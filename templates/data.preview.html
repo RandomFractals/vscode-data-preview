@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" 
+      content="default-src * vscode-resource: https: 'unsafe-inline' 'unsafe-eval';
+        script-src vscode-resource: blob: https: 'unsafe-inline' 'unsafe-eval';
+        style-src vscode-resource: https: 'unsafe-inline';
+        img-src vscode-resource: data: https:;
+        connect-src vscode-resource: blob: data: https: http:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vega is a declarative JSON format for creating
+      and sharing data visualization designs.">
+    <base href="https://vega.github.io/" target="_blank" />
+    <title>Preview</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script src="{scripts}/perspective.js"></script>
+    <script src="https://unpkg.com/@finos/perspective-viewer@0.3.0-rc.1/build/perspective.view.js"></script>
+    <script src="{scripts}/hypergrid.plugin.js"></script>
+    <style>
+      body {
+        background:#fff;
+        color: #333;
+        margin: 0px;
+      }
+      #toolbar {
+        border-bottom: 1px solid #999;
+        margin-bottom: 10px;
+        padding: 0px;
+        color: #333;
+      }
+      #toolbar a {
+        color: dodgerblue;
+        font-size: 10pt;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      #title {
+        padding: 0px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+      #data-selector {
+        width: 140px;
+      }
+      #message {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: red;
+        font-size: 11pt;
+        text-align: center;
+      }
+      #data-viewer {
+        position: absolute;
+        top: 36px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: 1px solid #999;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="toolbar">
+      <div style="float: right; width: 180px;">
+        data:
+        <select id="data-selector" onChange="changeData()">
+        </select>
+      </div>
+      <h3 id="title">loading...</h3>
+    </div>
+    <div id="message">Loading data preview...</div>
+    <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
+    <script type="text/javascript">
+      let vscode, viewer, message, data, title, dataSelector, selectedData = '';
+      // check web assembly support
+      console.log('data.preview:supportsWebAssembly():' + supportsWebAssembly());
+      // tag data view loading
+      window.addEventListener('WebComponentsReady', event => {
+        console.log('data.preview:WebComponentsReady: loading perspective data view...');
+      });
+      document.addEventListener('DOMContentLoaded', event => {
+        // initialize page elements
+        title = document.getElementById('title');
+        message = document.getElementById('message');
+        dataSelector = document.getElementById('data-selector');
+        viewer = document.getElementsByTagName('perspective-viewer')[0];
+        try {
+          // notify webview
+          vscode = acquireVsCodeApi();
+          vscode.postMessage({command: 'refresh'});
+        }
+        catch (error) {
+          console.error('data.preview:', error.message);
+          // ignore: must be loaded outside of vscode webview
+        }
+      });
+      // vega spec update handler
+      window.addEventListener('message', event => {
+        switch (event.data.command) {
+          case 'showMessage':
+            showMessage(event.data.message);
+            break;
+          case 'refresh':
+            try {
+              vscode.setState({uri: event.data.uri});
+              title.innerText = event.data.fileName.replace('.json', '');
+              spec = JSON.parse(event.data.spec);
+              data = event.data.data;
+              dataSelector.innerHTML = '';
+              const dataSources = [];
+              Object.keys(data).forEach(key => {
+                dataSelector.innerHTML += `<option value="${key}">${key}</option>"`;
+                dataSources.push(key);
+              });
+              if (dataSources.length > 0) {
+                preview(dataSources[0]);
+              }
+            }
+            catch (error) {
+              console.error('data.preview:', error.message);
+              showMessage(error.message);
+            }
+            break;
+        }
+      });
+
+      function changeData() {
+        const dataUrl = dataSelector.value;
+        console.log('data.preview:changeData():dataUrl:', dataUrl);
+        preview(dataUrl);
+      }
+
+      // data preview update
+      function preview(dataUrl) {
+        showMessage(''); // 'Loading data preview...';
+        console.log('data.preview:preview():dataUrl:', dataUrl);
+        selectedData = dataUrl;
+        let textData = data[dataUrl];
+        let tableData = [];
+        // TODO: change this to data format type switch
+        // + add arrow data display later
+        if (dataUrl.endsWith('.csv')) {
+          tableData = textData;
+        } else if (dataUrl.endsWith('.json')) {
+          tableData = JSON.parse(textData);
+        }
+        viewer.reset();
+        viewer.load(tableData);
+        viewer.update(tableData);
+        viewer.toggleConfig();
+      }
+
+      function showMessage(text) {
+        message.innerText = text;
+      }
+
+      function supportsWebAssembly() {
+        try {
+          if (typeof WebAssembly === 'object' &&
+              typeof WebAssembly.instantiate === 'function') {
+            const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+            if (module instanceof WebAssembly.Module) {
+                return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
+            }
+          }
+        } catch (e) {
+        }
+        return false;        
+      }
+    </script>
+  </body>
+</html>
