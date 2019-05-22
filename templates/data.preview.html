@@ -63,7 +63,7 @@
             try {
               vscode.setState({uri: event.data.uri});
               data = event.data.data;
-              preview(data);
+              preview(event.data.fileName, data);
             }
             catch (error) {
               console.error('data.preview:', error.message);
@@ -73,15 +73,16 @@
       });
 
       // data preview update
-      function preview(data) {
+      function preview(fileName, data) {
         let tableData = [];
         // TODO: change this to data format type switch
         // + add arrow data display later
-        if (dataUrl.endsWith('.csv')) {
+        if (fileName.endsWith('.csv')) {
           tableData = data;
-        } else if (dataUrl.endsWith('.json')) {
+        } else if (fileName.endsWith('.json')) {
           tableData = JSON.parse(data);
         }
+        console.log('data.preview:', fileName);
         viewer.reset();
         viewer.load(tableData);
         viewer.update(tableData);
