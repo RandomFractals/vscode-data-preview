@@ -94,8 +94,9 @@
   "dependencies": {
     "apache-arrow": "^0.4.1",
     "d3-fetch": "^1.1.2",
-    "@finos/perspective": "^0.3.0-rc.1",
-    "@finos/perspective-viewer": "^0.3.0-rc.1",
-    "@finos/perspective-viewer-hypergrid": "^0.3.0-rc.1"
+    "@finos/perspective": "^0.3.0-rc.2",
+    "@finos/perspective-viewer": "^0.3.0-rc.2",
+    "@finos/perspective-viewer-hypergrid": "^0.3.0-rc.2",
+    "@finos/perspective-viewer-highcharts": "^0.3.0-rc.2"
   }
 }
