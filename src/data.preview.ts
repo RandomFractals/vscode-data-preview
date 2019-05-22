@@ -196,15 +196,13 @@ export class DataPreview {
     // open data document
     workspace.openTextDocument(this.uri).then(document => {
       this._logger.logMessage(LogLevel.Debug, 'refresh(): file:', this._fileName);
-      const vegaSpec: string = document.getText();
+      const textData: string = document.getText();
       try {
-        const spec = JSON.parse(vegaSpec);
-        const data = this.getData(spec);
+        const data = this.getFileData(this._fileName);
         this.webview.postMessage({
           command: 'refresh',
           fileName: this._fileName,
           uri: this._uri.toString(),
-          spec: vegaSpec,
           data: data
         });
       }
@@ -213,75 +211,6 @@ export class DataPreview {
         this.webview.postMessage({error: error});
       }
     });
-  }
-
-  /**
-   * Extracts data urls and loads local data files to pass to vega preview webview.
-   * @param spec Vega json doc spec root or nested data references to extract.
-   */
-  private getData(spec: any): any {
-    const dataFiles = {};
-
-    // get top level data urls
-    let dataUrls: Array<string> = this.getDataUrls(spec);
-
-    // add nested spec data urls for view compositions (facets, repeats, etc.)
-    dataUrls = dataUrls.concat(this.getDataUrls(spec['spec']));
-    this._logger.logMessage(LogLevel.Debug, 'getData(): dataUrls:', dataUrls);
-
-    // get all local files data
-    dataUrls.filter(url => !url.startsWith('http')).forEach(url => {
-      // get local file data
-      const fileData: string = this.getFileData(url);
-      if (fileData) {
-        dataFiles[url] = fileData;
-      }
-      this._logger.logMessage(LogLevel.Debug, 'getData(): localDataUrl:', url);
-    });
-    return dataFiles;
-  }
-  
-  /**
-   * Recursively extracts data urls from the specified vega json doc spec 
-   * or knowwn nested data elements for loading local data content.
-   * @param spec Vega json doc spec root or nested data references to extract.
-   */
-  private getDataUrls(spec: any): Array<string> {
-    let dataUrls: Array<string> = [];
-    if (spec === undefined){
-      return dataUrls; // base case
-    }
-    const data: any = spec['data'];
-    const transforms: Array<any> = spec['transform'];
-    let layers: Array<any> = [];
-    layers = layers.concat(spec['layer']);
-    layers = layers.concat(spec['concat']);
-    layers = layers.concat(spec['hconcat']);
-    layers = layers.concat(spec['vconcat']);
-    if (data !== undefined) {
-      // get top level data references
-      if (Array.isArray(data)) {
-        data.filter(d => d['url'] !== undefined).forEach(d => {
-          dataUrls.push(d['url']);
-        });
-      }
-      else if (data['url'] !== undefined) {
-        dataUrls.push(data['url']);
-      }
-    }
-    if (layers !== undefined && Array.isArray(layers)) {
-      // get layers data references
-      layers.forEach(layer => {
-        dataUrls = dataUrls.concat(this.getDataUrls(layer));
-      });
-    }
-    if (transforms !== undefined) {
-      // get transform data references
-      transforms.forEach(transformData => {
-        dataUrls = dataUrls.concat(this.getDataUrls(transformData['from']));
-      });
-    }
-    return dataUrls;
   }
 
   /**
