@@ -33,7 +33,7 @@ const logger: Logger = new Logger('data.preview:', config.logLevel);
  */
 export function activate(context: ExtensionContext) {
   const extensionPath: string = context.extensionPath;
-  logger.logMessage(LogLevel.Info, 'activate(): activating from extPath:', context.extensionPath);
+  logger.logMessage(LogLevel.Debug, 'activate(): activating from extPath:', context.extensionPath);
 
   // initialize data preview webview panel html template
   const templateManager: ITemplateManager = new TemplateManager(context.asAbsolutePath('templates'));
