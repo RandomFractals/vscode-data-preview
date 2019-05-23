@@ -11,15 +11,29 @@ export interface ITemplateManager {
 }
 
 /**
- * Template type for loading file templates
- * and template file content.
+ * Template type for loading file templates and template file content.
  */
 export class Template {
-  // template name
-  public name: string = '';
 
-  // template file content
-  public content: string = '';
+  /**
+   * Creates new template
+   * @param name Template name.
+   * @param content Template file content.
+   */
+  constructor(public name: string = '', public content: string = '') {
+  }
+
+  /**
+   * Injects template content params by replacing {} tokens with regex.
+   * @param params Template key/value pair params to inject.
+   */
+  public replace(params: any): string {
+    let templateContent = this.content;
+    Object.keys(params).map(key => {
+      templateContent = templateContent.replace(RegExp(`{${key}}`, 'g'), params[key]);
+    });
+    return templateContent;
+  }
 }
 
 /**
@@ -51,7 +65,7 @@ export class TemplateManager implements ITemplateManager {
     const templates: Array<Template> = [];
     // TODO: change this to read file async ???
     fileNames.forEach(fileName => templates.push(
-      {name: fileName, content: fs.readFileSync(path.join(this.templateFolder, fileName), 'utf8')}
+      new Template(fileName, fs.readFileSync(path.join(this.templateFolder, fileName), 'utf8')) // file content
     ));
     this.logger.logMessage(LogLevel.Debug, 'loadTemplates(): templates:', fileNames);
     return templates;
