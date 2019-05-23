@@ -58,7 +58,7 @@
           vscode.postMessage({command: 'refresh'});
         }
         catch (error) {
-          console.error('data.preview:', error.message);
+          console.error(`data.preview:vscode:error ${error.message}`);
           // ignore: must be loaded outside of vscode webview
         }
       });
