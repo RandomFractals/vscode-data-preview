@@ -63,33 +63,11 @@
         }
       });
 
-      // data file change update handler
+      // webview post message even handler
       window.addEventListener('message', event => {
         switch (event.data.command) {
           case 'refresh':
-            try {
-              // set preview state src data file uri for restore on vscode reload
-              vscode.setState({uri: event.data.uri});
-
-              // load file data
-              const fileName = event.data.fileName;
-              const tableData = getData(fileName, event.data.data);
-              if (Array.isArray(viewData) && viewData.length === 0) {
-                // initialize perspective viewer
-                console.log(`data.preview:refresh(): initializing view data for: ${fileName}`);
-                viewer.load(tableData);
-                viewer.toggleConfig();
-              } else {
-                // update viewer data without toggles reset
-                console.log(`data.preview:refresh(): updating view data for: ${fileName}`);
-                viewer.update(tableData);
-              }
-              // save loaded view data for future data update checks
-              viewData = tableData;
-            }
-            catch (error) {
-              console.error(`data.preview:error: ${error.message}`);
-            }
+            refresh(event.data);
             break;
           default: // help
             // TODO: add quick data preivew popup display
@@ -97,6 +75,34 @@
             break;
         }
       });
+
+      /**
+       * Updates data view on data file change.
+       * @param data Refresh data json with doc uri, fileName and raw data to display.
+       */
+      function refresh(data) {
+        try {
+          // set preview state src data file uri for restore on vscode reload
+          vscode.setState({uri: data.uri});
+
+          // load file data
+          const tableData = getData(data.fileName, data.data);
+          if (Array.isArray(viewData) && viewData.length === 0) {
+            // initialize perspective viewer
+            console.log(`data.preview:refresh(): initializing view data for: ${data.fileName}`);
+            viewer.load(tableData);
+            viewer.toggleConfig();
+          } else {
+            // update viewer data without toggles reset
+            console.log(`data.preview:refresh(): updating view data for: ${data.fileName}`);
+            viewer.update(tableData);
+          }
+          // save loaded view data for future data update checks
+          viewData = tableData;
+        } catch (error) {
+          console.error(`data.preview:refresh(): error: ${error.message}`);
+        }
+      }
 
       /** 
        * Coverts raw text or binary data to flat arrays for display in perspective viewer.
@@ -121,15 +127,13 @@
        */
       function supportsWebAssembly() {
         try {
-          if (typeof WebAssembly === 'object' &&
-              typeof WebAssembly.instantiate === 'function') {
+          if (typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'function') {
             const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
             if (module instanceof WebAssembly.Module) {
-                return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
+              return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
             }
           }
-        } catch (e) {
-        }
+        } catch (e) {}
         return false;
       }
     </script>
