@@ -38,13 +38,17 @@
   <body>
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
-      let viewer, data;
-      // check web assembly support
-      // console.log('data.preview:supportsWebAssembly():' + supportsWebAssembly());
+      // data preview vars
+      let viewer, vscode, data = [];
+
+      // check web assembly support. uncomment this for dev debug:
+      // console.log(`data.preview:supportsWebAssembly(): ${supportsWebAssembly()}`);
+      
       // tag data view loading
       window.addEventListener('WebComponentsReady', event => {
         console.log('data.preview:WebComponentsReady: loading perspective data view...');
       });
+
       document.addEventListener('DOMContentLoaded', event => {
         // initialize page elements
         viewer = document.getElementsByTagName('perspective-viewer')[0];
@@ -58,39 +62,62 @@
           // ignore: must be loaded outside of vscode webview
         }
       });
-      // vega spec update handler
+
+      // data file change update handler
       window.addEventListener('message', event => {
         switch (event.data.command) {
           case 'refresh':
             try {
+              // set preview state src data file uri for restore on vscode reload
               vscode.setState({uri: event.data.uri});
+
+              // load file data
+              const fileName = event.data.fileName;
+              const tableData = getData(fileName, event.data.data);
+              if (Array.isArray(data) && data.length === 0) {
+                // initialize perspective viewer
+                viewer.reset();
+                viewer.load(tableData);
+                viewer.toggleConfig();
+              } else {
+                // update viewer data without toggles reset
+                viewer.update(tableData);
+              }
+              // save loaded viewer data for future updates
               data = event.data.data;
-              preview(event.data.fileName, data);
             }
             catch (error) {
-              console.error('data.preview:', error.message);
+              console.error(`data.preview:error: ${error.message}`);
             }
+            break;
+          default: // help
+            // TODO: add quick data preivew popup display
+            // with info how to work prespective viewer toggles UI
             break;
         }
       });
 
-      // data preview update
-      function preview(fileName, data) {
+      /** 
+       * Coverts raw text or binary data to flat arrays for display in perspective viewer.
+       * @param fileName Data file name.
+       * @param data Raw text or binary file data.
+       **/
+      function getData(fileName, data) {
         let tableData = [];
-        // TODO: change this to data format type switch
-        // + add arrow data display later
+        console.log(`data.preview:getData(): loading file data: ${fileName}`);
         if (fileName.endsWith('.csv')) {
           tableData = data;
         } else if (fileName.endsWith('.json')) {
+          // try to parse JSON array data
           tableData = JSON.parse(data);
         }
-        console.log('data.preview:', fileName);
-        viewer.reset();
-        viewer.load(tableData);
-        viewer.update(tableData);
-        viewer.toggleConfig();
+        // TODO: add arrow data loading & streaming later
+        return tableData;
       }
 
+      /**
+       * Checks web client web assembly support.
+       */
       function supportsWebAssembly() {
         try {
           if (typeof WebAssembly === 'object' &&
