@@ -39,7 +39,7 @@
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
-      let viewer, vscode, data = [];
+      let viewer, vscode, viewData = [];
 
       // check web assembly support. uncomment this for dev debug:
       // console.log(`data.preview:supportsWebAssembly(): ${supportsWebAssembly()}`);
@@ -74,17 +74,18 @@
               // load file data
               const fileName = event.data.fileName;
               const tableData = getData(fileName, event.data.data);
-              if (Array.isArray(data) && data.length === 0) {
+              if (Array.isArray(viewData) && viewData.length === 0) {
                 // initialize perspective viewer
-                viewer.reset();
+                console.log(`data.preview:refresh(): initializing view data for: ${fileName}`);
                 viewer.load(tableData);
                 viewer.toggleConfig();
               } else {
                 // update viewer data without toggles reset
+                console.log(`data.preview:refresh(): updating view data for: ${fileName}`);
                 viewer.update(tableData);
               }
-              // save loaded viewer data for future updates
-              data = event.data.data;
+              // save loaded view data for future data update checks
+              viewData = tableData;
             }
             catch (error) {
               console.error(`data.preview:error: ${error.message}`);
