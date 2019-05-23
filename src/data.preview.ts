@@ -106,12 +106,12 @@ export class DataPreview {
     // create html template for data preview with local scripts, styles and theme params replaced
     const scriptsPath: string = Uri.file(path.join(this._extensionPath, 'scripts'))
       .with({scheme: 'vscode-resource'}).toString(true);
-    const stylesPath: string = Uri.file(path.join(this._extensionPath, 'styles/perspetive-viewer'))
+    const stylesPath: string = Uri.file(path.join(this._extensionPath, 'styles'))
       .with({scheme: 'vscode-resource'}).toString(true);
     this._html = template.replace({
       scripts: scriptsPath,
       styles: stylesPath,
-      theme: '' // TODO: inject dark theme based on vscode settings
+      theme: '.dark' // TODO: inject dark theme based on vscode settings
     });
 
     // initialize webview panel
