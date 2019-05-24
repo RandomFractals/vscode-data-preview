@@ -16,6 +16,18 @@ large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](h
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
 "Perspective Viewer")
 
+# Next V.
+
+- Will include large data files support and [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data display and streaming.
+
+# Configuration
+[Create User or Workspace Settings in vscode](http://code.visualstudio.com/docs/customization/userandworkspace#_creating-user-and-workspace-settings) to change default Data Preview extension settings:
+
+Setting | Type | Default Value | Description
+------- | ---- | ------------- | -----------
+data.preview.theme | string |  | Data Preview theme: blank for light, or '.dark' for dark theme data previews display.
+data.preview.charts.plugin | string | hightcharts | Data Preview charts library to use for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
+
 ## Provided Chart Types
 
 - Area Chart
@@ -47,11 +59,6 @@ large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](h
 - sum abs
 - sum not null
 - unique
-
-
-# Next V.
-
-- Will include large data files support and [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data display and streaming.
 
 # Dev Log
 
