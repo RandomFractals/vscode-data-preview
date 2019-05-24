@@ -8,8 +8,10 @@ large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](h
 # MVP Features
 
 - CSV and JSON array data preview, sorting and filtering
-- Grid data summary display with aggregate functions, row and column pivots
+- Grid data summary display with aggregate functions, row and column pivots (a.k.a. groupBy and splitBy)
 - Basic charts auto-gen from data with aggregate functions, row and column pivots
+- Pluggable charting libraries for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
+- Dark and light data preview panel themes
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
 "Perspective Viewer")
@@ -50,8 +52,6 @@ large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](h
 # Next V.
 
 - Will include large data files support and [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data display and streaming.
-
-- plus dark theme support. gotta have that! :)
 
 # Dev Log
 
