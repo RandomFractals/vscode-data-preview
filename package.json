@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
   "contributors": [
@@ -75,6 +75,26 @@
           "group": "navigation"
         }
       ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Data Preview",
+      "properties": {
+        "data.preview.theme": {
+          "type": "string",
+          "default": "",
+          "description": "Data Preview theme: blank for light, or '.dark' for dark theme data previews display."
+        },
+        "data.preview.charts.plugin": {
+          "type": "string",
+          "enum": [
+            "highcharts",
+            "d3fc"
+          ],
+          "default": "highcharts",
+          "description": "Data Preview charts library to use."
+        }
+      }
     }
   },
   "scripts": {
@@ -97,6 +117,7 @@
     "@finos/perspective": "^0.3.0-rc.2",
     "@finos/perspective-viewer": "^0.3.0-rc.2",
     "@finos/perspective-viewer-hypergrid": "^0.3.0-rc.2",
-    "@finos/perspective-viewer-highcharts": "^0.3.0-rc.2"
+    "@finos/perspective-viewer-highcharts": "^0.3.0-rc.2",
+    "@finos/perspective-viewer-d3fc": "^0.3.0-rc.2"
   }
 }
