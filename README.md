@@ -2,14 +2,17 @@
 [VSCode](https://github.com/Microsoft/vscode) Data Preview extension for viewing, slicing and dicing 
 large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](https://perspective.finos.org/) - streaming analytics WebAssembly library.
 
-![Alt text](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
- "Data Preview")
+![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
+"Data Preview")
 
 # MVP Features
 
 - CSV and JSON array data preview, sorting and filtering
 - Grid data summary display with aggregate functions, row and column pivots
 - Basic charts auto-gen from data with aggregate functions, row and column pivots
+
+![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
+"Perspective Viewer")
 
 ## Provided Chart Types
 
