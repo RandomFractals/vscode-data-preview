@@ -111,7 +111,8 @@ export class DataPreview {
     this._html = template.replace({
       scripts: scriptsPath,
       styles: stylesPath,
-      theme: '.dark' // TODO: inject dark theme based on vscode settings
+      theme: this.theme,
+      charts: this.charts
     });
 
     // initialize webview panel
@@ -283,5 +284,20 @@ export class DataPreview {
    */
   get html(): string {
     return this._html;
+  }
+
+  /**
+   * Gets UI theme to use for Data Preview display from workspace config.
+   * see package.json 'configuration' section for more info.
+   */
+  get theme(): string {
+    return <string>workspace.getConfiguration('data.preview').get('theme');
+  }
+  /**
+   * Gets charts plugin preference for Data Preview display from workspace config.
+   * see package.json 'configuration' section for more info.
+   */
+  get charts(): string {
+    return <string>workspace.getConfiguration('data.preview').get('charts.plugin');
   }
 }
