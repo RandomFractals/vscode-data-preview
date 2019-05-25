@@ -5,6 +5,11 @@ large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](h
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
+## Usage Tips: 
+
+1. Hit `Ctrl+Shift+D` in open `csv` or `json` array data file to launch Data Preview panel.
+2. Hit `Ctrl+S` or Save your `csv` or `json` array data file for data refresh in open Data Preview panel.
+
 # MVP Features
 
 - CSV and JSON array data preview, sorting and filtering
@@ -21,6 +26,15 @@ large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](h
 
 - Will include large data files support and [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data display and streaming.
 
+# Installation
+
+Install this [Data Preview](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) via vscode Extensions tab (`Ctrl+Shift+X`) by searching for `data preview`, or via [vscode marketplace search results](https://marketplace.visualstudio.com/search?term=data%20preview&target=VSCode&category=All%20categories&sortBy=Relevance). 
+
+List of Data Preview extension vscode contributions, with `data.preview` command, keyboard shortcut, augmented menu contexts for `csv` and `json` array data file previews, and configurable theme and charts data preview settings:
+
+![Data Preview Contributions](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-contributions.png?raw=true 
+"Data Preview Contributions")
+
 # Configuration
 [Create User or Workspace Settings in vscode](http://code.visualstudio.com/docs/customization/userandworkspace#_creating-user-and-workspace-settings) to change default Data Preview extension settings:
 
@@ -28,6 +42,12 @@ Setting | Type | Default Value | Description
 ------- | ---- | ------------- | -----------
 data.preview.theme | string |  | Data Preview theme: blank for light, or '.dark' for dark theme data previews display.
 data.preview.charts.plugin | string | hightcharts | Data Preview charts library to use for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
+
+Data Preview using `.dark` theme and `d3fc` config :)
+
+![Data Preview Dark](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-dark.png?raw=true 
+"Data Preview Dark")
+
 
 ## Provided Chart Types
 
