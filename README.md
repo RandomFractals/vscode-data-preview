@@ -12,6 +12,7 @@ large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](h
 - Basic charts auto-gen from data with aggregate functions, row and column pivots
 - Pluggable charting libraries for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
 - Dark and light data preview panel themes
+- Persistent Data Preview settings (sort, filter, pivots, etc.) for restore on vscode reload
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
 "Perspective Viewer")

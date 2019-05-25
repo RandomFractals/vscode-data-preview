@@ -42,11 +42,14 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    */
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
     this._logger.logMessage(LogLevel.Debug, 'deserializeWeviewPanel(): url:', state.uri.toString());
+    this._logger.logMessage(LogLevel.Debug, 
+      'deserializeWeviewPanel(): config:', JSON.stringify(state.config));
     previewManager.add(
       new DataPreview(
         this.viewType,
         this.extensionPath, 
         Uri.parse(state.uri),
+        state.config, // view config
         webviewPanel.viewColumn, 
         this.template, 
         webviewPanel
@@ -66,6 +69,7 @@ export class DataPreview {
   private _fileName: string;
   private _title: string;
   private _html: string;
+  private _config: any;
   private _panel: WebviewPanel;
   private _logger: Logger;
 
@@ -73,7 +77,8 @@ export class DataPreview {
    * Creates new data preview.
    * @param viewType Preview webview type, i.e. data.preview.
    * @param extensionPath Extension path for loading webview scripts, etc.
-   * @param uri Vega spec json doc uri to preview.
+   * @param uri Source data file uri to preview.
+   * @param viewConfig Data preview config.
    * @param viewColumn vscode IDE view column to display vega preview in.
    * @param template Webview html template reference.
    * @param panel Optional webview panel reference for restore on vscode IDE reload.
@@ -81,14 +86,16 @@ export class DataPreview {
   constructor(
     viewType: string,
     extensionPath: string, 
-    uri: Uri, 
+    uri: Uri,
+    viewConfig: any, 
     viewColumn: ViewColumn, 
-    template: Template, 
+    htmlTemplate: Template, 
     panel?: WebviewPanel) {
 
-    // save ext path, document uri, and create prview uri
+    // save ext path, document uri, config, and create prview uri
     this._extensionPath = extensionPath;
     this._uri = uri;
+    this._config = viewConfig;
     this._fileName = path.basename(uri.fsPath);
     this._previewUri = this._uri.with({scheme: 'data'});
     this._logger = new Logger(`${viewType}:`, config.logLevel);
@@ -108,7 +115,7 @@ export class DataPreview {
       .with({scheme: 'vscode-resource'}).toString(true);
     const stylesPath: string = Uri.file(path.join(this._extensionPath, 'styles'))
       .with({scheme: 'vscode-resource'}).toString(true);
-    this._html = template.replace({
+    this._html = htmlTemplate.replace({
       scripts: scriptsPath,
       styles: stylesPath,
       theme: this.theme,
@@ -147,7 +154,13 @@ export class DataPreview {
     this.webview.onDidReceiveMessage(message => {
       switch (message.command) {
         case 'refresh':
+          // reload file data for preview
           this.refresh();
+          break;
+        case 'config':
+          // save data viewer config for restore on code reload
+          this._config = message.config;
+          this._logger.logMessage(LogLevel.Debug, 'configUpdate(): config:', JSON.stringify(message.config));
           break;
       }
     }, null, this._disposables);
@@ -203,13 +216,16 @@ export class DataPreview {
     // open data document
     workspace.openTextDocument(this.uri).then(document => {
       this._logger.logMessage(LogLevel.Debug, 'refresh(): file:', this._fileName);
-      const textData: string = document.getText();
+      //const textData: string = document.getText();
       try {
+        // get file data
         const data = this.getFileData(this._fileName);
+        // update web view
         this.webview.postMessage({
           command: 'refresh',
           fileName: this._fileName,
           uri: this._uri.toString(),
+          config: this.config,
           data: data
         });
       }
@@ -226,7 +242,7 @@ export class DataPreview {
    * TODO: change this to async later
    */
   private getFileData(filePath: string): string {
-    let data:string = null;
+    let data: string = null;
     const dataFilePath = path.join(path.dirname(this._uri.fsPath), filePath);
     if (fs.existsSync(dataFilePath)) {
       data = fs.readFileSync(dataFilePath, 'utf8');
@@ -284,6 +300,13 @@ export class DataPreview {
    */
   get html(): string {
     return this._html;
+  }
+
+  /**
+   * Gets data viewer config for data preview settings restore on vscode reload.
+   */
+  get config(): any {
+    return this._config;
   }
 
   /**

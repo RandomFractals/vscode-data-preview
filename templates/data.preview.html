@@ -39,7 +39,7 @@
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
-      let viewer, vscode, viewData = [];
+      let vscode, dataUri, viewer, viewConfig = {}, viewData = [];
 
       // check web assembly support. uncomment this for dev debug:
       // console.log(`data.preview:supportsWebAssembly(): ${supportsWebAssembly()}`);
@@ -50,12 +50,20 @@
       });
 
       document.addEventListener('DOMContentLoaded', event => {
-        // initialize page elements
+        // initialize data viewer
         viewer = document.getElementsByTagName('perspective-viewer')[0];
         try {
           // notify webview
           vscode = acquireVsCodeApi();
           vscode.postMessage({command: 'refresh'});
+
+          // add viewer config change handler
+          viewer.addEventListener('perspective-config-update', event => {
+            viewConfig = viewer.save();
+            // console.log(`data.preview:configUpdate(): config: ${JSON.stringify(viewConfig)}`);
+            vscode.setState({uri: dataUri, config: viewConfig});
+            vscode.postMessage({command: 'config', config: viewConfig});
+          });
         }
         catch (error) {
           console.error(`data.preview:vscode:error ${error.message}`);
@@ -82,19 +90,23 @@
        */
       function refresh(data) {
         try {
-          // set preview state src data file uri for restore on vscode reload
-          vscode.setState({uri: data.uri});
+          // set preview state for restore on vscode reload
+          dataUri = data.uri;
+          viewConfig = data.config;
+          vscode.setState({uri: dataUri, config: viewConfig});
 
           // load file data
           const tableData = getData(data.fileName, data.data);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
             console.log(`data.preview:refresh(): initializing view data for: ${data.fileName}`);
+            viewer.restore(viewConfig);
             viewer.load(tableData);
             viewer.toggleConfig();
           } else {
             // update viewer data without toggles reset
             console.log(`data.preview:refresh(): updating view data for: ${data.fileName}`);
+            viewer.clear();
             viewer.update(tableData);
           }
           // save loaded view data for future data update checks

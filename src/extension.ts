@@ -105,7 +105,7 @@ function createDataPreviewCommand(viewType: string, extensionPath: string, viewT
       }
     }
     const preview: DataPreview = new DataPreview(viewType,
-      extensionPath, resource, 
+      extensionPath, resource, {}, // viewConfig
       viewColumn, viewTemplate);
     previewManager.add(preview);
     return preview.webview;
