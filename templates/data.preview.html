@@ -31,7 +31,6 @@
         bottom: 0;
         left: 0;
         right: 0;
-        border: 1px solid #999;
       }
     </style>
   </head>
@@ -133,6 +132,7 @@
         else if (fileName.endsWith('.arrow')) {
           // pass through arrow table data
           tableData = data;
+          console.log(`data.preview:getData(): records count: ${tableData.length}`);
         }
         // TODO: add arrow data loading & streaming later
         return tableData;

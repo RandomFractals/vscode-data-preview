@@ -255,11 +255,13 @@ export class DataPreview {
         // get binary arrow data buffer
         const dataBuffer = fs.readFileSync(dataFilePath);
         // create arrow table data
-        data = Table.from(new Uint8Array(dataBuffer));
+        const dataTable = Table.from(new Uint8Array(dataBuffer));
         if (config.logLevel === LogLevel.Debug) {
           this._logger.logMessage(LogLevel.Debug, 'getFileData(): table schema:', 
-            JSON.stringify(data.schema, null, 2));
+            JSON.stringify(dataTable.schema, null, 2));
+          this._logger.logMessage(LogLevel.Debug, 'getFileData(): records count:', dataTable.length);
         }
+        data = dataTable.toArray();
       } else { // must be csv or json text data file
         data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read as string
       }
