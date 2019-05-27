@@ -1,18 +1,21 @@
 # vscode-data-preview
 [VSCode](https://github.com/Microsoft/vscode) Data Preview extension for viewing, slicing and dicing 
-large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](https://perspective.finos.org/) - streaming analytics WebAssembly library.
+large `.csv`, `.json` array, `.arrow` and `.parquet` data files with [Perspective](https://perspective.finos.org/) - streaming analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
 ## Usage Tips: 
 
-1. Hit `Ctrl+Shift+D` in open `csv` or `json` array data file to launch Data Preview panel.
-2. Hit `Ctrl+S` or Save your `csv` or `json` array data file for data refresh in open Data Preview panel.
+1. Hit `Ctrl+Shift+D` in open `.csv` or `.json` array data file to launch Data Preview panel.
+2. Hit `Ctrl+S` or Save your `.csv` or `.json` array data file for data refresh in open Data Preview panel.
+3. Right-click on `.arrow` data file in vscode file explorer to lauch Data Preview for these binary data files.
+4. Double click on the grid column header to sort data.
+5. Drag and drop columns from the left-side columns panel into filter fields for data filtering (group by, split by, sort, filter).
 
 # MVP Features
 
-- CSV and JSON array data preview, sorting and filtering
+- CSV, JSON array, and Arrow data preview, sorting and filtering
 - Grid data summary display with aggregate functions, row and column pivots (a.k.a. groupBy and splitBy)
 - Basic charts auto-gen from data with aggregate functions, row and column pivots
 - Pluggable charting libraries for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
@@ -24,7 +27,7 @@ large `csv`, `json` array, `arrow` and `parquet` data files with [Perspective](h
 
 # Next V.
 
-- Will include large data files support and [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data display and streaming.
+- Will include large data files support and [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
 
 # Installation
 
@@ -43,7 +46,8 @@ Setting | Type | Default Value | Description
 data.preview.theme | string |  | Data Preview theme: blank for light, or '.dark' for dark theme data previews display.
 data.preview.charts.plugin | string | hightcharts | Data Preview charts library to use for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
 
-Data Preview using `.dark` theme and `d3fc` config :)
+Data Preview using `.dark` theme with `d3fc` charts config, viewing 
+[superstore](https://github.com/finos/perspective/blob/master/examples/simple/superstore.arrow)`.arrow` data file :)
 
 ![Data Preview Dark](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-dark.png?raw=true 
 "Data Preview Dark")
