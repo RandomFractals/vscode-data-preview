@@ -130,6 +130,10 @@
           // try to parse JSON array data
           tableData = JSON.parse(data);
         }
+        else if (fileName.endsWith('.arrow')) {
+          // pass through arrow table data
+          tableData = data;
+        }
         // TODO: add arrow data loading & streaming later
         return tableData;
       }

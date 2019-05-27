@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node", "mocha"],
+    "types": ["node", "mocha", "apache-arrow"],
     "module": "commonjs",
     "target": "es6",
     "outDir": "out",

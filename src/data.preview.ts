@@ -13,6 +13,7 @@ import {
 } from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import {Table} from 'apache-arrow';
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
@@ -160,7 +161,10 @@ export class DataPreview {
         case 'config':
           // save data viewer config for restore on code reload
           this._config = message.config;
-          this._logger.logMessage(LogLevel.Debug, 'configUpdate(): config:', JSON.stringify(message.config));
+          if (config.logLevel === LogLevel.Debug) {
+            this._logger.logMessage(LogLevel.Debug, 'configUpdate(): config:', 
+              JSON.stringify(message.config, null, 2));
+          }
           break;
       }
     }, null, this._disposables);
@@ -214,7 +218,7 @@ export class DataPreview {
     // reveal corresponding data preview panel
     this._panel.reveal(this._panel.viewColumn, true); // preserve focus
     // open data document
-    workspace.openTextDocument(this.uri).then(document => {
+    // workspace.openTextDocument(this.uri).then(document => {
       this._logger.logMessage(LogLevel.Debug, 'refresh(): file:', this._fileName);
       //const textData: string = document.getText();
       try {
@@ -233,19 +237,32 @@ export class DataPreview {
         this._logger.logMessage(LogLevel.Error, 'refresh():', error.message);
         this.webview.postMessage({error: error});
       }
-    });
+    // });
   }
 
   /**
    * Loads actual local data file content.
    * @param filePath Local data file path.
+   * @returns String or Arrow Table for text and binary data files.
    * TODO: change this to async later
    */
-  private getFileData(filePath: string): string {
-    let data: string = null;
+  private getFileData(filePath: string): any {
+    let data: any = null;
     const dataFilePath = path.join(path.dirname(this._uri.fsPath), filePath);
     if (fs.existsSync(dataFilePath)) {
-      data = fs.readFileSync(dataFilePath, 'utf8');
+      // TODO: rework to using fs.ReadStream for large data files support later
+      if (dataFilePath.endsWith('.arrow')) {
+        // get binary arrow data buffer
+        const dataBuffer = fs.readFileSync(dataFilePath);
+        // create arrow table data
+        data = Table.from(new Uint8Array(dataBuffer));
+        if (config.logLevel === LogLevel.Debug) {
+          this._logger.logMessage(LogLevel.Debug, 'getFileData(): table schema:', 
+            JSON.stringify(data.schema, null, 2));
+        }
+      } else { // must be csv or json text data file
+        data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read as string
+      }
     }
     else {
       this._logger.logMessage(LogLevel.Error, 'getFileData():', `${filePath} doesn't exist`);
