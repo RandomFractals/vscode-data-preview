@@ -18,6 +18,7 @@ import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
 import {Template} from './template.manager';
+import { types } from 'util';
 
 /**
  * Data preview web panel serializer for restoring previews on vscode reload.
@@ -261,8 +262,15 @@ export class DataPreview {
         data = this.getArrowData(dataTable); // dataTable.toArray();
         // remap arrow data schema to columns for data viewer
         this._schema = {};
-        dataTable.schema.fields.map(field => this._schema[field.name] = field.type.toString());
-        this._config['columns'] = dataTable.schema.fields.map(field => field.name);
+        dataTable.schema.fields.map(field => {
+          let fieldType: string = field.type.toString();
+          const typesIndex: number = fieldType.indexOf('<');
+          if (typesIndex > 0) {
+            fieldType = fieldType.substring(0, typesIndex);
+          }
+          this._schema[field.name] = config.dataTypes[fieldType];
+        });
+        // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
         if (config.logLevel === LogLevel.Debug) {
           this._logger.logMessage(LogLevel.Debug, 'getFileData(): arrow table schema:', 
             JSON.stringify(dataTable.schema, null, 2));
