@@ -21,8 +21,6 @@
     <link rel="stylesheet" href="https://unpkg.com/@finos/perspective-viewer@0.3.0-rc.2/build/material{theme}.css">
     <style>
       body {
-        background:#fff;
-        color: #333;
         margin: 0px;
       }
       #data-viewer {
@@ -95,7 +93,7 @@
           vscode.setState({uri: dataUri, config: viewConfig});
 
           // load file data
-          const tableData = getData(data.fileName, data.data);
+          const tableData = getData(data.fileName, data.data, data.schema);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
             console.log(`data.preview:refresh(): initializing view data for: ${data.fileName}`);
@@ -120,21 +118,21 @@
        * @param fileName Data file name.
        * @param data Raw text or binary file data.
        **/
-      function getData(fileName, data) {
+      function getData(fileName, data, schema = {}) {
         let tableData = [];
         console.log(`data.preview:getData(): loading file data: ${fileName}`);
         if (fileName.endsWith('.csv')) {
           tableData = data;
         } else if (fileName.endsWith('.json')) {
           // try to parse JSON array data
-          tableData = JSON.parse(data);
+          tableData = JSON.parse(data);          
         }
         else if (fileName.endsWith('.arrow')) {
-          // pass through arrow table data
+          // pass through arrow table json
           tableData = data;
+          console.log(`data.preview:getData(): schema: ${JSON.stringify(schema, null, 2)}`);
           console.log(`data.preview:getData(): records count: ${tableData.length}`);
         }
-        // TODO: add arrow data loading & streaming later
         return tableData;
       }
 

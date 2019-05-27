@@ -44,7 +44,7 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
     this._logger.logMessage(LogLevel.Debug, 'deserializeWeviewPanel(): url:', state.uri.toString());
     this._logger.logMessage(LogLevel.Debug, 
-      'deserializeWeviewPanel(): config:', JSON.stringify(state.config));
+      'deserializeWeviewPanel(): config:', JSON.stringify(state.config, null, 2));
     previewManager.add(
       new DataPreview(
         this.viewType,
@@ -71,6 +71,7 @@ export class DataPreview {
   private _title: string;
   private _html: string;
   private _config: any;
+  private _schema: any;
   private _panel: WebviewPanel;
   private _logger: Logger;
 
@@ -230,6 +231,7 @@ export class DataPreview {
           fileName: this._fileName,
           uri: this._uri.toString(),
           config: this.config,
+          schema: this.schema,
           data: data
         });
       }
@@ -255,13 +257,14 @@ export class DataPreview {
         // get binary arrow data buffer
         const dataBuffer = fs.readFileSync(dataFilePath);
         // create arrow table data
-        const dataTable = Table.from(new Uint8Array(dataBuffer));
+        const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
+        data = dataTable.toArray();
+        this._schema = dataTable.schema;
         if (config.logLevel === LogLevel.Debug) {
           this._logger.logMessage(LogLevel.Debug, 'getFileData(): table schema:', 
             JSON.stringify(dataTable.schema, null, 2));
           this._logger.logMessage(LogLevel.Debug, 'getFileData(): records count:', dataTable.length);
         }
-        data = dataTable.toArray();
       } else { // must be csv or json text data file
         data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read as string
       }
@@ -326,6 +329,13 @@ export class DataPreview {
    */
   get config(): any {
     return this._config;
+  }
+
+  /**
+   * Gets schema for typed data sets.
+   */
+  get schema(): any {
+    return this._schema;
   }
 
   /**
