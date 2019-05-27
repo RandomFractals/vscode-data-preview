@@ -258,11 +258,16 @@ export class DataPreview {
         const dataBuffer = fs.readFileSync(dataFilePath);
         // create arrow table data
         const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
-        data = dataTable.toArray();
-        this._schema = dataTable.schema;
+        data = this.getArrowData(dataTable); // dataTable.toArray();
+        // remap arrow data schema to columns for data viewer
+        this._schema = {};
+        dataTable.schema.fields.map(field => this._schema[field.name] = field.type.toString());
+        this._config['columns'] = dataTable.schema.fields.map(field => field.name);
         if (config.logLevel === LogLevel.Debug) {
-          this._logger.logMessage(LogLevel.Debug, 'getFileData(): table schema:', 
+          this._logger.logMessage(LogLevel.Debug, 'getFileData(): arrow table schema:', 
             JSON.stringify(dataTable.schema, null, 2));
+          this._logger.logMessage(LogLevel.Debug, 'getFileData(): data view schema:', 
+            JSON.stringify(this._schema, null, 2));
           this._logger.logMessage(LogLevel.Debug, 'getFileData(): records count:', dataTable.length);
         }
       } else { // must be csv or json text data file
@@ -273,6 +278,24 @@ export class DataPreview {
       this._logger.logMessage(LogLevel.Error, 'getFileData():', `${filePath} doesn't exist`);
     }
     return data;
+  }
+
+  /**
+   * Converts arrow table data to array of objects.
+   * @param table The arrow data table to convert.
+   */
+  private getArrowData(table: Table): any[] {
+    const rows = Array(table.length);
+    const fields = table.schema.fields.map(d => d.name);  
+    for (let i=0, n=rows.length; i<n; ++i) {
+      const proto = {};
+      fields.forEach((fieldName, index) => {
+        const column = table.getColumnAt(index);
+        proto[fieldName] = column.get(i);
+      });
+      rows[i] = proto;
+    }
+    return rows;
   }
 
   /**

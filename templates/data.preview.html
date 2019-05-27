@@ -98,6 +98,8 @@
             // initialize perspective viewer
             console.log(`data.preview:refresh(): initializing view data for: ${data.fileName}`);
             viewer.restore(viewConfig);
+            viewer.columns = viewConfig['columns'];
+            viewer.load(data.schema);
             viewer.load(tableData);
             viewer.toggleConfig();
           } else {
