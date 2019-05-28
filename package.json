@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
   "contributors": [
@@ -25,7 +25,8 @@
     "json",
     "json data",
     "arrow",
-    "arrow data"
+    "arrow data",
+    "excel"
   ],
   "engines": {
     "vscode": "^1.32.3"
