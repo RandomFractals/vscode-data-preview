@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
   "contributors": [
@@ -21,12 +21,13 @@
     "dev tools",
     "data preview",
     "csv",
-    "csv data",
+    "tsv",
+    "xlsx",
+    "xlsm",
     "json",
-    "json data",
     "arrow",
-    "arrow data",
-    "excel"
+    "excel",
+    "parquet"
   ],
   "engines": {
     "vscode": "^1.32.3"
@@ -37,10 +38,42 @@
   "activationEvents": [
     "onCommand:data.preview",
     "onWebviewPanel:data.preview",
-    "onLanguage:json"
+    "onLanguage:csv",
+    "onLanguage:tsv",
+    "onLanguage:excel",
+    "onLanguage:json",
+    "onLanguage:arrow",
+    "onLanguage:parquet"
   ],
   "main": "./out/extension",
   "contributes": {
+    "languages": [
+      {
+        "id": "csv",
+        "extensions": [".csv"],
+        "aliases": ["CSV"]
+      },
+      {
+        "id": "tsv",
+        "extensions": [".tsv"],
+        "aliases": ["TSV"]
+      },
+      {
+        "id": "excel",
+        "extensions": [".xlsx", ".xlsm"],
+        "aliases": ["Excel"]
+      },
+      {
+        "id": "arrow",
+        "extensions": [".arrow", ".arr"],
+        "aliases": ["Arrow"]
+      },
+      {
+        "id": "parquet",
+        "extensions": [".parquet", ".parq"],
+        "aliases": ["Parquet"]
+      }
+    ],
     "commands": [
       {
         "command": "data.preview",
@@ -57,21 +90,21 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|json|arrow)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|xlsx|xlsm|json|arrow|arr|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|json|arrow)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|xlsx|xlsm|json|arrow|arr|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|json|arrow)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|xlsx|xlsm|json|arrow|arr|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }
@@ -119,6 +152,7 @@
     "@finos/perspective-viewer-highcharts": "^0.3.0-rc.2",
     "@finos/perspective-viewer-hypergrid": "^0.3.0-rc.2",
     "apache-arrow": "^0.4.1",
-    "d3-fetch": "^1.1.2"
+    "d3-fetch": "^1.1.2",
+    "xlsx": "^0.14.3"
   }
 }
