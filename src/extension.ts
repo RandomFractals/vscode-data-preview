@@ -20,8 +20,14 @@ import {Template, ITemplateManager, TemplateManager} from './template.manager';
 // supported data file extensions
 const DATA_FILE_EXTENSIONS: string[] = [
   '.csv',
+  '.tsv',
+  '.xlsx',
+  '.xlsm',
   '.json',
-  '.arrow'
+  '.arrow',
+  '.arr',
+  'parquet',
+  '.parq'
 ];
 
 const logger: Logger = new Logger('data.preview:', config.logLevel);
@@ -37,15 +43,15 @@ export function activate(context: ExtensionContext) {
 
   // initialize data preview webview panel html template
   const templateManager: ITemplateManager = new TemplateManager(context.asAbsolutePath('templates'));
-  const dataPreviewTemplate: Template = templateManager.getTemplate('data.preview.html');
+  const dataViewTemplate: Template = templateManager.getTemplate('data.view.html');
   
   // register Data preview serializer for restore on vscode restart
   window.registerWebviewPanelSerializer('data.preview', 
-    new DataPreviewSerializer('data.preview', extensionPath, dataPreviewTemplate));
+    new DataPreviewSerializer('data.preview', extensionPath, dataViewTemplate));
 
   // Preview Data command
   const dataWebview: Disposable = 
-    createDataPreviewCommand('data.preview', extensionPath, dataPreviewTemplate);    
+    createDataPreviewCommand('data.preview', extensionPath, dataViewTemplate);
   context.subscriptions.push(dataWebview);
 
   // refresh associated preview on data file save

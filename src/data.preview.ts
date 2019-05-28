@@ -73,10 +73,10 @@ export class DataPreview {
   private _fileName: string;
   private _title: string;
   private _html: string;
-  private _config: any;
   private _schema: any;
   private _panel: WebviewPanel;
   private _logger: Logger;
+  private _config: any = {};
 
   /**
    * Creates new data preview.
@@ -261,8 +261,8 @@ export class DataPreview {
     let data: any = null;
     const dataFilePath = path.join(path.dirname(this._uri.fsPath), filePath);
     if (!fs.existsSync(dataFilePath)) {
-      this._logger.logMessage(LogLevel.Error, 'getFileData():', `${filePath} doesn't exist`);
-      // TODO: show window error message popup ???
+      this._logger.logMessage(LogLevel.Error, 'getFileData():', `${filePath} doesn't exist!`);
+      window.showErrorMessage(`${filePath} doesn't exist!`);
       return data;
     }
 
@@ -291,25 +291,35 @@ export class DataPreview {
   } // end of getFileData()
 
   /**
-   * Gets excel file data for all supported excel data file formats.
+   * Gets binary Excel file data.
    * @param dataFilePath Excel file path.
    * @returns Array of row objects.
    */
   private getExcelData(dataFilePath: string): any[] {
-    let rows = [];
+    // load Excel workbook
     const workbook: xlsx.WorkBook = xlsx.readFile(dataFilePath, {
       type: 'binary', //'file',
       cellDates: true,
     });
-    this._logger.logMessage(LogLevel.Debug, 'getExcelData(): sheets:', workbook.SheetNames);
+    this._logger.logMessage(LogLevel.Debug, 'getExcelData(): sheetNames:', workbook.SheetNames);
+
+    // read first worksheet data rows
+    let rows = [];
     if (workbook.SheetNames.length > 0) {
-      // get first worksheet
+      // get first worksheet row data
       // TODO: add option to preview data for all worksheets later
       const firstSheetName = workbook.SheetNames[0];
       const worksheet: xlsx.Sheet = workbook.Sheets[firstSheetName];
       rows = xlsx.utils.sheet_to_json(worksheet);
-      this._logger.logMessage(LogLevel.Debug,
-        `getExcelData(): ${this._fileName}:${firstSheetName} records count:`, rows.length);
+      this._logger.logMessage(LogLevel.Debug, 
+        `getExcelData(): ${this._fileName}:${firstSheetName} records count:`, rows.length);        
+      if (rows.length > 0) {
+        const firstRow = rows[0];
+        // this._config['columns'] = Object.keys(firstRow);
+        this._logger.logMessage(LogLevel.Debug,
+          `getExcelData(): ${this._fileName}:${firstSheetName} 1st row:`, 
+          JSON.stringify(firstRow, null, 2));
+      }
     }
     return rows;
   }
@@ -320,13 +330,8 @@ export class DataPreview {
    * @returns Array of row objects.
    */
   private getArrowData(dataFilePath: string): any[] {
-    // read binary arrow data file
     const dataBuffer = fs.readFileSync(dataFilePath);
-
-    // create arrow data table
     const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
-
-    // convert arrow table to array of objects
     const rows = Array(dataTable.length);
     const fields = dataTable.schema.fields.map(field => field.name);
     for (let i=0, n=rows.length; i<n; ++i) {
@@ -348,9 +353,11 @@ export class DataPreview {
       }
       this._schema[field.name] = config.dataTypes[fieldType];
     });
-    // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
-    this.logArrowDataStats(dataTable);
 
+    // initialized typed data set columns config
+    // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
+
+    this.logArrowDataStats(dataTable);
     return rows;
   } // end of getArrowData()
 

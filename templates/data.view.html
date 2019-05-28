@@ -43,7 +43,7 @@
       
       // tag data view loading
       window.addEventListener('WebComponentsReady', event => {
-        console.log('data.preview:WebComponentsReady: loading perspective data view...');
+        console.log('data.view:WebComponentsReady: loading perspective data view...');
       });
 
       document.addEventListener('DOMContentLoaded', event => {
@@ -63,7 +63,7 @@
           });
         }
         catch (error) {
-          console.error(`data.preview:vscode:error ${error.message}`);
+          console.error(`data.view:vscode:error ${error.message}`);
           // ignore: must be loaded outside of vscode webview
         }
       });
@@ -96,7 +96,7 @@
           const tableData = getData(data.fileName, data.data, data.schema);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
-            console.log(`data.preview:refresh(): initializing view data for: ${data.fileName}`);
+            console.log(`data.view:refresh(): initializing view data for: ${data.fileName}`);
             viewer.restore(viewConfig);
             if (data.schema !== undefined && Object.keys(data.schema).length > 0) {
               // viewer.columns = viewConfig['columns'];
@@ -108,14 +108,14 @@
             }
             viewer.toggleConfig();
           } else {  // update viewer data without toggles reset
-            console.log(`data.preview:refresh(): updating view data for: ${data.fileName}`);
+            console.log(`data.view:refresh(): updating view data for: ${data.fileName}`);
             viewer.clear();
             viewer.update(tableData);
           }
           // save loaded view data for future data update checks
           viewData = tableData;
         } catch (error) {
-          console.error(`data.preview:refresh(): error: ${error.message}`);
+          console.error(`data.view:refresh(): error: ${error.message}`);
         }
       }
 
@@ -127,7 +127,7 @@
        **/
       function getData(fileName, data, schema = {}) {
         let tableData = [];
-        console.log(`data.preview:getData(): loading file data: ${fileName}`);
+        console.log(`data.view:getData(): loading file data: ${fileName}`);
         if (fileName.endsWith('.csv')) {
           tableData = data;
         } else if (fileName.endsWith('.json')) {
@@ -137,8 +137,8 @@
         else if (fileName.endsWith('.arrow')) {
           // pass through arrow table json
           tableData = data;
-          console.log(`data.preview:getData(): schema: ${JSON.stringify(schema, null, 2)}`);
-          console.log(`data.preview:getData(): records count: ${tableData.length}`);
+          console.log(`data.view:getData(): schema: ${JSON.stringify(schema, null, 2)}`);
+          console.log(`data.view:getData(): records count: ${tableData.length}`);
         }
         return tableData;
       }
