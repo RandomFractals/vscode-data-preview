@@ -134,7 +134,7 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc --skipLibCheck -p ./",
-    "watch": "tsc -watch -p ./",
+    "watch": "tsc -watch --skipLibCheck -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
