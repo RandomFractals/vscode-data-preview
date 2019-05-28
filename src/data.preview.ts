@@ -1,7 +1,7 @@
 'use strict';
 import { 
+  window,
   workspace, 
-  window, 
   Disposable, 
   Uri, 
   ViewColumn, 
@@ -13,12 +13,12 @@ import {
 } from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as xlsx from 'xlsx';
 import {Table} from 'apache-arrow';
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
 import {Template} from './template.manager';
-import { types } from 'util';
 
 /**
  * Data preview web panel serializer for restoring previews on vscode reload.
@@ -271,51 +271,88 @@ export class DataPreview {
     // TODO: rework to using fs.ReadStream for large data files support later
     switch (dataFileExt) {
       case '.csv':
+      case '.tsv':
       case '.json':
         data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read data as string
         break;
-        
+      case '.xlsx':
+      case '.xlsm':
+        data = this.getExcelData(dataFilePath);
+        break;
       case '.arrow':
-        // read arrow data
-        const dataBuffer = fs.readFileSync(dataFilePath);
-        const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
-        data = this.getArrowData(dataTable); // dataTable.toArray();
-
-        // remap arrow data schema to columns for data viewer
-        this._schema = {};
-        dataTable.schema.fields.map(field => {
-          let fieldType: string = field.type.toString();
-          const typesIndex: number = fieldType.indexOf('<');
-          if (typesIndex > 0) {
-            fieldType = fieldType.substring(0, typesIndex);
-          }
-          this._schema[field.name] = config.dataTypes[fieldType];
-        });
-        // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
+        data = this.getArrowData(dataFilePath);
+        break;
+      case '.parquet':
+        // TODO: add parquet data read
+        window.showInformationMessage('Parquet data format support coming soon!');
         break;
     }
     return data;
   } // end of getFileData()
 
   /**
-   * Converts arrow table data to array of objects.
-   * @param table The arrow data table to convert.
+   * Gets excel file data for all supported excel data file formats.
+   * @param dataFilePath Excel file path.
    * @returns Array of row objects.
    */
-  private getArrowData(table: Table): any[] {
-    this.logArrowDataStats(table);
-    const rows = Array(table.length);
-    const fields = table.schema.fields.map(field => field.name);
+  private getExcelData(dataFilePath: string): any[] {
+    let rows = [];
+    const workbook: xlsx.WorkBook = xlsx.readFile(dataFilePath, {
+      type: 'binary', //'file',
+      cellDates: true,
+    });
+    this._logger.logMessage(LogLevel.Debug, 'getExcelData(): sheets:', workbook.SheetNames);
+    if (workbook.SheetNames.length > 0) {
+      // get first worksheet
+      // TODO: add option to preview data for all worksheets later
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet: xlsx.Sheet = workbook.Sheets[firstSheetName];
+      rows = xlsx.utils.sheet_to_json(worksheet);
+      this._logger.logMessage(LogLevel.Debug,
+        `getExcelData(): ${this._fileName}:${firstSheetName} records count:`, rows.length);
+    }
+    return rows;
+  }
+
+  /**
+   * Gets binary arrow file data.
+   * @param dataFilePath Arrow data file path.
+   * @returns Array of row objects.
+   */
+  private getArrowData(dataFilePath: string): any[] {
+    // read binary arrow data file
+    const dataBuffer = fs.readFileSync(dataFilePath);
+
+    // create arrow data table
+    const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
+
+    // convert arrow table to array of objects
+    const rows = Array(dataTable.length);
+    const fields = dataTable.schema.fields.map(field => field.name);
     for (let i=0, n=rows.length; i<n; ++i) {
       const proto = {};
       fields.forEach((fieldName, index) => {
-        const column = table.getColumnAt(index);
+        const column = dataTable.getColumnAt(index);
         proto[fieldName] = column.get(i);
       });
       rows[i] = proto;
     }
+
+    // remap arrow data schema to columns for data viewer
+    this._schema = {};
+    dataTable.schema.fields.map(field => {
+      let fieldType: string = field.type.toString();
+      const typesIndex: number = fieldType.indexOf('<');
+      if (typesIndex > 0) {
+        fieldType = fieldType.substring(0, typesIndex);
+      }
+      this._schema[field.name] = config.dataTypes[fieldType];
+    });
+    // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
+    this.logArrowDataStats(dataTable);
+
     return rows;
-  }
+  } // end of getArrowData()
 
   /**
    * Logs arrow data table stats for debug.
@@ -323,11 +360,11 @@ export class DataPreview {
    */
   private logArrowDataStats(dataTable: Table): void {
     if (config.logLevel === LogLevel.Debug) {
-      this._logger.logMessage(LogLevel.Debug, 'getFileData(): arrow table schema:', 
+      this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): arrow table schema:', 
         JSON.stringify(dataTable.schema, null, 2));
-      this._logger.logMessage(LogLevel.Debug, 'getFileData(): data view schema:', 
+      this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): data view schema:', 
         JSON.stringify(this._schema, null, 2));
-      this._logger.logMessage(LogLevel.Debug, 'getFileData(): records count:', dataTable.length);
+      this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): records count:', dataTable.length);
     }
   }
 

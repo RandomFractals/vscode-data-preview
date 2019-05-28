@@ -1,7 +1,7 @@
 "use strict";
 import {
-  workspace, 
   window, 
+  workspace, 
   commands, 
   ExtensionContext,
   Disposable,
