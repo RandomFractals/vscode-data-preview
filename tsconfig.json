@@ -15,6 +15,12 @@
     // "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
     // "noUnusedParameters": true,  /* Report errors on unused parameters. */
   },
+  "include": [
+    "src/*.ts",
+    "./node_modules/vscode/vscode.d.ts",
+    "./node_modules/vscode/lib/*",
+    "./node_modules/apache-arrow/*.d.ts"
+  ],  
   "exclude": [
     "node_modules", 
     ".vscode-test",
