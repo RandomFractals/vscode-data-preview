@@ -120,25 +120,41 @@
       }
 
       /** 
-       * Converts raw text, json array or binary data 
-       * for display in perspective viewer.
+       * Gets data for display in perspective viewer.
        * @param fileName Data file name.
-       * @param data Raw text or binary file data.
+       * @param data Raw text or json array data.
        **/
       function getData(fileName, data, schema = {}) {
         let tableData = [];
         console.log(`data.view:getData(): loading file data: ${fileName}`);
-        if (fileName.endsWith('.csv')) {
-          tableData = data;
-        } else if (fileName.endsWith('.json')) {
-          // try to parse JSON array data
-          tableData = JSON.parse(data);          
-        }
-        else if (fileName.endsWith('.arrow')) {
-          // pass through arrow table json
-          tableData = data;
-          console.log(`data.view:getData(): schema: ${JSON.stringify(schema, null, 2)}`);
-          console.log(`data.view:getData(): records count: ${tableData.length}`);
+        // read file data
+        const fileExt = fileName.substr(fileName.lastIndexOf('.'));
+        // TODO: rework this for large data files streaming
+        switch (fileExt) {
+          case '.csv':
+          case '.tsv':
+            tableData = data;
+            break;
+          case '.json':
+            // try to parse JSON array data
+            tableData = JSON.parse(data);          
+            break;
+          case '.xlsx':
+          case '.xlsm':
+            // pass through Excel files data json
+            tableData = data;
+            console.log(`data.view:getData(): records count: ${tableData.length}`);
+            break;
+          case '.arrow':
+            // pass through arrow table data json
+            tableData = data;
+            console.log(`data.view:getData(): schema: ${JSON.stringify(schema, null, 2)}`);
+            console.log(`data.view:getData(): records count: ${tableData.length}`);
+            break;
+          case '.parquet':
+            // TODO: add parquet data read
+            console.info('Parquet data format support coming soon!');
+            break;
         }
         return tableData;
       }
