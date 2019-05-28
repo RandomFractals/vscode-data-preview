@@ -31,9 +31,9 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    * Creates new webview serializer.
    * @param viewType Web view type.
    * @param extensionPath Extension path for loading scripts, examples and data.
-   * @param template Webview preview html template.
+   * @param htmlTemplate Webview preview html template.
    */
-  constructor(private viewType: string, private extensionPath: string, private template: Template) {
+  constructor(private viewType: string, private extensionPath: string, private htmlTemplate: Template) {
     this._logger = new Logger(`${this.viewType}.serializer:`, config.logLevel);
   }
 
@@ -43,9 +43,11 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    * @param state Saved web view panel state.
    */
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
-    this._logger.logMessage(LogLevel.Debug, 'deserializeWeviewPanel(): url:', state.uri.toString());
-    this._logger.logMessage(LogLevel.Debug, 
-      'deserializeWeviewPanel(): config:', JSON.stringify(state.config, null, 2));
+    if (config.logLevel === LogLevel.Debug) {
+      this._logger.logMessage(LogLevel.Debug, 'deserializeWeviewPanel(): url:', state.uri.toString());
+      this._logger.logMessage(LogLevel.Debug, 
+        'deserializeWeviewPanel(): config:', JSON.stringify(state.config, null, 2));
+    }
     previewManager.add(
       new DataPreview(
         this.viewType,
@@ -53,7 +55,7 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
         Uri.parse(state.uri),
         state.config, // view config
         webviewPanel.viewColumn, 
-        this.template, 
+        this.htmlTemplate,
         webviewPanel
     ));
   }
@@ -82,8 +84,8 @@ export class DataPreview {
    * @param extensionPath Extension path for loading webview scripts, etc.
    * @param uri Source data file uri to preview.
    * @param viewConfig Data preview config.
-   * @param viewColumn vscode IDE view column to display vega preview in.
-   * @param template Webview html template reference.
+   * @param viewColumn vscode IDE view column to display data preview in.
+   * @param htmlTemplate Webview html template reference.
    * @param panel Optional webview panel reference for restore on vscode IDE reload.
    */
   constructor(
@@ -108,7 +110,7 @@ export class DataPreview {
       case 'data.preview':
         this._title = `Data Preview ${this._fileName} 🈸`;
         break;
-      default: // data.help
+      default: // TODO: data.help
         this._title = 'Data Help';
         break;
     }
@@ -132,7 +134,7 @@ export class DataPreview {
   } // end of constructor()
 
   /**
-   * Initializes vega preview webview panel.
+   * Initializes data preview webview panel.
    * @param viewType Preview webview type, i.e. data.preview.
    * @param viewColumn vscode IDE view column to display preview in.
    */
@@ -142,7 +144,7 @@ export class DataPreview {
       this._panel = window.createWebviewPanel(viewType, this._title, viewColumn, this.getWebviewOptions());
     }
 
-    // dispose preview panel 
+    // dispose preview panel handler
     this._panel.onDidDispose(() => {
       this.dispose();
     }, null, this._disposables);
@@ -197,8 +199,13 @@ export class DataPreview {
     else if (!this.uri.scheme || this.uri.scheme === 'file') {
       localResourceRoots.push(Uri.file(path.dirname(this.uri.fsPath)));
     }
-    // add vega preview js scripts
+    
+    // add data preview js scripts
     localResourceRoots.push(Uri.file(path.join(this._extensionPath, 'scripts')));
+
+    // add data preview styles
+    localResourceRoots.push(Uri.file(path.join(this._extensionPath, 'styles')));
+
     this._logger.logMessage(LogLevel.Debug, 'getLocalResourceRoots():', localResourceRoots);
     return localResourceRoots;
   }
@@ -219,7 +226,8 @@ export class DataPreview {
   public refresh(): void {
     // reveal corresponding data preview panel
     this._panel.reveal(this._panel.viewColumn, true); // preserve focus
-    // open data document
+
+    // read and send updated data to webview
     // workspace.openTextDocument(this.uri).then(document => {
       this._logger.logMessage(LogLevel.Debug, 'refresh(): file:', this._fileName);
       //const textData: string = document.getText();
@@ -246,20 +254,33 @@ export class DataPreview {
   /**
    * Loads actual local data file content.
    * @param filePath Local data file path.
-   * @returns String or Arrow Table for text and binary data files.
+   * @returns CSV/JSON string or Array of row objects.
    * TODO: change this to async later
    */
   private getFileData(filePath: string): any {
     let data: any = null;
     const dataFilePath = path.join(path.dirname(this._uri.fsPath), filePath);
-    if (fs.existsSync(dataFilePath)) {
-      // TODO: rework to using fs.ReadStream for large data files support later
-      if (dataFilePath.endsWith('.arrow')) {
-        // get binary arrow data buffer
+    if (!fs.existsSync(dataFilePath)) {
+      this._logger.logMessage(LogLevel.Error, 'getFileData():', `${filePath} doesn't exist`);
+      // TODO: show window error message popup ???
+      return data;
+    }
+
+    // read file data
+    const dataFileExt: string = filePath.substr(filePath.lastIndexOf('.'));
+    // TODO: rework to using fs.ReadStream for large data files support later
+    switch (dataFileExt) {
+      case '.csv':
+      case '.json':
+        data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read data as string
+        break;
+        
+      case '.arrow':
+        // read arrow data
         const dataBuffer = fs.readFileSync(dataFilePath);
-        // create arrow table data
         const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
         data = this.getArrowData(dataTable); // dataTable.toArray();
+
         // remap arrow data schema to columns for data viewer
         this._schema = {};
         dataTable.schema.fields.map(field => {
@@ -271,30 +292,20 @@ export class DataPreview {
           this._schema[field.name] = config.dataTypes[fieldType];
         });
         // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
-        if (config.logLevel === LogLevel.Debug) {
-          this._logger.logMessage(LogLevel.Debug, 'getFileData(): arrow table schema:', 
-            JSON.stringify(dataTable.schema, null, 2));
-          this._logger.logMessage(LogLevel.Debug, 'getFileData(): data view schema:', 
-            JSON.stringify(this._schema, null, 2));
-          this._logger.logMessage(LogLevel.Debug, 'getFileData(): records count:', dataTable.length);
-        }
-      } else { // must be csv or json text data file
-        data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read as string
-      }
-    }
-    else {
-      this._logger.logMessage(LogLevel.Error, 'getFileData():', `${filePath} doesn't exist`);
+        break;
     }
     return data;
-  }
+  } // end of getFileData()
 
   /**
    * Converts arrow table data to array of objects.
    * @param table The arrow data table to convert.
+   * @returns Array of row objects.
    */
   private getArrowData(table: Table): any[] {
+    this.logArrowDataStats(table);
     const rows = Array(table.length);
-    const fields = table.schema.fields.map(d => d.name);  
+    const fields = table.schema.fields.map(field => field.name);
     for (let i=0, n=rows.length; i<n; ++i) {
       const proto = {};
       fields.forEach((fieldName, index) => {
@@ -304,6 +315,20 @@ export class DataPreview {
       rows[i] = proto;
     }
     return rows;
+  }
+
+  /**
+   * Logs arrow data table stats for debug.
+   * @param dataTable Arrow data table.
+   */
+  private logArrowDataStats(dataTable: Table): void {
+    if (config.logLevel === LogLevel.Debug) {
+      this._logger.logMessage(LogLevel.Debug, 'getFileData(): arrow table schema:', 
+        JSON.stringify(dataTable.schema, null, 2));
+      this._logger.logMessage(LogLevel.Debug, 'getFileData(): data view schema:', 
+        JSON.stringify(this._schema, null, 2));
+      this._logger.logMessage(LogLevel.Debug, 'getFileData(): records count:', dataTable.length);
+    }
   }
 
   /**
@@ -335,14 +360,14 @@ export class DataPreview {
   }
     
   /**
-   * Gets the source vega spec json doc uri for this preview.
+   * Gets the source data doc uri for this preview.
    */
   get uri(): Uri {
     return this._uri;
   }
 
   /**
-   * Gets the preview uri to load on commands triggers or vscode IDE reload. 
+   * Gets the preview uri to load on data preview command triggers or vscode IDE reload. 
    */
   get previewUri(): Uri {
     return this._previewUri;
@@ -363,7 +388,7 @@ export class DataPreview {
   }
 
   /**
-   * Gets schema for typed data sets.
+   * Gets data schema for typed data sets.
    */
   get schema(): any {
     return this._schema;
