@@ -24,9 +24,9 @@
     "tsv",
     "xlsx",
     "xlsm",
-    "json",
+    "json array",
     "arrow",
-    "excel",
+    "excel",    
     "parquet"
   ],
   "engines": {
