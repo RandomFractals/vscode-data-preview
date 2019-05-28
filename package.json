@@ -26,7 +26,7 @@
     "xlsm",
     "json array",
     "arrow",
-    "excel",    
+    "excel",
     "parquet"
   ],
   "engines": {
@@ -50,28 +50,51 @@
     "languages": [
       {
         "id": "csv",
-        "extensions": [".csv"],
-        "aliases": ["CSV"]
+        "extensions": [
+          ".csv"
+        ],
+        "aliases": [
+          "CSV"
+        ]
       },
       {
         "id": "tsv",
-        "extensions": [".tsv"],
-        "aliases": ["TSV"]
+        "extensions": [
+          ".tsv"
+        ],
+        "aliases": [
+          "TSV"
+        ]
       },
       {
         "id": "excel",
-        "extensions": [".xlsx", ".xlsm"],
-        "aliases": ["Excel"]
+        "extensions": [
+          ".xlsx",
+          ".xlsm"
+        ],
+        "aliases": [
+          "Excel"
+        ]
       },
       {
         "id": "arrow",
-        "extensions": [".arrow", ".arr"],
-        "aliases": ["Arrow"]
+        "extensions": [
+          ".arrow",
+          ".arr"
+        ],
+        "aliases": [
+          "Arrow"
+        ]
       },
       {
         "id": "parquet",
-        "extensions": [".parquet", ".parq"],
-        "aliases": ["Parquet"]
+        "extensions": [
+          ".parquet",
+          ".parq"
+        ],
+        "aliases": [
+          "Parquet"
+        ]
       }
     ],
     "commands": [
