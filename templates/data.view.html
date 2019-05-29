@@ -133,14 +133,25 @@
         switch (fileExt) {
           case '.csv':
           case '.tsv':
+          case '.txt':
+            case '.tab':
+            // pass through text data for data view to load
             tableData = data;
             break;
           case '.json':
             // try to parse JSON array data
             tableData = JSON.parse(data);          
             break;
-          case '.xlsx':
-          case '.xlsm':
+            case '.xls':
+            case '.xlsb':
+            case '.xlsx':
+            case '.xlsm':
+            case '.slk':
+            case '.ods':
+            case '.prn':
+            case '.dif':
+            case '.xml':
+            case '.html':
             // pass through Excel files data json
             tableData = data;
             console.log(`data.view:getData(): records count: ${tableData.length}`);
