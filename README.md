@@ -1,25 +1,32 @@
 # vscode-data-preview
 [VSCode](https://github.com/Microsoft/vscode) Data Preview extension for viewing, slicing and dicing 
-large `.csv`, `.json` array, `.arrow` and `.parquet` data files with [Perspective](https://perspective.finos.org/) - streaming analytics WebAssembly library.
+large `.csv`, `.xlsx`, `.json` array, `.arrow` and `.parquet` data files with [Perspective](https://perspective.finos.org/) - streaming analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
-## Usage Tips: 
+## Data Preview Launch Tips: 
 
-1. Hit `Ctrl+Shift+D` in open `.csv` or `.json` array data file to launch Data Preview panel.
-2. Hit `Ctrl+S` or Save your `.csv` or `.json` array data file for data refresh in open Data Preview panel.
-3. Right-click on `.arrow` data file in vscode file explorer to lauch Data Preview for these binary data files.
-4. Double click on the grid column header to sort data.
-5. Drag and drop columns from the left-side columns panel into filter fields for data filtering (group by, split by, sort, filter).
+1. Hit `Ctrl+Shift+D` in an open text `.csv` or `.json` array data file document to launch Data Preview panel.
+2. Hit `Ctrl+S` or `File -> Save` your `.csv` or `.json` array data file for updates in open Data Preview panel.
+3. Right-click on a binary `.xlsx` or `.arrow` data file in vscode File Explorer to launch Data Preview panel.
+4. Use exposed `editor/title` or `editor/title/context` context menu options to Preview your data files.
+
+## Data Grid/Filter/Columns UX Tips:
+
+1. Double click on the grid column header to `Sort` data by that column.
+2. Drag and drop a column from the left-side `Columns` control panel into `Filter fields` for data filtering 
+(`Group By`, `Split By`, `Sort`, `Filter`).
+3. Drag columns up and down in the left-side `Columns` control panel to reorder displayed columns in the Data Grid.
+4. Uncheck a column in the `Columns` control panel to remove it from a Chart or Data Grid display.
 
 # MVP Features
 
-- CSV, JSON array, and Arrow data preview, sorting and filtering
-- Grid data summary display with aggregate functions, row and column pivots (a.k.a. groupBy and splitBy)
-- Basic charts auto-gen from data with aggregate functions, row and column pivots
-- Pluggable charting libraries for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
-- Dark and light data preview panel themes
+- `CSV`, `XLSX`, `JSON array`, and `Arrow` data files preview, sorting and filtering
+- Grid data summary display with Aggregate Functions, row and column pivots (a.k.a. `Group By` and `Split By`)
+- Basic Charts auto-gen from data with Aggregate Functions, row and column pivots
+- Pluggable charting libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
+- Dark and Light Data Preview panel themes
 - Persistent Data Preview settings (sort, filter, pivots, etc.) for restore on vscode reload
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
