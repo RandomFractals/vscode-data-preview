@@ -22,8 +22,18 @@
     "data preview",
     "csv",
     "tsv",
+    "txt",
+    "tab",
+    "dif",
+    "ods",
+    "prn",
+    "slk",
+    "xls",
+    "xlsb",
     "xlsx",
     "xlsm",
+    "xml",
+    "html",
     "json array",
     "arrow",
     "excel",
@@ -60,7 +70,9 @@
       {
         "id": "tsv",
         "extensions": [
-          ".tsv"
+          ".tsv",
+          ".txt",
+          ".tab"
         ],
         "aliases": [
           "TSV"
@@ -69,8 +81,16 @@
       {
         "id": "excel",
         "extensions": [
+          ".xls",
+          ".xlsb",
           ".xlsx",
-          ".xlsm"
+          ".xlsm",
+          ".dif",
+          ".ods",
+          ".prn",
+          ".slk",
+          ".xml",
+          ".html"    
         ],
         "aliases": [
           "Excel"
@@ -113,21 +133,21 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|xlsx|xlsm|json|arrow|arr|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|xlsx|xlsm|json|arrow|arr|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|xlsx|xlsm|json|arrow|arr|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }

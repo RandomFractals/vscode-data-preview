@@ -272,12 +272,24 @@ export class DataPreview {
     switch (dataFileExt) {
       case '.csv':
       case '.tsv':
+      case '.txt':
+      case '.tab':
       case '.json':
         data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read data as string
         break;
+      case '.xls':
+      case '.xlsb':
       case '.xlsx':
       case '.xlsm':
-        data = this.getExcelData(dataFilePath);
+      case '.slk':
+      case '.ods':
+      case '.prn':
+        data = this.getBinaryExcelData(dataFilePath);
+        break;
+      case '.dif':
+      case '.xml':
+      case '.html':
+        data = this.getTextExcelData(dataFilePath);
         break;
       case '.arrow':
         data = this.getArrowData(dataFilePath);
@@ -294,15 +306,39 @@ export class DataPreview {
    * Gets binary Excel file data.
    * @param dataFilePath Excel file path.
    * @returns Array of row objects.
-   */
-  private getExcelData(dataFilePath: string): any[] {
+   */  
+  private getBinaryExcelData(dataFilePath: string): any[] {
     // load Excel workbook
     const workbook: xlsx.WorkBook = xlsx.readFile(dataFilePath, {
-      type: 'binary', //'file',
+      type: 'binary',
       cellDates: true,
     });
-    this._logger.logMessage(LogLevel.Debug, 'getExcelData(): sheetNames:', workbook.SheetNames);
+    return this.getExcelData(dataFilePath, workbook);
+  }
 
+  /**
+   * Gets text Excel file data.
+   * @param dataFilePath Excel file path.
+   * @returns Array of row objects.
+   */  
+  private getTextExcelData(dataFilePath: string): any[] {
+    // load Excel workbook
+    const workbook: xlsx.WorkBook = xlsx.readFile(dataFilePath, {
+      type: 'file',
+      cellDates: true,
+    });
+    return this.getExcelData(dataFilePath, workbook, 'text'); // file type
+  }
+
+  /**
+   * Gets binary Excel file data.
+   * @param dataFilePath Excel file path.
+   * @param workbook Excel workbook.
+   * @param fileType Excel file type: text or binary.
+   * @returns Array of row objects.
+   */
+  private getExcelData(dataFilePath: string, workbook: xlsx.WorkBook, fileType = 'binary'): any[] {
+    this._logger.logMessage(LogLevel.Debug, 'getExcelData(): sheetNames:', workbook.SheetNames);
     // read first worksheet data rows
     let rows = [];
     if (workbook.SheetNames.length > 0) {
