@@ -1,44 +1,46 @@
 # vscode-data-preview
-[VSCode](https://github.com/Microsoft/vscode) Data Preview extension for viewing, slicing and dicing 
-large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow` and `.parquet` data files with [Perspective](https://perspective.finos.org/) - streaming analytics WebAssembly library.
+[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing, slicing & dicing 
+large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow` & `.parquet` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
-# MVP Features
+# Data Preview 🈸 MVP Features
 
-- `CSV/TSV`, `XLSX/XLSM`, `JSON array`, and `Arrow` data files preview, sorting and filtering
-- Grid Data summary display with Aggregate Functions, Row and Column Pivots (a.k.a. `Group By` and `Split By`)
-- Basic Charts auto-gen from data with Aggregate Functions, Row and Column Pivots
-- Pluggable charting libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
-- Dark and Light Data Preview panel themes
-- Persistent Data Preview settings (sort, filter, pivots, etc.) for restore on vscode reload
+- `CSV/TSV`, `XLSX/XLSM`, `JSON array` & `Arrow` data files preview, sorting & filtering
+- Grid Data summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
+- Basic Charts auto-gen from data with Aggregate Functions, Row & Column Pivots
+- Pluggable Data Charting libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
+- Dark & Light Data Preview 🈸 Panel Themes
+- Persistent Data Preview 🈸 Settings (sort, filter, pivots, etc.) for restore on vscode reload
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
 "Perspective Viewer")
 
 # Next V.
 
-- Will include `.parquet`, large text and binary data files support, and [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
+- Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
+
+**Note:** this Data Preview 🈸 MVP v. is already capable of loading a few MB's large data files with 100+K records & extensive list of supported data formats you'll be hard pressed to find on vscode marketplace.
 
 # Installation
 
-Install this [Data Preview](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) via vscode Extensions tab (`Ctrl+Shift+X`) by searching for `data preview`, or via [vscode marketplace search results](https://marketplace.visualstudio.com/search?term=data%20preview&target=VSCode&category=All%20categories&sortBy=Relevance). 
+Install this [Data Preview](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) 🈸 via vscode Extensions tab (`Ctrl+Shift+X`) by searching for `data preview` || via [vscode marketplace search results](https://marketplace.visualstudio.com/search?term=data%20preview&target=VSCode&category=All%20categories&sortBy=Relevance). 
 
-List of Data Preview extension vscode contributions, with `data.preview` command, keyboard shortcut, augmented menu contexts for `csv/tsv`, `xlsx/xlsm`, `json` array, and `arrow` data file previews, and configurable theme and charts data preview settings:
+List of Data Preview 🈸 extension vscode contributions, with `data.preview` command, keyboard shortcut, augmented vscode UI context menus, added data language mappings, supported data files list & configurable theme & charts Data Preview 🈸 Settings:
 
 ![Data Preview Contributions](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-contributions.png?raw=true 
 "Data Preview Contributions")
 
 # Configuration
-[Create User or Workspace Settings in vscode](http://code.visualstudio.com/docs/customization/userandworkspace#_creating-user-and-workspace-settings) to change default Data Preview extension settings:
+[Create User or Workspace Settings in vscode](http://code.visualstudio.com/docs/customization/userandworkspace#_creating-user-and-workspace-settings) to change default Data Preview 🈸 extension Settings:
 
 Setting | Type | Default Value | Description
 ------- | ---- | ------------- | -----------
 data.preview.theme | string |  | Data Preview theme: blank for light, or '.dark' for dark theme data previews display.
-data.preview.charts.plugin | string | hightcharts | Data Preview charts library to use for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
+data.preview.charts.plugin | string | hightcharts | Data Preview 🈸 charts library to use for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
 
-Data Preview using `.dark` theme with `d3fc` charts config, viewing 
+Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing 
 [superstore](https://github.com/finos/perspective/blob/master/examples/simple/superstore.arrow)`.arrow` data file :)
 
 ![Data Preview Dark](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-dark.png?raw=true 
@@ -46,12 +48,12 @@ Data Preview using `.dark` theme with `d3fc` charts config, viewing
 
 # Usage Tips
 
-## Data Preview Launch Tips
+## Data Preview 🈸 Launch Tips
 
-1. Run `View -> Command Palette>Data: Preview Data  🈸` command or hit `Ctrl+Shift+D` in an open text `.csv/.tsv` or `.json` array data file document to launch Data Preview panel.
-2. Hit `Ctrl+S` or `File -> Save` your `.csv/.tsv` or `.json` array data file for updates in open Data Preview panel.
-3. Right-click on a binary `.xlsx/.xlsm` or `.arrow` data file in vscode File Explorer to launch Data Preview panel.
-4. Use exposed `explorer/context`, `editor/title` or `editor/title/context` context menu options to Preview your data files.
+1. Run `View -> Command Palette...>Data: Preview Data 🈸` command or hit `Ctrl+Shift+D` in an open text `.csv/.tsv` or `.json` array data file document to launch Data Preview 🈸 panel.
+2. Hit `Ctrl+S` or `File -> Save` your `.csv/.tsv` or `.json` array data file for updates in open Data Preview 🈸 panel.
+3. Right-click on a binary `.xlsx/.xlsm` or `.arrow` data file in vscode File Explorer to launch Data Preview 🈸 panel.
+4. Use exposed `explorer/context`, `editor/title` or `editor/title/context` context menu options to Preview 🈸 your data files.
 
 ## Data Grid/Filter/Columns UX Tips
 
@@ -63,9 +65,6 @@ Data Preview using `.dark` theme with `d3fc` charts config, viewing
 
 # Supported Excel & Other Binary Data Formats
 
-![Data Preview Data](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-data.png?raw=true 
-"Data Preview Data")
-
 ```js
 {
   "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|parquet|parq)/",
@@ -75,6 +74,9 @@ Data Preview using `.dark` theme with `d3fc` charts config, viewing
 ```
 
 See https://github.com/SheetJS/js-xlsx#file-formats for more info on supported `Excel` file formats.
+
+![Data Preview Data](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-data.png?raw=true 
+"Data Preview Data")
 
 ## Provided Chart Types
 
@@ -110,7 +112,7 @@ See https://github.com/SheetJS/js-xlsx#file-formats for more info on supported `
 
 # Dev Log
 
-See [#DataPreview tag on Twitter](https://twitter.com/hashtag/datapreview?f=tweets&vertical=default&src=hash) for the latest and greatest updates on this vscode extension and what's in store next.
+See [#DataPreview 🈸 tag on Twitter](https://twitter.com/hashtag/datapreview?f=tweets&vertical=default&src=hash) for the latest and greatest updates on this vscode extension and what's in store next.
 
 # Dev Build
 
@@ -120,10 +122,10 @@ $ cd vscode-data-preview
 $ npm install
 $ code .
 ```
-`F5` to launch Data Preview extension VSCode debug session.
+`F5` to launch Data Preview 🈸 extension VSCode debug session.
 
 # Contributions
 
 Any and all test, code or feedback contributions are welcome. 
 
-Open an issue or create a pull request to make this Data Preview extension work better for all. 
+Open an issue or create a pull request to make this Data Preview 🈸 extension work better for all. 
