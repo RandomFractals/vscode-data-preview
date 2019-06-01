@@ -206,6 +206,7 @@
     "@finos/perspective-viewer-highcharts": "^0.3.0-rc.2",
     "@finos/perspective-viewer-hypergrid": "^0.3.0-rc.2",
     "apache-arrow": "^0.4.1",
+    "avsc": "^5.4.10",
     "d3-fetch": "^1.1.2",
     "xlsx": "^0.14.3"
   }
