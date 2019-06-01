@@ -7,19 +7,19 @@ large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow`, `.avro` & `.parquet` 
 
 # Data Preview 🈸 MVP Features
 
-- `CSV/TSV`, `XLSX/XLSM`, `JSON array` & `Arrow` data files preview, sorting & filtering
+- `CSV/TSV`, `XLSX/XLSM`, `JSON array`, `Arrow` & `Avro` data files Preview, Sorting & Filtering
 - Grid Data summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts auto-gen from data with Aggregate Functions, Row & Column Pivots
 - Pluggable Data Charting libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
 - Dark & Light Data Preview 🈸 Panel Themes
-- Persistent Data Preview 🈸 Settings (sort, filter, pivots, etc.) for restore on vscode reload
+- Persistent Data Preview 🈸 Settings (Sort, Filter, Pivots, etc.) for restore on vscode Reload
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
 "Perspective Viewer")
 
 # Next V.
 
-- Will include `.avro` & `.parquet` data formats support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
+- Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
 
 **Note:** this Data Preview 🈸 MVP v. is already capable of loading a few MB's large data files with 100+K records & extensive list of supported data formats you'll be hard pressed to find on vscode marketplace.
 
@@ -50,10 +50,10 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 
 ## Data Preview 🈸 Launch Tips
 
-1. Run `View -> Command Palette...>Data: Preview Data 🈸` command or hit `Ctrl+Shift+D` in an open text `.csv/.tsv` or `.json` array data file document to launch Data Preview 🈸 panel.
-2. Hit `Ctrl+S` or `File -> Save` your `.csv/.tsv` or `.json` array data file for updates in open Data Preview 🈸 panel.
-3. Right-click on a binary `.xlsx/.xlsm` or `.arrow` data file in vscode File Explorer to launch Data Preview 🈸 panel.
-4. Use exposed `explorer/context`, `editor/title` or `editor/title/context` context menu options to Preview 🈸 your data files.
+1. Run `View -> Command Palette...>Data: Preview Data 🈸` command || hit `Ctrl+Shift+D` in an open text `.csv/.tsv` || `.json` array data file document to launch Data Preview 🈸 panel.
+2. Hit `Ctrl+S` || `File -> Save` your `.csv/.tsv` || `.json` array data file for updates in open Data Preview 🈸 panel.
+3. Right-click on a binary `.xlsx/.xlsm`, `.arrow` || `.avro` data file in vscode File Explorer to launch Data Preview 🈸 panel.
+4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` context menu options to Preview 🈸 your data files.
 
 ## Data Grid/Filter/Columns UX Tips
 
@@ -67,7 +67,7 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|parquet|parq)/",
+  "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|avro|parquet|parq)/",
   "command": "data.preview",
   "group": "navigation"
 }
