@@ -237,15 +237,17 @@ export class DataPreview {
       try {
         // get file data
         const data = this.getFileData(this._fileName);
-        // update web view
-        this.webview.postMessage({
-          command: 'refresh',
-          fileName: this._fileName,
-          uri: this._uri.toString(),
-          config: this.config,
-          schema: this.schema,
-          data: data
-        });
+        if (data.length > 0) {
+          // update web view
+          this.webview.postMessage({
+            command: 'refresh',
+            fileName: this._fileName,
+            uri: this._uri.toString(),
+            config: this.config,
+            schema: this.schema,
+            data: data
+          });
+        }
       }
       catch (error) {
         this._logger.logMessage(LogLevel.Error, 'refresh():', error.message);
@@ -299,7 +301,7 @@ export class DataPreview {
         break;
       case '.avro':
         data = this.getAvroData(dataFilePath);
-        console.log('avro data:', JSON.stringify(data, null, 2));
+        this._logger.logMessage(LogLevel.Debug, 'getFileData(): Avro data:', JSON.stringify(data, null, 2));
         break;
       case '.parquet':
         // TODO: add parquet data read
@@ -320,7 +322,7 @@ export class DataPreview {
       type: 'binary',
       cellDates: true,
     });
-    return this.getExcelData(dataFilePath, workbook);
+    return this.getExcelData(workbook);
   }
 
   /**
@@ -334,17 +336,15 @@ export class DataPreview {
       type: 'file',
       cellDates: true,
     });
-    return this.getExcelData(dataFilePath, workbook, 'text'); // file type
+    return this.getExcelData(workbook);
   }
 
   /**
    * Gets binary Excel file data.
-   * @param dataFilePath Excel file path.
    * @param workbook Excel workbook.
-   * @param fileType Excel file type: text or binary.
    * @returns Array of row objects.
    */
-  private getExcelData(dataFilePath: string, workbook: xlsx.WorkBook, fileType = 'binary'): any[] {
+  private getExcelData(workbook: xlsx.WorkBook): any[] {
     this._logger.logMessage(LogLevel.Debug, 'getExcelData(): sheetNames:', workbook.SheetNames);
     // read first worksheet data rows
     let rows = [];
@@ -423,15 +423,26 @@ export class DataPreview {
    * @param dataFilePath Avro data file path.
    * @returns Array of row objects.
    */
-  private async getAvroData(dataFilePath: string): Promise<any[]> {
+  private getAvroData(dataFilePath: string): any[] {
     let dataRows: Array<any> = [];
     let dataSchema: any = {};
+    let rows: Array<any> = [];
     const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataFilePath);
     dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
-    await new Promise(resolve => dataBlockDecoder.on('end', () => resolve()));
-    const rows = dataRows.map(rowObject => this.flattenObject(rowObject));    
-    this.logAvroDataStats(dataSchema, rows);
+    dataBlockDecoder.on('end', () => {
+      rows = dataRows.map(rowObject => this.flattenObject(rowObject));    
+      this.logAvroDataStats(dataSchema, rows);
+      // update web view
+      this.webview.postMessage({
+        command: 'refresh',
+        fileName: this._fileName,
+        uri: this._uri.toString(),
+        config: this.config,
+        schema: this.schema,
+        data: rows
+      });
+    });
     return rows;
   } // end of getAvroData()
 
@@ -442,8 +453,8 @@ export class DataPreview {
    */
   private logAvroDataStats(dataSchema: any, dataRows: Array<any>): void {
     if (config.logLevel === LogLevel.Debug) {
-      this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): Avro data schema:', 
-        JSON.stringify(dataSchema, null, 2));
+      //this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): Avro data schema:', 
+      //  JSON.stringify(dataSchema, null, 2));
       this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): data view schema:', 
         JSON.stringify(this._schema, null, 2));
       this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): records count:', dataRows.length);
