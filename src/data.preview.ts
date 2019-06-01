@@ -301,7 +301,6 @@ export class DataPreview {
         break;
       case '.avro':
         data = this.getAvroData(dataFilePath);
-        this._logger.logMessage(LogLevel.Debug, 'getFileData(): Avro data:', JSON.stringify(data, null, 2));
         break;
       case '.parquet':
         // TODO: add parquet data read
@@ -453,8 +452,8 @@ export class DataPreview {
    */
   private logAvroDataStats(dataSchema: any, dataRows: Array<any>): void {
     if (config.logLevel === LogLevel.Debug) {
-      //this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): Avro data schema:', 
-      //  JSON.stringify(dataSchema, null, 2));
+      this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): Avro data schema:', 
+        JSON.stringify(dataSchema, null, 2));
       this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): data view schema:', 
         JSON.stringify(this._schema, null, 2));
       this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): records count:', dataRows.length);
