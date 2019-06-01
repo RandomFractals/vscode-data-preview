@@ -1,6 +1,6 @@
 # vscode-data-preview
 [VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing, slicing & dicing 
-large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow` & `.parquet` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow`, `.avro` & `.parquet` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
@@ -19,7 +19,7 @@ large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow` & `.parquet` data file
 
 # Next V.
 
-- Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
+- Will include `.avro` & `.parquet` data formats support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
 
 **Note:** this Data Preview 🈸 MVP v. is already capable of loading a few MB's large data files with 100+K records & extensive list of supported data formats you'll be hard pressed to find on vscode marketplace.
 

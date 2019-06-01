@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
   "contributors": [
@@ -36,6 +36,7 @@
     "html",
     "json array",
     "arrow",
+    "avro",
     "excel",
     "parquet"
   ],
@@ -53,6 +54,7 @@
     "onLanguage:excel",
     "onLanguage:json",
     "onLanguage:arrow",
+    "onLanguage:avro",
     "onLanguage:parquet"
   ],
   "main": "./out/extension",
@@ -107,6 +109,15 @@
         ]
       },
       {
+        "id": "avro",
+        "extensions": [
+          ".avro"
+        ],
+        "aliases": [
+          "Avro"
+        ]
+      },
+      {
         "id": "parquet",
         "extensions": [
           ".parquet",
@@ -133,21 +144,21 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|avro|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|avro|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|avro|parquet|parq)/",
           "command": "data.preview",
           "group": "navigation"
         }
@@ -169,7 +180,7 @@
             "d3fc"
           ],
           "default": "highcharts",
-          "description": "Data Preview charts library to use."
+          "description": "Data Preview charts library to use: highcharts || d3fc."
         }
       }
     }
