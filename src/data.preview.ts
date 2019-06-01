@@ -13,12 +13,15 @@ import {
 } from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as avro from 'avsc';
+import * as snappy from 'snappy';
 import * as xlsx from 'xlsx';
 import {Table} from 'apache-arrow';
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
 import {Template} from './template.manager';
+import { AnySrvRecord } from 'dns';
 
 /**
  * Data preview web panel serializer for restoring previews on vscode reload.
@@ -294,6 +297,9 @@ export class DataPreview {
       case '.arrow':
         data = this.getArrowData(dataFilePath);
         break;
+      case '.avro':
+        data = this.getAvroData(dataFilePath);
+        break;
       case '.parquet':
         // TODO: add parquet data read
         window.showInformationMessage('Parquet data format support coming soon!');
@@ -361,14 +367,14 @@ export class DataPreview {
   }
 
   /**
-   * Gets binary arrow file data.
+   * Gets binary Arrow file data.
    * @param dataFilePath Arrow data file path.
    * @returns Array of row objects.
    */
   private getArrowData(dataFilePath: string): any[] {
     const dataBuffer = fs.readFileSync(dataFilePath);
     const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
-    const rows = Array(dataTable.length);
+    const rows: Array<any> = Array(dataTable.length);
     const fields = dataTable.schema.fields.map(field => field.name);
     for (let i=0, n=rows.length; i<n; ++i) {
       const proto = {};
@@ -398,16 +404,52 @@ export class DataPreview {
   } // end of getArrowData()
 
   /**
-   * Logs arrow data table stats for debug.
+   * Logs Arrow data table stats for debug.
    * @param dataTable Arrow data table.
    */
   private logArrowDataStats(dataTable: Table): void {
     if (config.logLevel === LogLevel.Debug) {
-      this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): arrow table schema:', 
+      this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): Arrow table schema:', 
         JSON.stringify(dataTable.schema, null, 2));
       this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): data view schema:', 
         JSON.stringify(this._schema, null, 2));
       this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): records count:', dataTable.length);
+    }
+  }
+
+  /**
+   * Gets binary Avro file data.
+   * @param dataFilePath Avro data file path.
+   * @returns Array of row objects.
+   */
+  private async getAvroData(dataFilePath: string) {
+    let dataRows: Array<any> = [];
+    let dataSchema: any = {};
+    const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataFilePath);
+    dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
+		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
+		await new Promise(resolve => dataBlockDecoder.on('end', () => resolve()));
+    this.logAvroDataStats(dataSchema, dataRows);
+    return dataRows;
+  } // end of getAvroData()
+
+  /**
+   * Logs Avro data table stats for debug.
+   * @param dataSchema Avro metadata.
+   * @param dataRows Avro data rows.
+   */
+  private logAvroDataStats(dataSchema: any, dataRows: Array<any>): void {
+    if (config.logLevel === LogLevel.Debug) {
+      this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): Avro data schema:', 
+        JSON.stringify(dataSchema, null, 2));
+      this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): data view schema:', 
+        JSON.stringify(this._schema, null, 2));
+      this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): records count:', dataRows.length);
+      if (dataRows.length > 0) {
+        const firstRow = dataRows[0];
+        this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): 1st row:', 
+          JSON.stringify(firstRow, null, 2));
+      }
     }
   }
 
