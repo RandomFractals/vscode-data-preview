@@ -299,6 +299,7 @@ export class DataPreview {
         break;
       case '.avro':
         data = this.getAvroData(dataFilePath);
+        console.log('avro data:', JSON.stringify(data, null, 2));
         break;
       case '.parquet':
         // TODO: add parquet data read
@@ -422,15 +423,16 @@ export class DataPreview {
    * @param dataFilePath Avro data file path.
    * @returns Array of row objects.
    */
-  private async getAvroData(dataFilePath: string) {
+  private async getAvroData(dataFilePath: string): Promise<any[]> {
     let dataRows: Array<any> = [];
     let dataSchema: any = {};
     const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataFilePath);
     dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
-		await new Promise(resolve => dataBlockDecoder.on('end', () => resolve()));
-    this.logAvroDataStats(dataSchema, dataRows);
-    return dataRows;
+    await new Promise(resolve => dataBlockDecoder.on('end', () => resolve()));
+    const rows = dataRows.map(rowObject => this.flattenObject(rowObject));    
+    this.logAvroDataStats(dataSchema, rows);
+    return rows;
   } // end of getAvroData()
 
   /**
@@ -451,6 +453,23 @@ export class DataPreview {
           JSON.stringify(firstRow, null, 2));
       }
     }
+  }
+
+  /**
+   * Flattens objects with nested properties for data view display.
+   * @param obj Object to flatten.
+   * @returns Flat Object.
+   */
+  private flattenObject (obj: any): any {
+    const flatObject: any = {};
+    Object.keys(obj).forEach((key) => {
+      if (typeof obj[key] === 'object' && obj[key] !== null) {
+        Object.assign(flatObject, this.flattenObject(obj[key]));
+      } else {
+        flatObject[key] = obj[key];
+      }
+    });
+    return flatObject;
   }
 
   /**

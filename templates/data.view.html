@@ -142,22 +142,22 @@
             // try to parse JSON array data
             tableData = JSON.parse(data);          
             break;
-            case '.xls':
-            case '.xlsb':
-            case '.xlsx':
-            case '.xlsm':
-            case '.slk':
-            case '.ods':
-            case '.prn':
-            case '.dif':
-            case '.xml':
-            case '.html':
-            // pass through Excel files data json
+          case '.xls':
+          case '.xlsb':
+          case '.xlsx':
+          case '.xlsm':
+          case '.slk':
+          case '.ods':
+          case '.prn':
+          case '.dif':
+          case '.xml':
+          case '.html':
+          case '.avro':
+            // pass through loaded data json
             tableData = data;
             console.log(`data.view:getData(): records count: ${tableData.length}`);
             break;
           case '.arrow':
-          case '.avro':
             // pass through arrow table data json
             tableData = data;
             console.log(`data.view:getData(): schema: ${JSON.stringify(schema, null, 2)}`);
