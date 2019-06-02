@@ -35,7 +35,8 @@ const DATA_FILE_EXTENSIONS: string[] = [
   '.json',
   '.arrow',
   '.arr',
-  'parquet',
+  '.avro',
+  '.parquet',
   '.parq'
 ];
 
