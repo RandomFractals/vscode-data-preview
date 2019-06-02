@@ -17,11 +17,11 @@ import * as avro from 'avsc';
 import * as snappy from 'snappy';
 import * as xlsx from 'xlsx';
 import {Table} from 'apache-arrow';
+//import * as parquet from 'parquetjs';
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
 import {Template} from './template.manager';
-import { AnySrvRecord } from 'dns';
 
 /**
  * Data preview web panel serializer for restoring previews on vscode reload.
@@ -317,8 +317,7 @@ export class DataPreview {
         data = this.getAvroData(dataFilePath);
         break;
       case '.parquet':
-        // TODO: add parquet data read
-        window.showInformationMessage('Parquet data format support coming soon!');
+        //data = this.getParquetData(dataFilePath);
         break;
     }
     return data;
@@ -410,21 +409,9 @@ export class DataPreview {
     // initialized typed data set columns config
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
 
-    this.logArrowDataStats(dataTable);
+    this.logDataStats(dataTable.schema, rows);
     return rows;
   } // end of getArrowData()
-
-  /**
-   * Logs Arrow data table stats for debug.
-   * @param dataTable Arrow data table.
-   */
-  private logArrowDataStats(dataTable: Table): void {
-    if (config.logLevel === LogLevel.Debug) {
-      this._logger.debug('logArrowDataStats(): Arrow table schema:', dataTable.schema);
-      this._logger.debug('logArrowDataStats(): data view schema:', this._schema);
-      this._logger.debug('logArrowDataStats(): records count:', dataTable.length);
-    }
-  }
 
   /**
    * Gets binary Avro file data.
@@ -440,29 +427,36 @@ export class DataPreview {
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
       rows = dataRows.map(rowObject => this.flattenObject(rowObject));    
-      this.logAvroDataStats(dataSchema, rows);
+      this.logDataStats(dataSchema, rows);
       // update web view
       this.loadData(rows);
     });
     return rows;
-  } // end of getAvroData()
+  }
 
   /**
-   * Logs Avro data table stats for debug.
-   * @param dataSchema Avro metadata.
-   * @param dataRows Avro data rows.
-   */
-  private logAvroDataStats(dataSchema: any, dataRows: Array<any>): void {
-    if (config.logLevel === LogLevel.Debug) {
-      this._logger.debug('logAvroDataStats(): Avro data schema:', dataSchema);
-      this._logger.debug('logAvroDataStats(): data view schema:', this._schema);
-      this._logger.debug('logAvroDataStats(): records count:', dataRows.length);
-      if (dataRows.length > 0) {
-        const firstRow = dataRows[0];
-        this._logger.debug('logAvroDataStats(): 1st row:', firstRow);
-      }
+   * Gets binary Parquet file data.
+   * @param dataFilePath Parquet data file path.
+   * @returns Array of row objects.
+   */ /*
+  private async getParquetData(dataFilePath: string) {
+    let dataRows: Array<any> = [];
+    let dataSchema: any = {};
+    let rows: Array<any> = [];
+    const parquetReader = await parquet.ParquetReader.openFile(dataFilePath);
+    const cursor = parquetReader.getCursor();
+    // read all records
+    let record = null;
+    while (record = await cursor.next()) {
+      dataRows.push(record);
     }
-  }
+    await parquetReader.close();
+    rows = dataRows.map(rowObject => this.flattenObject(rowObject));    
+    this.logDataStats(dataSchema, rows);
+    // update web view
+    this.loadData(rows);
+    return rows;
+  } */
 
   /**
    * Flattens objects with nested properties for data view display.
@@ -479,6 +473,23 @@ export class DataPreview {
       }
     });
     return flatObject;
+  }
+
+  /**
+   * Logs data stats for debug.
+   * @param dataSchema metadata.
+   * @param dataRows data rows.
+   */
+  private logDataStats(dataSchema: any, dataRows: Array<any>): void {
+    if (config.logLevel === LogLevel.Debug) {
+      this._logger.debug('logDataStats(): data schema:', dataSchema);
+      this._logger.debug('logDataStats(): data view schema:', this._schema);
+      this._logger.debug('logDataStats(): records count:', dataRows.length);
+      if (dataRows.length > 0) {
+        const firstRow = dataRows[0];
+        this._logger.debug('logAvroDataStats(): 1st row:', firstRow);
+      }
+    }
   }
 
   /**
