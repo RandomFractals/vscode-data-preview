@@ -21,6 +21,20 @@ export class Logger {
   }
 
   /**
+   * Logs new debug message.
+   * @param message log message.
+   * @param params log message params, if any.
+   */
+  public debug(message: string, params: any = null): void{
+    if (this.logLevel <= LogLevel.Debug) {
+      if (typeof params === 'object') {
+        params = JSON.stringify(params, null, 2);
+      }
+      this.log(LogLevel.Debug, message, params);
+    }
+  }
+
+  /**
    * Logs new message to console based on the specified log level.
    * @param logLevel log message level.
    * @param message log message.
