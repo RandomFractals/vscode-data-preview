@@ -47,9 +47,8 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    */
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
     if (config.logLevel === LogLevel.Debug) {
-      this._logger.logMessage(LogLevel.Debug, 'deserializeWeviewPanel(): url:', state.uri.toString());
-      this._logger.logMessage(LogLevel.Debug, 
-        'deserializeWeviewPanel(): config:', JSON.stringify(state.config, null, 2));
+      this._logger.debug('deserializeWeviewPanel(): url:', state.uri.toString());
+      this._logger.debug('deserializeWeviewPanel(): config:', state.config);
     }
     previewManager.add(
       new DataPreview(
@@ -169,8 +168,7 @@ export class DataPreview {
           // save data viewer config for restore on code reload
           this._config = message.config;
           if (config.logLevel === LogLevel.Debug) {
-            this._logger.logMessage(LogLevel.Debug, 'configUpdate(): config:', 
-              JSON.stringify(message.config, null, 2));
+            this._logger.debug('configUpdate(): config:', message.config);
           }
           break;
       }
@@ -232,28 +230,44 @@ export class DataPreview {
 
     // read and send updated data to webview
     // workspace.openTextDocument(this.uri).then(document => {
-      this._logger.logMessage(LogLevel.Debug, 'refresh(): file:', this._fileName);
+      this._logger.debug('refresh(): file:', this._fileName);
       //const textData: string = document.getText();
+      let data = [];
       try {
         // get file data
-        const data = this.getFileData(this._fileName);
-        if (data.length > 0) {
-          // update web view
-          this.webview.postMessage({
-            command: 'refresh',
-            fileName: this._fileName,
-            uri: this._uri.toString(),
-            config: this.config,
-            schema: this.schema,
-            data: data
-          });
-        }
+        data = this.getFileData(this._fileName);
       }
       catch (error) {
         this._logger.logMessage(LogLevel.Error, 'refresh():', error.message);
         this.webview.postMessage({error: error});
       }
+      this.loadData(data);
     // });
+  }
+
+  /**
+   * Loads string or JSON data into data view.
+   */
+  private loadData(data: any): void {
+    if (data === undefined || data.length <= 0) {
+      // no valid data to load
+      return;
+    }    
+    try {
+        // update web view
+        this.webview.postMessage({
+          command: 'refresh',
+          fileName: this._fileName,
+          uri: this._uri.toString(),
+          config: this.config,
+          schema: this.schema,
+          data: data
+        });
+    }
+    catch (error) {
+      this._logger.logMessage(LogLevel.Error, 'loadData():', error.message);
+      this.webview.postMessage({error: error});
+    }
   }
 
   /**
@@ -344,7 +358,7 @@ export class DataPreview {
    * @returns Array of row objects.
    */
   private getExcelData(workbook: xlsx.WorkBook): any[] {
-    this._logger.logMessage(LogLevel.Debug, 'getExcelData(): sheetNames:', workbook.SheetNames);
+    this._logger.debug('getExcelData(): sheetNames:', workbook.SheetNames);
     // read first worksheet data rows
     let rows = [];
     if (workbook.SheetNames.length > 0) {
@@ -353,14 +367,11 @@ export class DataPreview {
       const firstSheetName = workbook.SheetNames[0];
       const worksheet: xlsx.Sheet = workbook.Sheets[firstSheetName];
       rows = xlsx.utils.sheet_to_json(worksheet);
-      this._logger.logMessage(LogLevel.Debug, 
-        `getExcelData(): ${this._fileName}:${firstSheetName} records count:`, rows.length);        
+      this._logger.debug(`getExcelData(): ${this._fileName}:${firstSheetName} records count:`, rows.length);        
       if (rows.length > 0) {
         const firstRow = rows[0];
         // this._config['columns'] = Object.keys(firstRow);
-        this._logger.logMessage(LogLevel.Debug,
-          `getExcelData(): ${this._fileName}:${firstSheetName} 1st row:`, 
-          JSON.stringify(firstRow, null, 2));
+        this._logger.debug(`getExcelData(): ${this._fileName}:${firstSheetName} 1st row:`, firstRow); 
       }
     }
     return rows;
@@ -409,11 +420,9 @@ export class DataPreview {
    */
   private logArrowDataStats(dataTable: Table): void {
     if (config.logLevel === LogLevel.Debug) {
-      this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): Arrow table schema:', 
-        JSON.stringify(dataTable.schema, null, 2));
-      this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): data view schema:', 
-        JSON.stringify(this._schema, null, 2));
-      this._logger.logMessage(LogLevel.Debug, 'logArrowDataStats(): records count:', dataTable.length);
+      this._logger.debug('logArrowDataStats(): Arrow table schema:', dataTable.schema);
+      this._logger.debug('logArrowDataStats(): data view schema:', this._schema);
+      this._logger.debug('logArrowDataStats(): records count:', dataTable.length);
     }
   }
 
@@ -433,14 +442,7 @@ export class DataPreview {
       rows = dataRows.map(rowObject => this.flattenObject(rowObject));    
       this.logAvroDataStats(dataSchema, rows);
       // update web view
-      this.webview.postMessage({
-        command: 'refresh',
-        fileName: this._fileName,
-        uri: this._uri.toString(),
-        config: this.config,
-        schema: this.schema,
-        data: rows
-      });
+      this.loadData(rows);
     });
     return rows;
   } // end of getAvroData()
@@ -452,15 +454,12 @@ export class DataPreview {
    */
   private logAvroDataStats(dataSchema: any, dataRows: Array<any>): void {
     if (config.logLevel === LogLevel.Debug) {
-      this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): Avro data schema:', 
-        JSON.stringify(dataSchema, null, 2));
-      this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): data view schema:', 
-        JSON.stringify(this._schema, null, 2));
-      this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): records count:', dataRows.length);
+      this._logger.debug('logAvroDataStats(): Avro data schema:', dataSchema);
+      this._logger.debug('logAvroDataStats(): data view schema:', this._schema);
+      this._logger.debug('logAvroDataStats(): records count:', dataRows.length);
       if (dataRows.length > 0) {
         const firstRow = dataRows[0];
-        this._logger.logMessage(LogLevel.Debug, 'logAvroDataStats(): 1st row:', 
-          JSON.stringify(firstRow, null, 2));
+        this._logger.debug('logAvroDataStats(): 1st row:', firstRow);
       }
     }
   }
