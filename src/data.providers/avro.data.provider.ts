@@ -1,12 +1,13 @@
-import { 
-  TextDocumentContentProvider, 
-  EventEmitter, 
-  Uri, 
-  window 
+import {
+  window,
+  EventEmitter,
+  TextDocumentContentProvider,
+  Uri
 } from "vscode";
+import * as fs from 'fs';
 import * as avro from 'avsc';
 import * as config from '../config';
-import {Logger} from '../logger';
+import {Logger, LogLevel} from '../logger';
 
 class JsonData {
   data: string = '';
@@ -41,7 +42,6 @@ export class AvroContentProvider implements TextDocumentContentProvider {
         // load cached json data
         resolve(this.jsonFileDataMap.get(jsonFilePath)!.data);
       }
-
       // load Avro file data as JSON
       const dataFilePath: string = uri.toString();
       let dataRows: Array<any> = [];
@@ -49,14 +49,27 @@ export class AvroContentProvider implements TextDocumentContentProvider {
       const jsonData: JsonData = new JsonData();
       this.jsonFileDataMap.set(jsonFilePath, jsonData);
       const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataFilePath);
+
+      // process Avro data schema
       dataBlockDecoder.on('metadata', (type: any) => {
         dataSchema = type;
         jsonData.data = JSON.stringify(dataSchema, null, 2);
         this.onDidChangeEmitter.fire(uri);
         this.logger.debug('getAvroData(): data schema:', dataSchema);
+        // save generated Avro data schema json
+        const jsonFilePath:string = dataFilePath.replace('.avro', `.avro.schema.json`);
+        fs.writeFile(jsonFilePath, jsonData.data, (error) => {
+          if (error) {
+            const errorMessage: string = `Failed to save file: ${jsonFilePath}`;
+            this.logger.logMessage(LogLevel.Error, 'provideTextDocumentContent():', errorMessage);
+            window.showErrorMessage(errorMessage);
+          }
+        });
         // post Avro schema json
         resolve(jsonData.data);
-      });      
+      });
+
+      // process Avro data
       if (this.viewType === 'avro.data.json') {
         // read Avro data
         dataBlockDecoder.on('data', (data: any) => {
@@ -66,10 +79,20 @@ export class AvroContentProvider implements TextDocumentContentProvider {
         });
         dataBlockDecoder.on('end', () => {
           jsonData.data = JSON.stringify(dataRows, null, 2);
+          // save generated Avro data json
+          const jsonFilePath:string = dataFilePath.replace('.avro', `.avro.json`);
+          fs.writeFile(jsonFilePath, jsonData.data, (error) => {
+            if (error) {
+              const errorMessage: string = `Failed to save file: ${jsonFilePath}`;
+              this.logger.logMessage(LogLevel.Error, 'provideTextDocumentContent():', errorMessage);
+              window.showErrorMessage(errorMessage);
+            }
+          });  
           // post Avro data json
           resolve(jsonData.data);
         });  
       }
+
       // TODO: add Avro data file load error handler
       // window.showErrorMessage(message);
       // reject(message);
