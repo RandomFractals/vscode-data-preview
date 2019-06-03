@@ -317,6 +317,8 @@ export class DataPreview {
         data = this.getAvroData(dataFilePath);
         break;
       case '.parquet':
+        // TODO: sort out node-gyp lzo lib loading for parquet data files parse
+        window.showInformationMessage('Parquet data format support coming soon!');        
         //data = this.getParquetData(dataFilePath);
         break;
     }
