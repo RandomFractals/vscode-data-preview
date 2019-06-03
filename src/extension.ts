@@ -54,14 +54,18 @@ export function activate(context: ExtensionContext) {
 
   // register binary data content providers for viewing those files as json
   const avroJsonDataProvider: AvroContentProvider = new AvroContentProvider('avro.data.json'); // view type
-  context.subscriptions.push(workspace.registerTextDocumentContentProvider('avro', avroJsonDataProvider));
-  context.subscriptions.push(commands.registerTextEditorCommand('avro.data.json', 
-    textEditor => showTextDocument(textEditor.document, 'avro', 'json' )));
+  context.subscriptions.push(
+    workspace.registerTextDocumentContentProvider('avro', avroJsonDataProvider));
+  context.subscriptions.push(
+    commands.registerTextEditorCommand('avro.data.json', 
+      textEditor => showTextDocument(textEditor.document, 'avro', 'json' )));
 
-  const avroDataSchemaProvider: AvroContentProvider = new AvroContentProvider('avro.data.schema');
-  context.subscriptions.push(workspace.registerTextDocumentContentProvider('avro', avroDataSchemaProvider));
-  context.subscriptions.push(commands.registerTextEditorCommand('avro.data.schema.json',
-    textEditor => showTextDocument(textEditor.document, 'avro', 'schema.json' )));
+  const avroDataSchemaProvider: AvroContentProvider = new AvroContentProvider('avro.data.schema.json');
+  context.subscriptions.push(
+    workspace.registerTextDocumentContentProvider('avro', avroDataSchemaProvider));
+  context.subscriptions.push(
+    commands.registerTextEditorCommand('avro.data.schema.json',
+      textEditor => showTextDocument(textEditor.document, 'avro', 'schema.json' )));
     
   // TODO: add Arrow & binary Excel data files content providers + Excel html/xml to json :)
 
