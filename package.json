@@ -38,7 +38,8 @@
     "arrow",
     "avro",
     "excel",
-    "parquet"
+    "parquet",
+    "data schema"
   ],
   "engines": {
     "vscode": "^1.32.3",
@@ -131,6 +132,16 @@
         "command": "data.preview",
         "title": "Preview Data 🈸",
         "category": "Data"
+      },
+      {
+        "command": "avro.data.json",
+        "title": "Avro Data JSON",
+        "category": "Avro"
+      },
+      {
+        "command": "avro.data.schema.json",
+        "title": "Avro Data Schema JSON",
+        "category": "Avro"
       }
     ],
     "keybindings": [

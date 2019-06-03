@@ -16,6 +16,7 @@ import {Logger, LogLevel} from './logger';
 import {DataPreview, DataPreviewSerializer} from './data.preview';
 import {previewManager} from './preview.manager';
 import {Template, ITemplateManager, TemplateManager} from './template.manager';
+import {AvroContentProvider} from './data.providers/avro.data.provider';
 
 // supported data file extensions
 const DATA_FILE_EXTENSIONS: string[] = [
@@ -50,6 +51,19 @@ const logger: Logger = new Logger('data.preview:', config.logLevel);
 export function activate(context: ExtensionContext) {
   const extensionPath: string = context.extensionPath;
   logger.debug('activate(): activating from extPath:', context.extensionPath);
+
+  // register binary data content providers for viewing those files as json
+  const avroJsonDataProvider: AvroContentProvider = new AvroContentProvider('avro.data.json'); // view type
+  context.subscriptions.push(workspace.registerTextDocumentContentProvider('avro', avroJsonDataProvider));
+  context.subscriptions.push(commands.registerTextEditorCommand('avro.data.json', 
+    textEditor => showTextDocument(textEditor.document, 'avro', 'json' )));
+
+  const avroDataSchemaProvider: AvroContentProvider = new AvroContentProvider('avro.data.schema');
+  context.subscriptions.push(workspace.registerTextDocumentContentProvider('avro', avroDataSchemaProvider));
+  context.subscriptions.push(commands.registerTextEditorCommand('avro.data.schema.json',
+    textEditor => showTextDocument(textEditor.document, 'avro', 'schema.json' )));
+    
+  // TODO: add Arrow & binary Excel data files content providers + Excel html/xml to json :)
 
   // initialize data preview webview panel html template
   const templateManager: ITemplateManager = new TemplateManager(context.asAbsolutePath('templates'));
@@ -139,6 +153,23 @@ function isDataFile(document: TextDocument): boolean {
   logger.debug('isDataFile(): document:', document);
   logger.debug('isDataFile(): file:', fileName);
   return DATA_FILE_EXTENSIONS.findIndex(dataFileExt => dataFileExt === fileExt) >= 0;
+}
+
+/**
+ * Opens json Text document.
+ * @param document Text document to open.
+ * @param fileType Data file type: avro, arrow, excel, etc.
+ * @param viewType Text view type: json || schema.json.
+ */
+function showTextDocument(document: TextDocument, fileType: string, viewType: string = 'json') {
+  if (!document.fileName.endsWith(fileType)) {
+    window.showErrorMessage(`Open .${fileType} data file to Preview.`);
+    return; // no editor
+  }
+  if (document.fileName.endsWith(fileType) && !document.uri.scheme.startsWith(fileType)) {
+    const uri = Uri.parse(`${fileType}.data.${viewType}://${document.uri.path}.${viewType}`);
+    window.showTextDocument(uri);
+  }
 }
 
 /**
