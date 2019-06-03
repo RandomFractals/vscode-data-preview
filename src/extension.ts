@@ -8,7 +8,8 @@ import {
   Uri, 
   ViewColumn, 
   TextDocument,
-  TextDocumentChangeEvent 
+  TextDocumentChangeEvent,
+  TextDocumentContentProvider  
 } from 'vscode';
 import * as path from 'path';
 import * as config from './config';
@@ -53,19 +54,11 @@ export function activate(context: ExtensionContext) {
   logger.debug('activate(): activating from extPath:', context.extensionPath);
 
   // register binary data content providers for viewing those files as json
-  const avroJsonDataProvider: AvroContentProvider = new AvroContentProvider('avro.data.json'); // view type
-  context.subscriptions.push(
-    workspace.registerTextDocumentContentProvider('avro', avroJsonDataProvider));
-  context.subscriptions.push(
-    commands.registerTextEditorCommand('avro.data.json', 
-      textEditor => showTextDocument(textEditor.document, 'avro', 'json' )));
+  const avroJsonDataProvider: AvroContentProvider = new AvroContentProvider('avro.data.json');
+  addDataProvider(context, 'avro.data.json', avroJsonDataProvider, 'avro', 'json');
 
   const avroDataSchemaProvider: AvroContentProvider = new AvroContentProvider('avro.data.schema.json');
-  context.subscriptions.push(
-    workspace.registerTextDocumentContentProvider('avro', avroDataSchemaProvider));
-  context.subscriptions.push(
-    commands.registerTextEditorCommand('avro.data.schema.json',
-      textEditor => showTextDocument(textEditor.document, 'avro', 'schema.json' )));
+  addDataProvider(context, 'avro.data.schema.json', avroJsonDataProvider, 'avro', 'schema.json');
     
   // TODO: add Arrow & binary Excel data files content providers + Excel html/xml to json :)
 
@@ -145,6 +138,37 @@ function createDataPreviewCommand(viewType: string, extensionPath: string, viewT
     return preview.webview;
   });
   return dataWebview;
+}
+
+/**
+ * Adds custom text document data provider commands 
+ * for Avro, Arrow & Excel binary & html/xml data formats.
+ * @param context Extension context.
+ * @param commandType Command type/name.
+ * @param dataProvider Data provider instance.
+ * @param fileType Data file type.
+ * @param viewType Data provider output file type.
+ */
+function addDataProvider(context: ExtensionContext,
+  commandType: string, 
+  dataProvider: TextDocumentContentProvider,
+  fileType: string,
+  viewType: string): void {
+  
+  // add text document content provider
+  context.subscriptions.push(
+    workspace.registerTextDocumentContentProvider(commandType, dataProvider));
+
+  // add text editor command
+  context.subscriptions.push(
+    commands.registerTextEditorCommand(commandType, 
+      textEditor => showTextDocument(textEditor.document, fileType, viewType)));
+
+  // add regular data preview command 
+  /*
+  commands.registerCommand(commandType, (uri) => {
+    dataProvider.provideTextDocumentContent(uri, null); // cancelation token
+  }); */
 }
 
 /**
