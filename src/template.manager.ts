@@ -58,8 +58,7 @@ export class TemplateManager implements ITemplateManager {
    * @param templateFolder Template folder to inspect.
    */
   private loadTemplates(): Array<Template> {
-    this.logger.logMessage(LogLevel.Debug, 
-      'loadTemplates(): loading file templates... templateFolder:', this.templateFolder);
+    this.logger.debug('loadTemplates(): loading file templates... templateFolder:', this.templateFolder);
     const fileNames: string[] = fs.readdirSync(this.templateFolder)
       .filter(fileName => fileName.endsWith('.html') || fileName.endsWith('.json'));
     const templates: Array<Template> = [];
@@ -67,7 +66,7 @@ export class TemplateManager implements ITemplateManager {
     fileNames.forEach(fileName => templates.push(
       new Template(fileName, fs.readFileSync(path.join(this.templateFolder, fileName), 'utf8')) // file content
     ));
-    this.logger.logMessage(LogLevel.Debug, 'loadTemplates(): templates:', fileNames);
+    this.logger.debug('loadTemplates(): templates:', fileNames);
     return templates;
   }
 

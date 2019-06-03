@@ -49,7 +49,7 @@ const logger: Logger = new Logger('data.preview:', config.logLevel);
  */
 export function activate(context: ExtensionContext) {
   const extensionPath: string = context.extensionPath;
-  logger.logMessage(LogLevel.Debug, 'activate(): activating from extPath:', context.extensionPath);
+  logger.debug('activate(): activating from extPath:', context.extensionPath);
 
   // initialize data preview webview panel html template
   const templateManager: ITemplateManager = new TemplateManager(context.asAbsolutePath('templates'));
@@ -92,7 +92,7 @@ export function activate(context: ExtensionContext) {
     previewManager.configure();
   });
 
-  logger.logMessage(LogLevel.Info, 'activate(): activated! extPath:', context.extensionPath);
+  logger.debug('activate(): activated! extPath:', context.extensionPath);
 } // end of activate()
 
 /**
@@ -136,8 +136,8 @@ function createDataPreviewCommand(viewType: string, extensionPath: string, viewT
 function isDataFile(document: TextDocument): boolean {
   const fileName: string = path.basename(document.uri.fsPath);
   const fileExt: string = fileName.substr(fileName.lastIndexOf('.'));
-  logger.logMessage(LogLevel.Debug, 'isDataFile(): document:', document);
-  logger.logMessage(LogLevel.Debug, 'isDataFile(): file:', fileName);
+  logger.debug('isDataFile(): document:', document);
+  logger.debug('isDataFile(): file:', fileName);
   return DATA_FILE_EXTENSIONS.findIndex(dataFileExt => dataFileExt === fileExt) >= 0;
 }
 
