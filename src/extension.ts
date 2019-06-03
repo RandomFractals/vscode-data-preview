@@ -58,7 +58,7 @@ export function activate(context: ExtensionContext) {
   addDataProvider(context, 'avro.data.json', avroJsonDataProvider, 'avro', 'json');
 
   const avroDataSchemaProvider: AvroContentProvider = new AvroContentProvider('avro.data.schema.json');
-  addDataProvider(context, 'avro.data.schema.json', avroJsonDataProvider, 'avro', 'schema.json');
+  addDataProvider(context, 'avro.data.schema.json', avroDataSchemaProvider, 'avro', 'schema.json');
     
   // TODO: add Arrow & binary Excel data files content providers + Excel html/xml to json :)
 
