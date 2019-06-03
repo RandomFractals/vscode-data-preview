@@ -28,6 +28,7 @@ export class AvroContentProvider implements TextDocumentContentProvider {
    * @param viewType avro.data.json || avro.data.schema.json
    */
   constructor(private viewType: string = 'avro.data.json') {
+    this.logger.debug('(): created for:', viewType);
   }
 
   /**
@@ -35,6 +36,7 @@ export class AvroContentProvider implements TextDocumentContentProvider {
    * @param uri Avro data file uri.
    */
   async provideTextDocumentContent(uri: Uri): Promise<string> {
+    this.logger.debug('provideTextDocumentContent(): uri:', uri);
     return new Promise<string>((resolve, reject) => {
       // create json data file path
       const jsonFilePath = uri.path.replace(RegExp('\.json$'), '');
