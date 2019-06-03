@@ -24,7 +24,7 @@ export class AvroContentProvider implements TextDocumentContentProvider {
   /**
    * Creates new Avro data content provider for viewing 
    * Avro data and schema as json in a text editor.
-   * @param viewType avro.data.json || avro.data.schema
+   * @param viewType avro.data.json || avro.data.schema.json
    */
   constructor(private viewType: string = 'avro.data.json') {
   }
@@ -51,7 +51,11 @@ export class AvroContentProvider implements TextDocumentContentProvider {
       const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataFilePath);
       dataBlockDecoder.on('metadata', (type: any) => {
         dataSchema = type;
+        jsonData.data = JSON.stringify(dataSchema, null, 2);
+        this.onDidChangeEmitter.fire(uri);
         this.logger.debug('getAvroData(): data schema:', dataSchema);
+        // post Avro schema json
+        resolve(jsonData.data);
       });      
       if (this.viewType === 'avro.data.json') {
         // read Avro data
@@ -60,11 +64,12 @@ export class AvroContentProvider implements TextDocumentContentProvider {
           jsonData.data = JSON.stringify(dataRows, null, 2);
           this.onDidChangeEmitter.fire(uri);
         });
+        dataBlockDecoder.on('end', () => {
+          jsonData.data = JSON.stringify(dataRows, null, 2);
+          // post Avro data json
+          resolve(jsonData.data);
+        });  
       }
-      dataBlockDecoder.on('end', () => {
-        jsonData.data = JSON.stringify(dataRows, null, 2);
-        resolve(jsonData.data);
-      });
       // TODO: add Avro data file load error handler
       // window.showErrorMessage(message);
       // reject(message);
