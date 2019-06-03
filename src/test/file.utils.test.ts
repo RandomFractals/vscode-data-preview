@@ -1,5 +1,5 @@
-import { Uri, workspace } from "vscode";
-import { readFile } from 'fs';
+import {Uri, workspace} from "vscode";
+import {readFile} from 'fs';
 import * as assert from 'assert';
 
 export async function getUri(fileName: String): Promise<Uri> {
