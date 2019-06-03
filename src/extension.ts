@@ -171,7 +171,8 @@ function showTextDocument(document: TextDocument, fileType: string, viewType: st
     return; // no editor
   }
   if (document.fileName.endsWith(fileType) && !document.uri.scheme.startsWith(fileType)) {
-    const uri = Uri.parse(`${fileType}.data.${viewType}://${document.uri.path}.${viewType}`);
+    const uri = Uri.parse(//`${fileType}.data.${viewType}:
+      `file://${document.uri.path}.${viewType}`);
     window.showTextDocument(uri);
   }
 }
