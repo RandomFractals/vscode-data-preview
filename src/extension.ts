@@ -149,26 +149,48 @@ function createDataPreviewCommand(viewType: string, extensionPath: string, viewT
  * @param fileType Data file type.
  * @param viewType Data provider output file type.
  */
-function addDataProvider(context: ExtensionContext,
-  commandType: string, 
+function addDataProvider(
+  context: ExtensionContext,
+  commandType: string,
   dataProvider: TextDocumentContentProvider,
   fileType: string,
-  viewType: string): void {
-  
+  viewType: string):void {
+
   // add text document content provider
   context.subscriptions.push(
     workspace.registerTextDocumentContentProvider(commandType, dataProvider));
 
   // add text editor command
+  /*
   context.subscriptions.push(
     commands.registerTextEditorCommand(commandType, 
-      textEditor => showTextDocument(textEditor.document, fileType, viewType)));
-
+      textEditor => showTextDocument(textEditor.document.uri, fileType, viewType)));
+  */
   // add regular data preview command 
-  /*
   commands.registerCommand(commandType, (uri) => {
-    dataProvider.provideTextDocumentContent(uri, null); // cancelation token
-  }); */
+    dataProvider.provideTextDocumentContent(uri, null);
+    showTextDocument(uri, fileType, viewType);
+  });
+}
+
+/**
+ * Opens json Text document.
+ * @param documentUri Text document uri to open.
+ * @param fileType Data file type: avro, arrow, excel, etc.
+ * @param viewType Text view type: json || schema.json.
+ */
+function showTextDocument(documentUri: Uri, fileType: string, viewType: string = 'json') {
+  if (!documentUri) { // use open text editor uri
+    documentUri = window.activeTextEditor.document.uri;
+  }
+  if (!documentUri.fsPath.endsWith(fileType)) {
+    window.showErrorMessage(`Open .${fileType} data file to Preview.`);
+    return; // no editor
+  } else if (!documentUri.scheme.startsWith(fileType)) {
+    const uri = Uri.parse(//`${fileType}.data.${viewType}:
+      `file://${documentUri.fsPath}.${viewType}`);
+    window.showTextDocument(documentUri);
+  }
 }
 
 /**
@@ -181,24 +203,6 @@ function isDataFile(document: TextDocument): boolean {
   logger.debug('isDataFile(): document:', document);
   logger.debug('isDataFile(): file:', fileName);
   return DATA_FILE_EXTENSIONS.findIndex(dataFileExt => dataFileExt === fileExt) >= 0;
-}
-
-/**
- * Opens json Text document.
- * @param document Text document to open.
- * @param fileType Data file type: avro, arrow, excel, etc.
- * @param viewType Text view type: json || schema.json.
- */
-function showTextDocument(document: TextDocument, fileType: string, viewType: string = 'json') {
-  if (!document.fileName.endsWith(fileType)) {
-    window.showErrorMessage(`Open .${fileType} data file to Preview.`);
-    return; // no editor
-  }
-  if (document.fileName.endsWith(fileType) && !document.uri.scheme.startsWith(fileType)) {
-    const uri = Uri.parse(//`${fileType}.data.${viewType}:
-      `file://${document.uri.path}.${viewType}`);
-    window.showTextDocument(uri);
-  }
 }
 
 /**
