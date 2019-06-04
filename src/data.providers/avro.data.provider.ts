@@ -10,15 +10,14 @@ import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
 
 export class AvroContentProvider implements TextDocumentContentProvider {
-  private logger = new Logger(`avro.data.provider:`, config.logLevel);
+  private logger = new Logger(`data.preview:avro.data.provider:`, config.logLevel);
 
   /**
    * Creates new Avro data content provider for viewing 
    * Avro data and schema as json in a text editor.
-   * @param viewType avro.data.json || avro.data.schema.json
    */
-  constructor(private viewType: string = 'avro.data.json') {
-    this.logger.debug('(): created for:', viewType);
+  constructor() {
+    this.logger.debug('():', 'created!');
   }
 
   /**
@@ -26,25 +25,22 @@ export class AvroContentProvider implements TextDocumentContentProvider {
    * @param uri Avro data file uri.
    */
   async provideTextDocumentContent(uri: Uri): Promise<string> {
-    if (!uri && window.activeTextEditor !== undefined) { 
+    if (!uri && window.activeTextEditor) {
       // use open text editor uri
       uri = window.activeTextEditor.document.uri;
     }
     this.logger.debug('provideTextDocumentContent(): uri:', uri);
-
     return new Promise<string>((resolve, reject) => {
-      // create json data file path
-      const dataFilePath: string = uri.toString();
-      let jsonFilePath: string = dataFilePath.replace('.avro', `.avro.json`);
-      if (this.viewType === 'avro.data.schema.json') {
-        jsonFilePath = dataFilePath.replace('.avro', `.avro.schema.json`);
+      if (!uri) {
+        reject(uri);
       }
-
       // load Avro file data as JSON
-      let dataRows: Array<any> = [];
+      const dataFilePath: string = uri.toString();
       let dataSchema: any = {};
+      let dataRows: Array<any> = [];
       let jsonString: string = '';
-      this.logger.debug('provideTextDocumentContent(): loading Avro data...', dataFilePath);
+      let jsonFilePath: string = uri.fsPath.replace('.avro', '.avro.schema.json');
+      this.logger.debug(`provideTextDocumentContent(): loading Avro data...`, dataFilePath);
       const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataFilePath);
       dataBlockDecoder.on('metadata', (type: any) => {
         dataSchema = type;
@@ -68,6 +64,7 @@ export class AvroContentProvider implements TextDocumentContentProvider {
       });
       dataBlockDecoder.on('end', () => {
         // save generated Avro data json
+        jsonFilePath = uri.fsPath.replace('.avro', '.avro.json');
         jsonString = JSON.stringify(dataRows, null, 2);
         fs.writeFile(jsonFilePath, jsonString, (error) => {
           if (error) {
