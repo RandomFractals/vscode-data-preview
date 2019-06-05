@@ -17,7 +17,6 @@ import {Logger, LogLevel} from './logger';
 import {DataPreview, DataPreviewSerializer} from './data.preview';
 import {previewManager} from './preview.manager';
 import {Template, ITemplateManager, TemplateManager} from './template.manager';
-import {AvroContentProvider} from './data.providers/avro.data.provider';
 
 // supported data file extensions
 const DATA_FILE_EXTENSIONS: string[] = [
