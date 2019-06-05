@@ -1,0 +1,352 @@
+[
+  {
+    "State": "Alabama",
+    "ST": "AL",
+    "Capital": "Montgomery",
+    "Longitude": -86.300280684889,
+    "Latitude": 32.3778448300578
+  },
+  {
+    "State": "Alaska",
+    "ST": "AK",
+    "Capital": "Juneau",
+    "Longitude": -134.419720089079,
+    "Latitude": 58.3019435628538
+  },
+  {
+    "State": "Arizona",
+    "ST": "AZ",
+    "Capital": "Phoenix",
+    "Longitude": -112.097002114648,
+    "Latitude": 33.448056962118
+  },
+  {
+    "State": "Arkansas",
+    "ST": "AR",
+    "Capital": "Little Rock",
+    "Longitude": -92.2891966155731,
+    "Latitude": 34.74671389912
+  },
+  {
+    "State": "California",
+    "ST": "CA",
+    "Capital": "Sacramento",
+    "Longitude": -121.493173407028,
+    "Latitude": 38.5766379822497
+  },
+  {
+    "State": "Colorado",
+    "ST": "CO",
+    "Capital": "Denver",
+    "Longitude": -104.984882535635,
+    "Latitude": 39.7393011782883
+  },
+  {
+    "State": "Connecticut",
+    "ST": "CT",
+    "Capital": "Hartford",
+    "Longitude": -72.682265685282,
+    "Latitude": 41.7640478075494
+  },
+  {
+    "State": "Delaware",
+    "ST": "DE",
+    "Capital": "Dover",
+    "Longitude": -75.521440669349,
+    "Latitude": 39.1598182563424
+  },
+  {
+    "State": "Florida",
+    "ST": "FL",
+    "Capital": "Tallahassee",
+    "Longitude": -84.2814103124204,
+    "Latitude": 30.4379800379088
+  },
+  {
+    "State": "Georgia",
+    "ST": "GA",
+    "Capital": "Atlanta",
+    "Longitude": -84.3882728102467,
+    "Latitude": 33.7491105069311
+  },
+  {
+    "State": "Hawaii",
+    "ST": "HI",
+    "Capital": "Honolulu",
+    "Longitude": -157.857644685749,
+    "Latitude": 21.3071891251897
+  },
+  {
+    "State": "Idaho",
+    "ST": "ID",
+    "Capital": "Boise",
+    "Longitude": -116.200071549668,
+    "Latitude": 43.6173976205726
+  },
+  {
+    "State": "Illinois",
+    "ST": "IL",
+    "Capital": "Springfield",
+    "Longitude": -89.6838561293087,
+    "Latitude": 39.7992266437577
+  },
+  {
+    "State": "Indiana",
+    "ST": "IN",
+    "Capital": "Indianapolis",
+    "Longitude": -86.1619162318749,
+    "Latitude": 39.7682876590079
+  },
+  {
+    "State": "Iowa",
+    "ST": "IA",
+    "Capital": "Des Moines",
+    "Longitude": -93.6038299676467,
+    "Latitude": 41.591203450586
+  },
+  {
+    "State": "Kansas",
+    "ST": "KS",
+    "Capital": "Topeka",
+    "Longitude": -95.6781165783569,
+    "Latitude": 39.0481868390344
+  },
+  {
+    "State": "Kentucky",
+    "ST": "KY",
+    "Capital": "Frankfort",
+    "Longitude": -84.8752029177421,
+    "Latitude": 38.1868295579102
+  },
+  {
+    "State": "Louisiana",
+    "ST": "LA",
+    "Capital": "Baton Rouge",
+    "Longitude": -91.1873435440524,
+    "Latitude": 30.4561959742174
+  },
+  {
+    "State": "Maine",
+    "ST": "ME",
+    "Capital": "Augusta",
+    "Longitude": -69.7824740545278,
+    "Latitude": 44.3068311917176
+  },
+  {
+    "State": "Maryland",
+    "ST": "MD",
+    "Capital": "Annapolis",
+    "Longitude": -76.490730353326,
+    "Latitude": 38.9788809750953
+  },
+  {
+    "State": "Massachusetts",
+    "ST": "MA",
+    "Capital": "Boston",
+    "Longitude": -71.0635920009677,
+    "Latitude": 42.3585156598684
+  },
+  {
+    "State": "Michigan",
+    "ST": "MI",
+    "Capital": "Lansing",
+    "Longitude": -84.5554894724477,
+    "Latitude": 42.7337559214066
+  },
+  {
+    "State": "Minnesota",
+    "ST": "MN",
+    "Capital": "St. Paul",
+    "Longitude": -93.1023668129999,
+    "Latitude": 44.9544483754758
+  },
+  {
+    "State": "Mississippi",
+    "ST": "MS",
+    "Capital": "Jackson",
+    "Longitude": -90.1821570985857,
+    "Latitude": 32.3038596464079
+  },
+  {
+    "State": "Missouri",
+    "ST": "MO",
+    "Capital": "Jefferson City",
+    "Longitude": -92.1729471612446,
+    "Latitude": 38.5792342520804
+  },
+  {
+    "State": "Montana",
+    "ST": "MT",
+    "Capital": "Helena",
+    "Longitude": -112.017030200267,
+    "Latitude": 46.5844748792441
+  },
+  {
+    "State": "Nebraska",
+    "ST": "NE",
+    "Capital": "Lincoln",
+    "Longitude": -96.6997323196763,
+    "Latitude": 40.8080846893224
+  },
+  {
+    "State": "Nevada",
+    "ST": "NV",
+    "Capital": "Carson City",
+    "Longitude": -119.765996538968,
+    "Latitude": 39.1639658818133
+  },
+  {
+    "State": "New Hampshire",
+    "ST": "NH",
+    "Capital": "Concord",
+    "Longitude": -71.5360412913525,
+    "Latitude": 43.2077286653951
+  },
+  {
+    "State": "New Jersey",
+    "ST": "NJ",
+    "Capital": "Trenton",
+    "Longitude": -74.7701082395055,
+    "Latitude": 40.2205925416604
+  },
+  {
+    "State": "New Mexico",
+    "ST": "NM",
+    "Capital": "Santa Fe",
+    "Longitude": -105.939263846866,
+    "Latitude": 35.682385674315
+  },
+  {
+    "State": "New York",
+    "ST": "NY",
+    "Capital": "Albany",
+    "Longitude": -73.7584566763079,
+    "Latitude": 42.6531923942429
+  },
+  {
+    "State": "North Carolina",
+    "ST": "NC",
+    "Capital": "Raleigh",
+    "Longitude": -78.6390536727153,
+    "Latitude": 35.7808620976202
+  },
+  {
+    "State": "North Dakota",
+    "ST": "ND",
+    "Capital": "Bismarck",
+    "Longitude": -100.782425301832,
+    "Latitude": 46.8204800624107
+  },
+  {
+    "State": "Ohio",
+    "ST": "OH",
+    "Capital": "Columbus",
+    "Longitude": -83.000216483074,
+    "Latitude": 39.9611972655304
+  },
+  {
+    "State": "Oklahoma",
+    "ST": "OK",
+    "Capital": "Oklahoma City",
+    "Longitude": -97.5033086417702,
+    "Latitude": 35.4930913156566
+  },
+  {
+    "State": "Oregon",
+    "ST": "OR",
+    "Capital": "Salem",
+    "Longitude": -123.030608818409,
+    "Latitude": 44.9383658965847
+  },
+  {
+    "State": "Pennsylvania",
+    "ST": "PA",
+    "Capital": "Harrisburg",
+    "Longitude": -76.8841110484574,
+    "Latitude": 40.2651554758888
+  },
+  {
+    "State": "Rhode Island",
+    "ST": "RI",
+    "Capital": "Providence",
+    "Longitude": -71.4150694021695,
+    "Latitude": 41.8304368543275
+  },
+  {
+    "State": "South Carolina",
+    "ST": "SC",
+    "Capital": "Columbia",
+    "Longitude": -81.033361075349,
+    "Latitude": 34.0006222412432
+  },
+  {
+    "State": "South Dakota",
+    "ST": "SD",
+    "Capital": "Pierre",
+    "Longitude": -100.345546329203,
+    "Latitude": 44.3671499721808
+  },
+  {
+    "State": "Tennessee",
+    "ST": "TN",
+    "Capital": "Nashville",
+    "Longitude": -86.7844011981955,
+    "Latitude": 36.1658136639888
+  },
+  {
+    "State": "Texas",
+    "ST": "TX",
+    "Capital": "Austin",
+    "Longitude": -97.7403787162921,
+    "Latitude": 30.2746490151032
+  },
+  {
+    "State": "Utah",
+    "ST": "UT",
+    "Capital": "Salt Lake City",
+    "Longitude": -111.888143519988,
+    "Latitude": 40.7765189566751
+  },
+  {
+    "State": "Vermont",
+    "ST": "VT",
+    "Capital": "Montpelier",
+    "Longitude": -72.5804431413164,
+    "Latitude": 44.2619812631813
+  },
+  {
+    "State": "Virginia",
+    "ST": "VA",
+    "Capital": "Richmond",
+    "Longitude": -77.4334960632491,
+    "Latitude": 37.5387725441582
+  },
+  {
+    "State": "Washington",
+    "ST": "WA",
+    "Capital": "Olympia",
+    "Longitude": -122.904762637417,
+    "Latitude": 47.0362418589047
+  },
+  {
+    "State": "West Virginia",
+    "ST": "WV",
+    "Capital": "Charleston",
+    "Longitude": -81.6126542355569,
+    "Latitude": 38.3363786775331
+  },
+  {
+    "State": "Wisconsin",
+    "ST": "WI",
+    "Capital": "Madison",
+    "Longitude": -89.384196048713,
+    "Latitude": 43.0752429469311
+  },
+  {
+    "State": "Wyoming",
+    "ST": "WY",
+    "Capital": "Cheyenne",
+    "Longitude": -104.820410067003,
+    "Latitude": 41.1407764260928
+  }
+]

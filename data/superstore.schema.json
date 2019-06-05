@@ -1,0 +1,302 @@
+{
+  "fields": [
+    {
+      "name": "Row ID",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 32
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Order ID",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Ship Mode",
+      "type": {
+        "indices": {
+          "isSigned": true,
+          "bitWidth": 8
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "dictionaryVector": [
+          "First Class",
+          "Same Day",
+          "Second Class",
+          "Standard Class"
+        ],
+        "id": 0
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Customer ID",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Customer Name",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Segment",
+      "type": {
+        "indices": {
+          "isSigned": true,
+          "bitWidth": 8
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "dictionaryVector": [
+          "Consumer",
+          "Corporate",
+          "Home Office"
+        ],
+        "id": 1
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Country",
+      "type": {
+        "indices": {
+          "isSigned": true,
+          "bitWidth": 8
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "dictionaryVector": [
+          "United States"
+        ],
+        "id": 2
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "City",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "State",
+      "type": {
+        "indices": {
+          "isSigned": true,
+          "bitWidth": 8
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "dictionaryVector": [
+          "Alabama",
+          "Arizona",
+          "Arkansas",
+          "California",
+          "Colorado",
+          "Connecticut",
+          "Delaware",
+          "District of Columbia",
+          "Florida",
+          "Georgia",
+          "Idaho",
+          "Illinois",
+          "Indiana",
+          "Iowa",
+          "Kansas",
+          "Kentucky",
+          "Louisiana",
+          "Maine",
+          "Maryland",
+          "Massachusetts",
+          "Michigan",
+          "Minnesota",
+          "Mississippi",
+          "Missouri",
+          "Montana",
+          "Nebraska",
+          "Nevada",
+          "New Hampshire",
+          "New Jersey",
+          "New Mexico",
+          "New York",
+          "North Carolina",
+          "North Dakota",
+          "Ohio",
+          "Oklahoma",
+          "Oregon",
+          "Pennsylvania",
+          "Rhode Island",
+          "South Carolina",
+          "South Dakota",
+          "Tennessee",
+          "Texas",
+          "Utah",
+          "Vermont",
+          "Virginia",
+          "Washington",
+          "West Virginia",
+          "Wisconsin",
+          "Wyoming"
+        ],
+        "id": 3
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Postal Code",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Region",
+      "type": {
+        "indices": {
+          "isSigned": true,
+          "bitWidth": 8
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "dictionaryVector": [
+          "Central",
+          "East",
+          "South",
+          "West"
+        ],
+        "id": 4
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Product ID",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Category",
+      "type": {
+        "indices": {
+          "isSigned": true,
+          "bitWidth": 8
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "dictionaryVector": [
+          "Furniture",
+          "Office Supplies",
+          "Technology"
+        ],
+        "id": 5
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Sub-Category",
+      "type": {
+        "indices": {
+          "isSigned": true,
+          "bitWidth": 8
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "dictionaryVector": [
+          "Accessories",
+          "Appliances",
+          "Art",
+          "Binders",
+          "Bookcases",
+          "Chairs",
+          "Copiers",
+          "Envelopes",
+          "Fasteners",
+          "Furnishings",
+          "Labels",
+          "Machines",
+          "Paper",
+          "Phones",
+          "Storage",
+          "Supplies",
+          "Tables"
+        ],
+        "id": 6
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Product Name",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Sales",
+      "type": {
+        "precision": 2
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Quantity",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 64
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Discount",
+      "type": {
+        "precision": 2
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Profit",
+      "type": {
+        "precision": 2
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Order Date",
+      "type": {
+        "unit": 1,
+        "timezone": "UTC"
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Ship Date",
+      "type": {
+        "unit": 1,
+        "timezone": "UTC"
+      },
+      "nullable": true,
+      "metadata": {}
+    }
+  ],
+  "metadata": {},
+  "dictionaries": {},
+  "dictionaryFields": {}
+}

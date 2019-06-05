@@ -1,0 +1,100 @@
+{
+  "fields": [
+    {
+      "name": "f32",
+      "type": {
+        "precision": 1
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "f64",
+      "type": {
+        "precision": 2
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "i64",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 64
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "i32",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 32
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "i16",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 16
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "i8",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 8
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "bool",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "char",
+      "type": {},
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "dict",
+      "type": {
+        "indices": {
+          "isSigned": true,
+          "bitWidth": 8
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "dictionaryVector": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ],
+        "id": 0
+      },
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "datetime",
+      "type": {
+        "unit": 1,
+        "timezone": "UTC"
+      },
+      "nullable": true,
+      "metadata": {}
+    }
+  ],
+  "metadata": {},
+  "dictionaries": {},
+  "dictionaryFields": {}
+}
