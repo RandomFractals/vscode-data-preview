@@ -73,6 +73,7 @@ export class DataPreview {
   private _uri: Uri;
   private _previewUri: Uri;
   private _fileName: string;
+  private _fileExtension: string;
   private _title: string;
   private _html: string;
   private _schema: any;
@@ -104,6 +105,7 @@ export class DataPreview {
     this._uri = uri;
     this._config = viewConfig;
     this._fileName = path.basename(uri.fsPath);
+    this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
     this._previewUri = this._uri.with({scheme: 'data'});
     this._logger = new Logger(`${viewType}:`, config.logLevel);
 
@@ -286,9 +288,8 @@ export class DataPreview {
     }
 
     // read file data
-    const dataFileExt: string = filePath.substr(filePath.lastIndexOf('.'));
-    // TODO: rework to using fs.ReadStream for large data files support later
-    switch (dataFileExt) {
+    // TODO: rework this to using fs.ReadStream for large data files support later
+    switch (this._fileExtension) {
       case '.csv':
       case '.tsv':
       case '.txt':
@@ -369,8 +370,7 @@ export class DataPreview {
       const firstSheetName = workbook.SheetNames[0];
       const worksheet: xlsx.Sheet = workbook.Sheets[firstSheetName];
       rows = xlsx.utils.sheet_to_json(worksheet);
-      const fileExt: string = this._fileName.substr(this._fileName.lastIndexOf('.'));
-      this.createJsonFile(this._uri.toString().replace(fileExt, '.json'), rows);
+      this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.json'), rows);
       this.logDataStats(dataSchema, rows);
     }
     return rows;
@@ -408,9 +408,8 @@ export class DataPreview {
 
     // initialized typed data set columns config
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
-    const fileExt: string = this._fileName.substr(this._fileName.lastIndexOf('.'));
-    this.createJsonFile(this._uri.toString().replace(fileExt, '.json'), rows);
-    this.createJsonFile(this._uri.toString().replace(fileExt, '.schema.json'), dataTable.schema);
+    this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.json'), rows);
+    this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.schema.json'), dataTable.schema);
     this.logDataStats(dataTable.schema, rows);
     return rows;
   } // end of getArrowData()
@@ -430,8 +429,8 @@ export class DataPreview {
     dataBlockDecoder.on('end', () => {
       rows = dataRows.map(rowObject => this.flattenObject(rowObject));
       const fileExt: string = this._fileName.substr(this._fileName.lastIndexOf('.'));
-      this.createJsonFile(this._uri.toString().replace(fileExt, '.json'), dataRows);
-      this.createJsonFile(this._uri.toString().replace(fileExt, '.schema.json'), dataSchema);
+      this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.json'), dataRows);
+      this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.schema.json'), dataSchema);
       this.logDataStats(dataSchema, rows);
       // update web view
       this.loadData(rows);
