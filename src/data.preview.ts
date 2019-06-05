@@ -370,7 +370,7 @@ export class DataPreview {
       const firstSheetName = workbook.SheetNames[0];
       const worksheet: xlsx.Sheet = workbook.Sheets[firstSheetName];
       rows = xlsx.utils.sheet_to_json(worksheet);
-      this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.json'), rows);
+      this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), rows);
       this.logDataStats(dataSchema, rows);
     }
     return rows;
@@ -408,8 +408,8 @@ export class DataPreview {
 
     // initialized typed data set columns config
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
-    this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.json'), rows);
-    this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.schema.json'), dataTable.schema);
+    this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), rows);
+    this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
     this.logDataStats(dataTable.schema, rows);
     return rows;
   } // end of getArrowData()
@@ -429,8 +429,8 @@ export class DataPreview {
     dataBlockDecoder.on('end', () => {
       rows = dataRows.map(rowObject => this.flattenObject(rowObject));
       const fileExt: string = this._fileName.substr(this._fileName.lastIndexOf('.'));
-      this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.json'), dataRows);
-      this.createJsonFile(this._uri.toString().replace(this._fileExtension, '.schema.json'), dataSchema);
+      this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+      this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
       this.logDataStats(dataSchema, rows);
       // update web view
       this.loadData(rows);
@@ -506,8 +506,12 @@ export class DataPreview {
   private createJsonFile(jsonFilePath: string, jsonData: any): void {
     if (!fs.existsSync(jsonFilePath)) {
       const jsonString: string = JSON.stringify(jsonData, null, 2); 
-      try {      
-        fs.writeFileSync(jsonFilePath, jsonString, {encoding: 'utf8'});
+      try {
+        // TODO: rework this to async file write later
+        const jsonFileWriteStream: fs.WriteStream = fs.createWriteStream(jsonFilePath, {encoding: 'utf8'});
+        jsonFileWriteStream.write(jsonString);
+        jsonFileWriteStream.end();
+        this._logger.debug('createJsonFile(): saved:', jsonFilePath);
       } catch (error) {
         const errorMessage: string = `Failed to save file: ${jsonFilePath}`;
         this._logger.logMessage(LogLevel.Error, 'crateJsonFile():', errorMessage);
