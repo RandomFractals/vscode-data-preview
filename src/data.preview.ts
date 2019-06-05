@@ -504,15 +504,15 @@ export class DataPreview {
    * @param jsonData Json file data.
    */
   private createJsonFile(jsonFilePath: string, jsonData: any): void {
-    const jsonString: string = JSON.stringify(jsonData, null, 2);
     if (!fs.existsSync(jsonFilePath)) {
-      fs.writeFile(jsonFilePath, jsonString, (error) => {
-        if (error) {
-          const errorMessage: string = `Failed to save file: ${jsonFilePath}`;
-          this._logger.logMessage(LogLevel.Error, 'crateJsonFile():', errorMessage);
-          window.showErrorMessage(errorMessage);
-        }
-      });
+      const jsonString: string = JSON.stringify(jsonData, null, 2); 
+      try {      
+        fs.writeFileSync(jsonFilePath, jsonString, {encoding: 'utf8'});
+      } catch (error) {
+        const errorMessage: string = `Failed to save file: ${jsonFilePath}`;
+        this._logger.logMessage(LogLevel.Error, 'crateJsonFile():', errorMessage);
+        window.showErrorMessage(errorMessage);
+      }
     }
   }
 
