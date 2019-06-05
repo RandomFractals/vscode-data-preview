@@ -359,21 +359,19 @@ export class DataPreview {
    * @returns Array of row objects.
    */
   private getExcelData(workbook: xlsx.WorkBook): any[] {
-    this._logger.debug('getExcelData(): sheetNames:', workbook.SheetNames);
+    this._logger.debug(`getExcelData(): file: ${this._fileName} sheetNames:`, workbook.SheetNames);
     // read first worksheet data rows
     let rows = [];
+    const dataSchema = null;
     if (workbook.SheetNames.length > 0) {
       // get first worksheet row data
       // TODO: add option to preview data for all worksheets later
       const firstSheetName = workbook.SheetNames[0];
       const worksheet: xlsx.Sheet = workbook.Sheets[firstSheetName];
       rows = xlsx.utils.sheet_to_json(worksheet);
-      this._logger.debug(`getExcelData(): ${this._fileName}:${firstSheetName} records count:`, rows.length);        
-      if (rows.length > 0) {
-        const firstRow = rows[0];
-        // this._config['columns'] = Object.keys(firstRow);
-        this._logger.debug(`getExcelData(): ${this._fileName}:${firstSheetName} 1st row:`, firstRow); 
-      }
+      const fileExt: string = this._fileName.substr(this._fileName.lastIndexOf('.'));
+      this.createJsonFile(this._uri.toString().replace(fileExt, '.json'), rows);
+      this.logDataStats(dataSchema, rows);
     }
     return rows;
   }
@@ -410,7 +408,9 @@ export class DataPreview {
 
     // initialized typed data set columns config
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
-
+    const fileExt: string = this._fileName.substr(this._fileName.lastIndexOf('.'));
+    this.createJsonFile(this._uri.toString().replace(fileExt, '.json'), rows);
+    this.createJsonFile(this._uri.toString().replace(fileExt, '.schema.json'), dataTable.schema);
     this.logDataStats(dataTable.schema, rows);
     return rows;
   } // end of getArrowData()
@@ -428,7 +428,10 @@ export class DataPreview {
     dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
-      rows = dataRows.map(rowObject => this.flattenObject(rowObject));    
+      rows = dataRows.map(rowObject => this.flattenObject(rowObject));
+      const fileExt: string = this._fileName.substr(this._fileName.lastIndexOf('.'));
+      this.createJsonFile(this._uri.toString().replace(fileExt, '.json'), dataRows);
+      this.createJsonFile(this._uri.toString().replace(fileExt, '.schema.json'), dataSchema);
       this.logDataStats(dataSchema, rows);
       // update web view
       this.loadData(rows);
@@ -484,13 +487,33 @@ export class DataPreview {
    */
   private logDataStats(dataSchema: any, dataRows: Array<any>): void {
     if (config.logLevel === LogLevel.Debug) {
-      this._logger.debug('logDataStats(): data schema:', dataSchema);
-      this._logger.debug('logDataStats(): data view schema:', this._schema);
+      if (dataSchema !== null) {
+        this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
+        this._logger.debug('logDataStats(): data view schema:', this._schema);
+      }
       this._logger.debug('logDataStats(): records count:', dataRows.length);
       if (dataRows.length > 0) {
         const firstRow = dataRows[0];
-        this._logger.debug('logAvroDataStats(): 1st row:', firstRow);
+        this._logger.debug('logDataStats(): 1st row:', firstRow);
       }
+    }
+  }
+
+  /**
+   * Creates JSON data or schema file.
+   * @param jsonFilePath Json file path.
+   * @param jsonData Json file data.
+   */
+  private createJsonFile(jsonFilePath: string, jsonData: any): void {
+    const jsonString: string = JSON.stringify(jsonData, null, 2);
+    if (!fs.existsSync(jsonFilePath)) {
+      fs.writeFile(jsonFilePath, jsonString, (error) => {
+        if (error) {
+          const errorMessage: string = `Failed to save file: ${jsonFilePath}`;
+          this._logger.logMessage(LogLevel.Error, 'crateJsonFile():', errorMessage);
+          window.showErrorMessage(errorMessage);
+        }
+      });
     }
   }
 
