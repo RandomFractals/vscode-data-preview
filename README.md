@@ -39,6 +39,7 @@ Setting | Type | Default Value | Description
 ------- | ---- | ------------- | -----------
 data.preview.theme | string |  | Data Preview theme: blank for light, or '.dark' for dark theme data previews display.
 data.preview.charts.plugin | string | hightcharts | Data Preview 🈸 charts library to use for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
+data.preview.create.json.files | boolean | true | Creates JSON data & schema.json files, if available, for Arrow, Avro & Excel data files.
 
 Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing 
 [superstore](https://github.com/finos/perspective/blob/master/examples/simple/superstore.arrow)`.arrow` data file :)

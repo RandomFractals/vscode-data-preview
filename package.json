@@ -190,6 +190,11 @@
           ],
           "default": "highcharts",
           "description": "Data Preview charts library to use: highcharts || d3fc."
+        },
+        "data.preview.create.json.files": {
+          "type": "boolean",
+          "default": true,
+          "description": "Creates JSON data & schema.json files, if available, for Arrow, Avro & Excel binary data files."
         }
       }
     }

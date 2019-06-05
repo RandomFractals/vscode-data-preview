@@ -571,4 +571,8 @@ export class DataPreview {
   get charts(): string {
     return <string>workspace.getConfiguration('data.preview').get('charts.plugin');
   }
+
+  get createJsonFiles(): boolean {
+    return <boolean>workspace.getConfiguration('data.preview').get('create.json.files');
+  }
 }
