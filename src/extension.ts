@@ -53,11 +53,6 @@ export function activate(context: ExtensionContext) {
   const extensionPath: string = context.extensionPath;
   logger.debug('activate(): activating from extPath:', context.extensionPath);
 
-  // register binary data content providers for viewing those files as json
-  const avroDataProvider: AvroContentProvider = new AvroContentProvider();
-  addDataProvider(context, avroDataProvider, 'avro', 'json');
-  // TODO: add Arrow & binary Excel data files content providers + Excel html/xml to json :)
-
   // initialize data preview webview panel html template
   const templateManager: ITemplateManager = new TemplateManager(context.asAbsolutePath('templates'));
   const dataViewTemplate: Template = templateManager.getTemplate('data.view.html');
@@ -137,70 +132,6 @@ function createDataPreviewCommand(
     return preview.webview;
   });
   return dataWebview;
-}
-
-/**
- * Adds custom text document data provider commands 
- * for Avro, Arrow & Excel binary & html/xml data formats.
- * @param context Extension context.
- * @param dataProvider Data provider instance.
- * @param fileType Data file type: avro, arrow, excel, etc.
- * @param viewType Data provider output file type: only json for now :)
- */
-function addDataProvider(
-  context: ExtensionContext,
-  dataProvider: TextDocumentContentProvider,
-  fileType: string,
-  viewType: string):void {
-
-  let commandName: string = `${fileType}.data.${viewType}`;
-  // add text document content provider
-  context.subscriptions.push(
-    workspace.registerTextDocumentContentProvider(commandName, dataProvider));
-
-  // add text editor command
-  /*
-  context.subscriptions.push(
-    commands.registerTextEditorCommand(commandName,
-      textEditor => showTextDocument(textEditor.document.uri, fileType, viewType)));
-  */
-
-  // add regular json data view command 
-  commands.registerCommand(commandName, (uri) => {
-    showTextDocument(uri, fileType, viewType);
-  });
-
-  // add data schema json view command
-  commandName = `${fileType}.data.schema.${viewType}`;
-  commands.registerCommand(commandName, (uri) => {
-    showTextDocument(uri, fileType, 'schema.json');
-  });
-} // end of addDataProvider()
-
-/**
- * Opens Text document.
- * @param dataUri Data file uri.
- * @param fileType Data file type: avro, arrow, excel, etc.
- * @param viewType Text view type: json || schema.json.
- */
-function showTextDocument(dataUri: Uri, fileType: string, viewType: string = 'json') {
-  if (!dataUri && window.activeTextEditor) { // use open text editor uri
-    dataUri = window.activeTextEditor.document.uri;
-  }
-  if (!dataUri) {
-    // show no valid data Uri error message ???
-    return;
-  }
-  logger.debug('showTextDocument(): dataUri:', dataUri);
-
-  if (!dataUri.fsPath.endsWith(fileType)) {
-    window.showErrorMessage(`Open .${fileType} data file to Preview.`);
-    return; // no editor
-  } else if (!dataUri.scheme.startsWith(fileType)) {
-    const textUri: Uri = Uri.parse(//`${fileType}.data.${viewType}:
-      `file://${dataUri.fsPath}.${viewType}`);
-    window.showTextDocument(textUri);
-  }
 }
 
 /**

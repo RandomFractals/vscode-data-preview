@@ -132,16 +132,6 @@
         "command": "data.preview",
         "title": "Preview Data 🈸",
         "category": "Data"
-      },
-      {
-        "command": "avro.data.json",
-        "title": "Avro Data JSON",
-        "category": "Avro"
-      },
-      {
-        "command": "avro.data.schema.json",
-        "title": "Avro Data Schema JSON",
-        "category": "Avro"
       }
     ],
     "keybindings": [
