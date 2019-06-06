@@ -114,8 +114,8 @@ export class DataPreview {
       case 'data.preview':
         this._title = `Data Preview ${this._fileName} 🈸`;
         break;
-      default: // TODO: data.help
-        this._title = 'Data Help';
+      default: // TODO: add data.preview.help
+        this._title = 'Data Preview 🈸 Help';
         break;
     }
 
