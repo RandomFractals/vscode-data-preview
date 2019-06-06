@@ -362,18 +362,18 @@ export class DataPreview {
   private getExcelData(workbook: xlsx.WorkBook): any[] {
     this._logger.debug(`getExcelData(): file: ${this._fileName} sheetNames:`, workbook.SheetNames);
     // read first worksheet data rows
-    let rows = [];
+    let dataRows: Array<any> = [];
     const dataSchema = null;
     if (workbook.SheetNames.length > 0) {
-      // get first worksheet row data
+      // get first worksheet data
       // TODO: add option to preview data for all worksheets later
       const firstSheetName = workbook.SheetNames[0];
       const worksheet: xlsx.Sheet = workbook.Sheets[firstSheetName];
-      rows = xlsx.utils.sheet_to_json(worksheet);
-      this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), rows);
-      this.logDataStats(dataSchema, rows);
+      dataRows = xlsx.utils.sheet_to_json(worksheet);
+      this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+      this.logDataStats(dataSchema, dataRows);
     }
-    return rows;
+    return dataRows;
   }
 
   /**
@@ -384,15 +384,15 @@ export class DataPreview {
   private getArrowData(dataFilePath: string): any[] {
     const dataBuffer = fs.readFileSync(dataFilePath);
     const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
-    const rows: Array<any> = Array(dataTable.length);
+    const dataRows: Array<any> = Array(dataTable.length);
     const fields = dataTable.schema.fields.map(field => field.name);
-    for (let i=0, n=rows.length; i<n; ++i) {
+    for (let i=0, n=dataRows.length; i<n; ++i) {
       const proto = {};
       fields.forEach((fieldName, index) => {
         const column = dataTable.getColumnAt(index);
         proto[fieldName] = column.get(i);
       });
-      rows[i] = proto;
+      dataRows[i] = proto;
     }
 
     // remap arrow data schema to columns for data viewer
@@ -408,10 +408,10 @@ export class DataPreview {
 
     // initialized typed data set columns config
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
-    this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), rows);
+    this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
     this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
-    this.logDataStats(dataTable.schema, rows);
-    return rows;
+    this.logDataStats(dataTable.schema, dataRows);
+    return dataRows;
   } // end of getArrowData()
 
   /**
@@ -420,22 +420,20 @@ export class DataPreview {
    * @returns Array of row objects.
    */
   private getAvroData(dataFilePath: string): any[] {
-    let dataRows: Array<any> = [];
     let dataSchema: any = {};
-    let rows: Array<any> = [];
+    let dataRows: Array<any> = [];
     const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataFilePath);
     dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
-      rows = dataRows.map(rowObject => this.flattenObject(rowObject));
-      const fileExt: string = this._fileName.substr(this._fileName.lastIndexOf('.'));
       this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
       this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
-      this.logDataStats(dataSchema, rows);
-      // update web view
-      this.loadData(rows);
+      this.logDataStats(dataSchema, dataRows);
+      // update web view: flatten data rows for now since Avro format has hierarchical data structure
+      dataRows = dataRows.map(rowObject => this.flattenObject(rowObject));
+      this.loadData(dataRows);
     });
-    return rows;
+    return dataRows;
   }
 
   /**
@@ -444,9 +442,8 @@ export class DataPreview {
    * @returns Array of row objects.
    */ /*
   private async getParquetData(dataFilePath: string) {
-    let dataRows: Array<any> = [];
     let dataSchema: any = {};
-    let rows: Array<any> = [];
+    let dataRows: Array<any> = [];
     const parquetReader = await parquet.ParquetReader.openFile(dataFilePath);
     const cursor = parquetReader.getCursor();
     // read all records
@@ -455,11 +452,11 @@ export class DataPreview {
       dataRows.push(record);
     }
     await parquetReader.close();
-    rows = dataRows.map(rowObject => this.flattenObject(rowObject));    
-    this.logDataStats(dataSchema, rows);
+    dataRows = dataRows.map(rowObject => this.flattenObject(rowObject));    
+    this.logDataStats(dataSchema, dataRows);
     // update web view
-    this.loadData(rows);
-    return rows;
+    this.loadData(dataRows);
+    return dataRows;
   } */
 
   /**
@@ -598,6 +595,9 @@ export class DataPreview {
     return <string>workspace.getConfiguration('data.preview').get('charts.plugin');
   }
 
+  /**
+   * Creates JSON data & schema.json files config option for Arrow, Avro & Excel data files.
+   */
   get createJsonFiles(): boolean {
     return <boolean>workspace.getConfiguration('data.preview').get('create.json.files');
   }
