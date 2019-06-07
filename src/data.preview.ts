@@ -174,7 +174,7 @@ export class DataPreview {
           }
           break;
         case 'saveData':
-          this._logger.debug('saveData(): message:', message);
+          this.saveData(message.fileType, message.data);
           // TODO: implement saveData()
           break;
       }
@@ -518,6 +518,31 @@ export class DataPreview {
         this._logger.logMessage(LogLevel.Error, 'crateJsonFile():', errorMessage);
         window.showErrorMessage(errorMessage);
       }
+    }
+  }
+
+  /**
+   * Saves posted data from data view.
+   * @param fileType Data file type.
+   * @param fileData File data to save.
+   */
+  private async saveData(fileType: string, fileData: any): Promise<void> {
+    const dataFilePath: string = this._uri.fsPath.replace(this._fileExtension, fileType);
+    if (dataFilePath.endsWith('.config') || dataFilePath.endsWith('.json')) {
+      fileData = JSON.stringify(fileData, null, 2);
+    }
+    this._logger.debug('saveData(): saving data file:', dataFilePath);
+    const dataFileUri: Uri = await window.showSaveDialog({
+      defaultUri: Uri.parse(dataFilePath).with({scheme: 'file'})
+    });
+    if (dataFileUri) {
+      fs.writeFile(dataFileUri.fsPath, fileData, (error) => {
+        if (error) {
+          const errorMessage: string = `Failed to save file: ${dataFileUri.fsPath}`;
+          this._logger.logMessage(LogLevel.Error, 'saveData():', errorMessage);
+          window.showErrorMessage(errorMessage);
+        }
+      });
     }
   }
 

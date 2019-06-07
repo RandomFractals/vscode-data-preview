@@ -24,7 +24,7 @@
         margin: 0px;
       }
       #toolbar {
-        margin-bottom: 10px;
+        margin-top: 5px;
         padding: 0px;
         font-size: 9pt;
         font-weight: normal;
@@ -34,13 +34,12 @@
         text-decoration: none;
       }
       #title {
+        margin: 0px;
         padding: 0px;
-        margin-top: 10px;
-        margin-bottom: 5px;
       }
       #data-viewer {
         position: absolute;
-        top: 36px;
+        top: 30px;
         bottom: 0;
         left: 0;
         right: 0;
@@ -49,15 +48,15 @@
   </head>
   <body>
     <div id="toolbar">
-      <div style="float: right; width: 60px;">
+      <div style="float: right; width: 50px;">
         <select id="file-type-selector" onChange="saveData()">
-          <option value="">save:</option>
+          <option value="">Save</option>
           <option value=".config">config</option>
           <option value=".json">json</option>
           <option value=".csv">csv</option>
         </select>
       </div>
-      <h3 id="title">loading...</h3>
+      <h4 id="title">loading...</h3>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
@@ -201,41 +200,38 @@
       } // end of getData()
 
       /**
-       * Saves data view config, filtered json or csv data.
+       * Saves data view config, filtered json, or csv data.
        */
       function saveData() {
         const dataFileType = fileTypeSelector.value;
         switch (dataFileType) {
           case '.config':
             const data = {
-              uri: dataUri,
+              fileName: dataUri.substr(dataUri.lastIndexOf('/')),
               config: viewConfig
             };
-            vscode.postMessage({
-              command:'saveData',
-              fileType: dataFileType,
-              data: data
-            });
+            postData(dataFileType, data);
             break;
           case '.json':
-            viewer.view.to_json().then(json => {
-              vscode.postMessage({
-                command:'saveData',
-                fileType: dataFileType,
-                data: json
-              });
-            });
+            viewer.view.to_json().then(json => postData(dataFileType, json));
             break;
           case '.csv':
-            viewer.view.to_csv().then(csv => {
-              vscode.postMessage({
-                command:'saveData',
-                fileType: dataFileType,
-                data: csv
-              });
-            });
+            viewer.view.to_csv().then(csv => postData(dataFileType, csv));
             break;
         }
+      }
+
+      /**
+       * Posts data view data for saving.
+       * @param dataFileType Data file type to save.
+       * @param fileData File data to save.
+       */
+      function postData(dataFileType, fileData) {
+        vscode.postMessage({
+          command:'saveData',
+          fileType: dataFileType,
+          data: fileData
+        });
       }
 
       /**
