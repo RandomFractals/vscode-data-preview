@@ -112,7 +112,7 @@ export class DataPreview {
     // create preview panel title
     switch (viewType) {
       case 'data.preview':
-        this._title = `Data Preview ${this._fileName} 🈸`;
+        this._title = `${this._fileName} 🈸`;
         break;
       default: // TODO: add data.preview.help
         this._title = 'Data Preview 🈸 Help';
@@ -172,6 +172,10 @@ export class DataPreview {
           if (config.logLevel === LogLevel.Debug) {
             this._logger.debug('configUpdate(): config:', message.config);
           }
+          break;
+        case 'saveData':
+          this._logger.debug('saveData(): message:', message);
+          // TODO: implement saveData()
           break;
       }
     }, null, this._disposables);

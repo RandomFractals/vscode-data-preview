@@ -23,9 +23,24 @@
       body {
         margin: 0px;
       }
+      #toolbar {
+        margin-bottom: 10px;
+        padding: 0px;
+        font-size: 9pt;
+        font-weight: normal;
+      }
+      #toolbar a {
+        color: dodgerblue;
+        text-decoration: none;
+      }
+      #title {
+        padding: 0px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
       #data-viewer {
         position: absolute;
-        top: 0;
+        top: 36px;
         bottom: 0;
         left: 0;
         right: 0;
@@ -33,10 +48,21 @@
     </style>
   </head>
   <body>
+    <div id="toolbar">
+      <div style="float: right; width: 60px;">
+        <select id="file-type-selector" onChange="saveData()">
+          <option value="">save:</option>
+          <option value=".config">config</option>
+          <option value=".json">json</option>
+          <option value=".csv">csv</option>
+        </select>
+      </div>
+      <h3 id="title">loading...</h3>
+    </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
-      let vscode, dataUri, viewer, viewConfig = {}, viewData = [];
+      let vscode, title, fileTypeSelector, dataUri, viewer, viewConfig = {}, viewData = [];
 
       // check web assembly support. uncomment this for dev debug:
       // console.log(`data.preview:supportsWebAssembly(): ${supportsWebAssembly()}`);
@@ -47,7 +73,9 @@
       });
 
       document.addEventListener('DOMContentLoaded', event => {
-        // initialize data viewer
+        // initialize toolbar & data viewer elements
+        title = document.getElementById('title');
+        fileTypeSelector = document.getElementById('file-type-selector');
         viewer = document.getElementsByTagName('perspective-viewer')[0];
         try {
           // notify webview
@@ -91,6 +119,7 @@
           dataUri = data.uri;
           viewConfig = data.config;
           vscode.setState({uri: dataUri, config: viewConfig});
+          title.innerText = `🈸 ${data.fileName}`;
 
           // load file data
           const tableData = getData(data.fileName, data.data, data.schema);
@@ -169,6 +198,44 @@
             break;
         }
         return tableData;
+      } // end of getData()
+
+      /**
+       * Saves data view config, filtered json or csv data.
+       */
+      function saveData() {
+        const dataFileType = fileTypeSelector.value;
+        switch (dataFileType) {
+          case '.config':
+            const data = {
+              uri: dataUri,
+              config: viewConfig
+            };
+            vscode.postMessage({
+              command:'saveData',
+              fileType: dataFileType,
+              data: data
+            });
+            break;
+          case '.json':
+            viewer.view.to_json().then(json => {
+              vscode.postMessage({
+                command:'saveData',
+                fileType: dataFileType,
+                data: json
+              });
+            });
+            break;
+          case '.csv':
+            viewer.view.to_csv().then(csv => {
+              vscode.postMessage({
+                command:'saveData',
+                fileType: dataFileType,
+                data: csv
+              });
+            });
+            break;
+        }
       }
 
       /**
