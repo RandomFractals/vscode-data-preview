@@ -123,10 +123,11 @@
 
           // load file data
           const tableData = getData(data.fileName, data.data, data.schema);
+          // update view config
+          viewer.restore(viewConfig);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
             console.log(`data.view:refresh(): initializing view data for: ${data.fileName}`);
-            viewer.restore(viewConfig);
             if (data.schema !== undefined && Object.keys(data.schema).length > 0) {
               // viewer.columns = viewConfig['columns'];
               viewer.load(data.schema);
