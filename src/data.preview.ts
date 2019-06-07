@@ -528,14 +528,14 @@ export class DataPreview {
    */
   private async saveData(fileType: string, fileData: any): Promise<void> {
     const dataFilePath: string = this._uri.fsPath.replace(this._fileExtension, fileType);
-    if (dataFilePath.endsWith('.config') || dataFilePath.endsWith('.json')) {
-      fileData = JSON.stringify(fileData, null, 2);
-    }
     this._logger.debug('saveData(): saving data file:', dataFilePath);
     const dataFileUri: Uri = await window.showSaveDialog({
       defaultUri: Uri.parse(dataFilePath).with({scheme: 'file'})
     });
     if (dataFileUri) {
+      if (dataFilePath.endsWith('.config') || dataFilePath.endsWith('.json')) {
+        fileData = JSON.stringify(fileData, null, 2);
+      }  
       fs.writeFile(dataFileUri.fsPath, fileData, (error) => {
         if (error) {
           const errorMessage: string = `Failed to save file: ${dataFileUri.fsPath}`;

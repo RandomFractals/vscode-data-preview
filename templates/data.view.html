@@ -207,7 +207,7 @@
         switch (dataFileType) {
           case '.config':
             const data = {
-              fileName: dataUri.substr(dataUri.lastIndexOf('/')),
+              fileName: dataUri.substr(dataUri.lastIndexOf('/') + 1),
               config: viewConfig
             };
             postData(dataFileType, data);
