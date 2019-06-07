@@ -284,7 +284,7 @@ export class DataPreview {
    * Prompts to load saved data view config.
    */
    private async loadConfig(): Promise<void> {
-    const configFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
+    let configFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
     this._logger.debug('loadConfig(): loading config:', configFilePath);
     const configFiles: Uri[] = await window.showOpenDialog({
       canSelectMany: false,
@@ -292,8 +292,18 @@ export class DataPreview {
       filters: {'Config': ['config']}
     });
     if (configFiles.length > 0) {
-      this._logger.debug('loadConfig(): loading config:', configFiles[0].fsPath);
-      // TODO: load config file
+      configFilePath = configFiles[0].fsPath;
+      this._logger.debug('loadConfig(): loading config:', configFilePath);
+      const configString: string = fs.readFileSync(configFilePath, 'utf8'); // file encoding to read data as string
+      const viewConfig: any = JSON.parse(configString);
+      if (this._uri.fsPath.indexOf(viewConfig.fileName) >=0) { // matching data file config
+        this._config = viewConfig.config;
+        this._logger.debug('loadConfig(): loaded view config:', this._config);
+        this.refresh(); // reload data & config for display
+      }
+      else {
+        window.showErrorMessage(`Not a matching data view config for '${this._fileName}'!`);
+      }
     }
   }
 
