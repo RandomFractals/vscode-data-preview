@@ -26,12 +26,13 @@
       #toolbar {
         margin-top: 5px;
         padding: 0px;
-        font-size: 9pt;
+        font-size: 10pt;
         font-weight: normal;
       }
       #toolbar a {
         color: dodgerblue;
         text-decoration: none;
+        margin: 0px;
       }
       #title {
         margin: 0px;
@@ -56,7 +57,7 @@
           <option value=".csv">csv</option>
         </select>
       </div>
-      <h4 id="title">loading...</h3>
+      <div>🈸 <a id="title" title="load data view config" href="#" onclick="loadConfig()"></a></div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
@@ -118,7 +119,7 @@
           dataUri = data.uri;
           viewConfig = data.config;
           vscode.setState({uri: dataUri, config: viewConfig});
-          title.innerText = `🈸 ${data.fileName}`;
+          title.innerText = data.fileName;
 
           // load file data
           const tableData = getData(data.fileName, data.data, data.schema);
@@ -231,6 +232,15 @@
           command:'saveData',
           fileType: dataFileType,
           data: fileData
+        });
+      }
+
+      /**
+       * Opens load data view config file dialog.
+       */
+      function loadConfig() {
+        vscode.postMessage({
+          command:'loadConfig'
         });
       }
 

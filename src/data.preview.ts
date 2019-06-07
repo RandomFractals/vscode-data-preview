@@ -167,15 +167,19 @@ export class DataPreview {
           this.refresh();
           break;
         case 'config':
-          // save data viewer config for restore on code reload
+          // save data viewer config for restore on vscode reload
           this._config = message.config;
           if (config.logLevel === LogLevel.Debug) {
             this._logger.debug('configUpdate(): config:', message.config);
           }
           break;
         case 'saveData':
+          // saves data view config, or filtered json or csv data
           this.saveData(message.fileType, message.data);
-          // TODO: implement saveData()
+          break;
+        case 'loadConfig':
+          // prompots to load saved data view config
+          this.loadConfig();
           break;
       }
     }, null, this._disposables);
@@ -273,6 +277,23 @@ export class DataPreview {
     catch (error) {
       this._logger.logMessage(LogLevel.Error, 'loadData():', error.message);
       this.webview.postMessage({error: error});
+    }
+  }
+
+  /**
+   * Prompts to load saved data view config.
+   */
+   private async loadConfig(): Promise<void> {
+    const configFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
+    this._logger.debug('loadConfig(): loading config:', configFilePath);
+    const configFiles: Uri[] = await window.showOpenDialog({
+      canSelectMany: false,
+      defaultUri: Uri.parse(configFilePath).with({scheme: 'file'}),
+      filters: {'Config': ['config']}
+    });
+    if (configFiles.length > 0) {
+      this._logger.debug('loadConfig(): loading config:', configFiles[0].fsPath);
+      // TODO: load config file
     }
   }
 
