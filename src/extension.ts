@@ -146,9 +146,9 @@ function isDataFile(document: TextDocument): boolean {
 }
 
 /**
- * Gets 2nd panel view column, if vega json spec doc is open.
+ * Gets active editor view column for data preview display.
  */
 function getViewColumn(): ViewColumn {
   const activeEditor = window.activeTextEditor;
-  return activeEditor ? (activeEditor.viewColumn + 1) : ViewColumn.One;
+  return activeEditor ? (activeEditor.viewColumn) : ViewColumn.One;
 }
