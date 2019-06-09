@@ -57,7 +57,8 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 1. Run `View -> Command Palette...>Data: Preview Data 🈸` command || hit `Ctrl+Shift+D` in an open text `.csv/.tsv` || `.json` array data file document to launch Data Preview panel.
 2. Hit `Ctrl+S` || `File -> Save` your `.csv/.tsv` || `.json` array data file for updates in open Data Preview panel.
 3. Right-click on a binary `.xlsx/.xlsm`, `.arrow` || `.avro` data file in vscode File Explorer to launch Data Preview panel.
-4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` context menu options to Preview your data files.
+4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` Preview Data 🈸 context menu options to preview your data files.
+5. Click on the Data Preview panel data filename in the titlebar to load saved data view config.
 
 ## Data Grid/Filter/Columns UX Tips
 
