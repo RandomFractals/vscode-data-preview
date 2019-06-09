@@ -57,7 +57,12 @@
           <option value=".csv">csv</option>
         </select>
       </div>
-      <div>🈸 <a id="title" title="Load data view config" href="#" onclick="loadConfig()"></a></div>
+      <div>🈸 
+        <a id="title" title="Load data view config" href="#" onclick="loadConfig()"></a> |
+        <a title="Undo" href="#">↩</a>
+        <a title="Redo" href="#">↪</a>
+        <a title="Refresh" href="#">🔃</a>
+      </div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
