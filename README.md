@@ -13,8 +13,9 @@ large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow`, `.avro` & `.parquet` 
 - Pluggable Data Charting libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
 - Dark & Light Data Preview Panel Themes
 - Persistent Data Preview Settings (Sort, Filter, Pivots, etc.) for restore on vscode Reload
-- `Excel` data files, `.avro` & `.arrow` `.json` array & `.schema.json` files auto-gen on the 1st Data Preview run.
+- `Excel` data files, `.avro` & `.arrow` data `.json` array & `.schema.json` files auto-gen on the 1st Data Preview run
 - Filtered data `.json` & `.csv` Save file options.
+- Save and Load data view config options.
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
 "Perspective Viewer")
