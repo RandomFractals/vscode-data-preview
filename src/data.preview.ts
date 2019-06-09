@@ -181,6 +181,12 @@ export class DataPreview {
           // prompots to load saved data view config
           this.loadConfig();
           break;
+        case 'undoConfig':
+          // TODO: implement view config undo
+          break;
+        case 'undoConfig':
+          // TODO: implement view config redo
+          break;    
       }
     }, null, this._disposables);
   } // end of initWebview()
