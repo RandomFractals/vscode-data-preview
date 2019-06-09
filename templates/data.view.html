@@ -57,12 +57,12 @@
           <option value=".csv">csv</option>
         </select>
       </div>
-      <div>🈸 <a id="title" title="load data view config" href="#" onclick="loadConfig()"></a></div>
+      <div>🈸 <a id="title" title="Load data view config" href="#" onclick="loadConfig()"></a></div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
-      let vscode, title, fileTypeSelector, dataUri, viewer, viewConfig = {}, viewData = [];
+      let vscode, title, fileTypeSelector, dataUri, viewer, toggleConfig = true, viewConfig = {}, viewData = [];
 
       // check web assembly support. uncomment this for dev debug:
       // console.log(`data.preview:supportsWebAssembly(): ${supportsWebAssembly()}`);
@@ -117,14 +117,19 @@
         try {
           // set preview state for restore on vscode reload
           dataUri = data.uri;
-          viewConfig = data.config;
-          vscode.setState({uri: dataUri, config: viewConfig});
           title.innerText = data.fileName;
+          // check view config
+          if (JSON.stringify(viewConfig) != JSON.stringify(data.config)) {
+            viewConfig = data.config;
+            vscode.setState({uri: dataUri, config: viewConfig});
+            // update view config
+            viewer.restore(viewConfig);
+            // reset view data for new view load
+            viewData = [];
+          }
 
           // load file data
           const tableData = getData(data.fileName, data.data, data.schema);
-          // update view config
-          viewer.restore(viewConfig);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
             console.log(`data.view:refresh(): initializing view data for: ${data.fileName}`);
@@ -136,7 +141,11 @@
             else {
               viewer.load(tableData);
             }
-            viewer.toggleConfig();
+            if (toggleConfig) {
+              // show viewer toggles on the 1st run
+              viewer.toggleConfig();
+              toggleConfig = false;
+            }
           } else {  // update viewer data without toggles reset
             console.log(`data.view:refresh(): updating view data for: ${data.fileName}`);
             viewer.clear();
@@ -209,7 +218,7 @@
         switch (dataFileType) {
           case '.config':
             const data = {
-              fileName: dataUri.substr(dataUri.lastIndexOf('/') + 1),
+              dataFileName: dataUri.substr(dataUri.lastIndexOf('/') + 1),
               config: viewConfig
             };
             postData(dataFileType, data);

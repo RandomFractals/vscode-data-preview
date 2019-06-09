@@ -296,13 +296,13 @@ export class DataPreview {
       this._logger.debug('loadConfig(): loading config:', configFilePath);
       const configString: string = fs.readFileSync(configFilePath, 'utf8'); // file encoding to read data as string
       const viewConfig: any = JSON.parse(configString);
-      if (this._uri.fsPath.indexOf(viewConfig.fileName) >=0) { // matching data file config
+      if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) { // matching data file config
         this._config = viewConfig.config;
         this._logger.debug('loadConfig(): loaded view config:', this._config);
         this.refresh(); // reload data & config for display
       }
       else {
-        window.showErrorMessage(`Not a matching data view config for '${this._fileName}'!`);
+        window.showErrorMessage(`Config doesn't match data file: '${this._fileName}'!`);
       }
     }
   }
