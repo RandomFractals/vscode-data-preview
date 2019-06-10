@@ -45,12 +45,15 @@
         left: 0;
         right: 0;
       }
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div id="toolbar">
       <div style="float: right; width: 50px;">
-        <select id="file-type-selector" onChange="saveData()">
+        <select id="save-file-type-selector" onChange="saveData()">
           <option value="">Save</option>
           <option value=".config">config</option>
           <option value=".json">json</option>
@@ -59,17 +62,21 @@
       </div>
       <div>🈸 
         <a id="title" title="Load data view config" href="#" onclick="loadConfig()"></a>
-        <!--
-        <a title="Undo" href="#" onclick="undoConfig()">↩</a>
-        <a title="Redo" href="#" onclick="redoConfig()">↪</a>
+        <select id="table-selector" class="hidden" onChange="loadTable()">
+        </select>
+        <!-- |
+        <a title="Undo" href="#" onclick="undoConfig()"> ↩ </a>
+        <a title="Redo" href="#" onclick="redoConfig()"> ↪ </a>
         -->
-        <a title="Refresh data" href="#" onclick="reloadData()">🔃</a>
+        <a title="Refresh data" href="#" onclick="reloadData()"> 🔃 </a>
       </div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
-      let vscode, title, fileTypeSelector, dataUri, viewer, toggleConfig = true, viewConfig = {}, viewData = [];
+      let vscode, title, tableSelector, saveFileTypeSelector, 
+        dataUri, viewer, toggleConfig = true, dataTable = '', 
+        tableList = [], viewConfig = {}, viewData = [];
 
       // check web assembly support. uncomment this for dev debug:
       // console.log(`data.preview:supportsWebAssembly(): ${supportsWebAssembly()}`);
@@ -82,7 +89,8 @@
       document.addEventListener('DOMContentLoaded', event => {
         // initialize toolbar & data viewer elements
         title = document.getElementById('title');
-        fileTypeSelector = document.getElementById('file-type-selector');
+        tableSelector = document.getElementById('table-selector');
+        saveFileTypeSelector = document.getElementById('save-file-type-selector');
         viewer = document.getElementsByTagName('perspective-viewer')[0];
         try {
           // notify webview
@@ -91,15 +99,18 @@
 
           // add viewer config change handler
           viewer.addEventListener('perspective-config-update', event => {
+            // get latest view config state
             viewConfig = viewer.save();
-            // console.log(`data.preview:configUpdate(): config: ${JSON.stringify(viewConfig)}`);
+            // strip out updating and render time props for view config save
+            deleteProperty('updating', viewConfig);
+            deleteProperty('render_time', viewConfig);
+            // save view config for vscode reload
             vscode.setState({uri: dataUri, config: viewConfig});
             vscode.postMessage({command: 'config', config: viewConfig});
           });
         }
         catch (error) {
           console.error(`data.view:vscode:error ${error.message}`);
-          // ignore: must be loaded outside of vscode webview
         }
       });
 
@@ -117,14 +128,36 @@
       });
 
       /**
+       * Deletes object property.
+       * @param propertyName Property name to delete.
+       */
+      function deleteProperty(propertyName, obj) {
+        if (obj.hasOwnProperty(propertyName)) {
+          delete obj[propertyName];
+        }
+      }
+
+      /**
        * Updates data view on data file change.
        * @param data Refresh data json with doc uri, fileName and raw data to display.
        */
       function refresh(data) {
         try {
-          // set preview state for restore on vscode reload
+          // initialize data preview vars and UI elements
           dataUri = data.uri;
-          title.innerText = data.fileName;
+          title.innerText = ` ${data.fileName} `;
+          if (tableList.length <= 0) {
+            // load table list for data view display
+            Object.keys(data.tableList).forEach(tableName => {
+              tableSelector.innerHTML += `<option value="${tableName}">${tableName}</option>"`;
+              tableList.push(tableName);
+            });
+            if (tableList.length >= 0) {
+              // show table selector dropdown
+              tableSelector.style.display = 'inner-block';
+            }
+          }
+
           // check view config
           if (JSON.stringify(viewConfig) != JSON.stringify(data.config)) {
             viewConfig = data.config;
@@ -163,7 +196,7 @@
         } catch (error) {
           console.error(`data.view:refresh(): error: ${error.message}`);
         }
-      }
+      } // end of refresh(data)
 
       /** 
        * Gets data for display in perspective viewer.
@@ -254,9 +287,24 @@
 
       /**
        * Reloads view data.
+       * @param dataTable Optional data table name for data files with multiple data sets.
        */
-      function reloadData() {
-        vscode.postMessage({command: 'refresh'});
+      function reloadData(dataTable = '') {
+        vscode.postMessage({
+          command: 'refresh',
+          table: dataTable
+        });
+      }
+
+      /**
+       * Loads requested table data for data files with multiple data sets.
+       */
+      function loadTableData() {
+        let dataTable = tableSelector.value;
+        if (!dataTable || dataTable === undefined) {
+          dataTable = '';
+        }
+        reloadData(dataTable);
       }
 
       /**

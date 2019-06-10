@@ -80,6 +80,8 @@ export class DataPreview {
   private _panel: WebviewPanel;
   private _logger: Logger;
   private _config: any = {};
+  private _tableList: Array<string> = [];
+  private _dataTable: string = '';
 
   /**
    * Creates new data preview.
@@ -164,7 +166,7 @@ export class DataPreview {
       switch (message.command) {
         case 'refresh':
           // reload file data for preview
-          this.refresh();
+          this.refresh(message.table);
           break;
         case 'config':
           // save data viewer config for restore on vscode reload
@@ -239,14 +241,20 @@ export class DataPreview {
 
   /**
    * Reloads data preview on data file save changes or vscode IDE reload.
+   * @param dataTable Optional data table name for files with multiple data sets.
    */
-  public refresh(): void {
+  public refresh(dataTable = null): void {
     // reveal corresponding data preview panel
     this._panel.reveal(this._panel.viewColumn, true); // preserve focus
 
+    if (dataTable) {
+      // save requested data table
+      this._dataTable = dataTable;
+    }
+
     // read and send updated data to webview
     // workspace.openTextDocument(this.uri).then(document => {
-      this._logger.debug('refresh(): file:', this._fileName);
+      this._logger.debug(`refresh(${this._dataTable}): file:`, this._fileName);
       //const textData: string = document.getText();
       let data = [];
       try {
@@ -254,7 +262,7 @@ export class DataPreview {
         data = this.getFileData(this._fileName);
       }
       catch (error) {
-        this._logger.logMessage(LogLevel.Error, 'refresh():', error.message);
+        this._logger.logMessage(LogLevel.Error, `refresh(${this._dataTable}):`, error.message);
         this.webview.postMessage({error: error});
       }
       this.loadData(data);
@@ -277,6 +285,8 @@ export class DataPreview {
           uri: this._uri.toString(),
           config: this.config,
           schema: this.schema,
+          tableList: this._tableList,
+          table: this._dataTable,
           data: data
         });
     }
@@ -304,11 +314,12 @@ export class DataPreview {
       const viewConfig: any = JSON.parse(configString);
       if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) { // matching data file config
         this._config = viewConfig.config;
+        this._dataTable = viewConfig.dataTable;
         this._logger.debug('loadConfig(): loaded view config:', this._config);
-        this.refresh(); // reload data & config for display
+        this.refresh(this._dataTable); // reload data & config for display
       }
       else {
-        window.showErrorMessage(`Config doesn't match data file: '${this._fileName}'!`);
+        window.showErrorMessage(`Config data file '${viewConfig.dataFileName}' doesn't match: '${this._fileName}'!`);
       }
     }
   }
@@ -402,16 +413,28 @@ export class DataPreview {
    */
   private getExcelData(workbook: xlsx.WorkBook): any[] {
     this._logger.debug(`getExcelData(): file: ${this._fileName} sheetNames:`, workbook.SheetNames);
-    // read first worksheet data rows
     let dataRows: Array<any> = [];
     const dataSchema = null;
     if (workbook.SheetNames.length > 0) {
-      // get first worksheet data
-      // TODO: add option to preview data for all worksheets later
-      const firstSheetName = workbook.SheetNames[0];
-      const worksheet: xlsx.Sheet = workbook.Sheets[firstSheetName];
+      // save sheet names for data preview selections
+      this._tableList = workbook.SheetNames;
+      let sheetName = workbook.SheetNames[0];
+      if (this._dataTable.length > 0) {
+        // reset to requested table name
+        sheetName = this._dataTable;
+      }
+      
+      // get worksheet data
+      const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
       dataRows = xlsx.utils.sheet_to_json(worksheet);
-      this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+
+      // create json data file
+      let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
+      if (this._dataTable.length > 0) {
+        // append sheet name to generated json data file
+        jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
+      }
+      this.createJsonFile(jsonFilePath, dataRows);
       this.logDataStats(dataSchema, dataRows);
     }
     return dataRows;
