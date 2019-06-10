@@ -145,6 +145,7 @@
         try {
           // initialize data preview vars and UI elements
           dataUri = data.uri;
+          dataTable = data.table;
           title.innerText = ` ${data.fileName} `;
           if (tableList.length <= 0) {
             // load table list for data view display
@@ -302,6 +303,7 @@
       function loadTableData() {
         let dataTable = tableSelector.value;
         if (!dataTable || dataTable === undefined) {
+          // reset to empty for default data load
           dataTable = '';
         }
         reloadData(dataTable);

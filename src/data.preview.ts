@@ -243,11 +243,11 @@ export class DataPreview {
    * Reloads data preview on data file save changes or vscode IDE reload.
    * @param dataTable Optional data table name for files with multiple data sets.
    */
-  public refresh(dataTable = null): void {
+  public refresh(dataTable = ''): void {
     // reveal corresponding data preview panel
     this._panel.reveal(this._panel.viewColumn, true); // preserve focus
 
-    if (dataTable) {
+    if (dataTable.length >  0) {
       // save requested data table
       this._dataTable = dataTable;
     }
@@ -314,7 +314,7 @@ export class DataPreview {
       const viewConfig: any = JSON.parse(configString);
       if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) { // matching data file config
         this._config = viewConfig.config;
-        this._dataTable = viewConfig.dataTable;
+        this._dataTable = (viewConfig.dataTable === undefined) ? '': viewConfig.dataTable;
         this._logger.debug('loadConfig(): loaded view config:', this._config);
         this.refresh(this._dataTable); // reload data & config for display
       }
