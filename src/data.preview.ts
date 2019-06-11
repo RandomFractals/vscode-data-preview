@@ -422,8 +422,10 @@ export class DataPreview {
     let dataRows: Array<any> = [];
     const dataSchema = null;
     if (workbook.SheetNames.length > 0) {
-      // save sheet names for data preview selections
-      this._tableList = workbook.SheetNames;
+      if (workbook.SheetNames.length > 1) {
+        // save sheet names for table list UI display
+        this._tableList = workbook.SheetNames;
+      }
 
       // determine spreadsheet to load
       let sheetName = workbook.SheetNames[0];
@@ -438,7 +440,7 @@ export class DataPreview {
 
       // create json data file for text data preview
       let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
-      if (this._dataTable.length > 0) {
+      if (this._dataTable.length > 0 && this._tableList.length > 1) {
         // append sheet name to generated json data file
         jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
       }
