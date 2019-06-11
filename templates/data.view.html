@@ -79,25 +79,46 @@
         tableList = [], viewConfig = {}, viewData = [];
 
       // check web assembly support. uncomment this for dev debug:
-      // console.log(`data.preview:supportsWebAssembly(): ${supportsWebAssembly()}`);
+      // console.log(`data.view:supportsWebAssembly(): ${supportsWebAssembly()}`);
       
-      // tag data view loading
+      // tag perspective viewer loading
       window.addEventListener('WebComponentsReady', event => {
-        console.log('data.view:WebComponentsReady: loading perspective data view...');
+        console.log('data.view:WebComponentsReady: perspective viewer initialized!');
       });
 
-      document.addEventListener('DOMContentLoaded', event => {
-        // initialize toolbar & data viewer elements
+      document.addEventListener('DOMContentLoaded', event => initializeDataView());
+
+      // add webview post message even handler
+      window.addEventListener('message', event => {
+        switch (event.data.command) {
+          case 'refresh':
+            refresh(event.data);
+            break;
+          default: // help
+            // TODO: add quick data preivew popup display
+            // with info how to work prespective viewer toggles UI
+            break;
+        }
+      });
+
+      /**
+       * Initializes data view UI elements and vs code api
+       * for webview message data updates.
+       */
+      function initializeDataView() {
+        // initialize toolbar & perspective data viewer
         title = document.getElementById('title');
         tableSelector = document.getElementById('table-selector');
         saveFileTypeSelector = document.getElementById('save-file-type-selector');
         viewer = document.getElementsByTagName('perspective-viewer')[0];
         try {
-          // notify webview
+          // init vs code api for messaging
           vscode = acquireVsCodeApi();
+
+          // request first data update
           vscode.postMessage({command: 'refresh'});
 
-          // add viewer config change handler
+          // add viewer config change handler for saving view state
           viewer.addEventListener('perspective-config-update', event => {
             // get latest view config state
             viewConfig = viewer.save();
@@ -112,20 +133,7 @@
         catch (error) {
           console.error(`data.view:vscode:error ${error.message}`);
         }
-      });
-
-      // webview post message even handler
-      window.addEventListener('message', event => {
-        switch (event.data.command) {
-          case 'refresh':
-            refresh(event.data);
-            break;
-          default: // help
-            // TODO: add quick data preivew popup display
-            // with info how to work prespective viewer toggles UI
-            break;
-        }
-      });
+      }
 
       /**
        * Deletes object property.
@@ -143,7 +151,7 @@
        */
       function refresh(data) {
         try {
-          // initialize data preview vars and UI elements
+          // initialize data view vars and UI elements
           dataUri = data.uri;
           dataTable = data.table;
           title.innerText = ` ${data.fileName} `;
@@ -165,7 +173,7 @@
             vscode.setState({uri: dataUri, config: viewConfig});
             // update view config
             viewer.restore(viewConfig);
-            // reset view data for new view load
+            // reset view data for reaload
             viewData = [];
           }
 
@@ -173,7 +181,7 @@
           const tableData = getData(data.fileName, data.data, data.schema);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
-            console.log(`data.view:refresh(): initializing view data for: ${data.fileName}`);
+            console.log(`data.view:refresh(${dataTable}): initializing view data for: ${data.fileName}`);
             if (data.schema !== undefined && Object.keys(data.schema).length > 0) {
               // viewer.columns = viewConfig['columns'];
               viewer.load(data.schema);
@@ -188,7 +196,7 @@
               toggleConfig = false;
             }
           } else {  // update viewer data without toggles reset
-            console.log(`data.view:refresh(): updating view data for: ${data.fileName}`);
+            console.log(`data.view:refresh(${dataTable}): updating view data for: ${data.fileName}`);
             viewer.clear();
             viewer.update(tableData);
           }
@@ -203,6 +211,7 @@
        * Gets data for display in perspective viewer.
        * @param fileName Data file name.
        * @param data Raw text or json array data.
+       * @param schema Optional data schema.
        **/
       function getData(fileName, data, schema = {}) {
         let tableData = [];
@@ -214,7 +223,7 @@
           case '.csv':
           case '.tsv':
           case '.txt':
-            case '.tab':
+          case '.tab':
             // pass through text data for data view to load
             tableData = data;
             break;
@@ -252,14 +261,15 @@
       } // end of getData()
 
       /**
-       * Saves data view config, filtered json, or csv data.
+       * Saves data view config, and filtered json or csv data.
        */
       function saveData() {
-        const dataFileType = fileTypeSelector.value;
+        const dataFileType = saveFileTypeSelector.value;
         switch (dataFileType) {
           case '.config':
             const data = {
               dataFileName: dataUri.substr(dataUri.lastIndexOf('/') + 1),
+              dataTable: dataTable,
               config: viewConfig
             };
             postData(dataFileType, data);
