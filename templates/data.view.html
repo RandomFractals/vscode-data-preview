@@ -62,7 +62,7 @@
       </div>
       <div>🈸 
         <a id="title" title="Load data view config" href="#" onclick="loadConfig()">...</a>
-        <select id="table-selector" onChange="loadTableData()">
+        <select id="table-selector" style="display: none;" onChange="loadTableData()">
         </select>
         <!-- |
         <a title="Undo" href="#" onclick="undoConfig()"> ↩ </a>
@@ -162,7 +162,7 @@
               tableSelector.innerHTML += `<option value="${tableName}">${tableName}</option>"`;
               tableList.push(tableName);
             });
-            if (tableList.length >= 0) {
+            if (tableList.length > 0) {
               // show table selector dropdown
               tableSelector.style.display = 'inner-block';
             }
