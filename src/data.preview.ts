@@ -46,10 +46,8 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    * @param state Saved web view panel state.
    */
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
-    if (config.logLevel === LogLevel.Debug) {
-      this._logger.debug('deserializeWeviewPanel(): url:', state.uri.toString());
-      this._logger.debug('deserializeWeviewPanel(): config:', state.config);
-    }
+    this._logger.debug('deserializeWeviewPanel(): uri:', state.uri.toString());
+    this._logger.debug('deserializeWeviewPanel(): config:', state.config);
     previewManager.add(
       new DataPreview(
         this.viewType,
@@ -88,7 +86,7 @@ export class DataPreview {
    * @param viewType Preview webview type, i.e. data.preview.
    * @param extensionPath Extension path for loading webview scripts, etc.
    * @param uri Source data file uri to preview.
-   * @param viewConfig Data preview config.
+   * @param viewConfig Data view config.
    * @param viewColumn vscode IDE view column to display data preview in.
    * @param htmlTemplate Webview html template reference.
    * @param panel Optional webview panel reference for restore on vscode IDE reload.
@@ -102,7 +100,7 @@ export class DataPreview {
     htmlTemplate: Template, 
     panel?: WebviewPanel) {
 
-    // save ext path, document uri, config, and create prview uri
+    // save ext path, document uri, view config, and create preview uri
     this._extensionPath = extensionPath;
     this._uri = uri;
     this._config = viewConfig;
@@ -180,7 +178,7 @@ export class DataPreview {
           this.saveData(message.fileType, message.data);
           break;
         case 'loadConfig':
-          // prompots to load saved data view config
+          // prompts to load saved data view config
           this.loadConfig();
           break;
         case 'undoConfig':
@@ -207,7 +205,7 @@ export class DataPreview {
   }
 
   /**
-   * Creates local resource roots for loading scripts in data preview webview.
+   * Creates local resource roots for loading assets in data preview webview.
    */
   private getLocalResourceRoots(): Uri[] {
     const localResourceRoots: Uri[] = [];
@@ -236,7 +234,7 @@ export class DataPreview {
     this.webview.html = this.html;
     // NOTE: let webview fire refresh message
     // when data preview DOM content is initialized
-    // see: this.refresh();
+    // see: data.view.html/this.refresh();
   }
 
   /**
@@ -302,27 +300,35 @@ export class DataPreview {
    private async loadConfig(): Promise<void> {
     let configFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
     this._logger.debug('loadConfig(): loading config:', configFilePath);
+
+    // display open config files dialog
     const configFiles: Uri[] = await window.showOpenDialog({
       canSelectMany: false,
       defaultUri: Uri.parse(configFilePath).with({scheme: 'file'}),
       filters: {'Config': ['config']}
     });
+
     if (configFiles.length > 0) {
+      // get the first selected config file
       configFilePath = configFiles[0].fsPath;
       this._logger.debug('loadConfig(): loading config:', configFilePath);
+
+      // load view config
       const configString: string = fs.readFileSync(configFilePath, 'utf8'); // file encoding to read data as string
       const viewConfig: any = JSON.parse(configString);
+
       if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) { // matching data file config
+        // save loaded view config, and data table reference if present
         this._config = viewConfig.config;
         this._dataTable = (viewConfig.dataTable === undefined) ? '': viewConfig.dataTable;
         this._logger.debug('loadConfig(): loaded view config:', this._config);
         this.refresh(this._dataTable); // reload data & config for display
       }
       else {
-        window.showErrorMessage(`Config data file '${viewConfig.dataFileName}' doesn't match: '${this._fileName}'!`);
+        window.showErrorMessage(`Config data file '${viewConfig.dataFileName}' doesn't match '${this._fileName}'!`);
       }
     }
-  }
+  } // end of loadConfig()
 
   /**
    * Loads actual local data file content.
@@ -407,7 +413,7 @@ export class DataPreview {
   }
 
   /**
-   * Gets binary Excel file data.
+   * Gets Excel file data.
    * @param workbook Excel workbook.
    * @returns Array of row objects.
    */
@@ -418,17 +424,19 @@ export class DataPreview {
     if (workbook.SheetNames.length > 0) {
       // save sheet names for data preview selections
       this._tableList = workbook.SheetNames;
+
+      // determine spreadsheet to load
       let sheetName = workbook.SheetNames[0];
       if (this._dataTable.length > 0) {
         // reset to requested table name
         sheetName = this._dataTable;
       }
       
-      // get worksheet data
+      // get worksheet data row objects array
       const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
       dataRows = xlsx.utils.sheet_to_json(worksheet);
 
-      // create json data file
+      // create json data file for text data preview
       let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
       if (this._dataTable.length > 0) {
         // append sheet name to generated json data file
@@ -438,7 +446,7 @@ export class DataPreview {
       this.logDataStats(dataSchema, dataRows);
     }
     return dataRows;
-  }
+  } // end of getExcelData()
 
   /**
    * Gets binary Arrow file data.
@@ -472,6 +480,8 @@ export class DataPreview {
 
     // initialized typed data set columns config
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
+
+    // create data json and schema.json for text arrow data preview
     this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
     this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
     this.logDataStats(dataTable.schema, dataRows);
@@ -490,6 +500,7 @@ export class DataPreview {
     dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
+      // create data json and schema.json files for text data preview
       this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
       this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
       this.logDataStats(dataSchema, dataRows);
@@ -560,7 +571,7 @@ export class DataPreview {
   }
 
   /**
-   * Creates JSON data or schema file.
+   * Creates JSON data or schema.json file.
    * @param jsonFilePath Json file path.
    * @param jsonData Json file data.
    */
@@ -589,9 +600,12 @@ export class DataPreview {
   private async saveData(fileType: string, fileData: any): Promise<void> {
     const dataFilePath: string = this._uri.fsPath.replace(this._fileExtension, fileType);
     this._logger.debug('saveData(): saving data file:', dataFilePath);
+
+    // display save file dialog
     const dataFileUri: Uri = await window.showSaveDialog({
       defaultUri: Uri.parse(dataFilePath).with({scheme: 'file'})
     });
+
     if (dataFileUri) {
       if (dataFilePath.endsWith('.config') || dataFilePath.endsWith('.json')) {
         fileData = JSON.stringify(fileData, null, 2);
@@ -604,7 +618,7 @@ export class DataPreview {
         }
       });
     }
-  }
+  } // end of saveData()
 
   /**
    * Disposes this preview resources.
@@ -676,6 +690,7 @@ export class DataPreview {
   get theme(): string {
     return <string>workspace.getConfiguration('data.preview').get('theme');
   }
+
   /**
    * Gets charts plugin preference for Data Preview display from workspace config.
    * see package.json 'configuration' section for more info.
@@ -685,7 +700,7 @@ export class DataPreview {
   }
 
   /**
-   * Creates JSON data & schema.json files config option for Arrow, Avro & Excel data files.
+   * Create JSON data & schema.json files config option for Arrow, Avro & Excel data files.
    */
   get createJsonFiles(): boolean {
     return <boolean>workspace.getConfiguration('data.preview').get('create.json.files');
