@@ -66,7 +66,8 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
  * Main data preview webview implementation for this vscode extension.
  */
 export class DataPreview {
-    
+
+  // webview vars
   protected _disposables: Disposable[] = [];
   private _extensionPath: string;
   private _uri: Uri;
@@ -75,12 +76,15 @@ export class DataPreview {
   private _fileExtension: string;
   private _title: string;
   private _html: string;
-  private _schema: any;
   private _panel: WebviewPanel;
   private _logger: Logger;
-  private _config: any = {};
+
+  // data view vars
+  private _dataSchema: any;  
   private _tableList: Array<string> = [];
+  private _viewConfig: any = {};
   private _dataTable: string = '';
+  private _dataViews: any = {};
 
   /**
    * Creates new data preview.
@@ -107,7 +111,7 @@ export class DataPreview {
     this._extensionPath = extensionPath;
     this._uri = uri;
     this._dataTable = (table !== undefined) ? table: '';
-    this._config = viewConfig;
+    this._viewConfig = viewConfig;
     this._fileName = path.basename(uri.fsPath);
     this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
     this._previewUri = this._uri.with({scheme: 'data'});
@@ -242,9 +246,13 @@ export class DataPreview {
    * Saves updated data viewer config for restore on vscode reload.
    */
   private updateConfig(viewConfig: any) {
-    if (JSON.stringify(this._config) !== JSON.stringify(viewConfig)) {
-      this._config = viewConfig;
-      this._logger.debug(`updateConfig(${this._dataTable}): config:`, this._config);
+    if (JSON.stringify(this._viewConfig) !== JSON.stringify(viewConfig)) {
+      this._viewConfig = viewConfig;
+      this._logger.debug(`updateConfig(${this._dataTable}): config:`, this._viewConfig);
+      if (this._dataTable.length > 0) {
+        // save updated config in data views for reload
+        this._dataViews[this._dataTable] = this._viewConfig;
+      }
     }
   }
 
@@ -330,9 +338,9 @@ export class DataPreview {
 
       if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) { // matching data file config
         // save loaded view config, and data table reference if present
-        this._config = viewConfig.config;
+        this._viewConfig = viewConfig.config;
         this._dataTable = (viewConfig.dataTable === undefined) ? '': viewConfig.dataTable;
-        this._logger.debug('loadConfig(): loaded view config:', this._config);
+        this._logger.debug('loadConfig(): loaded view config:', this._viewConfig);
         this.refresh(this._dataTable); // reload data & config for display
       }
       else {
@@ -481,14 +489,14 @@ export class DataPreview {
     }
 
     // remap arrow data schema to columns for data viewer
-    this._schema = {};
+    this._dataSchema = {};
     dataTable.schema.fields.map(field => {
       let fieldType: string = field.type.toString();
       const typesIndex: number = fieldType.indexOf('<');
       if (typesIndex > 0) {
         fieldType = fieldType.substring(0, typesIndex);
       }
-      this._schema[field.name] = config.dataTypes[fieldType];
+      this._dataSchema[field.name] = config.dataTypes[fieldType];
     });
 
     // initialized typed data set columns config
@@ -573,7 +581,7 @@ export class DataPreview {
     if (config.logLevel === LogLevel.Debug) {
       if (dataSchema !== null) {
         this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
-        this._logger.debug('logDataStats(): data view schema:', this._schema);
+        this._logger.debug('logDataStats(): data view schema:', this._dataSchema);
       }
       this._logger.debug('logDataStats(): records count:', dataRows.length);
       if (dataRows.length > 0) {
@@ -692,14 +700,14 @@ export class DataPreview {
    * Gets data viewer config for data preview settings restore on vscode reload.
    */
   get config(): any {
-    return this._config;
+    return this._viewConfig;
   }
 
   /**
    * Gets data schema for typed data sets.
    */
   get schema(): any {
-    return this._schema;
+    return this._dataSchema;
   }
 
   /**
