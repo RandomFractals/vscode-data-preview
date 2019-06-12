@@ -23,6 +23,13 @@
       body {
         margin: 0px;
       }
+      #app-icon {
+        color: #000;
+        background-color: orange;
+        font-weight: bold;
+        font-size: 11pt;
+        padding: 0px 2px 0px 2px;
+      }
       #toolbar {
         margin-top: 5px;
         padding: 0px;
@@ -33,9 +40,7 @@
         color: dodgerblue;
         text-decoration: none;
         margin: 0px;
-        padding-left: 5px;
-        padding-right: 5px;
-        padding-bottom: 3px;
+        padding: 0px 5px 3px 5px;
       }
       #title {
         margin: 0px;
@@ -63,7 +68,8 @@
           <option value=".csv">csv</option>
         </select>
       </div>
-      <div>🈸 
+      <div>
+        <span id="app-icon">🈸</span>
         <a id="title" title="Load data view config" href="#" onclick="loadConfig()">...</a>
         <select id="table-selector" style="display: none;" onChange="loadTableData()">
         </select>
@@ -71,7 +77,7 @@
         <a title="Undo" href="#" onclick="undoConfig()"> ↩ </a>
         <a title="Redo" href="#" onclick="redoConfig()"> ↪ </a>
         -->
-        <a title="Refresh data" href="#" onclick="reloadData()"> 🔃 </a>
+        <a style="color: orange;" title="Refresh data" href="#" onclick="reloadData()"> 🔃 </a>
       </div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
