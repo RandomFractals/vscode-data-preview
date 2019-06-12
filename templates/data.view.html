@@ -126,7 +126,7 @@
             deleteProperty('updating', viewConfig);
             deleteProperty('render_time', viewConfig);
             // save view config for vscode reload
-            vscode.setState({uri: dataUri, config: viewConfig});
+            vscode.setState({uri: dataUri, table: dataTable, config: viewConfig});
             vscode.postMessage({command: 'config', config: viewConfig});
           });
         }
@@ -169,7 +169,7 @@
           }
 
           // check view config
-          if (JSON.stringify(viewConfig) != JSON.stringify(data.config)) {
+          if (JSON.stringify(viewConfig) !== JSON.stringify(data.config)) {
             viewConfig = data.config;
             vscode.setState({uri: dataUri, table: dataTable, config: viewConfig});
             // update view config
@@ -320,8 +320,9 @@
         } else {
           // reset view data table and config for new data load
           dataTable = tableName;
-          viewConfig = {};
           viewData = [];
+          viewConfig = {};
+          vscode.postMessage({command: 'config', config: viewConfig});
         }
         reloadData(dataTable);
       }
