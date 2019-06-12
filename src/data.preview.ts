@@ -603,7 +603,7 @@ export class DataPreview {
     let dataFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
     if (this._dataTable.length > 0) {
       // append data table name to new config or data export file name
-      dataFilePath += `-${this._dataTable}.`;
+      dataFilePath += `-${this._dataTable}`;
     }
     // add requested data file ext.
     dataFilePath += fileType;
