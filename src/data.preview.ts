@@ -252,8 +252,14 @@ export class DataPreview {
    * Saves updated data viewer config for restore on vscode reload.
    */
   private updateConfig(viewConfig: any, dataTable: string) {
-    if (viewConfig.hasOwnProperty('view') && // not a blank view config
+    if (this._dataTable !== dataTable && this._dataViews.hasOwnProperty(dataTable)) {
+      // load saved data view for the requested data table
+      this._viewConfig = this._dataViews[dataTable];
+      this._logger.debug(`updateConfig(${dataTable}): new view config:`, this._viewConfig);
+    }
+    else if (viewConfig.hasOwnProperty('view') && // not a blank view config
       JSON.stringify(this._viewConfig) !== JSON.stringify(viewConfig)) {
+      // update view config for the loaded data table
       this._viewConfig = viewConfig;
       this._logger.debug(`updateConfig(${this._dataTable}): config:`, this._viewConfig);
       if (this._dataTable.length > 0) {
