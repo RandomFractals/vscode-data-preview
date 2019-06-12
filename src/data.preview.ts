@@ -600,7 +600,13 @@ export class DataPreview {
    * @param fileData File data to save.
    */
   private async saveData(fileType: string, fileData: any): Promise<void> {
-    const dataFilePath: string = this._uri.fsPath.replace(this._fileExtension, fileType);
+    let dataFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
+    if (this._dataTable.length > 0) {
+      // append data table name to new config or data export file name
+      dataFilePath += `-${this._dataTable}.`;
+    }
+    // add requested data file ext.
+    dataFilePath += fileType;
     this._logger.debug('saveData(): saving data file:', dataFilePath);
 
     // display save file dialog
