@@ -128,6 +128,7 @@ function createDataPreviewCommand(
       extensionPath, resource, 
       '', // default data table
       {}, // data view config
+      {}, // other data views
       viewColumn, viewTemplate);
     previewManager.add(preview);
     return preview.webview;

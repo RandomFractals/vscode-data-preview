@@ -75,7 +75,7 @@
     <script type="text/javascript">
       // data preview vars
       let vscode, title, tableSelector, saveFileTypeSelector, 
-        dataUri, viewer, toggleConfig = true, dataTable = '', 
+        dataUri, viewer, toggleConfig = true, dataTable = '', dataViews = {},
         tableList = [], viewConfig = {}, viewData = [];
 
       // check web assembly support. uncomment this for dev debug:
@@ -126,7 +126,12 @@
             deleteProperty('updating', viewConfig);
             deleteProperty('render_time', viewConfig);
             // save view config for vscode reload
-            vscode.setState({uri: dataUri, table: dataTable, config: viewConfig});
+            vscode.setState({
+              uri: dataUri, 
+              table: dataTable, 
+              config: viewConfig,
+              views: dataViews
+            });
             vscode.postMessage({command: 'config', config: viewConfig});
           });
         }
@@ -154,6 +159,7 @@
           // initialize data view vars and UI elements
           dataUri = data.uri;
           dataTable = data.table;
+          dataViews = data.views;
           title.innerText = ` ${data.fileName} `;
           if (tableList.length <= 0) {
             // load table list for data view display
@@ -171,11 +177,17 @@
           // check view config
           if (JSON.stringify(viewConfig) !== JSON.stringify(data.config)) {
             viewConfig = data.config;
-            vscode.setState({uri: dataUri, table: dataTable, config: viewConfig});
             // update view config
             viewer.restore(viewConfig);
             // reset view data for reaload
             viewData = [];
+            // update data view state
+            vscode.setState({
+              uri: dataUri, 
+              table: dataTable, 
+              config: viewConfig,
+              views: dataViews
+            });
           }
 
           // load file data

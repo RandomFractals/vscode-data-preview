@@ -46,15 +46,18 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    * @param state Saved web view panel state.
    */
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
-    this._logger.debug('deserializeWeviewPanel(): uri:', state.uri.toString());
-    this._logger.debug('deserializeWeviewPanel(): config:', state.config);
+    const dataTable: string = state.table;
+    this._logger.debug(`deserializeWeviewPanel(${dataTable}): uri:`, state.uri.toString());
+    this._logger.debug(`deserializeWeviewPanel(${dataTable}): config:`, state.config);
+    this._logger.debug(`deserializeWeviewPanel(${dataTable}): views:`, state.views);
     previewManager.add(
       new DataPreview(
         this.viewType,
         this.extensionPath, 
         Uri.parse(state.uri),
-        state.table, // data table
+        dataTable,
         state.config, // data view config
+        state.views, // other data views for data files with multiple data sets
         webviewPanel.viewColumn, 
         this.htmlTemplate,
         webviewPanel
@@ -93,6 +96,7 @@ export class DataPreview {
    * @param uri Source data file uri to preview.
    * @param table Data table name.
    * @param viewConfig Data view config.
+   * @param views Other data table views.
    * @param viewColumn vscode IDE view column to display data preview in.
    * @param htmlTemplate Webview html template reference.
    * @param panel Optional webview panel reference for restore on vscode IDE reload.
@@ -102,7 +106,8 @@ export class DataPreview {
     extensionPath: string, 
     uri: Uri,
     table: string,
-    viewConfig: any, 
+    viewConfig: any,
+    views: any,
     viewColumn: ViewColumn, 
     htmlTemplate: Template, 
     panel?: WebviewPanel) {
@@ -111,6 +116,7 @@ export class DataPreview {
     this._extensionPath = extensionPath;
     this._uri = uri;
     this._dataTable = (table !== undefined) ? table: '';
+    this._dataViews = (views !== undefined) ? views: {};
     this._viewConfig = viewConfig;
     this._fileName = path.basename(uri.fsPath);
     this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
@@ -303,6 +309,7 @@ export class DataPreview {
           config: this.config,
           schema: this.schema,
           tableList: this._tableList,
+          views: this._dataViews,
           table: this._dataTable,
           data: data
         });
