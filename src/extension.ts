@@ -125,7 +125,9 @@ function createDataPreviewCommand(
       }
     }
     const preview: DataPreview = new DataPreview(viewType,
-      extensionPath, resource, {}, // viewConfig
+      extensionPath, resource, 
+      '', // default data table
+      {}, // data view config
       viewColumn, viewTemplate);
     previewManager.add(preview);
     return preview.webview;

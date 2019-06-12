@@ -171,7 +171,7 @@
           // check view config
           if (JSON.stringify(viewConfig) != JSON.stringify(data.config)) {
             viewConfig = data.config;
-            vscode.setState({uri: dataUri, config: viewConfig});
+            vscode.setState({uri: dataUri, table: dataTable, config: viewConfig});
             // update view config
             viewer.restore(viewConfig);
             // reset view data for reaload

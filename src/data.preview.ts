@@ -53,7 +53,8 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
         this.viewType,
         this.extensionPath, 
         Uri.parse(state.uri),
-        state.config, // view config
+        state.table, // data table
+        state.config, // data view config
         webviewPanel.viewColumn, 
         this.htmlTemplate,
         webviewPanel
@@ -86,6 +87,7 @@ export class DataPreview {
    * @param viewType Preview webview type, i.e. data.preview.
    * @param extensionPath Extension path for loading webview scripts, etc.
    * @param uri Source data file uri to preview.
+   * @param table Data table name.
    * @param viewConfig Data view config.
    * @param viewColumn vscode IDE view column to display data preview in.
    * @param htmlTemplate Webview html template reference.
@@ -95,6 +97,7 @@ export class DataPreview {
     viewType: string,
     extensionPath: string, 
     uri: Uri,
+    table: string,
     viewConfig: any, 
     viewColumn: ViewColumn, 
     htmlTemplate: Template, 
@@ -103,6 +106,7 @@ export class DataPreview {
     // save ext path, document uri, view config, and create preview uri
     this._extensionPath = extensionPath;
     this._uri = uri;
+    this._dataTable = (table !== undefined) ? table: '';
     this._config = viewConfig;
     this._fileName = path.basename(uri.fsPath);
     this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
@@ -689,6 +693,13 @@ export class DataPreview {
    */
   get schema(): any {
     return this._schema;
+  }
+
+  /**
+   * Gets data table name for data files with multiple data sets on vscode reload.
+   */
+  get table(): string {
+    return this._dataTable;
   }
 
   /**
