@@ -182,7 +182,7 @@ export class DataPreview {
           break;
         case 'config':
           // save data viewer config for restore on vscode reload
-          this.updateConfig(message.config);
+          this.updateConfig(message.config, message.table);
           break;
         case 'saveData':
           // saves data view config, or filtered json or csv data
@@ -251,8 +251,9 @@ export class DataPreview {
   /**
    * Saves updated data viewer config for restore on vscode reload.
    */
-  private updateConfig(viewConfig: any) {
-    if (JSON.stringify(this._viewConfig) !== JSON.stringify(viewConfig)) {
+  private updateConfig(viewConfig: any, dataTable: string) {
+    if (viewConfig.hasOwnProperty('view') && // not a blank view config
+      JSON.stringify(this._viewConfig) !== JSON.stringify(viewConfig)) {
       this._viewConfig = viewConfig;
       this._logger.debug(`updateConfig(${this._dataTable}): config:`, this._viewConfig);
       if (this._dataTable.length > 0) {

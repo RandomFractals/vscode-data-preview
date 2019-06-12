@@ -135,7 +135,12 @@
               config: viewConfig,
               views: dataViews
             });
-            vscode.postMessage({command: 'config', config: viewConfig});
+            // update data viw config
+            vscode.postMessage({
+              command: 'config',
+              table: dataTable,
+              config: viewConfig
+            });
           });
         }
         catch (error) {
@@ -339,7 +344,16 @@
           dataTable = tableName;
           viewData = [];
           viewConfig = {};
-          vscode.postMessage({command: 'config', config: viewConfig});
+          viewer.clear();
+          if (dataViews.hasOwnProperty(dataTable)) {
+            viewConfig = dataViews[dataTable];
+            viewer.restore(viewConfig);
+          }
+          vscode.postMessage({
+            command: 'config',
+            table: dataTable,
+            config: viewConfig
+          });
         }
         reloadData(dataTable);
       }
