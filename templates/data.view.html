@@ -268,8 +268,9 @@
         const dataFileType = saveFileTypeSelector.value;
         switch (dataFileType) {
           case '.config':
+            const dataFileName = dataUri.substr(dataUri.lastIndexOf('/') + 1);
             const data = {
-              dataFileName: dataUri.substr(dataUri.lastIndexOf('/') + 1),
+              dataFileName: dataFileName,
               dataTable: dataTable,
               config: viewConfig
             };
@@ -312,10 +313,15 @@
        * Loads requested table data for data files with multiple data sets.
        */
       function loadTableData() {
-        let dataTable = tableSelector.value;
-        if (!dataTable || dataTable === undefined) {
+        let tableName = tableSelector.value;
+        if (!tableName || tableName === undefined) {
           // reset to empty for default data load
           dataTable = '';
+        } else {
+          // reset view data table and config for new data load
+          dataTable = tableName;
+          viewConfig = {};
+          viewData = [];
         }
         reloadData(dataTable);
       }
