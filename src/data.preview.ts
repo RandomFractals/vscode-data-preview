@@ -172,10 +172,7 @@ export class DataPreview {
           break;
         case 'config':
           // save data viewer config for restore on vscode reload
-          this._config = message.config;
-          if (config.logLevel === LogLevel.Debug) {
-            this._logger.debug('configUpdate(): config:', message.config);
-          }
+          this.updateConfig(message.config);
           break;
         case 'saveData':
           // saves data view config, or filtered json or csv data
@@ -239,6 +236,16 @@ export class DataPreview {
     // NOTE: let webview fire refresh message
     // when data preview DOM content is initialized
     // see: data.view.html/this.refresh();
+  }
+
+  /**
+   * Saves updated data viewer config for restore on vscode reload.
+   */
+  private updateConfig(viewConfig: any) {
+    if (JSON.stringify(this._config) !== JSON.stringify(viewConfig)) {
+      this._config = viewConfig;
+      this._logger.debug(`updateConfig(${this._dataTable}): config:`, this._config);
+    }
   }
 
   /**
