@@ -1,21 +1,20 @@
 # vscode-data-preview
-[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing, slicing & dicing 
-large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow` & `.avro` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 charting 📊 slicing & dicing large `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
-# Data Preview 🈸 MVP Features
+# Data Preview 🈸 Features
 
-- `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow` & `.avro` data files Preview, Sorting & Filtering
+- Preview `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid with Sorting & Filtering
 - Grid Data summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts 📊 creation with Aggregate Functions, Row & Column Pivots
-- Pluggable Charting libraries for stock Charts 📊: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
+- Pluggable Charting 📊 libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
 - Persistent Data Preview Settings (Sort, Filter, Pivots, etc.) for restore of open panels on vscode Reload
 - Mulptiple Spreadsheets Data Preview for `Excel` data files
-- Arrow & Avro `.schema.json` generation & binary `Excel` data files `.json` data generation for text data previews
+- Arrow & Avro `.schema.json` generation & `Excel` data files `.json` data generation for text data previews
 - Filtered data `.json` & `.csv` Save file options
-- Save and Load data view `.config` options
+- Save & Load data view `.config` options
 - Dark & Light Data Preview Panel Themes
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
@@ -23,15 +22,15 @@ large `.csv/.tsv`, `.xlsx/.xlsm`, `.json` array, `.arrow` & `.avro` data files w
 
 # Next V.
 
-- Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
+- Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming
 
-**Note:** this Data Preview 🈸 MVP v. is already capable of loading a few MB's large data files with 100+K records & extensive list of supported data formats you'll be hard pressed to find on vscode marketplace.
+**Note:** this Data Preview 🈸 extension is already capable of loading a few MB's large data files with 100+K records & extensive list of supported data formats you'll be hard pressed to find on vscode marketplace.
 
 # Installation
 
 Install this [Data Preview](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) 🈸 via vscode Extensions tab (`Ctrl+Shift+X`) by searching for `data preview` || via [vscode marketplace search results](https://marketplace.visualstudio.com/search?term=data%20preview&target=VSCode&category=All%20categories&sortBy=Relevance). 
 
-List of Data Preview 🈸 extension config Settings, with `data.preview` command info, keyboard shortcut, augmented vscode UI context menus, added Data Language mappings, supported Data Files list & configurable Theme & Charts 📊 Data Preview Settings:
+List of Data Preview 🈸 extension config Settings, with `data.preview` command info, keyboard shortcut, augmented vscode UI context menus, added Data Language mappings, supported Data Files list & configurable Theme & Charts 📊 Settings:
 
 ![Data Preview Contributions](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-contributions.png?raw=true 
 "Data Preview Contributions")
