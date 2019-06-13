@@ -1,7 +1,8 @@
 {
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
-  "version": "1.10.0",
+  "description": "VSCode Data Preview 🈸 extension for viewing, slicing & dicing large .csv/.tsv, .xlsx/.xlsm, .json array, .arrow & .avro data files with Perspective - streaming data analytics WebAssembly library",
+  "version": "1.10.1",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
   "contributors": [
@@ -203,11 +204,11 @@
     "vscode": "^1.1.34"
   },
   "dependencies": {
-    "@finos/perspective": "^0.3.0-rc.4",
-    "@finos/perspective-viewer": "^0.3.0-rc.4",
-    "@finos/perspective-viewer-d3fc": "^0.3.0-rc.4",
-    "@finos/perspective-viewer-highcharts": "^0.3.0-rc.4",
-    "@finos/perspective-viewer-hypergrid": "^0.3.0-rc.4",
+    "@finos/perspective": "^0.3.0",
+    "@finos/perspective-viewer": "^0.3.0",
+    "@finos/perspective-viewer-d3fc": "^0.3.0",
+    "@finos/perspective-viewer-highcharts": "^0.3.0",
+    "@finos/perspective-viewer-hypergrid": "^0.3.0",
     "apache-arrow": "^0.4.1",
     "avsc": "^5.4.10",
     "d3-fetch": "^1.1.2",
