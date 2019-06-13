@@ -1,7 +1,7 @@
 {
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
-  "description": "VSCode Data Preview 🈸 extension for viewing, slicing & dicing large .csv/.tsv, .xlsx/.xlsm, .json array, .arrow & .avro data files with Perspective - streaming data analytics WebAssembly library",
+  "description": "Data Preview 🈸 extension for viewing, charting, slicing & dicing large JSON array, Apache Arrow, Avro and Excel data files with Perspective - streaming data analytics WebAssembly library",
   "version": "1.10.1",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
