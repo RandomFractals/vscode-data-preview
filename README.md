@@ -1,5 +1,5 @@
 # vscode-data-preview
-[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 charting 📊 slicing & dicing large `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 charting 📊 slicing & dicing 🎲 large `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
@@ -7,14 +7,14 @@
 # Data Preview 🈸 Features
 
 - Preview `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid with Sorting & Filtering
-- Grid Data summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
+- Grid Data Summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts 📊 creation with Aggregate Functions, Row & Column Pivots
 - Pluggable Charting 📊 libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
-- Persistent Data Preview Settings (Sort, Filter, Pivots, etc.) for restore of open panels on vscode Reload
+- Persistent Data Preview Settings (View, Sort, Filter, Pivots, etc.) for restore of open panels on vscode Reload
 - Mulptiple Spreadsheets Data Preview for `Excel` data files
-- Arrow & Avro `.schema.json` generation & `Excel` data files `.json` data generation for text data previews
-- Filtered data `.json` & `.csv` Save file options
-- Save & Load data view `.config` options
+- Arrow & Avro `.schema.json` generation & `Excel` data files `.json` data generation for Text Data Previews
+- Filtered Data `.json` & `.csv` Save file options
+- Save & Load Data View `.config` options
 - Dark & Light Data Preview Panel Themes
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
