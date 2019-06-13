@@ -3,6 +3,7 @@
   "displayName": "Data Preview",
   "description": "Data Preview 🈸 extension for viewing 🔎 charting 📊 slicing & dicing large JSON array, Apache Arrow, Avro and Excel data files",
   "version": "1.10.2",
+  "icon": "images/data-preview.png",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
   "contributors": [
