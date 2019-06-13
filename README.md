@@ -1,12 +1,12 @@
 # vscode-data-preview
-[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 charting 📊 slicing & dicing 🎲 large `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 charting 📊 slicing 🔪 & dicing 🎲 large `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
 # Data Preview 🈸 Features
 
-- Preview `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid with Sorting & Filtering
+- Preview 🈸 `.json` array, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid with Sorting & Filtering
 - Grid Data Summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts 📊 creation with Aggregate Functions, Row & Column Pivots
 - Pluggable Charting 📊 libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
@@ -15,7 +15,7 @@
 - Arrow & Avro `.schema.json` generation & `Excel` data files `.json` data generation for Text Data Previews
 - Filtered Data `.json` & `.csv` Save file options
 - Save & Load Data View `.config` options
-- Dark & Light Data Preview Panel Themes
+- Dark & Light Data Preview 🈸 Panel Themes
 
 ![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
 "Perspective Viewer")
@@ -28,7 +28,7 @@
 
 # Installation
 
-Install this [Data Preview](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) 🈸 via vscode Extensions tab (`Ctrl+Shift+X`) by searching for `data preview` || via [vscode marketplace search results](https://marketplace.visualstudio.com/search?term=data%20preview&target=VSCode&category=All%20categories&sortBy=Relevance). 
+Install [Data Preview](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) 🈸 via vscode Extensions tab (`Ctrl+Shift+X`) by searching for `data preview` || via [vscode marketplace search results](https://marketplace.visualstudio.com/search?term=data%20preview&target=VSCode&category=All%20categories&sortBy=Relevance). 
 
 List of Data Preview 🈸 extension config Settings, with `data.preview` command info, keyboard shortcut, augmented vscode UI context menus, added Data Language mappings, supported Data Files list & configurable Theme & Charts 📊 Settings:
 
@@ -58,7 +58,7 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 2. Hit `Ctrl+S` || `File -> Save` your `.csv/.tsv` || `.json` array data file for updates in open Data Preview panel.
 3. Right-click on a binary `.xlsx/.xlsm`, `.arrow` || `.avro` data file in vscode File Explorer to launch Data Preview panel.
 4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` Preview Data 🈸 context menu options to preview your data files.
-5. Click on the Data Preview panel data filename in the titlebar to load saved data view config.
+5. Click on the Data Preview panel data filename in the toolbar to Load saved data view `.config`.
 
 ## Data Grid/Filter/Columns UX Tips
 
@@ -72,7 +72,7 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|avro)/",
+  "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
