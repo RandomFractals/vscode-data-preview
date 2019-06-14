@@ -410,9 +410,13 @@ export class DataPreview {
         break;
       case '.parquet':
         // TODO: sort out node-gyp lzo lib loading for parquet data files parse
-        window.showInformationMessage('Parquet data format support coming soon!');        
+        window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
         //data = this.getParquetData(dataFilePath);
         break;
+      case '.config':
+        window.showInformationMessage('Data view .config driven Data Preview 🈸 coming soon!');
+        //data = this.getDataFromConfig(dataFilePath);
+        break;  
     }
     return data;
   } // end of getFileData()

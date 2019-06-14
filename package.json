@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large JSON array, Apache Arrow, Avro & Excel data files",
-  "version": "1.10.2",
+  "version": "1.11.0",
   "icon": "images/data-preview.png",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
@@ -21,6 +21,14 @@
     "dataViz",
     "dev tools",
     "data preview",
+    "data schema",
+    "data view",
+    "config",
+    "json array",
+    "arrow",
+    "avro",
+    "parquet",
+    "excel",
     "csv",
     "tsv",
     "txt",
@@ -34,13 +42,7 @@
     "xlsx",
     "xlsm",
     "xml",
-    "html",
-    "json array",
-    "arrow",
-    "avro",
-    "excel",
-    "parquet",
-    "data schema"
+    "html"
   ],
   "categories": [
     "Programming Languages"
@@ -48,13 +50,14 @@
   "activationEvents": [
     "onCommand:data.preview",
     "onWebviewPanel:data.preview",
-    "onLanguage:csv",
-    "onLanguage:tsv",
-    "onLanguage:excel",
     "onLanguage:json",
     "onLanguage:arrow",
     "onLanguage:avro",
-    "onLanguage:parquet"
+    "onLanguage:parquet",
+    "onLanguage:config",
+    "onLanguage:csv",
+    "onLanguage:tsv",
+    "onLanguage:excel"
   ],
   "main": "./out/extension",
   "contributes": {
@@ -140,21 +143,21 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|avro|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|parquet|parq|config)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|avro|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|parquet|parq|config)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|json|arrow|arr|avro|parquet|parq)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|parquet|parq|config)/",
           "command": "data.preview",
           "group": "navigation"
         }

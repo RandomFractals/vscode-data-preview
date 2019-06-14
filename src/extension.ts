@@ -20,6 +20,13 @@ import {Template, ITemplateManager, TemplateManager} from './template.manager';
 
 // supported data file extensions
 const DATA_FILE_EXTENSIONS: string[] = [
+  '.json',
+  '.arrow',
+  '.arr',
+  '.avro',
+  '.parquet',
+  '.parq',
+  '.config',
   '.csv',
   '.tsv',
   '.txt',
@@ -32,13 +39,7 @@ const DATA_FILE_EXTENSIONS: string[] = [
   '.xlsx',
   '.xlsm',
   '.xml',
-  '.html',
-  '.json',
-  '.arrow',
-  '.arr',
-  '.avro',
-  '.parquet',
-  '.parq'
+  '.html'
 ];
 
 const logger: Logger = new Logger('data.preview:', config.logLevel);
