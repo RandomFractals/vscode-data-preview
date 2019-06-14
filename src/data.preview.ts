@@ -22,7 +22,7 @@ import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
 import {Template} from './template.manager';
-import {flattenObject} from './utils/json.utils';
+import {flattenObject, createJsonFile} from './utils/json.utils';
 
 /**
  * Data preview web panel serializer for restoring previews on vscode reload.
@@ -482,7 +482,7 @@ export class DataPreview {
         // append sheet name to generated json data file
         jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
       }
-      this.createJsonFile(jsonFilePath, dataRows);
+      createJsonFile(jsonFilePath, dataRows);
       this.logDataStats(dataSchema, dataRows);
     }
     return dataRows;
@@ -522,8 +522,8 @@ export class DataPreview {
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
 
     // create data json and schema.json for text arrow data preview
-    this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
-    this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
+    createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+    createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
     this.logDataStats(dataTable.schema, dataRows);
     return dataRows;
   } // end of getArrowData()
@@ -541,8 +541,8 @@ export class DataPreview {
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
       // create data json and schema.json files for text data preview
-      this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
-      this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
+      createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+      createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
       this.logDataStats(dataSchema, dataRows);
       // update web view: flatten data rows for now since Avro format has hierarchical data structure
       dataRows = dataRows.map(rowObject => flattenObject(rowObject));
@@ -589,28 +589,6 @@ export class DataPreview {
       if (dataRows.length > 0) {
         const firstRow = dataRows[0];
         this._logger.debug('logDataStats(): 1st row:', firstRow);
-      }
-    }
-  }
-
-  /**
-   * Creates JSON data or schema.json file.
-   * @param jsonFilePath Json file path.
-   * @param jsonData Json file data.
-   */
-  private createJsonFile(jsonFilePath: string, jsonData: any): void {
-    if (!fs.existsSync(jsonFilePath)) {
-      const jsonString: string = JSON.stringify(jsonData, null, 2); 
-      try {
-        // TODO: rework this to async file write later
-        const jsonFileWriteStream: fs.WriteStream = fs.createWriteStream(jsonFilePath, {encoding: 'utf8'});
-        jsonFileWriteStream.write(jsonString);
-        jsonFileWriteStream.end();
-        this._logger.debug('createJsonFile(): saved:', jsonFilePath);
-      } catch (error) {
-        const errorMessage: string = `Failed to save file: ${jsonFilePath}`;
-        this._logger.logMessage(LogLevel.Error, 'crateJsonFile():', errorMessage);
-        window.showErrorMessage(errorMessage);
       }
     }
   }
