@@ -22,6 +22,7 @@ import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
 import {Template} from './template.manager';
+import {flattenObject} from './utils/json.utils';
 
 /**
  * Data preview web panel serializer for restoring previews on vscode reload.
@@ -411,11 +412,11 @@ export class DataPreview {
       case '.parquet':
         // TODO: sort out node-gyp lzo lib loading for parquet data files parse
         window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
-        //data = this.getParquetData(dataFilePath);
+        // data = this.getParquetData(dataFilePath);
         break;
       case '.config':
         window.showInformationMessage('Data view .config driven Data Preview 🈸 coming soon!');
-        //data = this.getDataFromConfig(dataFilePath);
+        // data = this.getDataFromConfig(dataFilePath);
         break;  
     }
     return data;
@@ -544,7 +545,7 @@ export class DataPreview {
       this.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
       this.logDataStats(dataSchema, dataRows);
       // update web view: flatten data rows for now since Avro format has hierarchical data structure
-      dataRows = dataRows.map(rowObject => this.flattenObject(rowObject));
+      dataRows = dataRows.map(rowObject => flattenObject(rowObject));
       this.loadData(dataRows);
     });
     return dataRows;
@@ -572,23 +573,6 @@ export class DataPreview {
     this.loadData(dataRows);
     return dataRows;
   } */
-
-  /**
-   * Flattens objects with nested properties for data view display.
-   * @param obj Object to flatten.
-   * @returns Flat Object.
-   */
-  private flattenObject (obj: any): any {
-    const flatObject: any = {};
-    Object.keys(obj).forEach((key) => {
-      if (typeof obj[key] === 'object' && obj[key] !== null) {
-        Object.assign(flatObject, this.flattenObject(obj[key]));
-      } else {
-        flatObject[key] = obj[key];
-      }
-    });
-    return flatObject;
-  }
 
   /**
    * Logs data stats for debug.
