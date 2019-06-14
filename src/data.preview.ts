@@ -235,7 +235,7 @@ export class DataPreview {
     // add data preview styles
     localResourceRoots.push(Uri.file(path.join(this._extensionPath, 'styles')));
 
-    this._logger.logMessage(LogLevel.Debug, 'getLocalResourceRoots():', localResourceRoots);
+    this._logger.debug('getLocalResourceRoots():', localResourceRoots);
     return localResourceRoots;
   }
 
