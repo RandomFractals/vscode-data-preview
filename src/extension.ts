@@ -18,30 +18,6 @@ import {DataPreview, DataPreviewSerializer} from './data.preview';
 import {previewManager} from './preview.manager';
 import {Template, ITemplateManager, TemplateManager} from './template.manager';
 
-// supported data file extensions
-const DATA_FILE_EXTENSIONS: string[] = [
-  '.json',
-  '.arrow',
-  '.arr',
-  '.avro',
-  '.parquet',
-  '.parq',
-  '.config',
-  '.csv',
-  '.tsv',
-  '.txt',
-  '.tab',
-  '.ods',
-  '.prn',
-  '.slk',
-  '.xls',
-  '.xlsb',
-  '.xlsx',
-  '.xlsm',
-  '.xml',
-  '.html'
-];
-
 const logger: Logger = new Logger('data.preview:', config.logLevel);
 
 /**
@@ -146,7 +122,7 @@ function isDataFile(document: TextDocument): boolean {
   const fileExt: string = fileName.substr(fileName.lastIndexOf('.'));
   logger.debug('isDataFile(): document:', document);
   logger.debug('isDataFile(): file:', fileName);
-  return DATA_FILE_EXTENSIONS.findIndex(dataFileExt => dataFileExt === fileExt) >= 0;
+  return config.supportedDataFiles.findIndex(dataFileExt => dataFileExt === fileExt) >= 0;
 }
 
 /**

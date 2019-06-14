@@ -3,6 +3,30 @@ import { LogLevel } from "./logger";
 // log level setting for prod. vs. dev run of this ext.
 export const logLevel: LogLevel = LogLevel.Info; // change to .Debug for ext. dev debug
 
+// supported data file extensions
+export const supportedDataFiles: string[] = [
+  '.json',
+  '.arrow',
+  '.arr',
+  '.avro',
+  '.parquet',
+  '.parq',
+  '.config',
+  '.csv',
+  '.tsv',
+  '.txt',
+  '.tab',
+  '.ods',
+  '.prn',
+  '.slk',
+  '.xls',
+  '.xlsb',
+  '.xlsx',
+  '.xlsm',
+  '.xml',
+  '.html'
+];
+
 // arrow to data view type mappings
 // see: https://github.com/finos/perspective/blob/master/packages/perspective/src/js/utils.js
 // and https://github.com/finos/perspective/blob/master/packages/perspective/src/js/perspective.js#ArrowColumnLoader
