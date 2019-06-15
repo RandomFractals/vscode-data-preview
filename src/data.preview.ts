@@ -405,7 +405,7 @@ export class DataPreview {
         break;
       case '.env':
       case '.properties':
-        data = jsonUtils.configToArray(fs.readFileSync(dataFilePath, 'utf8'));
+        data = jsonUtils.configToPropertyArray(fs.readFileSync(dataFilePath, 'utf8'));
         break;
       case '.arrow':
         data = this.getArrowData(dataFilePath);

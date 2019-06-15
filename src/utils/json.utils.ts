@@ -9,13 +9,20 @@ const logger: Logger = new Logger(`json.utils:`, config.logLevel);
 /**
  * Flattens objects with nested properties for data view display.
  * @param obj Object to flatten.
+ * @param preservePath Optional flag for generating key path.
+ * @param prefix Parent key prefix.
  * @returns Flat Object.
  */
-export function flattenObject (obj: any): any {
+export function flattenObject (obj: any, preservePath: boolean = false, prefix: string = ''): any {
   const flatObject: any = {};
   Object.keys(obj).forEach((key) => {
+    if (preservePath && prefix.length > 0) {
+      // append parent key prefix
+      key = `${prefix}.${key}`;
+      prefix = key;
+    }
     if (typeof obj[key] === 'object' && obj[key] !== null) {
-      Object.assign(flatObject, this.flattenObject(obj[key]));
+      Object.assign(flatObject, this.flattenObject(obj[key]), preservePath, prefix);
     } else {
       flatObject[key] = obj[key];
     }
@@ -25,10 +32,10 @@ export function flattenObject (obj: any): any {
 
 /**
  * Converts .env or .properties config file
- * to an array of propertyName/value objects.
+ * to an array of property key/value objects.
  * @param configString Config file content.
  */
-export function configToArray(configString: string): Array<any> {
+export function configToPropertyArray(configString: string): Array<any> {
   const properties: Array<any> = [];
   if (configString && configString.length > 0) {
     const configLines: Array<string> = configString.split(/\r\n|\r|\n/);
@@ -44,7 +51,6 @@ export function configToArray(configString: string): Array<any> {
   }
   return properties;
 }
-
 
 /**
  * Creates JSON data or schema.json file.
