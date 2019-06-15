@@ -58,7 +58,7 @@
     "onLanguage:parquet",
     "onLanguage:config",
     "onLanguage:env",
-    "onLanguage:properties",    
+    "onLanguage:properties",
     "onLanguage:csv",
     "onLanguage:tsv",
     "onLanguage:excel"
