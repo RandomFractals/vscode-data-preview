@@ -29,8 +29,11 @@ export function flattenObject (obj: any, preservePath: boolean = false, parentPa
       Object.keys(children).forEach(childKey => {
         flatObject[`${parentPath}.${childKey}`] = children[childKey];
       });
+    } 
+    else if (Array.isArray(obj[key])) {
+    
     } else {
-      flatObject[key] = obj[key];
+      flatObject[key] = obj[key].toString();
     }
   });
   return flatObject;

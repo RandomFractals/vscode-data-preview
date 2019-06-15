@@ -386,7 +386,6 @@ export class DataPreview {
       case '.tsv':
       case '.txt':
       case '.tab':
-      case '.json':
         data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read data as string
         break;
       case '.xls':
@@ -409,7 +408,16 @@ export class DataPreview {
         break;
       case '.config':
         data = jsonUtils.objectToPropertyArray(
-          jsonUtils.flattenObject(JSON.parse(fs.readFileSync(dataFilePath, 'utf8')), true)); // preserve parent path
+          jsonUtils.flattenObject(
+            JSON.parse(fs.readFileSync(dataFilePath, 'utf8')), true)); // preserve parent path
+        break;
+      case '.json':
+        data = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+        if (!Array.isArray(data)) {
+          // convert it to flat object properties array
+          data = jsonUtils.objectToPropertyArray(
+            jsonUtils.flattenObject(data, true)); // preserve parent path
+        }
         break;
       case '.arrow':
         data = this.getArrowData(dataFilePath);

@@ -259,10 +259,6 @@
             // pass through text data for data view to load
             tableData = data;
             break;
-          case '.json':
-            // try to parse JSON array data
-            tableData = JSON.parse(data);
-            break;
           case '.xls':
           case '.xlsb':
           case '.xlsx':
@@ -277,6 +273,7 @@
           case '.env':
           case '.properties':
           case '.config':
+          case '.json':
             // pass through loaded data json
             tableData = data;
             console.log(`data.view:getData(): records count: ${tableData.length}`);
