@@ -36,8 +36,8 @@ export function configToArray(configString: string): Array<any> {
       if (line.length > 0 && !line.startsWith('#') && !line.startsWith('!')) { // skip comments        
         const keyValue: Array<string> = line.split('=');
         properties.push({
-            "Name": keyValue[0] || 'space',
-            "Value": keyValue[1] || ''
+            key: keyValue[0] || '<space>',
+            value: keyValue[1] || ''
           });
       }
     });
