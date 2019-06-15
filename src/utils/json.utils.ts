@@ -24,6 +24,32 @@ export function flattenObject (obj: any): any {
 }
 
 /**
+ * Converts .env or .properties config file
+ * to an array of propertyName/value objects.
+ * @param configString Config file content.
+ */
+export function configToArray(configString: string): Array<any> {
+  const properties: Array<any> = [];
+  if (configString && configString.length > 0) {
+    const configLines: Array<string> = configString.split(/\r\n|\r|\n/);
+    for (let line of configLines) {
+      if (line.length > 0 && !line.startsWith('#') && !line.startsWith('!')) { // skip comments
+        const keyValue: Array<string> = line.split('=');
+        if (keyValue.length >= 2) { // has property setting
+          let propertyObj: any = {
+            "Name": keyValue[0],
+            "Value": keyValue[1]
+          };
+          properties.push(propertyObj);
+        }
+      }
+    }
+  }
+  return properties;
+}
+
+
+/**
  * Creates JSON data or schema.json file.
  * @param jsonFilePath Json file path.
  * @param jsonData Json file data.
