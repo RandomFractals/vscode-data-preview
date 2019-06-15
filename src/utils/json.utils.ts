@@ -10,24 +10,17 @@ const logger: Logger = new Logger(`json.utils:`, config.logLevel);
  * Flattens objects with nested properties for data view display.
  * @param obj Object to flatten.
  * @param preservePath Optional flag for generating key path.
- * @param parentPath Parent key path.
  * @returns Flat Object.
  */
-export function flattenObject (obj: any, preservePath: boolean = false, parentPath: string = ''): any {
+export function flattenObject (obj: any, preservePath: boolean = false): any {
   const flatObject: any = {};
   Object.keys(obj).forEach((key) => {
-    if (preservePath) {
-      if (parentPath.length > 0) {
-        parentPath = `${parentPath}.${key}`;
-      } else {
-        parentPath = key;
-      }
-    }
     if (typeof obj[key] === 'object' && obj[key] !== null) {
       let children: any = {};
-      Object.assign(children, this.flattenObject(obj[key], preservePath, parentPath));
+      Object.assign(children, this.flattenObject(obj[key], preservePath));
       Object.keys(children).forEach(childKey => {
-        flatObject[`${parentPath}.${childKey}`] = children[childKey];
+        const propertyName: string = (preservePath) ? `${key}.${childKey}`: childKey;
+        flatObject[propertyName] = children[childKey];
       });
     } 
     else if (Array.isArray(obj[key])) {
