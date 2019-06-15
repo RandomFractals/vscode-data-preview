@@ -32,18 +32,15 @@ export function configToArray(configString: string): Array<any> {
   const properties: Array<any> = [];
   if (configString && configString.length > 0) {
     const configLines: Array<string> = configString.split(/\r\n|\r|\n/);
-    for (let line of configLines) {
-      if (line.length > 0 && !line.startsWith('#') && !line.startsWith('!')) { // skip comments
+    configLines.forEach(line => {
+      if (line.length > 0 && !line.startsWith('#') && !line.startsWith('!')) { // skip comments        
         const keyValue: Array<string> = line.split('=');
-        if (keyValue.length >= 2) { // has property setting
-          let propertyObj: any = {
-            "Name": keyValue[0],
-            "Value": keyValue[1]
-          };
-          properties.push(propertyObj);
-        }
+        properties.push({
+            "Name": keyValue[0] || 'space',
+            "Value": keyValue[1] || ''
+          });
       }
-    }
+    });
   }
   return properties;
 }
