@@ -28,6 +28,8 @@
     "arrow",
     "avro",
     "parquet",
+    "env",
+    "properties",
     "excel",
     "csv",
     "tsv",
@@ -55,6 +57,8 @@
     "onLanguage:avro",
     "onLanguage:parquet",
     "onLanguage:config",
+    "onLanguage:env",
+    "onLanguage:properties",    
     "onLanguage:csv",
     "onLanguage:tsv",
     "onLanguage:excel"
@@ -125,6 +129,24 @@
         "aliases": [
           "Parquet"
         ]
+      },
+      {
+        "id": "env",
+        "extensions": [
+          ".env"
+        ],
+        "aliases": [
+          "Environment"
+        ]
+      },
+      {
+        "id": "properties",
+        "extensions": [
+          ".properties"
+        ],
+        "aliases": [
+          "Properties"
+        ]
       }
     ],
     "commands": [
@@ -143,21 +165,21 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|parquet|parq|config)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|parquet|parq|config)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html|parquet|parq|config)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
