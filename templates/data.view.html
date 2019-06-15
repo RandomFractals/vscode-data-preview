@@ -261,7 +261,7 @@
             break;
           case '.json':
             // try to parse JSON array data
-            tableData = JSON.parse(data);          
+            tableData = JSON.parse(data);
             break;
           case '.xls':
           case '.xlsb':
@@ -276,6 +276,7 @@
           case '.avro':
           case '.env':
           case '.properties':
+          case '.config':
             // pass through loaded data json
             tableData = data;
             console.log(`data.view:getData(): records count: ${tableData.length}`);

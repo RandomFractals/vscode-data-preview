@@ -407,6 +407,10 @@ export class DataPreview {
       case '.properties':
         data = jsonUtils.configToPropertyArray(fs.readFileSync(dataFilePath, 'utf8'));
         break;
+      case '.config':
+        data = jsonUtils.objectToPropertyArray(
+          jsonUtils.flattenObject(JSON.parse(fs.readFileSync(dataFilePath, 'utf8')), true)); // preserve parent path
+        break;
       case '.arrow':
         data = this.getArrowData(dataFilePath);
         break;
@@ -418,10 +422,6 @@ export class DataPreview {
         window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
         // data = this.getParquetData(dataFilePath);
         break;
-      case '.config':
-        window.showInformationMessage('Data view .config driven Data Preview 🈸 coming soon!');
-        // data = this.getDataFromConfig(dataFilePath);
-        break;  
     }
     return data;
   } // end of getFileData()
