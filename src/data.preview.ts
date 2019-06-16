@@ -16,6 +16,7 @@ import * as path from 'path';
 import * as avro from 'avsc';
 import * as snappy from 'snappy';
 import * as xlsx from 'xlsx';
+import * as yaml from 'js-yaml';
 import {Table} from 'apache-arrow';
 //import * as parquet from 'parquetjs';
 import * as config from './config';
@@ -420,8 +421,13 @@ export class DataPreview {
         }
         break;
       case '.yaml':
-        // TODO: read yaml file with yaml-js and flatten it with json utils
-        window.showInformationMessage('YAML Data Preview 🈸 coming soon!');
+      case '.yml':
+        data = yaml.safeLoad(fs.readFileSync(dataFilePath, 'utf8'));
+        if (!Array.isArray(data)) {
+          // convert it to flat object properties array
+          data = jsonUtils.objectToPropertyArray(
+            jsonUtils.flattenObject(data, true)); // preserve parent path
+        }
         break;
       case '.arrow':
         data = this.getArrowData(dataFilePath);
