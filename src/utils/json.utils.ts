@@ -25,7 +25,7 @@ export function flattenObject (obj: any, preservePath: boolean = false): any {
     } 
     else if (Array.isArray(obj[key])) {
     
-    } else {
+    } else if (obj[key]) {
       flatObject[key] = obj[key].toString();
     }
   });
