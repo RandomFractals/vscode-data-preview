@@ -419,6 +419,10 @@ export class DataPreview {
             jsonUtils.flattenObject(data, true)); // preserve parent path
         }
         break;
+      case '.yaml':
+        // TODO: read yaml file with yaml-js and flatten it with json utils
+        window.showInformationMessage('YAML Data Preview 🈸 coming soon!');
+        break;
       case '.arrow':
         data = this.getArrowData(dataFilePath);
         break;
