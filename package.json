@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large JSON array/config, Apache Arrow, Avro & Excel data files",
-  "version": "1.11.1",
+  "version": "1.12.0",
   "icon": "images/data-preview.png",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
@@ -238,6 +238,7 @@
     "apache-arrow": "^0.4.1",
     "avsc": "^5.4.10",
     "d3-fetch": "^1.1.2",
+    "js-yaml": "^3.13.1",
     "snappy": "^6.2.2",
     "xlsx": "^0.14.3"
   }
