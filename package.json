@@ -31,6 +31,7 @@
     "env",
     "properties",
     "yaml",
+    "yml",
     "excel",
     "csv",
     "tsv",
@@ -153,7 +154,8 @@
       {
         "id": "yaml",
         "extensions": [
-          ".yaml"
+          ".yaml",
+          ".yml"
         ],
         "aliases": [
           "YAML"
@@ -176,21 +178,21 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
