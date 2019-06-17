@@ -1,4 +1,6 @@
 'use strict';
+
+// vscode imports
 import { 
   window,
   workspace, 
@@ -11,15 +13,20 @@ import {
   WebviewPanelOnDidChangeViewStateEvent, 
   WebviewPanelSerializer
 } from 'vscode';
+
+// fs data parsing imports
 import * as fs from 'fs';
 import * as path from 'path';
+import {Table} from 'apache-arrow';
 import * as avro from 'avsc';
-import * as snappy from 'snappy';
+import * as hjson from 'hjson';
+import * as json5 from 'json5';
 import * as xlsx from 'xlsx';
 import * as yaml from 'js-yaml';
-import * as hjson from 'hjson';
-import {Table} from 'apache-arrow';
+import * as snappy from 'snappy';
 //import * as parquet from 'parquetjs';
+
+// local ext. imports
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
@@ -421,6 +428,15 @@ export class DataPreview {
             jsonUtils.flattenObject(data, true)); // preserve parent path
         }
         break;
+      case '.json5':
+        // see https://json5.org/ for more info
+        data = json5.parse(fs.readFileSync(dataFilePath, 'utf8'));
+        if (!Array.isArray(data)) {
+          // convert it to flat object properties array
+          data = jsonUtils.objectToPropertyArray(
+            jsonUtils.flattenObject(data, true)); // preserve parent path
+        }
+        break;    
       case '.hjson':
         // see https://github.com/hjson/hjson-js for more info
         data = hjson.parse(fs.readFileSync(dataFilePath, 'utf8'));
@@ -652,6 +668,9 @@ export class DataPreview {
         case '.json':
           fileData = JSON.stringify(fileData, null, 2);
           break;
+        case '.json5':
+          fileData = json5.stringify(fileData, null, 2);
+          break;    
         case '.hjson':
           fileData = hjson.stringify(fileData);
           break;

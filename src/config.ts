@@ -6,6 +6,7 @@ export const logLevel: LogLevel = LogLevel.Info; // change to .Debug for ext. de
 // supported data file extensions
 export const supportedDataFiles: string[] = [
   '.json',
+  '.json5',
   '.hjson',
   '.arrow',
   '.arr',

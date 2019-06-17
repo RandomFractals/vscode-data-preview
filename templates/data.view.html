@@ -69,6 +69,7 @@
           <option value=".config">config</option>
           <option value=".csv">csv</option>
           <option value=".json">json</option>
+          <option value=".json5">json5</option>
           <option value=".hjson">hjson</option>
           <option value=".yml">yaml</option>
           <option value=".properties">properties</option>
@@ -279,6 +280,7 @@
           case '.yaml':
           case '.yml':
           case '.json':
+          case '.json5':
           case '.hjson':
             // pass through loaded data json
             tableData = data;
@@ -317,6 +319,7 @@
             viewer.view.to_csv().then(csv => postData(dataFileType, csv));
             break;
           case '.json':
+          case '.json5':
           case '.hjson':
           case '.yml':
           case '.properties':
