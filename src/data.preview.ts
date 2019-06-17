@@ -638,7 +638,10 @@ export class DataPreview {
     if (dataFileUri) {
       if (dataFilePath.endsWith('.config') || dataFilePath.endsWith('.json')) {
         fileData = JSON.stringify(fileData, null, 2);
-      }  
+      } else if (dataFilePath.endsWith('.yml')) {
+        // convert to yaml. see: https://github.com/nodeca/js-yaml#safedump-object---options-
+        fileData = yaml.dump(fileData, {skipInvalid: true});
+      }
       fs.writeFile(dataFileUri.fsPath, fileData, (error) => {
         if (error) {
           const errorMessage: string = `Failed to save file: ${dataFileUri.fsPath}`;

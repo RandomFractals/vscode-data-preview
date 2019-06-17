@@ -67,8 +67,9 @@
         <select id="save-file-type-selector" onChange="saveData()">
           <option value="">Save</option>
           <option value=".config">config</option>
-          <option value=".json">json</option>
           <option value=".csv">csv</option>
+          <option value=".json">json</option>
+          <option value=".yml">yaml</option>
         </select>
       </div>
       <div>
@@ -309,11 +310,12 @@
             };
             postData(dataFileType, data);
             break;
-          case '.json':
-            viewer.view.to_json().then(json => postData(dataFileType, json));
-            break;
           case '.csv':
             viewer.view.to_csv().then(csv => postData(dataFileType, csv));
+            break;
+          case '.json':
+          case '.yml':
+            viewer.view.to_json().then(json => postData(dataFileType, json));
             break;
         }
       }
