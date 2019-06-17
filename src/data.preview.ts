@@ -17,6 +17,7 @@ import * as avro from 'avsc';
 import * as snappy from 'snappy';
 import * as xlsx from 'xlsx';
 import * as yaml from 'js-yaml';
+import * as hjson from 'hjson';
 import {Table} from 'apache-arrow';
 //import * as parquet from 'parquetjs';
 import * as config from './config';
@@ -420,6 +421,15 @@ export class DataPreview {
             jsonUtils.flattenObject(data, true)); // preserve parent path
         }
         break;
+      case '.hjson':
+        // see https://github.com/hjson/hjson-js for more info
+        data = hjson.parse(fs.readFileSync(dataFilePath, 'utf8'));
+        if (!Array.isArray(data)) {
+          // convert it to flat object properties array
+          data = jsonUtils.objectToPropertyArray(
+            jsonUtils.flattenObject(data, true)); // preserve parent path
+        }
+        break;  
       case '.yaml':
       case '.yml':
         data = yaml.load(fs.readFileSync(dataFilePath, 'utf8'));
@@ -641,6 +651,9 @@ export class DataPreview {
         case '.config':
         case '.json':
           fileData = JSON.stringify(fileData, null, 2);
+          break;
+        case '.hjson':
+          fileData = hjson.stringify(fileData);
           break;
         case '.yml':
           // convert to yaml. see: https://github.com/nodeca/js-yaml#safedump-object---options-

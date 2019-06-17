@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large JSON array/config, YAML, Apache Arrow, Avro & Excel data files",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "icon": "images/data-preview.png",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
@@ -25,6 +25,7 @@
     "data view",
     "config",
     "json array",
+    "hjson",
     "arrow",
     "avro",
     "parquet",
@@ -55,6 +56,7 @@
     "onCommand:data.preview",
     "onWebviewPanel:data.preview",
     "onLanguage:json",
+    "onLanguage:hjson",
     "onLanguage:arrow",
     "onLanguage:avro",
     "onLanguage:parquet",
@@ -76,6 +78,15 @@
         ],
         "aliases": [
           "JSON"
+        ]
+      },
+      {
+        "id": "hjson",
+        "extensions": [
+          ".hjson"
+        ],
+        "aliases": [
+          "HJSON"
         ]
       },
       {
@@ -196,21 +207,21 @@
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|hjson|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|hjson|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|hjson|arrow|arr|avro|parquet|parq|config|env|properties|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
           "group": "navigation"
         }
@@ -269,6 +280,7 @@
     "apache-arrow": "^0.4.1",
     "avsc": "^5.4.10",
     "d3-fetch": "^1.1.2",
+    "hjson": "^3.1.2",
     "js-yaml": "^3.13.1",
     "snappy": "^6.2.2",
     "xlsx": "^0.14.3"

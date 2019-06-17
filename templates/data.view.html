@@ -63,12 +63,13 @@
   </head>
   <body>
     <div id="toolbar">
-      <div style="float: right; width: 50px;">
+      <div style="float: right; width: 80px;">
         <select id="save-file-type-selector" onChange="saveData()">
           <option value="">Save</option>
           <option value=".config">config</option>
           <option value=".csv">csv</option>
           <option value=".json">json</option>
+          <option value=".hjson">hjson</option>
           <option value=".yml">yaml</option>
           <option value=".properties">properties</option>
         </select>
@@ -278,6 +279,7 @@
           case '.yaml':
           case '.yml':
           case '.json':
+          case '.hjson':
             // pass through loaded data json
             tableData = data;
             console.log(`data.view:getData(): records count: ${tableData.length}`);
@@ -315,6 +317,7 @@
             viewer.view.to_csv().then(csv => postData(dataFileType, csv));
             break;
           case '.json':
+          case '.hjson':
           case '.yml':
           case '.properties':
             viewer.view.to_json().then(json => postData(dataFileType, json));
