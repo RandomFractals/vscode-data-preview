@@ -650,9 +650,15 @@ export class DataPreview {
           if (fileData.length > 0 && 
             fileData[0].hasOwnProperty('key') && fileData[0].hasOwnProperty('value')) { // data in properties format
               let propertiesString: string = '';
+              const newLineRegExp: RegExp = new RegExp('\n', 'g');
               fileData = fileData.forEach(property => {
                 // convert it to properties string
-                propertiesString += `${property['key']}=${property['value']}\n`;
+                let propertyLine:string =`${property['key']}=${property['value']}`;
+                if (propertyLine.indexOf(`\n`) > 0) {
+                  // replace all new lines for multi-line property values with \ next line marker and \n
+                  propertyLine = propertyLine.replace(newLineRegExp, '\\\n');
+                }
+                propertiesString += `${propertyLine}\n`;
               });
               fileData = propertiesString;
           } else {
