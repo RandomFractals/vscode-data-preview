@@ -422,7 +422,7 @@ export class DataPreview {
         break;
       case '.yaml':
       case '.yml':
-        data = yaml.safeLoad(fs.readFileSync(dataFilePath, 'utf8'));
+        data = yaml.load(fs.readFileSync(dataFilePath, 'utf8'));
         if (!Array.isArray(data)) {
           // convert it to flat object properties array
           data = jsonUtils.objectToPropertyArray(
