@@ -70,6 +70,7 @@
           <option value=".csv">csv</option>
           <option value=".json">json</option>
           <option value=".yml">yaml</option>
+          <option value=".properties">properties</option>
         </select>
       </div>
       <div>
@@ -315,6 +316,7 @@
             break;
           case '.json':
           case '.yml':
+          case '.properties':
             viewer.view.to_json().then(json => postData(dataFileType, json));
             break;
         }

@@ -636,19 +636,44 @@ export class DataPreview {
     });
 
     if (dataFileUri) {
-      if (dataFilePath.endsWith('.config') || dataFilePath.endsWith('.json')) {
-        fileData = JSON.stringify(fileData, null, 2);
-      } else if (dataFilePath.endsWith('.yml')) {
-        // convert to yaml. see: https://github.com/nodeca/js-yaml#safedump-object---options-
-        fileData = yaml.dump(fileData, {skipInvalid: true});
+      const dataFileExtension = dataFilePath.substr(dataFilePath.lastIndexOf('.'));
+      switch (dataFileExtension) {
+        case '.config':
+        case '.json':
+          fileData = JSON.stringify(fileData, null, 2);
+          break;
+        case '.yml':
+          // convert to yaml. see: https://github.com/nodeca/js-yaml#safedump-object---options-
+          fileData = yaml.dump(fileData, {skipInvalid: true});
+          break;
+        case '.properties':
+          if (fileData.length > 0 && 
+            fileData[0].hasOwnProperty('key') && fileData[0].hasOwnProperty('value')) { // data in properties format
+              let propertiesString: string = '';
+              fileData = fileData.forEach(property => {
+                // convert it to properties string
+                propertiesString += `${property['key']}=${property['value']}\n`;
+              });
+              fileData = propertiesString;
+          } else {
+            // display not a properties collection warning
+            fileData = '';
+            window.showWarningMessage(`Preview data is not a Properties collection. Use Save JSON or YAML format to save it.`);
+          }
+          break;
       }
-      fs.writeFile(dataFileUri.fsPath, fileData, (error) => {
-        if (error) {
-          const errorMessage: string = `Failed to save file: ${dataFileUri.fsPath}`;
-          this._logger.logMessage(LogLevel.Error, 'saveData():', errorMessage);
-          window.showErrorMessage(errorMessage);
-        }
-      });
+
+      if (fileData.length > 0) {
+        // save exported data
+        // TODO: change this to async later
+        fs.writeFile(dataFileUri.fsPath, fileData, (error) => {
+          if (error) {
+            const errorMessage: string = `Failed to save file: ${dataFileUri.fsPath}`;
+            this._logger.logMessage(LogLevel.Error, 'saveData():', errorMessage);
+            window.showErrorMessage(errorMessage);
+          }
+        });
+      }
     }
   } // end of saveData()
 
