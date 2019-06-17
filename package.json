@@ -1,7 +1,7 @@
 {
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
-  "description": "Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large JSON array/config, Apache Arrow, Avro & Excel data files",
+  "description": "Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large JSON array/config, YAML, Apache Arrow, Avro & Excel data files",
   "version": "1.13.0",
   "icon": "images/data-preview.png",
   "publisher": "RandomFractalsInc",
@@ -105,6 +105,15 @@
         ],
         "aliases": [
           "Parquet"
+        ]
+      },
+      {
+        "id": "config",
+        "extensions": [
+          ".config"
+        ],
+        "aliases": [
+          "Configuration"
         ]
       },
       {

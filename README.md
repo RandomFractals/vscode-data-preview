@@ -1,20 +1,21 @@
 # vscode-data-preview
-[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large `.json` array/config, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
 # Data Preview 🈸 Features
 
-- Preview 🈸 `.json`, `.arrow`, `.avro`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid with Sorting & Filtering
+- Preview 🈸 `.json`, `.arrow`, `.avro`, `.yml`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid with Sorting & Filtering
 - Grid Data Summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts 📊 creation with Aggregate Functions, Row & Column Pivots
 - Pluggable Charting 📊 libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
-- Persistent Data Preview Settings (View, Sort, Filter, Pivots, etc.) for restore of open panels on vscode Reload
+- Persistent Data Preview Settings (View, Sort, Filter, Pivots, etc.) for restore of open Data View panels on VSCode Reload
 - Mulptiple Spreadsheets Data Preview for `Excel` data files
-- Arrow & Avro `.schema.json` generation & `Excel` data files `.json` data generation for Text Data Previews
-- Property Grid display for `.json`, `.env` & `.properties` configuration files
-- Filtered Data `.json` & `.csv` Save file options
+- Arrow & Avro `.schema.json` generation for Data Schema Text Previews in JSON format 
+- Arrow, Avro & `Excel` data files `.json` data generation for Text Data Previews in JSON format
+- Property Grid display for `.json`, `.config`, `.env`, `.properties` & `.yml` configuration files
+- Filtered Data `.csv`, `.json`, `.yml` & `.properties` Data Grid/Chart 📊 Save file options
 - Save & Load Data View `.config` options
 - Dark & Light Data Preview 🈸 Panel Themes
 
@@ -55,11 +56,12 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 
 ## Data Preview 🈸 Launch Tips
 
-1. Run `View -> Command Palette...>Data: Preview Data 🈸` command || hit `Ctrl+Shift+D` in an open text `.csv/.tsv` || `.json` data file document to launch Data Preview panel.
-2. Hit `Ctrl+S` || `File -> Save` your `.csv/.tsv` || `.json` data file for updates in open Data Preview panel.
-3. Right-click on a binary `.xlsx/.xlsm`, `.arrow` || `.avro` data file in vscode File Explorer to launch Data Preview panel.
+1. Run `View -> Command Palette...>Data: Preview Data 🈸` command || hit `Ctrl+Shift+D` in an open 
+`.json` `.config` `.env` `.properties` `.yml` || `.csv/.tsv` text  data file document to launch Data Preview panel.
+2. Hit `Ctrl+S` || `File -> Save` your text data file for immediate updates in an open Data Preview panel.
+3. Right-click on a Binary `.xlsx/.xlsm`, `.arrow` || `.avro` data file in VSCode File Explorer to launch Data Preview panel.
 4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` Preview Data 🈸 context menu options to preview your data files.
-5. Click on the Data Preview panel data filename in the toolbar to Load saved data view `.config`.
+5. Click on the Data Preview panel data filename link in its toolbar to Load saved Data View Grid || Chart 📊 `.config`.
 
 ## Data Grid/Filter/Columns UX Tips
 
@@ -67,13 +69,13 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 2. Drag and drop a column from the left-side `Columns` control panel into `Filter fields` for data filtering 
 (`Group By`, `Split By`, `Sort`, `Filter`).
 3. Drag columns up and down in the left-side `Columns` control panel to reorder displayed columns in the Data Grid.
-4. Uncheck a column in the `Columns` control panel to remove it from a Chart or Data Grid display.
+4. Uncheck a column in the `Columns` control panel to remove it from a Chart 📊 or Data Grid display.
 
-# Supported Excel & Other Binary Data Formats
+# Supported JSON, Config, Binary & Excel Data File Formats
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|env|config|properties|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+  "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|env|config|properties|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
