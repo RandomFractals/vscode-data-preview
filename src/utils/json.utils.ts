@@ -7,6 +7,19 @@ import {window} from 'vscode';
 const logger: Logger = new Logger(`json.utils:`, config.logLevel);
 
 /**
+ * Converts json data to property array if data is an object.
+ * @param data Json data array or object to convert.
+ */
+export function convertJsonData(data: any): any {
+  if (!Array.isArray(data)) {
+    // convert it to flat object properties array
+    data = this.objectToPropertyArray(
+      this.flattenObject(data, true)); // preserve parent path
+  }
+  return data;
+}
+
+/**
  * Flattens objects with nested properties for data view display.
  * @param obj Object to flatten.
  * @param preservePath Optional flag for generating key path.
