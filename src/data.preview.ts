@@ -137,6 +137,7 @@ export class DataPreview {
 
     // initilize charts plugin
     this._charts = this.charts;
+    if (viewConfig && viewConfig.hasOwnProperty('view') && viewConfig.view.startsWith('d3')) {
       // reset it to highcharts for older ext v.s configs
       this._charts = 'highcharts';
     }
