@@ -84,7 +84,8 @@
         <a title="Undo" href="#" onclick="undoConfig()"> ↩ </a>
         <a title="Redo" href="#" onclick="redoConfig()"> ↪ </a>
         -->
-        <a style="color: orange;" title="Refresh data" href="#" onclick="reloadData()"> 🔃 </a>
+        <a id="refresh-data-link" style="color: orange;" title="Refresh data" href="#" onclick="reloadData()"> 🔃 </a>
+        <span id="row-counter">0 rows</span>
       </div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
@@ -92,7 +93,7 @@
       // data preview vars
       let vscode, title, tableSelector, saveFileTypeSelector, 
         dataUri, viewer, toggleConfig = true, dataTable = '', dataViews = {},
-        tableList = [], viewConfig = {}, viewData = [];
+        tableList = [], viewConfig = {}, viewData = [], rowCounter;
 
       // check web assembly support. uncomment this for dev debug:
       // console.log(`data.view:supportsWebAssembly(): ${supportsWebAssembly()}`);
@@ -125,6 +126,7 @@
         // initialize toolbar & perspective data viewer
         title = document.getElementById('title');
         tableSelector = document.getElementById('table-selector');
+        rowCounter = document.getElementById('row-counter');
         saveFileTypeSelector = document.getElementById('save-file-type-selector');
         viewer = document.getElementsByTagName('perspective-viewer')[0];
         try {
@@ -133,6 +135,13 @@
 
           // request first data update
           vscode.postMessage({command: 'refresh'});
+
+          // add rows update handler
+          viewer.addEventListener('perspective-view-update', event => {
+            // update row counter display
+            viewer.view.num_rows().then(rowCount => rowCounter.innerHTML = `${rowCount} rows`);
+            console.log(`data.view:refresh(${dataTable}): rowCount=${rowCount}`);
+          });
 
           // add viewer config change handler for saving view state
           viewer.addEventListener('perspective-config-update', event => {
@@ -148,7 +157,7 @@
               config: viewConfig,
               views: dataViews
             });
-            // update data viw config
+            // update data view config
             vscode.postMessage({
               command: 'config',
               table: dataTable,
