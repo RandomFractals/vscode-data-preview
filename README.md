@@ -9,7 +9,7 @@
 - Preview 🈸 `.json`, `.arrow`, `.avro`, `.yml`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid with Sorting & Filtering
 - Grid Data Summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts 📊 creation with Aggregate Functions, Row & Column Pivots
-- Pluggable Charting 📊 libraries for stock Charts: [highcharts](https://www.highcharts.com/demo) || [d3fc](https://d3fc.io/)
+- Pluggable Charting 📊 libraries for stock Charts: [d3fc](https://d3fc.io/) || [highcharts](https://www.highcharts.com/demo)
 - Persistent Data Preview Settings (View, Sort, Filter, Pivots, etc.) for restore of open Data View panels on VSCode Reload
 - Mulptiple Spreadsheets Data Preview for `Excel` data files
 - Arrow & Avro `.schema.json` generation for Data Schema Text Previews in JSON format 
@@ -43,7 +43,7 @@ List of Data Preview 🈸 extension config Settings, with `data.preview` command
 Setting | Type | Default Value | Description
 ------- | ---- | ------------- | -----------
 data.preview.theme | string |  | Data Preview Theme: blank for light or `.dark` for dark theme data previews display.
-data.preview.charts.plugin | string | hightcharts | Data Preview Charts 📊 library to use for stock charts: [highcharts](https://www.highcharts.com/demo) or [d3fc](https://d3fc.io/)
+data.preview.charts.plugin | string | d3fc | Data Preview Charts 📊 library to use for built-in charts: [d3fc](https://d3fc.io/) or [highcharts](https://www.highcharts.com/demo)
 data.preview.create.json.files | boolean | true | Creates `.json` data & `.schema.json` files, if available, for Arrow, Avro & Excel data files.
 
 Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing 

@@ -250,11 +250,11 @@
         "data.preview.charts.plugin": {
           "type": "string",
           "enum": [
-            "highcharts",
-            "d3fc"
+            "d3fc",
+            "highcharts"
           ],
-          "default": "highcharts",
-          "description": "Data Preview Charts library to use: highcharts || d3fc."
+          "default": "d3fc",
+          "description": "Data Preview Charts library to use: d3fc || highcharts."
         },
         "data.preview.create.json.files": {
           "type": "boolean",

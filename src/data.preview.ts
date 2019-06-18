@@ -99,6 +99,7 @@ export class DataPreview {
   private _viewConfig: any = {};
   private _dataTable: string = '';
   private _dataViews: any = {};
+  private _charts: string = 'd3fc';
 
   /**
    * Creates new data preview.
@@ -134,6 +135,12 @@ export class DataPreview {
     this._previewUri = this._uri.with({scheme: 'data'});
     this._logger = new Logger(`${viewType}:`, config.logLevel);
 
+    // initilize charts plugin
+    this._charts = this.charts;
+      // reset it to highcharts for older ext v.s configs
+      this._charts = 'highcharts';
+    }
+
     // create preview panel title
     switch (viewType) {
       case 'data.preview':
@@ -153,7 +160,7 @@ export class DataPreview {
       scripts: scriptsPath,
       styles: stylesPath,
       theme: this.theme,
-      charts: this.charts
+      charts: this._charts
     });
 
     // initialize webview panel
