@@ -24,6 +24,7 @@ import * as json5 from 'json5';
 import * as xlsx from 'xlsx';
 import * as yaml from 'js-yaml';
 import * as snappy from 'snappy';
+import * as props from 'properties';
 //import * as parquet from 'parquetjs';
 
 // local ext. imports
@@ -389,6 +390,7 @@ export class DataPreview {
     }
 
     // read file data
+    // TODO: convert this to data reader factory
     // TODO: rework this to using fs.ReadStream for large data files support later
     switch (this._fileExtension) {
       case '.csv':
@@ -412,48 +414,27 @@ export class DataPreview {
         data = this.getTextExcelData(dataFilePath);
         break;
       case '.env':
-      case '.properties':
         data = jsonUtils.configToPropertyArray(fs.readFileSync(dataFilePath, 'utf8'));
         break;
+      case '.properties':
+        data = this.getPropertiesData(dataFilePath);
+        break;
       case '.config':
-        data = jsonUtils.objectToPropertyArray(
-          jsonUtils.flattenObject(
-            JSON.parse(fs.readFileSync(dataFilePath, 'utf8')), true)); // preserve parent path
+        data = this.getConfigData(dataFilePath);
         break;
       case '.json':
-        data = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
-        if (!Array.isArray(data)) {
-          // convert it to flat object properties array
-          data = jsonUtils.objectToPropertyArray(
-            jsonUtils.flattenObject(data, true)); // preserve parent path
-        }
+        data = this.getJsonData(dataFilePath);
         break;
       case '.json5':
         // see https://json5.org/ for more info
-        data = json5.parse(fs.readFileSync(dataFilePath, 'utf8'));
-        if (!Array.isArray(data)) {
-          // convert it to flat object properties array
-          data = jsonUtils.objectToPropertyArray(
-            jsonUtils.flattenObject(data, true)); // preserve parent path
-        }
-        break;    
+        data = this.getJson5Data(dataFilePath);
+        break;
       case '.hjson':
-        // see https://github.com/hjson/hjson-js for more info
-        data = hjson.parse(fs.readFileSync(dataFilePath, 'utf8'));
-        if (!Array.isArray(data)) {
-          // convert it to flat object properties array
-          data = jsonUtils.objectToPropertyArray(
-            jsonUtils.flattenObject(data, true)); // preserve parent path
-        }
-        break;  
+        data = this.getHJsonData(dataFilePath);
+        break;
       case '.yaml':
       case '.yml':
-        data = yaml.load(fs.readFileSync(dataFilePath, 'utf8'));
-        if (!Array.isArray(data)) {
-          // convert it to flat object properties array
-          data = jsonUtils.objectToPropertyArray(
-            jsonUtils.flattenObject(data, true)); // preserve parent path
-        }
+        data = this.getYamlData(dataFilePath);
         break;
       case '.arrow':
         data = this.getArrowData(dataFilePath);
@@ -469,6 +450,8 @@ export class DataPreview {
     }
     return data;
   } // end of getFileData()
+
+  // TODO: Move these data loading methods to separate data.provders per file type
 
   /**
    * Gets binary Excel file data.
@@ -597,6 +580,74 @@ export class DataPreview {
       this.loadData(dataRows);
     });
     return dataRows;
+  }
+
+  /**
+   * Gets .config data array or config object.
+   * @param dataFilePath Config data file path.
+   * @see https://github.com/lorenwest/node-config/wiki/Configuration-Files
+   */
+  private getConfigData(dataFilePath: string): any {
+    let data: any = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    return jsonUtils.convertJsonData(data);
+  }
+
+  /**
+   * Gets JSON data array or config object.
+   * @param dataFilePath Json data file path.
+   * @see http://json.org/
+   */
+  private getJsonData(dataFilePath: string): any {
+    let data: any = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    return jsonUtils.convertJsonData(data);
+  }
+
+  /**
+   * Gets JSON5 data array or config object.
+   * @param dataFilePath Json5 data file path.
+   * @see https://json5.org
+   */
+  private getJson5Data(dataFilePath: string): any {
+    let data: any = json5.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    return jsonUtils.convertJsonData(data);
+  }
+
+  /**
+   * Gets HJSON data array or config object.
+   * @param dataFilePath HJson data file path.
+   * @see https://github.com/hjson/hjson-js
+   */
+  private getHJsonData(dataFilePath: string): any {
+    let data: any = hjson.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    return jsonUtils.convertJsonData(data);
+  }
+
+  /**
+   * Gets YAML data array or config object.
+   * @param dataFilePath YAML data file path.
+   */
+  private getYamlData(dataFilePath: string): any {
+    let data: any = yaml.load(fs.readFileSync(dataFilePath, 'utf8'));
+    return jsonUtils.convertJsonData(data);
+  }
+
+  /**
+   * Gets properties data array with key/value pairs.
+   * @param dataFilePath Properties data file path.
+   */
+  private getPropertiesData(dataFilePath: string): any {
+    this._dataSchema = {};
+    let data: any = jsonUtils.configToPropertyArray(fs.readFileSync(dataFilePath, 'utf8'));
+    /*
+    let data: any = props.parse(fs.readFileSync(dataFilePath, 'utf8'), {path: true}, (error, obj) => {
+      console.log(obj);
+      if (error) {
+        this._logger.logMessage(LogLevel.Error, 'getFileData(): error', error);
+        window.showErrorMessage(`Failed to parse '${this._fileName}'! \n ${error}`);
+      }
+    }); */
+    this.logDataStats(this._dataSchema, data);
+    return data;
   }
 
   /**
