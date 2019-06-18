@@ -85,7 +85,7 @@
         <a title="Redo" href="#" onclick="redoConfig()"> ↪ </a>
         -->
         <a id="refresh-data-link" style="color: orange;" title="Refresh data" href="#" onclick="reloadData()"> 🔃 </a>
-        <span id="row-counter">0 rows</span>
+        <span id="row-counter"></span>
       </div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
@@ -139,7 +139,7 @@
           // add rows update handler
           viewer.addEventListener('perspective-view-update', event => {
             // update row counter display
-            viewer.view.num_rows().then(rowCount => rowCounter.innerHTML = `${rowCount} rows`);
+            viewer.view.num_rows().then(rowCount => rowCounter.innerHTML = `${rowCount.toLocaleString()} rows`);
             console.log(`data.view:refresh(${dataTable}): rowCount=${rowCount}`);
           });
 
