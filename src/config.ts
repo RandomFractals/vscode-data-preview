@@ -16,6 +16,7 @@ export const supportedDataFiles: string[] = [
   '.config',
   '.env',
   '.properties',
+  '.ini',
   '.yaml',
   '.yml',
   '.csv',

@@ -427,6 +427,9 @@ export class DataPreview {
       case '.properties':
         data = this.getPropertiesData(dataFilePath);
         break;
+      case '.ini':
+          data = this.getIniData(dataFilePath);
+          break;  
       case '.config':
         data = this.getConfigData(dataFilePath);
         break;
@@ -655,6 +658,18 @@ export class DataPreview {
       }
     }); */
     this.logDataStats(this._dataSchema, data);
+    return data;
+  }
+
+  /**
+   * Gets INI properties data array with key/value pairs.
+   * @param dataFilePath INI file path.
+   * @see https://github.com/gagle/node-properties#ini
+   */
+  private getIniData(dataFilePath: string): any {
+    const dataString: string = fs.readFileSync(dataFilePath, 'utf8');
+    const data: any = jsonUtils.convertJsonData(
+      props.parse(dataString, {sections: true, comments: [';', '#']})); // NOTE: some INI files consider # as a comment
     return data;
   }
 
