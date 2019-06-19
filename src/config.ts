@@ -50,4 +50,3 @@ export const dataTypes = {
   "Timestamp": "datetime",
   "Utf8": "string",
 };
-
