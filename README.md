@@ -1,5 +1,5 @@
 # vscode-data-preview
-[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
@@ -14,7 +14,7 @@
 - Mulptiple Spreadsheets Data Preview for `Excel` data files
 - Arrow & Avro `.schema.json` generation for Data Schema Text Previews in JSON format 
 - Arrow, Avro & `Excel` data files `.json` data generation for Text Data Previews in JSON format
-- Property Grid display for `.json`, `.config`, `.env`, `.properties` & `.yml` configuration files
+- Property Grid display for `.json`, `.config`, `.env`, `.properties` `.ini` & `.yml` configuration files
 - Filtered Data `.csv`, `.json`, `.yml` & `.properties` Data Grid/Chart 📊 Save file options
 - Save & Load Data View `.config` options
 - Dark & Light Data Preview 🈸 Panel Themes
@@ -56,9 +56,9 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 
 ## Data Preview 🈸 Launch Tips
 
-1. Run `View -> Command Palette...>Data: Preview Data 🈸` command || hit `Ctrl+Shift+D` in an open 
-`.json` `.config` `.env` `.properties` `.yml` || `.csv/.tsv` text  data file document to launch Data Preview panel.
-2. Hit `Ctrl+S` || `File -> Save` your text data file for immediate updates in an open Data Preview panel.
+1. Run `View -> Command Palette...>Data: Preview Data 🈸` command || `Ctrl+Shift+D` in an open 
+`.json` `.config` `.env` `.properties` `.ini` `.yml` || `.csv/.tsv` text  data file document to launch Data Preview panel.
+2. `File -> Save` || `Ctrl+S` your text data file for immediate updates in an open Data Preview panel.
 3. Right-click on a Binary `.xlsx/.xlsm`, `.arrow` || `.avro` data file in VSCode File Explorer to launch Data Preview panel.
 4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` Preview Data 🈸 context menu options to preview your data files.
 5. Click on the Data Preview panel data filename link in its toolbar to Load saved Data View Grid || Chart 📊 `.config`.
@@ -75,7 +75,7 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|env|config|properties|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+  "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|env|config|properties|ini|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
