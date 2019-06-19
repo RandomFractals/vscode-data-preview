@@ -6,16 +6,17 @@
 
 # Data Preview 🈸 Features
 
-- Preview 🈸 `.json`, `.arrow`, `.avro`, `.yml`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid with Sorting & Filtering
-- Grid Data Summary display with Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
-- Basic Charts 📊 creation with Aggregate Functions, Row & Column Pivots
-- Pluggable Charting 📊 libraries for stock Charts: [d3fc](https://d3fc.io/) || [highcharts](https://www.highcharts.com/demo)
+- Preview 🈸 `.json`, `.arrow`, `.avro`, `.yml`, `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid w/Sorting & Filtering
+- Grid Data Summary display w/Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
+- Basic Charts 📊 creation w/Aggregate Functions, Row & Column Pivots
+- Pluggable Charting 📊 libraries for bult-in Charts: [d3fc](https://d3fc.io/) || [highcharts](https://www.highcharts.com/demo)
 - Persistent Data Preview Settings (View, Sort, Filter, Pivots, etc.) for restore of open Data View panels on VSCode Reload
 - Mulptiple Spreadsheets Data Preview for `Excel` data files
-- Arrow & Avro `.schema.json` generation for Data Schema Text Previews in JSON format 
-- Arrow, Avro & `Excel` data files `.json` data generation for Text Data Previews in JSON format
-- Property Grid display for `.json`, `.config`, `.env`, `.properties` `.ini` & `.yml` configuration files
-- Filtered Data `.csv`, `.json`, `.yml` & `.properties` Data Grid/Chart 📊 Save file options
+- Data `.schema.json` generation for Arrow & Avro Data Schema Text Previews in JSON format 
+- Binary Data files `.json` generation for Arrow, Avro & `Excel` formats to Text Preview that data in JSON format
+- Property Grid display for `.json` `.config` `.env` `.properties` `.ini` & `.yml` configuration files
+- Open Data Preview on Side option for slim data || config files
+- Filtered Data `.csv` `.json(s)` `.yml` & `.properties` Data Grid/Chart 📊 Save file options
 - Save & Load Data View `.config` options
 - Dark & Light Data Preview 🈸 Panel Themes
 
@@ -26,13 +27,14 @@
 
 - Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming
 
-**Note:** this Data Preview 🈸 extension is already capable of loading a few MB's large data files with 100+K records & extensive list of supported data formats you'll be hard pressed to find on vscode marketplace.
+**Note:** this Data Preview 🈸 extension is already capable of loading 10+MB's large data files with 100+K records & extensive list of supported Data Formats you'll be hard pressed to find on 
+[VSCode marketplace](https://marketplace.visualstudio.com/search?term=data&target=VSCode&category=All%20categories&sortBy=Relevance).
 
 # Installation
 
-Install [Data Preview](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) 🈸 via vscode Extensions tab (`Ctrl+Shift+X`) by searching for `data preview` || via [vscode marketplace search results](https://marketplace.visualstudio.com/search?term=data%20preview&target=VSCode&category=All%20categories&sortBy=Relevance). 
+Install [Data Preview](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) 🈸 via vscode Extensions tab (`Ctrl+Shift+X`) by searching for `data preview` || via [VSCode marketplace search results](https://marketplace.visualstudio.com/search?term=data%20preview&target=VSCode&category=All%20categories&sortBy=Relevance). 
 
-List of Data Preview 🈸 extension config Settings, with `data.preview` command info, keyboard shortcut, augmented vscode UI context menus, added Data Language mappings, supported Data Files list & configurable Theme & Charts 📊 Settings:
+List of Data Preview 🈸 extension config Settings, `data.preview` command(s), keyboard shortcut(s), augmented vscode UI context menus, added Data Language mappings, supported Data Files list & configurable Theme & Charts 📊 Settings:
 
 ![Data Preview Contributions](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-contributions.png?raw=true 
 "Data Preview Contributions")
@@ -60,7 +62,7 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 `.json` `.config` `.env` `.properties` `.ini` `.yml` || `.csv/.tsv` text  data file document to launch Data Preview panel.
 2. `File -> Save` || `Ctrl+S` your text data file for immediate updates in an open Data Preview panel.
 3. Right-click on a Binary `.xlsx/.xlsm`, `.arrow` || `.avro` data file in VSCode File Explorer to launch Data Preview panel.
-4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` Preview Data 🈸 context menu options to preview your data files.
+4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` Preview Data 🈸 || Preview Data on Side context menu options to preview your data files.
 5. Click on the Data Preview panel data filename link in its toolbar to Load saved Data View Grid || Chart 📊 `.config`.
 
 ## Data Grid/Filter/Columns UX Tips
