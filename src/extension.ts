@@ -44,7 +44,7 @@ export function activate(context: ExtensionContext) {
 
   // add Preview Data on Side command
   const dataWebviewOnSide: Disposable = 
-    createDataPreviewCommand('data.preview', 'data.preview.on.side', extensionPath, dataViewTemplate);
+    createDataPreviewCommand('data.preview.on.side', 'data.preview', extensionPath, dataViewTemplate);
   context.subscriptions.push(dataWebviewOnSide);
 
   // refresh associated preview on data file save
@@ -87,14 +87,14 @@ export function deactivate() {
 
 /**
  * Creates a data preview command.
-   * @param viewType Preview Data view type.
-   * @param commandType Preview Data command type: data.preview || data.preview.on.side for now.
-   * @param extensionPath Extension path for loading scripts, examples and data.
-   * @param viewTemplate Preview html template.
+ * @param commandType Preview Data command type: data.preview || data.preview.on.side for now. 
+ * @param viewType Preview Data view type: only data.prevview for now. might add maps & help later.
+ * @param extensionPath Extension path for loading scripts, examples and data.
+ * @param viewTemplate Preview html template.
  */
 function createDataPreviewCommand(
-  viewType: string,
   commandType: string,
+  viewType: string,
   extensionPath: string, 
   viewTemplate: Template): Disposable {
   const dataWebview: Disposable = commands.registerCommand(commandType, (uri) => {
@@ -108,7 +108,7 @@ function createDataPreviewCommand(
       if (window.activeTextEditor) {
         resource = window.activeTextEditor.document.uri;
       } else {
-        window.showInformationMessage('Open a data file to Preview.');
+        window.showInformationMessage('Open a Data file to Preview.');
         return;
       }
     }
