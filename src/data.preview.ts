@@ -647,17 +647,9 @@ export class DataPreview {
    * @param dataFilePath Properties data file path.
    */
   private getPropertiesData(dataFilePath: string): any {
-    this._dataSchema = {};
-    let data: any = jsonUtils.configToPropertyArray(fs.readFileSync(dataFilePath, 'utf8'));
-    /*
-    let data: any = props.parse(fs.readFileSync(dataFilePath, 'utf8'), {path: true}, (error, obj) => {
-      console.log(obj);
-      if (error) {
-        this._logger.logMessage(LogLevel.Error, 'getFileData(): error', error);
-        window.showErrorMessage(`Failed to parse '${this._fileName}'! \n ${error}`);
-      }
-    }); */
-    this.logDataStats(this._dataSchema, data);
+    const dataString: string = fs.readFileSync(dataFilePath, 'utf8');
+    const data: any = jsonUtils.convertJsonData(
+      props.parse(dataString, {sections: true}));
     return data;
   }
 
