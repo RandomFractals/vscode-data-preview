@@ -221,8 +221,8 @@
         "category": "Data",
         "icon": {
           "light": "./images/data-preview.svg",
-          "dark": "./media/data-preview-dark.svg"
-        }   
+          "dark": "./images/data-preview-dark.svg"
+        }
       },
       {
         "command": "data.preview.on.side",
@@ -230,8 +230,8 @@
         "category": "Data",
         "icon": {
           "light": "./images/data-preview-side.svg",
-          "dark": "./media/data-preview-side-dark.svg"
-        }   
+          "dark": "./images/data-preview-side-dark.svg"
+        }
       }
     ],
     "keybindings": [
