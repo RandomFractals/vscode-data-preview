@@ -56,6 +56,7 @@
   ],
   "activationEvents": [
     "onCommand:data.preview",
+    "onCommand:data.preview.on.side",
     "onWebviewPanel:data.preview",
     "onLanguage:json",
     "onLanguage:json5",
@@ -216,35 +217,67 @@
     "commands": [
       {
         "command": "data.preview",
-        "title": "Preview Data 🈸",
-        "category": "Data"
+        "title": "Preview Data",
+        "category": "Data",
+        "icon": {
+          "light": "./images/data-preview.svg",
+          "dark": "./media/data-preview-dark.svg"
+        }   
+      },
+      {
+        "command": "data.preview.on.side",
+        "title": "Preview Data on Side",
+        "category": "Data",
+        "icon": {
+          "light": "./images/data-preview-side.svg",
+          "dark": "./media/data-preview-side-dark.svg"
+        }   
       }
     ],
     "keybindings": [
       {
         "command": "data.preview",
         "key": "ctrl+shift+d"
+      },
+      {
+        "command": "data.preview.on.side",
+        "key": "ctrl+alt+s d"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
+          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "group": "navigation"
+        },
+        {
+          "command": "data.preview.on.side",
+          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
+          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "group": "navigation"
+        },
+        {
+          "command": "data.preview.on.side",
+          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "command": "data.preview",
+          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "group": "navigation"
+        },
+        {
+          "command": "data.preview.on.side",
+          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "group": "navigation"
         }
       ]

@@ -37,10 +37,15 @@ export function activate(context: ExtensionContext) {
   window.registerWebviewPanelSerializer('data.preview', 
     new DataPreviewSerializer('data.preview', extensionPath, dataViewTemplate));
 
-  // Preview Data command
+  // add Preview Data command
   const dataWebview: Disposable = 
-    createDataPreviewCommand('data.preview', extensionPath, dataViewTemplate);
+    createDataPreviewCommand('data.preview', 'data.preview', extensionPath, dataViewTemplate);
   context.subscriptions.push(dataWebview);
+
+  // add Preview Data on Side command
+  const dataWebviewOnSide: Disposable = 
+    createDataPreviewCommand('data.preview', 'data.preview.on.side', extensionPath, dataViewTemplate);
+  context.subscriptions.push(dataWebviewOnSide);
 
   // refresh associated preview on data file save
   workspace.onDidSaveTextDocument((document: TextDocument) => {
@@ -82,17 +87,23 @@ export function deactivate() {
 
 /**
  * Creates a data preview command.
-   * @param viewType Preview command type.
+   * @param viewType Preview Data view type.
+   * @param commandType Preview Data command type: data.preview || data.preview.on.side for now.
    * @param extensionPath Extension path for loading scripts, examples and data.
    * @param viewTemplate Preview html template.
  */
 function createDataPreviewCommand(
-  viewType: string, 
+  viewType: string,
+  commandType: string,
   extensionPath: string, 
   viewTemplate: Template): Disposable {
-  const dataWebview: Disposable = commands.registerCommand(viewType, (uri) => {
+  const dataWebview: Disposable = commands.registerCommand(commandType, (uri) => {
     let resource: any = uri;
     let viewColumn: ViewColumn = getViewColumn();
+    if (commandType.endsWith('.on.side')) {
+      // bump view column
+      viewColumn++;
+    }
     if (!(resource instanceof Uri)) {
       if (window.activeTextEditor) {
         resource = window.activeTextEditor.document.uri;
