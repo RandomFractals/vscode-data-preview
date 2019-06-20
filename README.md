@@ -89,12 +89,14 @@ See https://github.com/SheetJS/js-xlsx#file-formats for more info on supported `
 ![Data Preview Data](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-data.png?raw=true 
 "Data Preview Data")
 
-## Provided Chart Types
+## Provided Chart 📊 Types
 
 - Area Chart
-- Bar Chart
+- Bar 
+- Candlesick Chart (`d3fc` only))
 - Heatmap
 - Line Chart
+- OHLC Chart (`d3fc` only)
 - Scatter Chart
 - Sunburst
 - Tree Map
