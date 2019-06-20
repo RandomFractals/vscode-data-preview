@@ -22,16 +22,19 @@
     <style>
       body {
         margin: 0px;
+        padding: 0px;
       }
-      #app-icon {
+      #app-icon, #help-icon {
         color: orange;
         font-weight: bold;
         font-size: 11pt;
         padding: 0px 2px 0px 2px;
       }
       #toolbar {
+        margin: 0px;
         margin-top: 5px;
         padding: 0px;
+        padding-left: 7px;
         font-size: 10pt;
         font-weight: normal;
       }
@@ -63,7 +66,7 @@
   </head>
   <body>
     <div id="toolbar">
-      <div style="float: right; width: 80px;">
+      <div style="float: right; width: 110px;">
         <select id="save-file-type-selector" onChange="saveData()">
           <option value="">Save</option>
           <option value=".config">config</option>
@@ -74,9 +77,10 @@
           <option value=".yml">yaml</option>
           <option value=".properties">properties</option>
         </select>
+        <a id="help-link" title="Data Preview Help" href="#" onClick="loadHelp()"><span id="help-icon">?</span></a>
       </div>
       <div>
-        <span id="app-icon">🈸</span>
+        <a id="app-link" title="Load data" href="#" onClick="loadDataPreview()"><span id="app-icon">🈸</span></a>
         <a id="title" title="Load data view config" href="#" onclick="loadConfig()">...</a>
         <select id="table-selector" style="display: none;" onChange="loadTableData()">
         </select>
@@ -91,9 +95,11 @@
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
-      let vscode, title, tableSelector, saveFileTypeSelector, 
-        dataUri, viewer, toggleConfig = true, dataTable = '', dataViews = {},
-        tableList = [], viewConfig = {}, viewData = [], rowCounter;
+      let vscode, title, tableSelector, rowCounter, saveFileTypeSelector, 
+        dataUri, dataFileName, 
+        viewer, toggleConfig = true, 
+        dataTable = '', dataViews = {}, tableList = [], 
+        viewConfig = {}, viewData = [];
 
       // check web assembly support. uncomment this for dev debug:
       // console.log(`data.view:supportsWebAssembly(): ${supportsWebAssembly()}`);
@@ -188,6 +194,7 @@
         try {
           // initialize data view vars and UI elements
           dataUri = data.uri;
+          dataFileName = data.fileName;
           dataTable = data.table;
           dataViews = data.views;
           title.innerText = data.fileName;
@@ -387,6 +394,41 @@
           });
         }
         reloadData(dataTable);
+      }
+
+      /**
+       * Loads new data preview, if the currently loaded data.view 
+       * is for a data view config file.
+       * Refreshes current data view otherwise.
+       */
+      function loadDataPreview() {
+        // check if loaded data view is for a view config file.
+        if (dataUri.endsWith('.config') && 
+            viewData.length > 0 &&
+            viewData[0].hasOwnProperty('key') && 
+            viewData[0].hasOwnProperty('value')) {
+          // TODO: extract data file name from config to load that data view
+          const documentUri = dataUri;
+          vscode.postMessage({
+            command: 'loadView',
+            viewName: 'data.preview',
+            uri: documentUri
+          });
+        } else {
+          // reload data for all other files
+          reloadData();
+        }
+      }
+
+      /**
+       * Loads data preview help in a browser window.
+       */
+      function loadHelp() {
+        vscode.postMessage({
+            command: 'loadView',
+            viewName: 'vscode.open',
+            uri: 'https://github.com/RandomFractals/vscode-data-preview#usage-tips'
+          });
       }
 
       /**
