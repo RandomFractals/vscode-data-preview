@@ -234,6 +234,7 @@ export class DataPreview {
    */
   private loadView(viewName: string, uri: string) {
     try {
+      this._logger.debug(`loadView(): ${viewName}`, uri);
       const documentUri: Uri = Uri.parse(uri);
       commands.executeCommand(viewName, documentUri);
     } catch (error) {
