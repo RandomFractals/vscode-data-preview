@@ -16,7 +16,11 @@ export class Logger {
    */
   public logMessage(logLevel: LogLevel, message: string, params: any = null): void{
     if (logLevel >= this.logLevel) {
-      this.log(logLevel, message, params);
+      if (params) {
+        this.log(logLevel, message, params);
+      } else {
+        this.log(logLevel, message);
+      }
     }
   }
 
