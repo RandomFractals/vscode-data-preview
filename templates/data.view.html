@@ -67,7 +67,8 @@
   <body>
     <div id="toolbar">
       <div style="float: right; width: 110px;">
-        <select id="save-file-type-selector" onChange="saveData()">
+        <select id="save-file-type-selector" 
+          title="Save Data View .config or Data" onChange="saveData()">
           <option value="">Save</option>
           <option value=".config">config</option>
           <option value=".csv">csv</option>
@@ -80,15 +81,16 @@
         <a id="help-link" title="Data Preview Help" href="#" onClick="loadHelp()"><span id="help-icon">?</span></a>
       </div>
       <div>
-        <a id="app-link" title="Load data" href="#" onClick="loadDataPreview()"><span id="app-icon">🈸</span></a>
-        <a id="title" title="Load data view config" href="#" onclick="loadConfig()">...</a>
-        <select id="table-selector" style="display: none;" onChange="loadTableData()">
+        <a id="app-link" title="Launch new Data Preview" href="#" onClick="loadDataPreview()"><span id="app-icon">🈸</span></a>
+        <a id="title" title="Load Data View .config" href="#" onclick="loadConfig()">...</a>
+        <select id="table-selector" title="Select Data Table" 
+          style="display: none;" onChange="loadTableData()">
         </select>
         <!-- |
         <a title="Undo" href="#" onclick="undoConfig()"> ↩ </a>
         <a title="Redo" href="#" onclick="redoConfig()"> ↪ </a>
         -->
-        <a id="refresh-data-link" style="color: orange;" title="Refresh data" href="#" onclick="reloadData()"> 🔃 </a>
+        <a id="refresh-data-link" style="color: orange;" title="Refresh Data" href="#" onclick="reloadData()"> 🔃 </a>
         <span id="row-counter"></span>
       </div>
     </div>    
@@ -397,17 +399,15 @@
       }
 
       /**
-       * Loads new data preview, if the currently loaded data.view 
-       * is for a data view config file.
-       * Refreshes current data view otherwise.
+       * Launches new data preview.
        */
       function loadDataPreview() {
+        let documentUri = dataUri; // for new data.preview launch
         // check if loaded data view is for a view config file
         if (dataUri.endsWith('.config') && 
             viewData.length > 0 &&
             viewData[0].hasOwnProperty('key') && 
             viewData[0].hasOwnProperty('value')) {
-          let documentUri = dataUri; // for new data.preview launch
           // extract data file name from config to load that data view
           const dataViewFileName = viewData.find(config => config.key === 'dataFileName');
           const view = viewData.find(config => config.key === 'config.view');
@@ -415,16 +415,13 @@
             // must be our data.view config: swap it out to load that data
             documentUri = dataUri.replace(dataFileName, dataViewFileName.value);
           }
-          // launch new data preview
-          vscode.postMessage({
-            command: 'loadView',
-            viewName: 'data.preview',
-            uri: documentUri
-          });
-        } else {
-          // reload data for all other files
-          reloadData();
-        }
+        } 
+        // launch new data preview
+        vscode.postMessage({
+          command: 'loadView',
+          viewName: 'data.preview',
+          uri: documentUri
+        });
       }
 
       /**
