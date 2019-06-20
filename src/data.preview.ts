@@ -1,7 +1,8 @@
 'use strict';
 
 // vscode imports
-import { 
+import {
+  commands, 
   window,
   workspace, 
   Disposable, 
@@ -207,6 +208,10 @@ export class DataPreview {
           // saves data view config, or filtered json or csv data
           this.saveData(message.fileType, message.data);
           break;
+        case 'loadView':
+          // launch new view
+          this.loadView(message.viewName, message.uri);
+          break;
         case 'loadConfig':
           // prompts to load saved data view config
           this.loadConfig();
@@ -220,6 +225,22 @@ export class DataPreview {
       }
     }, null, this._disposables);
   } // end of initWebview()
+
+  /**
+   * Launches new view with commands.executeCommand interface.
+   * @param viewName View name to launch.
+   * @param uri View document uri parameter.
+   * @see https://code.visualstudio.com/api/extension-guides/command
+   */
+  private loadView(viewName: string, uri: string) {
+    try {
+      const documentUri: Uri = Uri.parse(uri);
+      commands.executeCommand(viewName, documentUri);
+    } catch (error) {
+      this._logger.logMessage(LogLevel.Error, `loadView(${uri}):`, error.message);
+      window.showErrorMessage(`Failed to load '${viewName}' for document: ${uri}! ${error.message}`);
+    }
+  }
 
   /**
    * Creates webview options with local resource roots, etc
