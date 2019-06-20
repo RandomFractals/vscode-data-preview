@@ -402,13 +402,20 @@
        * Refreshes current data view otherwise.
        */
       function loadDataPreview() {
-        // check if loaded data view is for a view config file.
+        // check if loaded data view is for a view config file
         if (dataUri.endsWith('.config') && 
             viewData.length > 0 &&
             viewData[0].hasOwnProperty('key') && 
             viewData[0].hasOwnProperty('value')) {
-          // TODO: extract data file name from config to load that data view
-          const documentUri = dataUri;
+          let documentUri = dataUri; // for new data.preview launch
+          // extract data file name from config to load that data view
+          const dataViewFileName = viewData.find(config => config.key === 'dataFileName');
+          const view = viewData.find(config => config.key === 'config.view');
+          if (view !== undefined && dataViewFileName !== undefined) {
+            // must be our data.view config: swap it out to load that data
+            documentUri = dataUri.replace(dataFileName, dataViewFileName.value);
+          }
+          // launch new data preview
           vscode.postMessage({
             command: 'loadView',
             viewName: 'data.preview',
