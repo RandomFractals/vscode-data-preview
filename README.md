@@ -1,5 +1,6 @@
 # vscode-data-preview
 [![](https://vsmarketplacebadge.apphb.com/version/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
+[![](https://vsmarketplacebadge.apphb.com/trending-monthly/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 
 [VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
