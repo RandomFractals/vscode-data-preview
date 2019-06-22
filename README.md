@@ -7,7 +7,7 @@
 [![](https://vsmarketplacebadge.apphb.com/trending-daily/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 
 
-[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
@@ -35,10 +35,10 @@
 
 - Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming
 
-**Note:** Data Preview 🈸 is already capable of loading a few 10+MB's large data files with 100+K records & extensive list of supported Data Formats you'll be hard pressed to find on 
+**Note:** Data Preview 🈸 is already capable of loading a few 10+MB's large data files with 100+K records & extensive list of [supported Data Formats](https://github.com/RandomFractals/vscode-data-preview#supported-json-config-binary--excel-data-file-formats) you'll be hard pressed to find on 
 [VSCode marketplace](https://marketplace.visualstudio.com/search?term=data&target=VSCode&category=All%20categories&sortBy=Relevance) in one extension. 
 
-See [data/large/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/large) data folder for sample large data files and Data View configs you can try in Data Preview 🈸.
+See [data/large/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/large) data folder for sample large data files and Data View `.config`s you can try in Data Preview 🈸.
 
 # Installation
 
