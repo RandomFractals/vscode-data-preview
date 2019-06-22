@@ -82,6 +82,18 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 3. Drag columns up and down in the left-side `Columns` control panel to reorder displayed columns in the Data Grid.
 4. Uncheck a column in the `Columns` control panel to remove it from a Chart 📊 or Data Grid display.
 
+# Usage Scenarios
+
+Use Data Preview 🈸 to:
+
+- Load large data files for data sorting, filtering, charting and export to `.csv` `.json` || `.yml` text data formats
+- Preview `.properites` and other key-value pairs configuration files to reformat them || find set config option values
+- Generate Arrow & Avro `.shema.json` for metadata text preview of those binary data files
+- Generate `.json` files for text data preview of binary Excel files
+- Preview Excel files and workbooks with multiple workseets without opening Excel
+- Convert `.csv` || `.tsv` data to `.json` || `.yml` format
+- Use built-in Charts 📊 for exploratory data analysis
+
 # Supported JSON, Config, Binary & Excel Data File Formats
 
 ```js
