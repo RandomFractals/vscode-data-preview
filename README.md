@@ -98,6 +98,9 @@ Data File Extension(s) |Data Parsing Library/Method Used | Data Format Specifica
 `.hjson` | [hjson-js](https://github.com/hjson/hjson-js)/[`Hjson.parse()`](https://github.com/hjson/hjson-js#hjsonparsetext-options) | https://hjson.org/
 `.arrow` `.arr` | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/
 `.avro` | [avsc](https://github.com/mtth/avsc)/[`avro.createFileDecoder()`](https://github.com/mtth/avsc/wiki/API#createfiledecoderpath-opts) | https://avro.apache.org/docs/current/
+`.properties` | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#parse) | https://en.wikipedia.org/wiki/.properties
+`.ini` | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file
+`.yml` `.yaml` | [js-yaml](https://github.com/nodeca/js-yaml)/[`yaml.load()`](https://github.com/nodeca/js-yaml#load-string---options-) | https://yaml.org/
 
 See https://github.com/SheetJS/js-xlsx#file-formats for more info on supported `Excel` file formats.
 
