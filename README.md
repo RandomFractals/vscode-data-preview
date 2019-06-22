@@ -96,7 +96,9 @@ Use Data Preview 🈸 to:
 
 # Supported JSON, Config, Binary & Excel Data File Formats
 
-**Note**: you can use sample data and view config files from this repository for testing: [/data/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data)
+**Note**: you can use sample data and view config files from this repository for testing: [/data/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data) 
+
+[Vega datasets](https://github.com/vega/vega-datasets) repository also has a broad collection of sample `.csv` & `.json` array data files you can use for testing Data Preview 🈸
 
 ```js
 {
