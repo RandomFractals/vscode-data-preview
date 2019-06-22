@@ -160,6 +160,24 @@ Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data For
 - sum not null
 - unique
 
+# Recommended VSCode Extensions
+
+Other extensions Data Preview 🈸 replaces, enhances || supplements for working with [supported data file formats](https://github.com/RandomFractals/vscode-data-preview#supported-json-config-binary--excel-data-file-formats) in VSCode:
+
+Extension | Description
+--- | ---
+[Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) | View Excel spreadsheets and CSV files
+[Avro Viewer](https://marketplace.visualstudio.com/items?itemName=romiogaku.vscode-avro-viewer) | `.avro` file viewer 
+[avro-idl](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.avro) | Avro IDL Syntax Highlighter
+[DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv) | `.env` Syntax Highlighter
+[Ini for VSCode](https://marketplace.visualstudio.com/items?itemName=DavidWang.ini-for-vscode) | Provides outline view and section folding for INI files
+[Hjson](https://marketplace.visualstudio.com/items?itemName=laktak.hjson) | Hjson language syntax support
+[JSON5 syntax](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-json5) | Adds syntax highlighting of JSON5 files
+[YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) | YAML Language Support by Red Hat, with built-in Kubernetes and Kedge syntax support
+[docs-yaml](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-yaml) | YAML schema validation and auto-completion for docs.microsoft.com authoring
+[YAML to JSON](https://marketplace.visualstudio.com/items?itemName=ahebrank.yaml2json) | Convert YAML from clipboard or current document/selection to JSON and vice versa
+[Properties To Yaml](https://marketplace.visualstudio.com/items?itemName=tanaka-x.prop2yaml) | Convert properties to yaml
+
 # Dev Log
 
 See [#DataPreview 🈸 tag on Twitter](https://twitter.com/hashtag/datapreview?f=tweets&vertical=default&src=hash) for the latest and greatest updates on this vscode extension and what's in store next.
