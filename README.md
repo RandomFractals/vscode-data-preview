@@ -138,6 +138,12 @@ Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data For
 - Sunburst
 - Tree Map
 
+## Supported Filter Functions
+
+- `<, <=, ==, !=, >, >=` for dates and number columns/fields
+- `==, !=, contains, in, not in, begins with, ends with` for string fields and dictionaries
+- `&, |, and, or, ==, !=` for bolean fields 
+
 ## Supported Aggregate Functions
 
 - any
