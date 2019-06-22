@@ -91,16 +91,16 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
   "group": "navigation"
 }
 ```
-Data File Extension(s) |Data Parsing Library/Method Used | Data Format Specification
---- | --- | ---
-`.json` | `JSON.parse()` | https://json.org/
-`.json5` | [json5](https://github.com/json5/json5)/[`JSON5.parse()`](https://github.com/json5/json5#json5parse) | https://json5.org/
-`.hjson` | [hjson-js](https://github.com/hjson/hjson-js)/[`Hjson.parse()`](https://github.com/hjson/hjson-js#hjsonparsetext-options) | https://hjson.org/
-`.arrow` `.arr` | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/
-`.avro` | [avsc](https://github.com/mtth/avsc)/[`avro.createFileDecoder()`](https://github.com/mtth/avsc/wiki/API#createfiledecoderpath-opts) | https://avro.apache.org/docs/current/
-`.properties` | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#parse) | https://en.wikipedia.org/wiki/.properties
-`.ini` | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file
-`.yml` `.yaml` | [js-yaml](https://github.com/nodeca/js-yaml)/[`yaml.load()`](https://github.com/nodeca/js-yaml#load-string---options-) | https://yaml.org/
+Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data Format Specification
+--- | --- | --- | ---
+`.json` `.config` | text | `JSON.parse()` | https://json.org/
+`.json5` | text | [json5](https://github.com/json5/json5)/[`JSON5.parse()`](https://github.com/json5/json5#json5parse) | https://json5.org/
+`.hjson` | text | [hjson-js](https://github.com/hjson/hjson-js)/[`Hjson.parse()`](https://github.com/hjson/hjson-js#hjsonparsetext-options) | https://hjson.org/
+`.arrow` `.arr` | binary | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/
+`.avro` | binary | [avsc](https://github.com/mtth/avsc)/[`avro.createFileDecoder()`](https://github.com/mtth/avsc/wiki/API#createfiledecoderpath-opts) | https://avro.apache.org/docs/current/
+`.properties` `.env` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#parse) | https://en.wikipedia.org/wiki/.properties
+`.ini` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file
+`.yml` `.yaml` | text | [js-yaml](https://github.com/nodeca/js-yaml)/[`yaml.load()`](https://github.com/nodeca/js-yaml#load-string---options-) | https://yaml.org/
 
 See https://github.com/SheetJS/js-xlsx#file-formats for more info on supported `Excel` file formats.
 
