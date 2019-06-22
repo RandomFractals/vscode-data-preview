@@ -91,6 +91,11 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
   "group": "navigation"
 }
 ```
+**Note:** `.json` `.config` & `.yml` configuration files that don't contain array data are converted to
+flat properties key/value pairs Object and displayed in a Property Grid Data View mode. 
+See [json.utils.ts](https://github.com/RandomFractals/vscode-data-preview/blob/master/src/utils/json.utils.ts)
+for more info.
+
 Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data Format Specification
 --- | --- | --- | ---
 `.json` `.config` | text | `JSON.parse()` | https://json.org/
