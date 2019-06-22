@@ -96,6 +96,8 @@ Use Data Preview 🈸 to:
 
 # Supported JSON, Config, Binary & Excel Data File Formats
 
+**Note**: you can use sample data and view config files from this repository for testing: [/data/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data)
+
 ```js
 {
   "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|env|config|properties|ini|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
@@ -121,7 +123,6 @@ Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data For
 `.csv` `.tsv` `.txt` `.tab` | text | [perspective](https://github.com/finos/perspective/)/[`perspectiveViewer.load(text)`](https://github.com/finos/perspective/tree/master/packages/perspective-viewer#module_perspective-viewer..PerspectiveViewer+load) | https://en.wikipedia.org/wiki/Comma-separated_values https://en.wikipedia.org/wiki/Tab-separated_values
 `.dif` `.slk` `.prn` `.xml` `.html` | text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.readFile(text)`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on text `Excel` file formats
 `.ods` `.xls` `.xlsb` `.xlsx` `.xlsm` | binary | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.readFile(binary)`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on binary `Excel` file formats
-
 
 ![Data Preview Data](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-data.png?raw=true 
 "Data Preview Data")
