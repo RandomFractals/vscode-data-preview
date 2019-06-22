@@ -35,8 +35,10 @@
 
 - Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming
 
-**Note:** Data Preview 🈸 is already capable of loading 10+MB's large data files with 100+K records & extensive list of supported Data Formats you'll be hard pressed to find on 
-[VSCode marketplace](https://marketplace.visualstudio.com/search?term=data&target=VSCode&category=All%20categories&sortBy=Relevance) in one extension.
+**Note:** Data Preview 🈸 is already capable of loading a few 10+MB's large data files with 100+K records & extensive list of supported Data Formats you'll be hard pressed to find on 
+[VSCode marketplace](https://marketplace.visualstudio.com/search?term=data&target=VSCode&category=All%20categories&sortBy=Relevance) in one extension. 
+
+See [data/large/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/large) data folder for sample large data files and Data View configs you can try in Data Preview 🈸.
 
 # Installation
 
@@ -96,9 +98,18 @@ Use Data Preview 🈸 to:
 
 # Supported JSON, Config, Binary & Excel Data File Formats
 
-**Note**: you can use sample data and view config files from this repository for testing: [/data/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data) 
+**Tip**: try sample data and Data View `.config` files from this repository [data/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data) folders: 
+[`data/arrow`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/arrow) 
+[`data/avro`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/avro)
+[`data/config`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/config)
+[`data/excel`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/excel)
+[`data/json`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/json)
+[`data/yaml`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/yaml)
+[`data/large`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/large)
 
-[Vega datasets](https://github.com/vega/vega-datasets) repository also has a broad collection of sample `.csv` & `.json` array data files you can use for testing Data Preview 🈸
+[Vega datasets](https://github.com/vega/vega-datasets) repository also has a broad collection of sample `.csv` & `.json` array data files you can try in Data Preview 🈸
+
+## Data Preivew 🈸 Files Matching Rules
 
 ```js
 {
@@ -107,6 +118,9 @@ Use Data Preview 🈸 to:
   "group": "navigation"
 }
 ```
+
+## Data Preivew 🈸 Files Loading Details
+
 **Note:** `.json` `.config` & `.yml` configuration files that don't contain array data are converted to
 flat properties key/value pairs Object and displayed in a Property Grid Data View mode. 
 See [json.utils.ts](https://github.com/RandomFractals/vscode-data-preview/blob/master/src/utils/json.utils.ts)
