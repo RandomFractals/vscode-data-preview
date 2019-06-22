@@ -86,11 +86,16 @@ Data Preview 🈸 example using `.dark` theme with `d3fc` charts config, viewing
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(json|arrow|arr|avro|env|config|properties|ini|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+  "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|env|config|properties|ini|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
 ```
+Data File Extension(s) |Data Parsing Library Used | Data Format Specification
+--- | --- | ---
+`.json` | `JSON.parse()` | https://json.org/
+`.json5` | [json5](https://github.com/json5/json5) | https://json5.org/
+`.hjson` | [hjson-js](https://github.com/hjson/hjson-js) | https://hjson.org/
 
 See https://github.com/SheetJS/js-xlsx#file-formats for more info on supported `Excel` file formats.
 
