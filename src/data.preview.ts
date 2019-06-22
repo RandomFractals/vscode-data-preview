@@ -433,12 +433,12 @@ export class DataPreview {
       case '.xlsb':
       case '.xlsx':
       case '.xlsm':
-      case '.slk':
       case '.ods':
-      case '.prn':
         data = this.getBinaryExcelData(dataFilePath);
         break;
       case '.dif':
+      case '.slk':
+      case '.prn':
       case '.xml':
       case '.html':
         data = this.getTextExcelData(dataFilePath);
