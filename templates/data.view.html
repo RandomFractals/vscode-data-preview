@@ -30,6 +30,9 @@
         font-size: 11pt;
         padding: 0px 2px 0px 2px;
       }
+      #help-icon {
+        margin-left: 5px;
+      }
       #toolbar {
         margin: 0px;
         margin-top: 5px;
@@ -47,6 +50,18 @@
       #title {
         margin: 0px;
         padding: 0px;
+      }
+      #row-counter {
+        padding-right: 10px;
+      }
+      #data-url-label {
+        font-size: 10pt;
+      }
+      #data-url-input {
+        width: 360px;
+        color: var(--vscode-editor-foreground);
+        background-color: var(--vscode-editor-background);
+        border: 1px solid #999;
       }
       #data-viewer {
         position: absolute;
@@ -70,7 +85,7 @@
   </head>
   <body>
     <div id="toolbar">
-      <div style="float: right; width: 110px;">
+      <div style="float: right; width: 120px;">
         <select id="save-file-type-selector" 
           title="Save Data View .config or Data" onChange="saveData()">
           <option value="">Save</option>
@@ -96,6 +111,10 @@
         -->
         <a id="refresh-data-link" style="color: orange;" title="Refresh Data" href="#" onclick="reloadData()"> 🔃 </a>
         <span id="row-counter"></span>
+        <!--
+        <label id="data-url-label" for="data-url-input">| new data url:</label>
+        -->
+        <input id="data-url-input" type="text" title="Enter new Data Url to Preview" />
       </div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
