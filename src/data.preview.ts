@@ -566,7 +566,7 @@ export class DataPreview {
         // append sheet name to generated json data file
         jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
       }
-      jsonUtils.createJsonFile(jsonFilePath, dataRows);
+      fileUtils.createJsonFile(jsonFilePath, dataRows);
       this.logDataStats(dataSchema, dataRows);
     }
     return dataRows;
@@ -606,8 +606,8 @@ export class DataPreview {
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
 
     // create data json and schema.json for text arrow data preview
-    jsonUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
-    jsonUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
+    fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+    fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
     this.logDataStats(dataTable.schema, dataRows);
     return dataRows;
   } // end of getArrowData()
@@ -625,8 +625,8 @@ export class DataPreview {
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
       // create data json and schema.json files for text data preview
-      jsonUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
-      jsonUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
+      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
       this.logDataStats(dataSchema, dataRows);
       // update web view: flatten data rows for now since Avro format has hierarchical data structure
       dataRows = dataRows.map(rowObject => jsonUtils.flattenObject(rowObject));

@@ -24,3 +24,26 @@ export function readDataFile(dataFilePath: string, encoding:string = null): any 
   }
   return data;
 }
+
+/**
+ * Creates JSON data or schema.json file.
+ * @param jsonFilePath Json file path.
+ * @param jsonData Json file data.
+ */
+export function createJsonFile(jsonFilePath: string, jsonData: any): void {
+  if (!fs.existsSync(jsonFilePath)) {
+    const jsonString: string = JSON.stringify(jsonData, null, 2); 
+    try {
+      // TODO: rework this to async file write later
+      const jsonFileWriteStream: fs.WriteStream = fs.createWriteStream(jsonFilePath, {encoding: 'utf8'});
+      jsonFileWriteStream.write(jsonString);
+      jsonFileWriteStream.end();
+      logger.debug('createJsonFile(): saved:', jsonFilePath);
+    } catch (error) {
+      const errorMessage: string = `Failed to save file: ${jsonFilePath}`;
+      logger.logMessage(LogLevel.Error, 'crateJsonFile():', errorMessage);
+      window.showErrorMessage(errorMessage);
+    }
+  }
+}
+
