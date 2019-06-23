@@ -33,6 +33,7 @@ import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {previewManager} from './preview.manager';
 import {Template} from './template.manager';
+import * as fileUtils from './utils/file.utils';
 import * as jsonUtils from './utils/json.utils';
 
 /**
@@ -170,6 +171,22 @@ export class DataPreview {
     this.initWebview(viewType, viewColumn);
     this.configure();
   } // end of constructor()
+
+  /**
+   * Disposes this data preview resources.
+   */
+  public dispose() {
+    previewManager.remove(this);
+    this._panel.dispose();
+    while (this._disposables.length) {
+      const item = this._disposables.pop();
+      if (item) {
+        item.dispose();
+      }
+    }
+  }
+
+  /*---------------------- Data Preview Initialization Methods ---------------------------------*/
 
   /**
    * Initializes data preview webview panel.
@@ -404,6 +421,9 @@ export class DataPreview {
     }
   } // end of loadConfig()
 
+
+  /*------------------------------ Get/Save Data Methods ---------------------------------------*/
+
   /**
    * Loads actual local data file content.
    * @param filePath Local data file path.
@@ -427,7 +447,7 @@ export class DataPreview {
       case '.tsv':
       case '.txt':
       case '.tab':
-        data = fs.readFileSync(dataFilePath, 'utf8'); // file encoding to read data as string
+        data = fileUtils.readDataFile(dataFilePath, 'utf8'); // file encoding to read data as string
         break;
       case '.xls':
       case '.xlsb':
@@ -558,7 +578,7 @@ export class DataPreview {
    * @returns Array of row objects.
    */
   private getArrowData(dataFilePath: string): any[] {
-    const dataBuffer = fs.readFileSync(dataFilePath);
+    const dataBuffer: Buffer = fileUtils.readDataFile(dataFilePath);
     const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
     const dataRows: Array<any> = Array(dataTable.length);
     const fields = dataTable.schema.fields.map(field => field.name);
@@ -621,7 +641,7 @@ export class DataPreview {
    * @see https://github.com/lorenwest/node-config/wiki/Configuration-Files
    */
   private getConfigData(dataFilePath: string): any {
-    let data: any = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    let data: any = JSON.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
     return jsonUtils.convertJsonData(data);
   }
 
@@ -631,7 +651,7 @@ export class DataPreview {
    * @see http://json.org/
    */
   private getJsonData(dataFilePath: string): any {
-    let data: any = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    let data: any = JSON.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
     return jsonUtils.convertJsonData(data);
   }
 
@@ -641,7 +661,7 @@ export class DataPreview {
    * @see https://json5.org
    */
   private getJson5Data(dataFilePath: string): any {
-    let data: any = json5.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    let data: any = json5.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
     return jsonUtils.convertJsonData(data);
   }
 
@@ -651,7 +671,7 @@ export class DataPreview {
    * @see https://github.com/hjson/hjson-js
    */
   private getHJsonData(dataFilePath: string): any {
-    let data: any = hjson.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    let data: any = hjson.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
     return jsonUtils.convertJsonData(data);
   }
 
@@ -660,7 +680,7 @@ export class DataPreview {
    * @param dataFilePath YAML data file path.
    */
   private getYamlData(dataFilePath: string): any {
-    let data: any = yaml.load(fs.readFileSync(dataFilePath, 'utf8'));
+    let data: any = yaml.load(fileUtils.readDataFile(dataFilePath, 'utf8'));
     return jsonUtils.convertJsonData(data);
   }
 
@@ -669,7 +689,7 @@ export class DataPreview {
    * @param dataFilePath Properties data file path.
    */
   private getPropertiesData(dataFilePath: string): any {
-    const dataString: string = fs.readFileSync(dataFilePath, 'utf8');
+    const dataString: string = fileUtils.readDataFile(dataFilePath, 'utf8');
     const data: any = jsonUtils.convertJsonData(
       props.parse(dataString, {sections: true}));
     return data;
@@ -681,7 +701,7 @@ export class DataPreview {
    * @see https://github.com/gagle/node-properties#ini
    */
   private getIniData(dataFilePath: string): any {
-    const dataString: string = fs.readFileSync(dataFilePath, 'utf8');
+    const dataString: string = fileUtils.readDataFile(dataFilePath, 'utf8');
     const data: any = jsonUtils.convertJsonData(
       props.parse(dataString, {sections: true, comments: [';', '#']})); // NOTE: some INI files consider # as a comment
     return data;
@@ -803,19 +823,8 @@ export class DataPreview {
     }
   } // end of saveData()
 
-  /**
-   * Disposes this preview resources.
-   */
-  public dispose() {
-    previewManager.remove(this);
-    this._panel.dispose();
-    while (this._disposables.length) {
-      const item = this._disposables.pop();
-      if (item) {
-        item.dispose();
-      }
-    }
-  }
+
+  /*----------------------------- Data Preview Properties ----------------------------*/
 
   /**
    * Gets preview panel visibility status.
