@@ -101,7 +101,7 @@
       </div>
       <div>
         <a id="app-link" title="Launch new Data Preview" href="#" onClick="loadDataPreview()"><span id="app-icon">🈸</span></a>
-        <a id="title" title="Load Data View .config" href="#" onclick="loadConfig()">...</a>
+        <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">...</a>
         <select id="table-selector" title="Select Data Table" 
           style="display: none;" onChange="loadTableData()">
         </select>
@@ -114,14 +114,15 @@
         <!--
         <label id="data-url-label" for="data-url-input">| new data url:</label>
         -->
-        <input id="data-url-input" type="text" title="Enter new Data Url to Preview" />
+        <input id="data-url-input" type="text" title="Enter new Data Url to Preview" 
+          onKeyPress="loadDataPreviewForUrl()" />
       </div>
     </div>    
     <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
       let vscode, title, tableSelector, rowCounter, saveFileTypeSelector, 
-        dataUri, dataFileName, 
+        dataUrlInput, dataUri, dataFileName, 
         viewer, toggleConfig = true, 
         dataTable = '', dataViews = {}, tableList = [], 
         viewConfig = {}, viewData = [];
@@ -158,6 +159,7 @@
         title = document.getElementById('title');
         tableSelector = document.getElementById('table-selector');
         rowCounter = document.getElementById('row-counter');
+        dataUrlInput = document.getElementById('data-url-input');
         saveFileTypeSelector = document.getElementById('save-file-type-selector');
         viewer = document.getElementsByTagName('perspective-viewer')[0];
         try {
@@ -445,6 +447,23 @@
           viewName: 'data.preview',
           uri: documentUri
         });
+      }
+
+      /**
+       * Launches new data preview for entered url in data url input textbox.
+       */
+      function loadDataPreviewForUrl(e) {
+        if (!e) e = window.event;
+        const keyCode = e.keyCode || e.which;
+        if (keyCode == '13') {
+          const url = dataUrlInput.value;
+          // launch new data preview
+          vscode.postMessage({
+            command: 'loadView',
+            viewName: 'data.preview',
+            uri: url
+          });
+        }
       }
 
       /**
