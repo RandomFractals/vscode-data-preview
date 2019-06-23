@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
-import {window} from 'vscode';
+import {window, workspace, Uri} from 'vscode';
 
 const logger: Logger = new Logger(`file.utils:`, config.logLevel);
 
@@ -10,17 +10,27 @@ const logger: Logger = new Logger(`file.utils:`, config.logLevel);
  * Reads local data file or fetches public data source data.
  * @param dataFilePath Data file path or public data source url.
  * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
+ * TODO: change this to read data async later
  */
 export function readDataFile(dataFilePath: string, encoding:string = null): any {
-  let data: any;
+  let data: any = '';
+  let isRemoteData: boolean = dataFilePath.startsWith('http://') || dataFilePath.startsWith('https://');
   logger.debug('readDataFile(): ', dataFilePath);
-  if (!dataFilePath.startsWith('http://') && !dataFilePath.startsWith('https://')) {
+  if (isRemoteData) {
+    // TODO: fetch remote data with https://github.com/d3/d3-fetch
+    window.showInformationMessage('Remote data loading coming soon!');
+  } else if (fs.existsSync(dataFilePath)) {
     // read local data file via fs read file api
-    // TODO: change this to read data async later
     data = fs.readFileSync(dataFilePath, encoding);
   } else {
-    // TODO: fetch remote data with https://github.com/d3/d3-fetch
-    data = '';
+    // try to find requested data file(s) in open workspace
+    workspace.findFiles(`**/${dataFilePath}`).then(files => {
+      if (files.length > 0 && fs.existsSync(files[0].fsPath)) {
+        data = fs.readFileSync(dataFilePath, encoding);
+      } else {
+        window.showErrorMessage(`${dataFilePath} file doesn't exist!`);
+      }
+    });
   }
   return data;
 }

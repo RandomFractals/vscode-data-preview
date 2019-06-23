@@ -244,19 +244,36 @@ export class DataPreview {
   } // end of initWebview()
 
   /**
-   * Launches new view with commands.executeCommand interface.
+   * Launches new view via commands.executeCommand interface.
    * @param viewName View name to launch.
-   * @param uri View document uri parameter.
+   * @param url View document url parameter.
    * @see https://code.visualstudio.com/api/extension-guides/command
    */
-  private loadView(viewName: string, uri: string) {
+  private loadView(viewName: string, url: string) {
     try {
-      this._logger.debug(`loadView(): ${viewName}`, uri);
-      const documentUri: Uri = Uri.parse(uri);
-      commands.executeCommand(viewName, documentUri);
+      this._logger.debug(`loadView(): ${viewName}`, url);
+      let isRemoteUrl: boolean = url.startsWith('http://') || url.startsWith('https://');
+      if (isRemoteUrl || fs.existsSync(url)) {
+        // create uri for new view
+        const documentUri: Uri = Uri.parse(url);
+        // launch requested view command
+        commands.executeCommand(viewName, documentUri);
+      } else {
+        // try to find requested data file(s) in open workspace
+        workspace.findFiles(`**/${url}`).then(files => {
+          if (files.length > 0 && fs.existsSync(files[0].fsPath)) {
+            // pick the 1st matching file from the workspace
+            const dataUri: Uri = Uri.parse(files[0].fsPath);
+            // launch requested view command
+            commands.executeCommand(viewName, dataUri);
+          } else {
+            window.showErrorMessage(`${url} file doesn't exist in this workspace!`);
+          }
+        });
+      }
     } catch (error) {
-      this._logger.logMessage(LogLevel.Error, `loadView(${uri}):`, error.message);
-      window.showErrorMessage(`Failed to load '${viewName}' for document: ${uri}! ${error.message}`);
+      this._logger.logMessage(LogLevel.Error, `loadView(${url}):`, error.message);
+      window.showErrorMessage(`Failed to load '${viewName}' for document: ${url}! ${error.message}`);
     }
   }
 
