@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 large JSON array/config, YAML, Apache Arrow, Avro & Excel data files",
-  "version": "1.20.0",
+  "version": "1.19.1",
   "icon": "images/data-preview.png",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
@@ -290,8 +290,12 @@
       "properties": {
         "data.preview.theme": {
           "type": "string",
-          "default": "",
-          "description": "Data Preview Theme: blank for light || '.dark' for dark theme data previews display."
+          "enum": [
+            "light",
+            "dark"
+          ],
+          "default": "dark",
+          "description": "Data Preview UI Theme: light || dark."
         },
         "data.preview.charts.plugin": {
           "type": "string",

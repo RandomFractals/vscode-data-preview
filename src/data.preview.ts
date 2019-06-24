@@ -904,7 +904,8 @@ export class DataPreview {
    * see package.json 'configuration' section for more info.
    */
   get theme(): string {
-    return <string>workspace.getConfiguration('data.preview').get('theme');
+    const uiTheme: string = <string>workspace.getConfiguration('data.preview').get('theme');
+    return (uiTheme === 'dark' || uiTheme === '.dark') ? '.dark': ''; // blank for light theme css loading
   }
 
   /**
