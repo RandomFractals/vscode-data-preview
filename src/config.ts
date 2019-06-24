@@ -4,35 +4,7 @@ import { LogLevel } from "./logger";
 export const logLevel: LogLevel = LogLevel.Info; // change to .Debug for ext. dev debug
 
 // supported data file extensions
-export const supportedDataFiles: string[] = [
-  '.json',
-  '.json5',
-  '.hjson',
-  '.arrow',
-  '.arr',
-  '.avro',
-  '.parquet',
-  '.parq',
-  '.config',
-  '.env',
-  '.properties',
-  '.ini',
-  '.yaml',
-  '.yml',
-  '.csv',
-  '.tsv',
-  '.txt',
-  '.tab',
-  '.ods',
-  '.prn',
-  '.slk',
-  '.xls',
-  '.xlsb',
-  '.xlsx',
-  '.xlsm',
-  '.xml',
-  '.html'
-];
+export const supportedDataFiles: RegExp = /.*\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/;
 
 // arrow to data view type mappings
 // see: https://github.com/finos/perspective/blob/master/packages/perspective/src/js/utils.js

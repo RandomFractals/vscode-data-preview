@@ -14,15 +14,20 @@ const logger: Logger = new Logger(`file.utils:`, config.logLevel);
  */
 export function readDataFile(dataFilePath: string, encoding:string = null): any {
   let data: any = '';
-  let isRemoteData: boolean = dataFilePath.startsWith('http://') || dataFilePath.startsWith('https://');
+  const fileName: string = path.basename(dataFilePath);
   logger.debug('readDataFile(): ', dataFilePath);
-  if (isRemoteData) {
+  if (!config.supportedDataFiles.test(fileName)) {
+    window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
+  }
+  else if (dataFilePath.startsWith('http://') || dataFilePath.startsWith('https://')) {
     // TODO: fetch remote data with https://github.com/d3/d3-fetch
     window.showInformationMessage('Remote data loading coming soon!');
-  } else if (fs.existsSync(dataFilePath)) {
+  } 
+  else if (fs.existsSync(dataFilePath)) {
     // read local data file via fs read file api
     data = fs.readFileSync(dataFilePath, encoding);
-  } else {
+  } 
+  else {
     // try to find requested data file(s) in open workspace
     workspace.findFiles(`**/${dataFilePath}`).then(files => {
       if (files.length > 0 && fs.existsSync(files[0].fsPath)) {

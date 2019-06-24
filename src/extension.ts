@@ -130,10 +130,9 @@ function createDataPreviewCommand(
  */
 function isDataFile(document: TextDocument): boolean {
   const fileName: string = path.basename(document.uri.fsPath);
-  const fileExt: string = fileName.substr(fileName.lastIndexOf('.'));
   logger.debug('isDataFile(): document:', document);
   logger.debug('isDataFile(): file:', fileName);
-  return config.supportedDataFiles.findIndex(dataFileExt => dataFileExt === fileExt) >= 0;
+  return config.supportedDataFiles.test(fileName);
 }
 
 /**
