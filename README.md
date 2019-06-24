@@ -24,6 +24,7 @@
 - Binary Data files `.json` generation for Arrow, Avro & `Excel` formats for Text Data Preview
 - Property Grid display for `.json` `.config` `.env` `.properties` `.ini` & `.yml` configuration files
 - Open Data Preview on Side option for slim data || config files
+- Quick Launch new Data Preivew input box for data files in open workspace
 - Save Filtered Data Grid || Chart 📊 Data in `.csv` `.json(s)` `.yml` & `.properties` formats
 - Save & Load Data View `.config` options
 - Dark & Light Data Preview 🈸 Panel Themes
