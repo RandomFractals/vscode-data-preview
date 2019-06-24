@@ -41,6 +41,13 @@
         font-size: 10pt;
         font-weight: normal;
       }
+      #toolbar-left {
+        width: calc(100% - 120);
+      }
+      #toolbar-right {
+        float: right; 
+        width: 120px;
+      }
       #toolbar a {
         color: dodgerblue;
         text-decoration: none;
@@ -58,7 +65,7 @@
         font-size: 10pt;
       }
       #data-url-input {
-        width: 360px;
+        width: 200px;
         color: var(--vscode-editor-foreground);
         background-color: var(--vscode-editor-background);
         border: 1px solid #999;
@@ -85,7 +92,7 @@
   </head>
   <body>
     <div id="toolbar">
-      <div style="float: right; width: 120px;">
+      <div id="toolbar-right">
         <select id="save-file-type-selector" 
           title="Save Data View .config or Data" onChange="saveData()">
           <option value="">Save</option>
@@ -99,7 +106,7 @@
         </select>
         <a id="help-link" title="Data Preview Help" href="#" onClick="loadHelp()"><span id="help-icon">?</span></a>
       </div>
-      <div>
+      <div id="toolbar-left">
         <a id="app-link" title="Launch new Data Preview" href="#" onClick="loadDataPreview()"><span id="app-icon">🈸</span></a>
         <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">...</a>
         <select id="table-selector" title="Select Data Table" 
