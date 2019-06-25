@@ -534,9 +534,8 @@ export class DataPreview {
    * @returns Array of row objects.
    */  
   private getBinaryExcelData(dataFilePath: string): any[] {
-    // load Excel workbook
-    const workbook: xlsx.WorkBook = xlsx.readFile(dataFilePath, {
-      type: 'binary',
+    const dataBuffer: Buffer = fileUtils.readDataFile(dataFilePath);
+    const workbook: xlsx.WorkBook = xlsx.read(dataBuffer, {
       cellDates: true,
     });
     return this.getExcelData(workbook);

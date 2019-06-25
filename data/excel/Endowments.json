@@ -1,0 +1,6255 @@
+[
+  {
+    "Rank": 1,
+    "Institution": "Harvard University",
+    "State": "MA",
+    "2007 Endowment": 34634906,
+    "2006 Endowment": 28915706,
+    "% Change": 0.198
+  },
+  {
+    "Rank": 2,
+    "Institution": "Yale University",
+    "State": "CT",
+    "2007 Endowment": 22530200,
+    "2006 Endowment": 18030600,
+    "% Change": 0.25
+  },
+  {
+    "Rank": 3,
+    "Institution": "Stanford University",
+    "State": "CA",
+    "2007 Endowment": 17164836,
+    "2006 Endowment": 14084676,
+    "% Change": 0.219
+  },
+  {
+    "Rank": 4,
+    "Institution": "Princeton University",
+    "State": "NJ",
+    "2007 Endowment": 15787200,
+    "2006 Endowment": 13044900,
+    "% Change": 0.21
+  },
+  {
+    "Rank": 5,
+    "Institution": "University of Texas System",
+    "State": "TX",
+    "2007 Endowment": 15613672,
+    "2006 Endowment": 13234848,
+    "% Change": 0.18
+  },
+  {
+    "Rank": 6,
+    "Institution": "Massachusetts Institute of Technology",
+    "State": "MA",
+    "2007 Endowment": 9980410,
+    "2006 Endowment": 8368066,
+    "% Change": 0.193
+  },
+  {
+    "Rank": 7,
+    "Institution": "Columbia University",
+    "State": "NY",
+    "2007 Endowment": 7149803,
+    "2006 Endowment": 5937814,
+    "% Change": 0.204
+  },
+  {
+    "Rank": 8,
+    "Institution": "University of Michigan",
+    "State": "MI",
+    "2007 Endowment": 7089830,
+    "2006 Endowment": 5652262,
+    "% Change": 0.254
+  },
+  {
+    "Rank": 9,
+    "Institution": "University of Pennsylvania",
+    "State": "PA",
+    "2007 Endowment": 6635187,
+    "2006 Endowment": 5313268,
+    "% Change": 0.249
+  },
+  {
+    "Rank": 10,
+    "Institution": "The Texas A&M University System and Foundations",
+    "State": "TX",
+    "2007 Endowment": 6590300,
+    "2006 Endowment": 5642978,
+    "% Change": 0.168
+  },
+  {
+    "Rank": 11,
+    "Institution": "Northwestern University",
+    "State": "IL",
+    "2007 Endowment": 6503292,
+    "2006 Endowment": 5140668,
+    "% Change": 0.265
+  },
+  {
+    "Rank": 12,
+    "Institution": "University of California",
+    "State": "CA",
+    "2007 Endowment": 6439436,
+    "2006 Endowment": 5541930,
+    "% Change": 0.162
+  },
+  {
+    "Rank": 13,
+    "Institution": "University of Chicago",
+    "State": "IL",
+    "2007 Endowment": 6204189,
+    "2006 Endowment": 4867003,
+    "% Change": 0.275
+  },
+  {
+    "Rank": 14,
+    "Institution": "University of Notre Dame",
+    "State": "IN",
+    "2007 Endowment": 5976973,
+    "2006 Endowment": 4436624,
+    "% Change": 0.347
+  },
+  {
+    "Rank": 15,
+    "Institution": "Duke University",
+    "State": "NC",
+    "2007 Endowment": 5910280,
+    "2006 Endowment": 4497718,
+    "% Change": 0.314
+  },
+  {
+    "Rank": 16,
+    "Institution": "Washington University",
+    "State": "MO",
+    "2007 Endowment": 5567843,
+    "2006 Endowment": 4684737,
+    "% Change": 0.189
+  },
+  {
+    "Rank": 17,
+    "Institution": "Emory University",
+    "State": "GA",
+    "2007 Endowment": 5561743,
+    "2006 Endowment": 4870019,
+    "% Change": 0.142
+  },
+  {
+    "Rank": 18,
+    "Institution": "Cornell University",
+    "State": "NY",
+    "2007 Endowment": 5424733,
+    "2006 Endowment": 4321199,
+    "% Change": 0.255
+  },
+  {
+    "Rank": 19,
+    "Institution": "Rice University",
+    "State": "TX",
+    "2007 Endowment": 4669544,
+    "2006 Endowment": 3986664,
+    "% Change": 0.171
+  },
+  {
+    "Rank": 20,
+    "Institution": "University of Virginia",
+    "State": "VA",
+    "2007 Endowment": 4370209,
+    "2006 Endowment": 3618172,
+    "% Change": 0.208
+  },
+  {
+    "Rank": 21,
+    "Institution": "Dartmouth College",
+    "State": "NH",
+    "2007 Endowment": 3760234,
+    "2006 Endowment": 3092094,
+    "% Change": 0.216
+  },
+  {
+    "Rank": 22,
+    "Institution": "University of Southern California",
+    "State": "CA",
+    "2007 Endowment": 3715272,
+    "2006 Endowment": 3065935,
+    "% Change": 0.212
+  },
+  {
+    "Rank": 23,
+    "Institution": "Vanderbilt University",
+    "State": "TN",
+    "2007 Endowment": 3487500,
+    "2006 Endowment": 2946392,
+    "% Change": 0.184
+  },
+  {
+    "Rank": 24,
+    "Institution": "University of Minnesota",
+    "State": "MN",
+    "2007 Endowment": 2804466,
+    "2006 Endowment": 2224308,
+    "% Change": 0.261
+  },
+  {
+    "Rank": 25,
+    "Institution": "Johns Hopkins University",
+    "State": "MD",
+    "2007 Endowment": 2800377,
+    "2006 Endowment": 2350749,
+    "% Change": 0.191
+  },
+  {
+    "Rank": 26,
+    "Institution": "Brown University",
+    "State": "RI",
+    "2007 Endowment": 2780798,
+    "2006 Endowment": 2290646,
+    "% Change": 0.214
+  },
+  {
+    "Rank": 27,
+    "Institution": "Ohio State University and Foundation",
+    "State": "OH",
+    "2007 Endowment": 2338103,
+    "2006 Endowment": 1996839,
+    "% Change": 0.171
+  },
+  {
+    "Rank": 28,
+    "Institution": "University of Pittsburgh",
+    "State": "PA",
+    "2007 Endowment": 2254379,
+    "2006 Endowment": 1802859,
+    "% Change": 0.25
+  },
+  {
+    "Rank": 29,
+    "Institution": "University of Washington",
+    "State": "WA",
+    "2007 Endowment": 2184374,
+    "2006 Endowment": 1794370,
+    "% Change": 0.217
+  },
+  {
+    "Rank": 30,
+    "Institution": "University of North Carolina at Chapel Hill and Foundations",
+    "State": "NC",
+    "2007 Endowment": 2164444,
+    "2006 Endowment": 1638601,
+    "% Change": 0.321
+  },
+  {
+    "Rank": 31,
+    "Institution": "New York University",
+    "State": "NY",
+    "2007 Endowment": 2161800,
+    "2006 Endowment": 1774700,
+    "% Change": 0.218
+  },
+  {
+    "Rank": 32,
+    "Institution": "The Rockefeller University",
+    "State": "NY",
+    "2007 Endowment": 2145203,
+    "2006 Endowment": 1771954,
+    "% Change": 0.211
+  },
+  {
+    "Rank": 33,
+    "Institution": "Williams College",
+    "State": "MA",
+    "2007 Endowment": 1892055,
+    "2006 Endowment": 1462131,
+    "% Change": 0.294
+  },
+  {
+    "Rank": 34,
+    "Institution": "California Institute of Technology",
+    "State": "CA",
+    "2007 Endowment": 1860052,
+    "2006 Endowment": 1580922,
+    "% Change": 0.177
+  },
+  {
+    "Rank": 35,
+    "Institution": "Case Western Reserve University",
+    "State": "OH",
+    "2007 Endowment": 1841234,
+    "2006 Endowment": 1598566,
+    "% Change": 0.152
+  },
+  {
+    "Rank": 36,
+    "Institution": "Purdue University",
+    "State": "IN",
+    "2007 Endowment": 1786592,
+    "2006 Endowment": 1493554,
+    "% Change": 0.196
+  },
+  {
+    "Rank": 37,
+    "Institution": "University of Toronto",
+    "State": "ON",
+    "2007 Endowment": 1763764,
+    "2006 Endowment": 1414513,
+    "% Change": 0.247
+  },
+  {
+    "Rank": 38,
+    "Institution": "Pomona College",
+    "State": "CA",
+    "2007 Endowment": 1760902,
+    "2006 Endowment": 1457213,
+    "% Change": 0.208
+  },
+  {
+    "Rank": 39,
+    "Institution": "University of Rochester",
+    "State": "NY",
+    "2007 Endowment": 1726318,
+    "2006 Endowment": 1491275,
+    "% Change": 0.158
+  },
+  {
+    "Rank": 40,
+    "Institution": "Grinnell College",
+    "State": "IA",
+    "2007 Endowment": 1718313,
+    "2006 Endowment": 1471804,
+    "% Change": 0.167
+  },
+  {
+    "Rank": 41,
+    "Institution": "Boston College",
+    "State": "MA",
+    "2007 Endowment": 1670092,
+    "2006 Endowment": 1447887,
+    "% Change": 0.153
+  },
+  {
+    "Rank": 42,
+    "Institution": "Amherst College",
+    "State": "MA",
+    "2007 Endowment": 1662377,
+    "2006 Endowment": 1337158,
+    "% Change": 0.243
+  },
+  {
+    "Rank": 43,
+    "Institution": "Wellesley College",
+    "State": "MA",
+    "2007 Endowment": 1656565,
+    "2006 Endowment": 1412410,
+    "% Change": 0.173
+  },
+  {
+    "Rank": 44,
+    "Institution": "University of Richmond",
+    "State": "VA",
+    "2007 Endowment": 1654988,
+    "2006 Endowment": 1380439,
+    "% Change": 0.199
+  },
+  {
+    "Rank": 45,
+    "Institution": "University of Wisconsin Foundation",
+    "State": "WI",
+    "2007 Endowment": 1645250,
+    "2006 Endowment": 1425750,
+    "% Change": 0.154
+  },
+  {
+    "Rank": 46,
+    "Institution": "Pennsylvania State University",
+    "State": "PA",
+    "2007 Endowment": 1590000,
+    "2006 Endowment": 1326390,
+    "% Change": 0.199
+  },
+  {
+    "Rank": 47,
+    "Institution": "Indiana University and Foundation",
+    "State": "IN",
+    "2007 Endowment": 1556853,
+    "2006 Endowment": 1276160,
+    "% Change": 0.22
+  },
+  {
+    "Rank": 48,
+    "Institution": "University of Illinois",
+    "State": "IL",
+    "2007 Endowment": 1515387,
+    "2006 Endowment": 1252290,
+    "% Change": 0.21
+  },
+  {
+    "Rank": 49,
+    "Institution": "Tufts University",
+    "State": "MA",
+    "2007 Endowment": 1452058,
+    "2006 Endowment": 1148868,
+    "% Change": 0.264
+  },
+  {
+    "Rank": 50,
+    "Institution": "Swarthmore College",
+    "State": "PA",
+    "2007 Endowment": 1441232,
+    "2006 Endowment": 1245281,
+    "% Change": 0.157
+  },
+  {
+    "Rank": 51,
+    "Institution": "Yeshiva University",
+    "State": "NY",
+    "2007 Endowment": 1409576,
+    "2006 Endowment": 1273327,
+    "% Change": 0.107
+  },
+  {
+    "Rank": 52,
+    "Institution": "University of Delaware",
+    "State": "DE",
+    "2007 Endowment": 1397492,
+    "2006 Endowment": 1223203,
+    "% Change": 0.142
+  },
+  {
+    "Rank": 53,
+    "Institution": "Smith College",
+    "State": "MA",
+    "2007 Endowment": 1360966,
+    "2006 Endowment": 1156350,
+    "% Change": 0.177
+  },
+  {
+    "Rank": 54,
+    "Institution": "Southern Methodist University",
+    "State": "TX",
+    "2007 Endowment": 1327816,
+    "2006 Endowment": 1122477,
+    "% Change": 0.183
+  },
+  {
+    "Rank": 55,
+    "Institution": "Georgia Tech Foundation, Inc.",
+    "State": "GA",
+    "2007 Endowment": 1281162,
+    "2006 Endowment": 1047724,
+    "% Change": 0.223
+  },
+  {
+    "Rank": 56,
+    "Institution": "Baylor College of Medicine",
+    "State": "TX",
+    "2007 Endowment": 1278011,
+    "2006 Endowment": 1059393,
+    "% Change": 0.206
+  },
+  {
+    "Rank": 57,
+    "Institution": "University of Nebraska and Foundation",
+    "State": "NE",
+    "2007 Endowment": 1277169,
+    "2006 Endowment": 1153559,
+    "% Change": 0.107
+  },
+  {
+    "Rank": 58,
+    "Institution": "Wake Forest University",
+    "State": "NC",
+    "2007 Endowment": 1248695,
+    "2006 Endowment": 1042558,
+    "% Change": 0.198
+  },
+  {
+    "Rank": 59,
+    "Institution": "Michigan State University",
+    "State": "MI",
+    "2007 Endowment": 1247713,
+    "2006 Endowment": 1047792,
+    "% Change": 0.191
+  },
+  {
+    "Rank": 60,
+    "Institution": "Kansas University Endowment Association",
+    "State": "KS",
+    "2007 Endowment": 1238695,
+    "2006 Endowment": 1049367,
+    "% Change": 0.18
+  },
+  {
+    "Rank": 61,
+    "Institution": "University of Florida Foundation, Inc.",
+    "State": "FL",
+    "2007 Endowment": 1219026,
+    "2006 Endowment": 996245,
+    "% Change": 0.224
+  },
+  {
+    "Rank": 62,
+    "Institution": "Texas Christian University",
+    "State": "TX",
+    "2007 Endowment": 1187057,
+    "2006 Endowment": 1016353,
+    "% Change": 0.168
+  },
+  {
+    "Rank": 63,
+    "Institution": "University of Cincinnati",
+    "State": "OH",
+    "2007 Endowment": 1185400,
+    "2006 Endowment": 1101100,
+    "% Change": 0.077
+  },
+  {
+    "Rank": 64,
+    "Institution": "The George Washington University",
+    "State": "DC",
+    "2007 Endowment": 1147451,
+    "2006 Endowment": 963697,
+    "% Change": 0.191
+  },
+  {
+    "Rank": 65,
+    "Institution": "Carnegie Mellon University",
+    "State": "PA",
+    "2007 Endowment": 1115740,
+    "2006 Endowment": 941525,
+    "% Change": 0.185
+  },
+  {
+    "Rank": 66,
+    "Institution": "University of Oklahoma",
+    "State": "OK",
+    "2007 Endowment": 1114426,
+    "2006 Endowment": 960315,
+    "% Change": 0.16
+  },
+  {
+    "Rank": 67,
+    "Institution": "Princeton Theological Seminary",
+    "State": "NJ",
+    "2007 Endowment": 1108515,
+    "2006 Endowment": 945355,
+    "% Change": 0.173
+  },
+  {
+    "Rank": 68,
+    "Institution": "Berea College",
+    "State": "KY",
+    "2007 Endowment": 1102272,
+    "2006 Endowment": 948738,
+    "% Change": 0.162
+  },
+  {
+    "Rank": 69,
+    "Institution": "Boston University",
+    "State": "MA",
+    "2007 Endowment": 1101386,
+    "2006 Endowment": 916017,
+    "% Change": 0.202
+  },
+  {
+    "Rank": 70,
+    "Institution": "University of Missouri System",
+    "State": "MO",
+    "2007 Endowment": 1097846,
+    "2006 Endowment": 944054,
+    "% Change": 0.163
+  },
+  {
+    "Rank": 71,
+    "Institution": "Syracuse University",
+    "State": "NY",
+    "2007 Endowment": 1086143,
+    "2006 Endowment": 908371,
+    "% Change": 0.196
+  },
+  {
+    "Rank": 72,
+    "Institution": "Lehigh University",
+    "State": "PA",
+    "2007 Endowment": 1085639,
+    "2006 Endowment": 939473,
+    "% Change": 0.156
+  },
+  {
+    "Rank": 73,
+    "Institution": "Georgetown University",
+    "State": "DC",
+    "2007 Endowment": 1059343,
+    "2006 Endowment": 834497,
+    "% Change": 0.269
+  },
+  {
+    "Rank": 74,
+    "Institution": "Baylor University",
+    "State": "TX",
+    "2007 Endowment": 1018012,
+    "2006 Endowment": 874364,
+    "% Change": 0.164
+  },
+  {
+    "Rank": 75,
+    "Institution": "University of British Columbia",
+    "State": "BC",
+    "2007 Endowment": 1013532,
+    "2006 Endowment": 772245,
+    "% Change": 0.312
+  },
+  {
+    "Rank": 76,
+    "Institution": "Tulane University",
+    "State": "LA",
+    "2007 Endowment": 1009129,
+    "2006 Endowment": 858323,
+    "% Change": 0.176
+  },
+  {
+    "Rank": 77,
+    "Institution": "University of Alabama System",
+    "State": "AL",
+    "2007 Endowment": 999816,
+    "2006 Endowment": 848848,
+    "% Change": 0.178
+  },
+  {
+    "Rank": 78,
+    "Institution": "Trinity University (Texas)",
+    "State": "TX",
+    "2007 Endowment": 991112,
+    "2006 Endowment": 814672,
+    "% Change": 0.217
+  },
+  {
+    "Rank": 79,
+    "Institution": "University of Iowa and Foundation",
+    "State": "IA",
+    "2007 Endowment": 982428,
+    "2006 Endowment": 832869,
+    "% Change": 0.18
+  },
+  {
+    "Rank": 80,
+    "Institution": "UCLA Foundation",
+    "State": "CA",
+    "2007 Endowment": 975295,
+    "2006 Endowment": 804869,
+    "% Change": 0.212
+  },
+  {
+    "Rank": 81,
+    "Institution": "Saint Louis University",
+    "State": "MO",
+    "2007 Endowment": 959486,
+    "2006 Endowment": 824851,
+    "% Change": 0.163
+  },
+  {
+    "Rank": 82,
+    "Institution": "University of Kentucky",
+    "State": "KY",
+    "2007 Endowment": 957608,
+    "2006 Endowment": 785196,
+    "% Change": 0.22
+  },
+  {
+    "Rank": 83,
+    "Institution": "University of Tennessee System",
+    "State": "TN",
+    "2007 Endowment": 954376,
+    "2006 Endowment": 811138,
+    "% Change": 0.177
+  },
+  {
+    "Rank": 84,
+    "Institution": "Middlebury College",
+    "State": "VT",
+    "2007 Endowment": 936354,
+    "2006 Endowment": 775753,
+    "% Change": 0.207
+  },
+  {
+    "Rank": 85,
+    "Institution": "University of Tulsa",
+    "State": "OK",
+    "2007 Endowment": 915320,
+    "2006 Endowment": 816980,
+    "% Change": 0.12
+  },
+  {
+    "Rank": 86,
+    "Institution": "University of Arkansas and Foundation",
+    "State": "AR",
+    "2007 Endowment": 876839,
+    "2006 Endowment": 763069,
+    "% Change": 0.149
+  },
+  {
+    "Rank": 87,
+    "Institution": "Vassar College",
+    "State": "NY",
+    "2007 Endowment": 869122,
+    "2006 Endowment": 741655,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 88,
+    "Institution": "McGill University",
+    "State": "QC",
+    "2007 Endowment": 863405,
+    "2006 Endowment": 729766,
+    "% Change": 0.183
+  },
+  {
+    "Rank": 89,
+    "Institution": "University of California, Berkeley",
+    "State": "CA",
+    "2007 Endowment": 837011,
+    "2006 Endowment": 694763,
+    "% Change": 0.205
+  },
+  {
+    "Rank": 90,
+    "Institution": "Bowdoin College",
+    "State": "ME",
+    "2007 Endowment": 827714,
+    "2006 Endowment": 673346,
+    "% Change": 0.229
+  },
+  {
+    "Rank": 91,
+    "Institution": "Oberlin College",
+    "State": "OH",
+    "2007 Endowment": 816135,
+    "2006 Endowment": 697851,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 92,
+    "Institution": "Rensselaer Polytechnic Institute",
+    "State": "NY",
+    "2007 Endowment": 812996,
+    "2006 Endowment": 682894,
+    "% Change": 0.191
+  },
+  {
+    "Rank": 93,
+    "Institution": "University of Maryland System and Foundation",
+    "State": "MD",
+    "2007 Endowment": 810374,
+    "2006 Endowment": 674600,
+    "% Change": 0.201
+  },
+  {
+    "Rank": 94,
+    "Institution": "University of Louisville Foundation",
+    "State": "KY",
+    "2007 Endowment": 796812,
+    "2006 Endowment": 680251,
+    "% Change": 0.171
+  },
+  {
+    "Rank": 95,
+    "Institution": "The Principia Corporation",
+    "State": "MO",
+    "2007 Endowment": 776864,
+    "2006 Endowment": 552931,
+    "% Change": 0.405
+  },
+  {
+    "Rank": 96,
+    "Institution": "University of Miami",
+    "State": "FL",
+    "2007 Endowment": 741382,
+    "2006 Endowment": 620435,
+    "% Change": 0.195
+  },
+  {
+    "Rank": 97,
+    "Institution": "Pepperdine University",
+    "State": "CA",
+    "2007 Endowment": 734924,
+    "2006 Endowment": 538233,
+    "% Change": 0.365
+  },
+  {
+    "Rank": 98,
+    "Institution": "Lafayette College",
+    "State": "PA",
+    "2007 Endowment": 734421,
+    "2006 Endowment": 648292,
+    "% Change": 0.133
+  },
+  {
+    "Rank": 99,
+    "Institution": "University of Alberta",
+    "State": "AB",
+    "2007 Endowment": 722539,
+    "2006 Endowment": 557722,
+    "% Change": 0.296
+  },
+  {
+    "Rank": 100,
+    "Institution": "University of Colorado Foundation",
+    "State": "CO",
+    "2007 Endowment": 716656,
+    "2006 Endowment": 590306,
+    "% Change": 0.214
+  },
+  {
+    "Rank": 101,
+    "Institution": "Wesleyan University",
+    "State": "CT",
+    "2007 Endowment": 710800,
+    "2006 Endowment": 619761,
+    "% Change": 0.147
+  },
+  {
+    "Rank": 102,
+    "Institution": "Colgate University",
+    "State": "NY",
+    "2007 Endowment": 709047,
+    "2006 Endowment": 557121,
+    "% Change": 0.273
+  },
+  {
+    "Rank": 103,
+    "Institution": "Hamilton College",
+    "State": "NY",
+    "2007 Endowment": 701670,
+    "2006 Endowment": 587582,
+    "% Change": 0.194
+  },
+  {
+    "Rank": 104,
+    "Institution": "Santa Clara University",
+    "State": "CA",
+    "2007 Endowment": 697881,
+    "2006 Endowment": 598657,
+    "% Change": 0.166
+  },
+  {
+    "Rank": 105,
+    "Institution": "Washington & Lee University",
+    "State": "VA",
+    "2007 Endowment": 692797,
+    "2006 Endowment": 586968,
+    "% Change": 0.18
+  },
+  {
+    "Rank": 106,
+    "Institution": "Brandeis University",
+    "State": "MA",
+    "2007 Endowment": 691370,
+    "2006 Endowment": 579654,
+    "% Change": 0.193
+  },
+  {
+    "Rank": 107,
+    "Institution": "Berry College",
+    "State": "GA",
+    "2007 Endowment": 683253,
+    "2006 Endowment": 589279,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 108,
+    "Institution": "Northeastern University",
+    "State": "MA",
+    "2007 Endowment": 679926,
+    "2006 Endowment": 595859,
+    "% Change": 0.141
+  },
+  {
+    "Rank": 109,
+    "Institution": "Macalester College",
+    "State": "MN",
+    "2007 Endowment": 675987,
+    "2006 Endowment": 577060,
+    "% Change": 0.171
+  },
+  {
+    "Rank": 110,
+    "Institution": "Bryn Mawr College",
+    "State": "PA",
+    "2007 Endowment": 663626,
+    "2006 Endowment": 579747,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 111,
+    "Institution": "Carleton College",
+    "State": "MN",
+    "2007 Endowment": 663500,
+    "2006 Endowment": 571955,
+    "% Change": 0.16
+  },
+  {
+    "Rank": 112,
+    "Institution": "College of the Holy Cross",
+    "State": "MA",
+    "2007 Endowment": 658855,
+    "2006 Endowment": 544347,
+    "% Change": 0.21
+  },
+  {
+    "Rank": 113,
+    "Institution": "Louisiana State University System",
+    "State": "LA",
+    "2007 Endowment": 656710,
+    "2006 Endowment": 593203,
+    "% Change": 0.107
+  },
+  {
+    "Rank": 114,
+    "Institution": "Rochester Institute of Technology",
+    "State": "NY",
+    "2007 Endowment": 656218,
+    "2006 Endowment": 568945,
+    "% Change": 0.153
+  },
+  {
+    "Rank": 115,
+    "Institution": "Rutgers, The State University of New Jersey",
+    "State": "NJ",
+    "2007 Endowment": 654184,
+    "2006 Endowment": 549858,
+    "% Change": 0.19
+  },
+  {
+    "Rank": 116,
+    "Institution": "Washington State University",
+    "State": "WA",
+    "2007 Endowment": 650903,
+    "2006 Endowment": 579861,
+    "% Change": 0.123
+  },
+  {
+    "Rank": 117,
+    "Institution": "Denison University",
+    "State": "OH",
+    "2007 Endowment": 642791,
+    "2006 Endowment": 528121,
+    "% Change": 0.217
+  },
+  {
+    "Rank": 118,
+    "Institution": "Texas Tech University",
+    "State": "TX",
+    "2007 Endowment": 641640,
+    "2006 Endowment": 540251,
+    "% Change": 0.188
+  },
+  {
+    "Rank": 119,
+    "Institution": "Drexel University",
+    "State": "PA",
+    "2007 Endowment": 628467,
+    "2006 Endowment": 526792,
+    "% Change": 0.193
+  },
+  {
+    "Rank": 120,
+    "Institution": "University of Georgia Foundation",
+    "State": "GA",
+    "2007 Endowment": 618838,
+    "2006 Endowment": 518823,
+    "% Change": 0.193
+  },
+  {
+    "Rank": 121,
+    "Institution": "Mount Holyoke College",
+    "State": "MA",
+    "2007 Endowment": 615376,
+    "2006 Endowment": 510032,
+    "% Change": 0.207
+  },
+  {
+    "Rank": 122,
+    "Institution": "Queens University",
+    "State": "ON",
+    "2007 Endowment": 614739,
+    "2006 Endowment": 501804,
+    "% Change": 0.225
+  },
+  {
+    "Rank": 123,
+    "Institution": "Thomas Jefferson University",
+    "State": "PA",
+    "2007 Endowment": 614338,
+    "2006 Endowment": 468635,
+    "% Change": 0.311
+  },
+  {
+    "Rank": 124,
+    "Institution": "University of Utah",
+    "State": "UT",
+    "2007 Endowment": 610469,
+    "2006 Endowment": 509095,
+    "% Change": 0.199
+  },
+  {
+    "Rank": 125,
+    "Institution": "Bucknell University",
+    "State": "PA",
+    "2007 Endowment": 599399,
+    "2006 Endowment": 522059,
+    "% Change": 0.148
+  },
+  {
+    "Rank": 126,
+    "Institution": "Colby College",
+    "State": "ME",
+    "2007 Endowment": 598729,
+    "2006 Endowment": 482019,
+    "% Change": 0.242
+  },
+  {
+    "Rank": 127,
+    "Institution": "Cooper Union",
+    "State": "NY",
+    "2007 Endowment": 598202,
+    "2006 Endowment": 471081,
+    "% Change": 0.27
+  },
+  {
+    "Rank": 128,
+    "Institution": "Iowa State University and Foundation",
+    "State": "IA",
+    "2007 Endowment": 592368,
+    "2006 Endowment": 496018,
+    "% Change": 0.194
+  },
+  {
+    "Rank": 129,
+    "Institution": "College of William & Mary and Foundations",
+    "State": "VA",
+    "2007 Endowment": 585904,
+    "2006 Endowment": 491629,
+    "% Change": 0.192
+  },
+  {
+    "Rank": 130,
+    "Institution": "SUNY Pooled and University at Buffalo & Foundation",
+    "State": "NY",
+    "2007 Endowment": 566362,
+    "2006 Endowment": 499632,
+    "% Change": 0.134
+  },
+  {
+    "Rank": 131,
+    "Institution": "DePauw University",
+    "State": "IN",
+    "2007 Endowment": 554051,
+    "2006 Endowment": 489188,
+    "% Change": 0.133
+  },
+  {
+    "Rank": 132,
+    "Institution": "Florida State University Foundation, Inc.",
+    "State": "FL",
+    "2007 Endowment": 548994,
+    "2006 Endowment": 500637,
+    "% Change": 0.097
+  },
+  {
+    "Rank": 133,
+    "Institution": "Furman University",
+    "State": "SC",
+    "2007 Endowment": 544610,
+    "2006 Endowment": 478834,
+    "% Change": 0.137
+  },
+  {
+    "Rank": 134,
+    "Institution": "Haverford College",
+    "State": "PA",
+    "2007 Endowment": 539589,
+    "2006 Endowment": 452933,
+    "% Change": 0.191
+  },
+  {
+    "Rank": 135,
+    "Institution": "North Carolina State University Foundations",
+    "State": "NC",
+    "2007 Endowment": 535003,
+    "2006 Endowment": 412298,
+    "% Change": 0.298
+  },
+  {
+    "Rank": 136,
+    "Institution": "University of Arizona and Foundation",
+    "State": "AZ",
+    "2007 Endowment": 532351,
+    "2006 Endowment": 466652,
+    "% Change": 0.141
+  },
+  {
+    "Rank": 137,
+    "Institution": "Virginia Tech Foundation",
+    "State": "VA",
+    "2007 Endowment": 524731,
+    "2006 Endowment": 447405,
+    "% Change": 0.173
+  },
+  {
+    "Rank": 138,
+    "Institution": "Howard University",
+    "State": "DC",
+    "2007 Endowment": 523690,
+    "2006 Endowment": 423898,
+    "% Change": 0.235
+  },
+  {
+    "Rank": 139,
+    "Institution": "Colorado College",
+    "State": "CO",
+    "2007 Endowment": 523228,
+    "2006 Endowment": 458853,
+    "% Change": 0.14
+  },
+  {
+    "Rank": 140,
+    "Institution": "University of Houston System",
+    "State": "TX",
+    "2007 Endowment": 522395,
+    "2006 Endowment": 454009,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 141,
+    "Institution": "Medical College of Wisconsin",
+    "State": "WI",
+    "2007 Endowment": 507065,
+    "2006 Endowment": 442173,
+    "% Change": 0.147
+  },
+  {
+    "Rank": 142,
+    "Institution": "University of Mississippi and Foundation",
+    "State": "MS",
+    "2007 Endowment": 494774,
+    "2006 Endowment": 421368,
+    "% Change": 0.174
+  },
+  {
+    "Rank": 143,
+    "Institution": "Davidson College",
+    "State": "NC",
+    "2007 Endowment": 489461,
+    "2006 Endowment": 421672,
+    "% Change": 0.161
+  },
+  {
+    "Rank": 144,
+    "Institution": "Franklin W. Olin College of Engineering",
+    "State": "MA",
+    "2007 Endowment": 482662,
+    "2006 Endowment": 432117,
+    "% Change": 0.117
+  },
+  {
+    "Rank": 145,
+    "Institution": "Arizona State University and ASU Foundation",
+    "State": "AZ",
+    "2007 Endowment": 478385,
+    "2006 Endowment": 394796,
+    "% Change": 0.212
+  },
+  {
+    "Rank": 146,
+    "Institution": "Claremont McKenna College",
+    "State": "CA",
+    "2007 Endowment": 474022,
+    "2006 Endowment": 373380,
+    "% Change": 0.27
+  },
+  {
+    "Rank": 147,
+    "Institution": "University of California, San Francisco Foundation",
+    "State": "CA",
+    "2007 Endowment": 470568,
+    "2006 Endowment": 384656,
+    "% Change": 0.223
+  },
+  {
+    "Rank": 148,
+    "Institution": "Oklahoma State University and Foundation",
+    "State": "OK",
+    "2007 Endowment": 468735,
+    "2006 Endowment": 382097,
+    "% Change": 0.227
+  },
+  {
+    "Rank": 149,
+    "Institution": "Reed College",
+    "State": "OR",
+    "2007 Endowment": 455705,
+    "2006 Endowment": 385294,
+    "% Change": 0.183
+  },
+  {
+    "Rank": 150,
+    "Institution": "University of Oregon",
+    "State": "OR",
+    "2007 Endowment": 455583,
+    "2006 Endowment": 365859,
+    "% Change": 0.245
+  },
+  {
+    "Rank": 151,
+    "Institution": "Fordham University",
+    "State": "NY",
+    "2007 Endowment": 455374,
+    "2006 Endowment": 357342,
+    "% Change": 0.274
+  },
+  {
+    "Rank": 152,
+    "Institution": "Oregon Health Sciences Foundation",
+    "State": "OR",
+    "2007 Endowment": 446634,
+    "2006 Endowment": 366575,
+    "% Change": 0.218
+  },
+  {
+    "Rank": 153,
+    "Institution": "Rush University",
+    "State": "IL",
+    "2007 Endowment": 443497,
+    "2006 Endowment": 387580,
+    "% Change": 0.144
+  },
+  {
+    "Rank": 154,
+    "Institution": "Oregon State University Foundation",
+    "State": "OR",
+    "2007 Endowment": 441230,
+    "2006 Endowment": 383354,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 155,
+    "Institution": "Trinity College (Connecticut)",
+    "State": "CT",
+    "2007 Endowment": 440195,
+    "2006 Endowment": 387410,
+    "% Change": 0.136
+  },
+  {
+    "Rank": 156,
+    "Institution": "West Virginia University Foundation, Inc.",
+    "State": "WV",
+    "2007 Endowment": 436931,
+    "2006 Endowment": 380785,
+    "% Change": 0.147
+  },
+  {
+    "Rank": 157,
+    "Institution": "Clemson University and Foundation",
+    "State": "SC",
+    "2007 Endowment": 430020,
+    "2006 Endowment": 343726,
+    "% Change": 0.251
+  },
+  {
+    "Rank": 158,
+    "Institution": "Auburn University and Foundation",
+    "State": "AL",
+    "2007 Endowment": 420840,
+    "2006 Endowment": 360070,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 159,
+    "Institution": "Wabash College",
+    "State": "IN",
+    "2007 Endowment": 413212,
+    "2006 Endowment": 363466,
+    "% Change": 0.137
+  },
+  {
+    "Rank": 160,
+    "Institution": "University of Dayton",
+    "State": "OH",
+    "2007 Endowment": 410355,
+    "2006 Endowment": 353424,
+    "% Change": 0.161
+  },
+  {
+    "Rank": 161,
+    "Institution": "Miami University (Ohio) & Foundation",
+    "State": "OH",
+    "2007 Endowment": 409271,
+    "2006 Endowment": 320188,
+    "% Change": 0.278
+  },
+  {
+    "Rank": 162,
+    "Institution": "Creighton University",
+    "State": "NE",
+    "2007 Endowment": 408311,
+    "2006 Endowment": 351841,
+    "% Change": 0.16
+  },
+  {
+    "Rank": 163,
+    "Institution": "Worcester Polytechnic Institute",
+    "State": "MA",
+    "2007 Endowment": 404745,
+    "2006 Endowment": 353720,
+    "% Change": 0.144
+  },
+  {
+    "Rank": 164,
+    "Institution": "American University",
+    "State": "DC",
+    "2007 Endowment": 396844,
+    "2006 Endowment": 319238,
+    "% Change": 0.243
+  },
+  {
+    "Rank": 165,
+    "Institution": "VMI Foundation, Inc.",
+    "State": "VA",
+    "2007 Endowment": 394848,
+    "2006 Endowment": 339918,
+    "% Change": 0.162
+  },
+  {
+    "Rank": 166,
+    "Institution": "Whitman College",
+    "State": "WA",
+    "2007 Endowment": 391366,
+    "2006 Endowment": 340803,
+    "% Change": 0.148
+  },
+  {
+    "Rank": 167,
+    "Institution": "University of South Florida Foundation",
+    "State": "FL",
+    "2007 Endowment": 388516,
+    "2006 Endowment": 329832,
+    "% Change": 0.178
+  },
+  {
+    "Rank": 168,
+    "Institution": "Woods Hole Oceanographic Institution",
+    "State": "MA",
+    "2007 Endowment": 383400,
+    "2006 Endowment": 343217,
+    "% Change": 0.117
+  },
+  {
+    "Rank": 169,
+    "Institution": "Rhode Island School of Design",
+    "State": "RI",
+    "2007 Endowment": 380033,
+    "2006 Endowment": 304729,
+    "% Change": 0.247
+  },
+  {
+    "Rank": 170,
+    "Institution": "Occidental College",
+    "State": "CA",
+    "2007 Endowment": 378040,
+    "2006 Endowment": 315638,
+    "% Change": 0.198
+  },
+  {
+    "Rank": 171,
+    "Institution": "Loyola University of Chicago",
+    "State": "IL",
+    "2007 Endowment": 373211,
+    "2006 Endowment": 305664,
+    "% Change": 0.221
+  },
+  {
+    "Rank": 172,
+    "Institution": "Loyola Marymount University",
+    "State": "CA",
+    "2007 Endowment": 371395,
+    "2006 Endowment": 305774,
+    "% Change": 0.215
+  },
+  {
+    "Rank": 173,
+    "Institution": "Union College (New York)",
+    "State": "NY",
+    "2007 Endowment": 369921,
+    "2006 Endowment": 315569,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 174,
+    "Institution": "St. John's University (New York)",
+    "State": "NY",
+    "2007 Endowment": 366660,
+    "2006 Endowment": 304896,
+    "% Change": 0.203
+  },
+  {
+    "Rank": 175,
+    "Institution": "Rollins College",
+    "State": "FL",
+    "2007 Endowment": 366594,
+    "2006 Endowment": 310356,
+    "% Change": 0.181
+  },
+  {
+    "Rank": 176,
+    "Institution": "College of the Ozarks",
+    "State": "MO",
+    "2007 Endowment": 366239,
+    "2006 Endowment": 311565,
+    "% Change": 0.175
+  },
+  {
+    "Rank": 177,
+    "Institution": "Academy of the New Church",
+    "State": "PA",
+    "2007 Endowment": 364358,
+    "2006 Endowment": 320179,
+    "% Change": 0.138
+  },
+  {
+    "Rank": 178,
+    "Institution": "Franklin and Marshall College",
+    "State": "PA",
+    "2007 Endowment": 362871,
+    "2006 Endowment": 321074,
+    "% Change": 0.13
+  },
+  {
+    "Rank": 179,
+    "Institution": "Wheaton College (Illinois)",
+    "State": "IL",
+    "2007 Endowment": 362830,
+    "2006 Endowment": 313105,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 180,
+    "Institution": "Marquette University",
+    "State": "WI",
+    "2007 Endowment": 360250,
+    "2006 Endowment": 301186,
+    "% Change": 0.196
+  },
+  {
+    "Rank": 181,
+    "Institution": "University of St. Thomas (Minnesota)",
+    "State": "MN",
+    "2007 Endowment": 359350,
+    "2006 Endowment": 300404,
+    "% Change": 0.196
+  },
+  {
+    "Rank": 182,
+    "Institution": "UC San Diego Foundation",
+    "State": "CA",
+    "2007 Endowment": 356509,
+    "2006 Endowment": 275729,
+    "% Change": 0.293
+  },
+  {
+    "Rank": 183,
+    "Institution": "University of Wisconsin System",
+    "State": "WI",
+    "2007 Endowment": 351914,
+    "2006 Endowment": 303899,
+    "% Change": 0.158
+  },
+  {
+    "Rank": 184,
+    "Institution": "Earlham College",
+    "State": "IN",
+    "2007 Endowment": 350411,
+    "2006 Endowment": 317243,
+    "% Change": 0.105
+  },
+  {
+    "Rank": 185,
+    "Institution": "University of Massachusetts and Foundation",
+    "State": "MA",
+    "2007 Endowment": 350216,
+    "2006 Endowment": 260228,
+    "% Change": 0.346
+  },
+  {
+    "Rank": 186,
+    "Institution": "Kansas State University Foundation",
+    "State": "KS",
+    "2007 Endowment": 346360,
+    "2006 Endowment": 294542,
+    "% Change": 0.176
+  },
+  {
+    "Rank": 187,
+    "Institution": "De Paul University",
+    "State": "IL",
+    "2007 Endowment": 344727,
+    "2006 Endowment": 285203,
+    "% Change": 0.209
+  },
+  {
+    "Rank": 188,
+    "Institution": "National University",
+    "State": "CA",
+    "2007 Endowment": 341231,
+    "2006 Endowment": 283277,
+    "% Change": 0.205
+  },
+  {
+    "Rank": 189,
+    "Institution": "Spelman College",
+    "State": "GA",
+    "2007 Endowment": 340261,
+    "2006 Endowment": 291605,
+    "% Change": 0.167
+  },
+  {
+    "Rank": 190,
+    "Institution": "University of Connecticut Foundation",
+    "State": "CT",
+    "2007 Endowment": 337945,
+    "2006 Endowment": 295031,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 191,
+    "Institution": "University of Vermont",
+    "State": "VT",
+    "2007 Endowment": 336363,
+    "2006 Endowment": 282594,
+    "% Change": 0.19
+  },
+  {
+    "Rank": 192,
+    "Institution": "Villanova University",
+    "State": "PA",
+    "2007 Endowment": 335734,
+    "2006 Endowment": 278606,
+    "% Change": 0.205
+  },
+  {
+    "Rank": 193,
+    "Institution": "Virginia Commonwealth University",
+    "State": "VA",
+    "2007 Endowment": 329199,
+    "2006 Endowment": 265653,
+    "% Change": 0.239
+  },
+  {
+    "Rank": 194,
+    "Institution": "Agnes Scott College",
+    "State": "GA",
+    "2007 Endowment": 328684,
+    "2006 Endowment": 298505,
+    "% Change": 0.101
+  },
+  {
+    "Rank": 195,
+    "Institution": "Georgia Institute of Technology",
+    "State": "GA",
+    "2007 Endowment": 327520,
+    "2006 Endowment": 276696,
+    "% Change": 0.184
+  },
+  {
+    "Rank": 196,
+    "Institution": "St. Olaf College",
+    "State": "MN",
+    "2007 Endowment": 321063,
+    "2006 Endowment": 261633,
+    "% Change": 0.227
+  },
+  {
+    "Rank": 197,
+    "Institution": "University of New Mexico and Foundation",
+    "State": "NM",
+    "2007 Endowment": 320200,
+    "2006 Endowment": 276141,
+    "% Change": 0.16
+  },
+  {
+    "Rank": 198,
+    "Institution": "University of South Alabama (USA) Foundation",
+    "State": "AL",
+    "2007 Endowment": 318769,
+    "2006 Endowment": 290502,
+    "% Change": 0.097
+  },
+  {
+    "Rank": 199,
+    "Institution": "University of the South",
+    "State": "TN",
+    "2007 Endowment": 314885,
+    "2006 Endowment": 270457,
+    "% Change": 0.164
+  },
+  {
+    "Rank": 200,
+    "Institution": "Southwestern University",
+    "State": "TX",
+    "2007 Endowment": 313999,
+    "2006 Endowment": 279940,
+    "% Change": 0.122
+  },
+  {
+    "Rank": 201,
+    "Institution": "University of Alaska and Foundation",
+    "State": "AK",
+    "2007 Endowment": 310802,
+    "2006 Endowment": 266389,
+    "% Change": 0.167
+  },
+  {
+    "Rank": 202,
+    "Institution": "University of Wyoming",
+    "State": "WY",
+    "2007 Endowment": 304170,
+    "2006 Endowment": 259773,
+    "% Change": 0.171
+  },
+  {
+    "Rank": 203,
+    "Institution": "Samford University",
+    "State": "AL",
+    "2007 Endowment": 301044,
+    "2006 Endowment": 272356,
+    "% Change": 0.105
+  },
+  {
+    "Rank": 204,
+    "Institution": "Lebanese American University",
+    "State": "NY",
+    "2007 Endowment": 298746,
+    "2006 Endowment": 240063,
+    "% Change": 0.244
+  },
+  {
+    "Rank": 205,
+    "Institution": "Clark University",
+    "State": "MA",
+    "2007 Endowment": 290020,
+    "2006 Endowment": 233795,
+    "% Change": 0.24
+  },
+  {
+    "Rank": 206,
+    "Institution": "Rhodes College",
+    "State": "TN",
+    "2007 Endowment": 288906,
+    "2006 Endowment": 246374,
+    "% Change": 0.173
+  },
+  {
+    "Rank": 207,
+    "Institution": "Dickinson College",
+    "State": "PA",
+    "2007 Endowment": 287731,
+    "2006 Endowment": 241981,
+    "% Change": 0.189
+  },
+  {
+    "Rank": 208,
+    "Institution": "Skidmore College",
+    "State": "NY",
+    "2007 Endowment": 287319,
+    "2006 Endowment": 222050,
+    "% Change": 0.294
+  },
+  {
+    "Rank": 209,
+    "Institution": "University of New Hampshire System",
+    "State": "NH",
+    "2007 Endowment": 284630,
+    "2006 Endowment": 234682,
+    "% Change": 0.213
+  },
+  {
+    "Rank": 210,
+    "Institution": "Abilene Christian University",
+    "State": "TX",
+    "2007 Endowment": 279735,
+    "2006 Endowment": 228354,
+    "% Change": 0.225
+  },
+  {
+    "Rank": 211,
+    "Institution": "Regent University",
+    "State": "VA",
+    "2007 Endowment": 277633,
+    "2006 Endowment": 257987,
+    "% Change": 0.076
+  },
+  {
+    "Rank": 212,
+    "Institution": "University of Denver",
+    "State": "CO",
+    "2007 Endowment": 277465,
+    "2006 Endowment": 223189,
+    "% Change": 0.243
+  },
+  {
+    "Rank": 213,
+    "Institution": "Bates College",
+    "State": "ME",
+    "2007 Endowment": 275557,
+    "2006 Endowment": 234386,
+    "% Change": 0.176
+  },
+  {
+    "Rank": 214,
+    "Institution": "Scripps College",
+    "State": "CA",
+    "2007 Endowment": 274415,
+    "2006 Endowment": 228330,
+    "% Change": 0.202
+  },
+  {
+    "Rank": 215,
+    "Institution": "Gettysburg College",
+    "State": "PA",
+    "2007 Endowment": 274194,
+    "2006 Endowment": 233808,
+    "% Change": 0.173
+  },
+  {
+    "Rank": 216,
+    "Institution": "College of Wooster",
+    "State": "OH",
+    "2007 Endowment": 270148,
+    "2006 Endowment": 228462,
+    "% Change": 0.182
+  },
+  {
+    "Rank": 217,
+    "Institution": "St. Lawrence University",
+    "State": "NY",
+    "2007 Endowment": 269194,
+    "2006 Endowment": 229830,
+    "% Change": 0.171
+  },
+  {
+    "Rank": 218,
+    "Institution": "Fairfield University",
+    "State": "CT",
+    "2007 Endowment": 268758,
+    "2006 Endowment": 214759,
+    "% Change": 0.251
+  },
+  {
+    "Rank": 219,
+    "Institution": "Willamette University",
+    "State": "OR",
+    "2007 Endowment": 268448,
+    "2006 Endowment": 233966,
+    "% Change": 0.147
+  },
+  {
+    "Rank": 220,
+    "Institution": "Drew University",
+    "State": "NJ",
+    "2007 Endowment": 268348,
+    "2006 Endowment": 241450,
+    "% Change": 0.111
+  },
+  {
+    "Rank": 221,
+    "Institution": "Harvey Mudd College",
+    "State": "CA",
+    "2007 Endowment": 260809,
+    "2006 Endowment": 229721,
+    "% Change": 0.135
+  },
+  {
+    "Rank": 222,
+    "Institution": "University of Puget Sound",
+    "State": "WA",
+    "2007 Endowment": 259302,
+    "2006 Endowment": 222688,
+    "% Change": 0.164
+  },
+  {
+    "Rank": 223,
+    "Institution": "Hampton University",
+    "State": "VA",
+    "2007 Endowment": 256990,
+    "2006 Endowment": 217529,
+    "% Change": 0.181
+  },
+  {
+    "Rank": 224,
+    "Institution": "University of San Diego",
+    "State": "CA",
+    "2007 Endowment": 256472,
+    "2006 Endowment": 204917,
+    "% Change": 0.252
+  },
+  {
+    "Rank": 225,
+    "Institution": "Bentley College",
+    "State": "MA",
+    "2007 Endowment": 245871,
+    "2006 Endowment": 213393,
+    "% Change": 0.152
+  },
+  {
+    "Rank": 226,
+    "Institution": "Loma Linda University",
+    "State": "CA",
+    "2007 Endowment": 245301,
+    "2006 Endowment": 209924,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 227,
+    "Institution": "Ohio University",
+    "State": "OH",
+    "2007 Endowment": 242812,
+    "2006 Endowment": 207666,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 228,
+    "Institution": "Bradley University",
+    "State": "IL",
+    "2007 Endowment": 241135,
+    "2006 Endowment": 205800,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 229,
+    "Institution": "University of Nevada, Reno and Foundation",
+    "State": "NV",
+    "2007 Endowment": 240328,
+    "2006 Endowment": 202005,
+    "% Change": 0.19
+  },
+  {
+    "Rank": 230,
+    "Institution": "Temple University",
+    "State": "PA",
+    "2007 Endowment": 236712,
+    "2006 Endowment": 204178,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 231,
+    "Institution": "Wayne State University",
+    "State": "MI",
+    "2007 Endowment": 236659,
+    "2006 Endowment": 202000,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 232,
+    "Institution": "Johnson & Wales University",
+    "State": "RI",
+    "2007 Endowment": 236333,
+    "2006 Endowment": 189193,
+    "% Change": 0.249
+  },
+  {
+    "Rank": 233,
+    "Institution": "University of California, Irvine",
+    "State": "CA",
+    "2007 Endowment": 234024,
+    "2006 Endowment": 194816,
+    "% Change": 0.201
+  },
+  {
+    "Rank": 234,
+    "Institution": "Ithaca College",
+    "State": "NY",
+    "2007 Endowment": 233802,
+    "2006 Endowment": 203216,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 235,
+    "Institution": "Mills College",
+    "State": "CA",
+    "2007 Endowment": 233739,
+    "2006 Endowment": 198734,
+    "% Change": 0.176
+  },
+  {
+    "Rank": 236,
+    "Institution": "The New School",
+    "State": "NY",
+    "2007 Endowment": 232239,
+    "2006 Endowment": 199087,
+    "% Change": 0.167
+  },
+  {
+    "Rank": 237,
+    "Institution": "Lawrence University (Wisconsin)",
+    "State": "WI",
+    "2007 Endowment": 231740,
+    "2006 Endowment": 200436,
+    "% Change": 0.156
+  },
+  {
+    "Rank": 238,
+    "Institution": "Seton Hall University",
+    "State": "NJ",
+    "2007 Endowment": 230105,
+    "2006 Endowment": 195698,
+    "% Change": 0.176
+  },
+  {
+    "Rank": 239,
+    "Institution": "Hofstra University",
+    "State": "NY",
+    "2007 Endowment": 226304,
+    "2006 Endowment": 187867,
+    "% Change": 0.205
+  },
+  {
+    "Rank": 240,
+    "Institution": "Connecticut College",
+    "State": "CT",
+    "2007 Endowment": 225045,
+    "2006 Endowment": 192481,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 241,
+    "Institution": "Lewis and Clark College",
+    "State": "OR",
+    "2007 Endowment": 224491,
+    "2006 Endowment": 197291,
+    "% Change": 0.138
+  },
+  {
+    "Rank": 242,
+    "Institution": "Quinnipiac University",
+    "State": "CT",
+    "2007 Endowment": 223008,
+    "2006 Endowment": 185191,
+    "% Change": 0.204
+  },
+  {
+    "Rank": 243,
+    "Institution": "Berklee College of Music",
+    "State": "MA",
+    "2007 Endowment": 220548,
+    "2006 Endowment": 177578,
+    "% Change": 0.242
+  },
+  {
+    "Rank": 244,
+    "Institution": "University of the Pacific",
+    "State": "CA",
+    "2007 Endowment": 220500,
+    "2006 Endowment": 195744,
+    "% Change": 0.126
+  },
+  {
+    "Rank": 245,
+    "Institution": "Babson College",
+    "State": "MA",
+    "2007 Endowment": 220062,
+    "2006 Endowment": 193250,
+    "% Change": 0.139
+  },
+  {
+    "Rank": 246,
+    "Institution": "The Catholic University of America",
+    "State": "DC",
+    "2007 Endowment": 219862,
+    "2006 Endowment": 191893,
+    "% Change": 0.146
+  },
+  {
+    "Rank": 247,
+    "Institution": "Teachers College, Columbia University",
+    "State": "NY",
+    "2007 Endowment": 219670,
+    "2006 Endowment": 182037,
+    "% Change": 0.207
+  },
+  {
+    "Rank": 248,
+    "Institution": "University at Buffalo Foundation",
+    "State": "NY",
+    "2007 Endowment": 219538,
+    "2006 Endowment": 193959,
+    "% Change": 0.132
+  },
+  {
+    "Rank": 249,
+    "Institution": "The Citadel",
+    "State": "SC",
+    "2007 Endowment": 216214,
+    "2006 Endowment": 185363,
+    "% Change": 0.166
+  },
+  {
+    "Rank": 250,
+    "Institution": "University of San Francisco",
+    "State": "CA",
+    "2007 Endowment": 216171,
+    "2006 Endowment": 190117,
+    "% Change": 0.137
+  },
+  {
+    "Rank": 251,
+    "Institution": "Seattle University",
+    "State": "WA",
+    "2007 Endowment": 214771,
+    "2006 Endowment": 184657,
+    "% Change": 0.163
+  },
+  {
+    "Rank": 252,
+    "Institution": "Barnard College",
+    "State": "NY",
+    "2007 Endowment": 207301,
+    "2006 Endowment": 173362,
+    "% Change": 0.196
+  },
+  {
+    "Rank": 253,
+    "Institution": "University of Memphis",
+    "State": "TN",
+    "2007 Endowment": 206976,
+    "2006 Endowment": 179984,
+    "% Change": 0.15
+  },
+  {
+    "Rank": 254,
+    "Institution": "Centre College of Kentucky",
+    "State": "KY",
+    "2007 Endowment": 205850,
+    "2006 Endowment": 176190,
+    "% Change": 0.168
+  },
+  {
+    "Rank": 255,
+    "Institution": "Chapman University",
+    "State": "CA",
+    "2007 Endowment": 205260,
+    "2006 Endowment": 152962,
+    "% Change": 0.342
+  },
+  {
+    "Rank": 256,
+    "Institution": "Goucher College",
+    "State": "MD",
+    "2007 Endowment": 203895,
+    "2006 Endowment": 173932,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 257,
+    "Institution": "Claremont Graduate University",
+    "State": "CA",
+    "2007 Endowment": 203457,
+    "2006 Endowment": 174154,
+    "% Change": 0.168
+  },
+  {
+    "Rank": 258,
+    "Institution": "Mercer University",
+    "State": "GA",
+    "2007 Endowment": 201688,
+    "2006 Endowment": 173986,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 259,
+    "Institution": "Rose-Hulman Institute of Technology",
+    "State": "IN",
+    "2007 Endowment": 198995,
+    "2006 Endowment": 176797,
+    "% Change": 0.126
+  },
+  {
+    "Rank": 260,
+    "Institution": "Ball State University Foundation",
+    "State": "IN",
+    "2007 Endowment": 198062,
+    "2006 Endowment": 169655,
+    "% Change": 0.167
+  },
+  {
+    "Rank": 261,
+    "Institution": "Western Michigan University Foundation",
+    "State": "MI",
+    "2007 Endowment": 197742,
+    "2006 Endowment": 168398,
+    "% Change": 0.174
+  },
+  {
+    "Rank": 262,
+    "Institution": "Simmons College",
+    "State": "MA",
+    "2007 Endowment": 193556,
+    "2006 Endowment": 169065,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 263,
+    "Institution": "Valparaiso University",
+    "State": "IN",
+    "2007 Endowment": 192973,
+    "2006 Endowment": 166852,
+    "% Change": 0.157
+  },
+  {
+    "Rank": 264,
+    "Institution": "Kenyon College",
+    "State": "OH",
+    "2007 Endowment": 192934,
+    "2006 Endowment": 164597,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 265,
+    "Institution": "University of Akron and Foundation",
+    "State": "OH",
+    "2007 Endowment": 192755,
+    "2006 Endowment": 168088,
+    "% Change": 0.147
+  },
+  {
+    "Rank": 266,
+    "Institution": "Gallaudet University",
+    "State": "DC",
+    "2007 Endowment": 192286,
+    "2006 Endowment": 172055,
+    "% Change": 0.118
+  },
+  {
+    "Rank": 267,
+    "Institution": "Hendrix College",
+    "State": "AR",
+    "2007 Endowment": 192182,
+    "2006 Endowment": 159678,
+    "% Change": 0.204
+  },
+  {
+    "Rank": 268,
+    "Institution": "Wheaton College (Massachusetts)",
+    "State": "MA",
+    "2007 Endowment": 191284,
+    "2006 Endowment": 165809,
+    "% Change": 0.154
+  },
+  {
+    "Rank": 269,
+    "Institution": "Illinois Wesleyan University",
+    "State": "IL",
+    "2007 Endowment": 190471,
+    "2006 Endowment": 171101,
+    "% Change": 0.113
+  },
+  {
+    "Rank": 270,
+    "Institution": "Florida Atlantic University Foundation, Inc.",
+    "State": "FL",
+    "2007 Endowment": 190212,
+    "2006 Endowment": 168605,
+    "% Change": 0.128
+  },
+  {
+    "Rank": 271,
+    "Institution": "Ohio Wesleyan University",
+    "State": "OH",
+    "2007 Endowment": 189836,
+    "2006 Endowment": 158418,
+    "% Change": 0.198
+  },
+  {
+    "Rank": 272,
+    "Institution": "Wichita State University",
+    "State": "KS",
+    "2007 Endowment": 189337,
+    "2006 Endowment": 161301,
+    "% Change": 0.174
+  },
+  {
+    "Rank": 273,
+    "Institution": "University of Idaho",
+    "State": "ID",
+    "2007 Endowment": 188675,
+    "2006 Endowment": 169602,
+    "% Change": 0.112
+  },
+  {
+    "Rank": 274,
+    "Institution": "Colorado State University Foundation",
+    "State": "CO",
+    "2007 Endowment": 186464,
+    "2006 Endowment": 152225,
+    "% Change": 0.225
+  },
+  {
+    "Rank": 275,
+    "Institution": "University of Toledo and Foundation",
+    "State": "OH",
+    "2007 Endowment": 183920,
+    "2006 Endowment": 137989,
+    "% Change": 0.333
+  },
+  {
+    "Rank": 276,
+    "Institution": "University of North Carolina at Greensboro",
+    "State": "NC",
+    "2007 Endowment": 183751,
+    "2006 Endowment": 155642,
+    "% Change": 0.181
+  },
+  {
+    "Rank": 277,
+    "Institution": "Columbia Theological Seminary",
+    "State": "GA",
+    "2007 Endowment": 183546,
+    "2006 Endowment": 162820,
+    "% Change": 0.127
+  },
+  {
+    "Rank": 278,
+    "Institution": "The Curtis Institute of Music",
+    "State": "PA",
+    "2007 Endowment": 182248,
+    "2006 Endowment": 153149,
+    "% Change": 0.19
+  },
+  {
+    "Rank": 279,
+    "Institution": "California Polytechnic State University and Foundation",
+    "State": "CA",
+    "2007 Endowment": 181723,
+    "2006 Endowment": 164822,
+    "% Change": 0.103
+  },
+  {
+    "Rank": 280,
+    "Institution": "Loyola College (Maryland)",
+    "State": "MD",
+    "2007 Endowment": 181530,
+    "2006 Endowment": 157757,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 281,
+    "Institution": "Ohio Northern University",
+    "State": "OH",
+    "2007 Endowment": 181041,
+    "2006 Endowment": 149335,
+    "% Change": 0.212
+  },
+  {
+    "Rank": 282,
+    "Institution": "John Carroll University",
+    "State": "OH",
+    "2007 Endowment": 179534,
+    "2006 Endowment": 156231,
+    "% Change": 0.149
+  },
+  {
+    "Rank": 283,
+    "Institution": "Clarkson University",
+    "State": "NY",
+    "2007 Endowment": 177962,
+    "2006 Endowment": 154478,
+    "% Change": 0.152
+  },
+  {
+    "Rank": 284,
+    "Institution": "Old Dominion University",
+    "State": "VA",
+    "2007 Endowment": 177844,
+    "2006 Endowment": 153009,
+    "% Change": 0.162
+  },
+  {
+    "Rank": 285,
+    "Institution": "New Mexico State University and Foundation",
+    "State": "NM",
+    "2007 Endowment": 175683,
+    "2006 Endowment": 144680,
+    "% Change": 0.214
+  },
+  {
+    "Rank": 286,
+    "Institution": "Colorado School of Mines Foundation, Inc.",
+    "State": "CO",
+    "2007 Endowment": 175022,
+    "2006 Endowment": 155072,
+    "% Change": 0.129
+  },
+  {
+    "Rank": 287,
+    "Institution": "Bryant University",
+    "State": "RI",
+    "2007 Endowment": 174992,
+    "2006 Endowment": 152005,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 288,
+    "Institution": "Duquesne University",
+    "State": "PA",
+    "2007 Endowment": 174670,
+    "2006 Endowment": 143625,
+    "% Change": 0.216
+  },
+  {
+    "Rank": 289,
+    "Institution": "Hobart and William Smith Colleges",
+    "State": "NY",
+    "2007 Endowment": 174319,
+    "2006 Endowment": 148560,
+    "% Change": 0.173
+  },
+  {
+    "Rank": 290,
+    "Institution": "Youngstown State University and Foundation",
+    "State": "OH",
+    "2007 Endowment": 172960,
+    "2006 Endowment": 152285,
+    "% Change": 0.136
+  },
+  {
+    "Rank": 291,
+    "Institution": "Kalamazoo College",
+    "State": "MI",
+    "2007 Endowment": 172198,
+    "2006 Endowment": 152340,
+    "% Change": 0.13
+  },
+  {
+    "Rank": 292,
+    "Institution": "Hope College",
+    "State": "MI",
+    "2007 Endowment": 168795,
+    "2006 Endowment": 143115,
+    "% Change": 0.179
+  },
+  {
+    "Rank": 293,
+    "Institution": "Wofford College",
+    "State": "SC",
+    "2007 Endowment": 168090,
+    "2006 Endowment": 131850,
+    "% Change": 0.275
+  },
+  {
+    "Rank": 294,
+    "Institution": "Rowan University Foundation",
+    "State": "NJ",
+    "2007 Endowment": 168020,
+    "2006 Endowment": 147458,
+    "% Change": 0.139
+  },
+  {
+    "Rank": 295,
+    "Institution": "University of Maine Foundation",
+    "State": "ME",
+    "2007 Endowment": 163474,
+    "2006 Endowment": 123991,
+    "% Change": 0.318
+  },
+  {
+    "Rank": 296,
+    "Institution": "Butler University",
+    "State": "IN",
+    "2007 Endowment": 162671,
+    "2006 Endowment": 135305,
+    "% Change": 0.202
+  },
+  {
+    "Rank": 297,
+    "Institution": "University of Guelph",
+    "State": "ON",
+    "2007 Endowment": 162603,
+    "2006 Endowment": 144030,
+    "% Change": 0.129
+  },
+  {
+    "Rank": 298,
+    "Institution": "Saint Mary's College of California",
+    "State": "CA",
+    "2007 Endowment": 162526,
+    "2006 Endowment": 143433,
+    "% Change": 0.133
+  },
+  {
+    "Rank": 299,
+    "Institution": "Stonehill College, Inc.",
+    "State": "MA",
+    "2007 Endowment": 162191,
+    "2006 Endowment": 138094,
+    "% Change": 0.174
+  },
+  {
+    "Rank": 300,
+    "Institution": "Stevens Institute of Technology",
+    "State": "NJ",
+    "2007 Endowment": 161250,
+    "2006 Endowment": 142414,
+    "% Change": 0.132
+  },
+  {
+    "Rank": 301,
+    "Institution": "Hanover College",
+    "State": "IN",
+    "2007 Endowment": 159042,
+    "2006 Endowment": 150814,
+    "% Change": 0.055
+  },
+  {
+    "Rank": 302,
+    "Institution": "Allegheny College",
+    "State": "PA",
+    "2007 Endowment": 158414,
+    "2006 Endowment": 135552,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 303,
+    "Institution": "Providence College",
+    "State": "RI",
+    "2007 Endowment": 158385,
+    "2006 Endowment": 136129,
+    "% Change": 0.163
+  },
+  {
+    "Rank": 304,
+    "Institution": "Randolph-Macon Woman's College",
+    "State": "VA",
+    "2007 Endowment": 155601,
+    "2006 Endowment": 142854,
+    "% Change": 0.089
+  },
+  {
+    "Rank": 305,
+    "Institution": "Buena Vista University",
+    "State": "IA",
+    "2007 Endowment": 155564,
+    "2006 Endowment": 130454,
+    "% Change": 0.192
+  },
+  {
+    "Rank": 306,
+    "Institution": "St. Mary's University (Texas)",
+    "State": "TX",
+    "2007 Endowment": 154340,
+    "2006 Endowment": 135887,
+    "% Change": 0.136
+  },
+  {
+    "Rank": 307,
+    "Institution": "Asbury Theological Seminary",
+    "State": "KY",
+    "2007 Endowment": 153699,
+    "2006 Endowment": 128896,
+    "% Change": 0.192
+  },
+  {
+    "Rank": 308,
+    "Institution": "Drake University",
+    "State": "IA",
+    "2007 Endowment": 152148,
+    "2006 Endowment": 131549,
+    "% Change": 0.157
+  },
+  {
+    "Rank": 309,
+    "Institution": "Medical University of South Carolina Foundation",
+    "State": "SC",
+    "2007 Endowment": 150311,
+    "2006 Endowment": 121494,
+    "% Change": 0.237
+  },
+  {
+    "Rank": 310,
+    "Institution": "Washburn Endowment Association",
+    "State": "KS",
+    "2007 Endowment": 150209,
+    "2006 Endowment": 126188,
+    "% Change": 0.19
+  },
+  {
+    "Rank": 311,
+    "Institution": "University of the Sciences in Philadelphia",
+    "State": "PA",
+    "2007 Endowment": 149174,
+    "2006 Endowment": 127333,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 312,
+    "Institution": "Inter American University of Puerto Rico",
+    "State": "PR",
+    "2007 Endowment": 149121,
+    "2006 Endowment": 128188,
+    "% Change": 0.163
+  },
+  {
+    "Rank": 313,
+    "Institution": "University of North Carolina at Charlotte",
+    "State": "NC",
+    "2007 Endowment": 147174,
+    "2006 Endowment": 105306,
+    "% Change": 0.398
+  },
+  {
+    "Rank": 314,
+    "Institution": "Polytechnic University",
+    "State": "NY",
+    "2007 Endowment": 145263,
+    "2006 Endowment": 132495,
+    "% Change": 0.096
+  },
+  {
+    "Rank": 315,
+    "Institution": "Austin College",
+    "State": "TX",
+    "2007 Endowment": 144743,
+    "2006 Endowment": 120222,
+    "% Change": 0.204
+  },
+  {
+    "Rank": 316,
+    "Institution": "Transylvania University",
+    "State": "KY",
+    "2007 Endowment": 144446,
+    "2006 Endowment": 125485,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 317,
+    "Institution": "Baldwin-Wallace College",
+    "State": "OH",
+    "2007 Endowment": 142634,
+    "2006 Endowment": 130451,
+    "% Change": 0.093
+  },
+  {
+    "Rank": 318,
+    "Institution": "Saint Joseph's University",
+    "State": "PA",
+    "2007 Endowment": 142508,
+    "2006 Endowment": 109065,
+    "% Change": 0.307
+  },
+  {
+    "Rank": 319,
+    "Institution": "Hampden-Sydney College",
+    "State": "VA",
+    "2007 Endowment": 142375,
+    "2006 Endowment": 125919,
+    "% Change": 0.131
+  },
+  {
+    "Rank": 320,
+    "Institution": "Bowling Green State University",
+    "State": "OH",
+    "2007 Endowment": 140766,
+    "2006 Endowment": 124020,
+    "% Change": 0.135
+  },
+  {
+    "Rank": 321,
+    "Institution": "Siena College",
+    "State": "NY",
+    "2007 Endowment": 139910,
+    "2006 Endowment": 122033,
+    "% Change": 0.146
+  },
+  {
+    "Rank": 322,
+    "Institution": "St. John's University (Minnesota)",
+    "State": "MN",
+    "2007 Endowment": 139700,
+    "2006 Endowment": 121922,
+    "% Change": 0.146
+  },
+  {
+    "Rank": 323,
+    "Institution": "Stetson University",
+    "State": "FL",
+    "2007 Endowment": 137556,
+    "2006 Endowment": 124428,
+    "% Change": 0.106
+  },
+  {
+    "Rank": 324,
+    "Institution": "Illinois College",
+    "State": "IL",
+    "2007 Endowment": 135616,
+    "2006 Endowment": 123176,
+    "% Change": 0.101
+  },
+  {
+    "Rank": 325,
+    "Institution": "Muhlenberg College",
+    "State": "PA",
+    "2007 Endowment": 135425,
+    "2006 Endowment": 114243,
+    "% Change": 0.185
+  },
+  {
+    "Rank": 326,
+    "Institution": "Lycoming College",
+    "State": "PA",
+    "2007 Endowment": 135068,
+    "2006 Endowment": 114011,
+    "% Change": 0.185
+  },
+  {
+    "Rank": 327,
+    "Institution": "Medical College of Georgia",
+    "State": "GA",
+    "2007 Endowment": 133971,
+    "2006 Endowment": 113767,
+    "% Change": 0.178
+  },
+  {
+    "Rank": 328,
+    "Institution": "Saint Mary's College (Indiana)",
+    "State": "IN",
+    "2007 Endowment": 132102,
+    "2006 Endowment": 110081,
+    "% Change": 0.2
+  },
+  {
+    "Rank": 329,
+    "Institution": "Randolph-Macon College",
+    "State": "VA",
+    "2007 Endowment": 131825,
+    "2006 Endowment": 112225,
+    "% Change": 0.175
+  },
+  {
+    "Rank": 330,
+    "Institution": "Mount Union College",
+    "State": "OH",
+    "2007 Endowment": 131569,
+    "2006 Endowment": 115949,
+    "% Change": 0.135
+  },
+  {
+    "Rank": 331,
+    "Institution": "Utah State University",
+    "State": "UT",
+    "2007 Endowment": 130544,
+    "2006 Endowment": 110319,
+    "% Change": 0.183
+  },
+  {
+    "Rank": 332,
+    "Institution": "Austin Presbyterian Theological Seminary",
+    "State": "TX",
+    "2007 Endowment": 129123,
+    "2006 Endowment": 110764,
+    "% Change": 0.166
+  },
+  {
+    "Rank": 333,
+    "Institution": "Messiah College",
+    "State": "PA",
+    "2007 Endowment": 127348,
+    "2006 Endowment": 113398,
+    "% Change": 0.123
+  },
+  {
+    "Rank": 334,
+    "Institution": "Hollins University",
+    "State": "VA",
+    "2007 Endowment": 126965,
+    "2006 Endowment": 109435,
+    "% Change": 0.16
+  },
+  {
+    "Rank": 335,
+    "Institution": "Susquehanna University",
+    "State": "PA",
+    "2007 Endowment": 126551,
+    "2006 Endowment": 108259,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 336,
+    "Institution": "University of Redlands",
+    "State": "CA",
+    "2007 Endowment": 125950,
+    "2006 Endowment": 110929,
+    "% Change": 0.135
+  },
+  {
+    "Rank": 337,
+    "Institution": "Xavier University (Ohio)",
+    "State": "OH",
+    "2007 Endowment": 124915,
+    "2006 Endowment": 108089,
+    "% Change": 0.156
+  },
+  {
+    "Rank": 338,
+    "Institution": "University of Montana Foundation",
+    "State": "MT",
+    "2007 Endowment": 123528,
+    "2006 Endowment": 105588,
+    "% Change": 0.17
+  },
+  {
+    "Rank": 339,
+    "Institution": "University of Tennessee at Chattanooga Foundation",
+    "State": "TN",
+    "2007 Endowment": 122259,
+    "2006 Endowment": 108409,
+    "% Change": 0.128
+  },
+  {
+    "Rank": 340,
+    "Institution": "University of Maine System",
+    "State": "ME",
+    "2007 Endowment": 122032,
+    "2006 Endowment": 107820,
+    "% Change": 0.132
+  },
+  {
+    "Rank": 341,
+    "Institution": "Pace University",
+    "State": "NY",
+    "2007 Endowment": 121931,
+    "2006 Endowment": 101815,
+    "% Change": 0.198
+  },
+  {
+    "Rank": 342,
+    "Institution": "Wittenberg University",
+    "State": "OH",
+    "2007 Endowment": 121320,
+    "2006 Endowment": 108787,
+    "% Change": 0.115
+  },
+  {
+    "Rank": 343,
+    "Institution": "Goshen College",
+    "State": "IN",
+    "2007 Endowment": 121076,
+    "2006 Endowment": 105789,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 344,
+    "Institution": "University of Scranton",
+    "State": "PA",
+    "2007 Endowment": 120073,
+    "2006 Endowment": 104039,
+    "% Change": 0.154
+  },
+  {
+    "Rank": 345,
+    "Institution": "Philadelphia College of Osteopathic Medicine",
+    "State": "PA",
+    "2007 Endowment": 119781,
+    "2006 Endowment": 96341,
+    "% Change": 0.243
+  },
+  {
+    "Rank": 346,
+    "Institution": "University of South Dakota and Foundation",
+    "State": "SD",
+    "2007 Endowment": 118829,
+    "2006 Endowment": 101680,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 347,
+    "Institution": "Christian Theological Seminary",
+    "State": "IN",
+    "2007 Endowment": 118652,
+    "2006 Endowment": 107280,
+    "% Change": 0.106
+  },
+  {
+    "Rank": 348,
+    "Institution": "Augustana College (Illinois)",
+    "State": "IL",
+    "2007 Endowment": 118485,
+    "2006 Endowment": 101180,
+    "% Change": 0.171
+  },
+  {
+    "Rank": 349,
+    "Institution": "San Diego State University",
+    "State": "CA",
+    "2007 Endowment": 117385,
+    "2006 Endowment": 97988,
+    "% Change": 0.198
+  },
+  {
+    "Rank": 350,
+    "Institution": "Roanoke College",
+    "State": "VA",
+    "2007 Endowment": 116416,
+    "2006 Endowment": 103654,
+    "% Change": 0.123
+  },
+  {
+    "Rank": 351,
+    "Institution": "University of Central Florida Foundation",
+    "State": "FL",
+    "2007 Endowment": 116291,
+    "2006 Endowment": 96417,
+    "% Change": 0.206
+  },
+  {
+    "Rank": 352,
+    "Institution": "Ursinus College",
+    "State": "PA",
+    "2007 Endowment": 116005,
+    "2006 Endowment": 103268,
+    "% Change": 0.123
+  },
+  {
+    "Rank": 353,
+    "Institution": "Roger Williams University",
+    "State": "RI",
+    "2007 Endowment": 114565,
+    "2006 Endowment": 90451,
+    "% Change": 0.267
+  },
+  {
+    "Rank": 354,
+    "Institution": "Alfred University",
+    "State": "NY",
+    "2007 Endowment": 114349,
+    "2006 Endowment": 96439,
+    "% Change": 0.186
+  },
+  {
+    "Rank": 355,
+    "Institution": "Gustavus Adolphus College",
+    "State": "MN",
+    "2007 Endowment": 114042,
+    "2006 Endowment": 96376,
+    "% Change": 0.183
+  },
+  {
+    "Rank": 356,
+    "Institution": "Luther College",
+    "State": "IA",
+    "2007 Endowment": 113807,
+    "2006 Endowment": 97648,
+    "% Change": 0.165
+  },
+  {
+    "Rank": 357,
+    "Institution": "Birmingham-Southern College",
+    "State": "AL",
+    "2007 Endowment": 113090,
+    "2006 Endowment": 114358,
+    "% Change": -0.011
+  },
+  {
+    "Rank": 358,
+    "Institution": "California State University, Fresno",
+    "State": "CA",
+    "2007 Endowment": 112901,
+    "2006 Endowment": 100391,
+    "% Change": 0.125
+  },
+  {
+    "Rank": 359,
+    "Institution": "Alma College",
+    "State": "MI",
+    "2007 Endowment": 112880,
+    "2006 Endowment": 100436,
+    "% Change": 0.124
+  },
+  {
+    "Rank": 360,
+    "Institution": "Columbia College Chicago",
+    "State": "IL",
+    "2007 Endowment": 112326,
+    "2006 Endowment": 104096,
+    "% Change": 0.079
+  },
+  {
+    "Rank": 361,
+    "Institution": "McCormick Theological Seminary",
+    "State": "IL",
+    "2007 Endowment": 111556
+  },
+  {
+    "Rank": 362,
+    "Institution": "Baker College",
+    "State": "MI",
+    "2007 Endowment": 111052,
+    "2006 Endowment": 82983,
+    "% Change": 0.338
+  },
+  {
+    "Rank": 363,
+    "Institution": "Montana State University Foundation",
+    "State": "MT",
+    "2007 Endowment": 110358,
+    "2006 Endowment": 92852,
+    "% Change": 0.189
+  },
+  {
+    "Rank": 364,
+    "Institution": "University of Hartford",
+    "State": "CT",
+    "2007 Endowment": 109295,
+    "2006 Endowment": 94674,
+    "% Change": 0.154
+  },
+  {
+    "Rank": 365,
+    "Institution": "California Institute of the Arts",
+    "State": "CA",
+    "2007 Endowment": 108932,
+    "2006 Endowment": 91752,
+    "% Change": 0.187
+  },
+  {
+    "Rank": 366,
+    "Institution": "Adelphi University",
+    "State": "NY",
+    "2007 Endowment": 106507,
+    "2006 Endowment": 86805,
+    "% Change": 0.227
+  },
+  {
+    "Rank": 367,
+    "Institution": "Hardin-Simmons University",
+    "State": "TX",
+    "2007 Endowment": 106379,
+    "2006 Endowment": 88025,
+    "% Change": 0.209
+  },
+  {
+    "Rank": 368,
+    "Institution": "Pitzer College",
+    "State": "CA",
+    "2007 Endowment": 106364,
+    "2006 Endowment": 86336,
+    "% Change": 0.232
+  },
+  {
+    "Rank": 369,
+    "Institution": "SUNY, Stony Brook Foundation",
+    "State": "NY",
+    "2007 Endowment": 104574,
+    "2006 Endowment": 76543,
+    "% Change": 0.366
+  },
+  {
+    "Rank": 370,
+    "Institution": "Sweet Briar College",
+    "State": "VA",
+    "2007 Endowment": 103136,
+    "2006 Endowment": 93685,
+    "% Change": 0.101
+  },
+  {
+    "Rank": 371,
+    "Institution": "Western Kentucky University and Foundations",
+    "State": "KY",
+    "2007 Endowment": 102155,
+    "2006 Endowment": 85723,
+    "% Change": 0.192
+  },
+  {
+    "Rank": 372,
+    "Institution": "Washington and Jefferson College",
+    "State": "PA",
+    "2007 Endowment": 101567,
+    "2006 Endowment": 92024,
+    "% Change": 0.104
+  },
+  {
+    "Rank": 373,
+    "Institution": "Westminster College (Pennsylvania)",
+    "State": "PA",
+    "2007 Endowment": 100298,
+    "2006 Endowment": 88426,
+    "% Change": 0.134
+  },
+  {
+    "Rank": 374,
+    "Institution": "Presbyterian College",
+    "State": "SC",
+    "2007 Endowment": 99487,
+    "2006 Endowment": 85317,
+    "% Change": 0.166
+  },
+  {
+    "Rank": 375,
+    "Institution": "Harding University",
+    "State": "AR",
+    "2007 Endowment": 99224,
+    "2006 Endowment": 85219,
+    "% Change": 0.164
+  },
+  {
+    "Rank": 376,
+    "Institution": "Millsaps College",
+    "State": "MS",
+    "2007 Endowment": 98676,
+    "2006 Endowment": 93101,
+    "% Change": 0.06
+  },
+  {
+    "Rank": 377,
+    "Institution": "Georgia State University Foundation, Inc.",
+    "State": "GA",
+    "2007 Endowment": 97648,
+    "2006 Endowment": 82386,
+    "% Change": 0.185
+  },
+  {
+    "Rank": 378,
+    "Institution": "Calvin College",
+    "State": "MI",
+    "2007 Endowment": 97596,
+    "2006 Endowment": 82556,
+    "% Change": 0.182
+  },
+  {
+    "Rank": 379,
+    "Institution": "Cottey College",
+    "State": "MO",
+    "2007 Endowment": 97426,
+    "2006 Endowment": 85547,
+    "% Change": 0.139
+  },
+  {
+    "Rank": 380,
+    "Institution": "University of Portland",
+    "State": "OR",
+    "2007 Endowment": 96315,
+    "2006 Endowment": 81212,
+    "% Change": 0.186
+  },
+  {
+    "Rank": 381,
+    "Institution": "The Fuller Foundation",
+    "State": "CA",
+    "2007 Endowment": 96228,
+    "2006 Endowment": 83627,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 382,
+    "Institution": "Millikin University",
+    "State": "IL",
+    "2007 Endowment": 95879,
+    "2006 Endowment": 79700,
+    "% Change": 0.203
+  },
+  {
+    "Rank": 383,
+    "Institution": "Elmhurst College",
+    "State": "IL",
+    "2007 Endowment": 95729,
+    "2006 Endowment": 81322,
+    "% Change": 0.177
+  },
+  {
+    "Rank": 384,
+    "Institution": "University of the Ozarks",
+    "State": "AR",
+    "2007 Endowment": 95113,
+    "2006 Endowment": 82127,
+    "% Change": 0.158
+  },
+  {
+    "Rank": 385,
+    "Institution": "University of Rhode Island Foundation",
+    "State": "RI",
+    "2007 Endowment": 95069,
+    "2006 Endowment": 79795,
+    "% Change": 0.191
+  },
+  {
+    "Rank": 386,
+    "Institution": "Lesley College",
+    "State": "MA",
+    "2007 Endowment": 94837,
+    "2006 Endowment": 51710,
+    "% Change": 0.834
+  },
+  {
+    "Rank": 387,
+    "Institution": "St. Louis College of Pharmacy",
+    "State": "MO",
+    "2007 Endowment": 94168,
+    "2006 Endowment": 76786,
+    "% Change": 0.226
+  },
+  {
+    "Rank": 388,
+    "Institution": "Moravian College",
+    "State": "PA",
+    "2007 Endowment": 93920,
+    "2006 Endowment": 81544,
+    "% Change": 0.152
+  },
+  {
+    "Rank": 389,
+    "Institution": "Doane College",
+    "State": "NE",
+    "2007 Endowment": 92712,
+    "2006 Endowment": 82088,
+    "% Change": 0.129
+  },
+  {
+    "Rank": 390,
+    "Institution": "University of North Texas",
+    "State": "TX",
+    "2007 Endowment": 92584,
+    "2006 Endowment": 68620,
+    "% Change": 0.349
+  },
+  {
+    "Rank": 391,
+    "Institution": "Florida International University",
+    "State": "FL",
+    "2007 Endowment": 91876,
+    "2006 Endowment": 80283,
+    "% Change": 0.144
+  },
+  {
+    "Rank": 392,
+    "Institution": "Saint Anselm College",
+    "State": "NH",
+    "2007 Endowment": 91737,
+    "2006 Endowment": 77321,
+    "% Change": 0.186
+  },
+  {
+    "Rank": 393,
+    "Institution": "Wentworth Institute of Technology",
+    "State": "MA",
+    "2007 Endowment": 91135,
+    "2006 Endowment": 78811,
+    "% Change": 0.156
+  },
+  {
+    "Rank": 394,
+    "Institution": "Garrett-Evangelical Theological Seminary",
+    "State": "IL",
+    "2007 Endowment": 91057
+  },
+  {
+    "Rank": 395,
+    "Institution": "Long Island University",
+    "State": "NY",
+    "2007 Endowment": 91049,
+    "2006 Endowment": 45792,
+    "% Change": 0.988
+  },
+  {
+    "Rank": 396,
+    "Institution": "East Carolina University",
+    "State": "NC",
+    "2007 Endowment": 90425,
+    "2006 Endowment": 79002,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 397,
+    "Institution": "McDaniel College",
+    "State": "MD",
+    "2007 Endowment": 89697,
+    "2006 Endowment": 76973,
+    "% Change": 0.165
+  },
+  {
+    "Rank": 398,
+    "Institution": "Franklin College of Indiana",
+    "State": "IN",
+    "2007 Endowment": 89581,
+    "2006 Endowment": 77878,
+    "% Change": 0.15
+  },
+  {
+    "Rank": 399,
+    "Institution": "Wright State University & Foundation",
+    "State": "OH",
+    "2007 Endowment": 89075,
+    "2006 Endowment": 77485,
+    "% Change": 0.15
+  },
+  {
+    "Rank": 400,
+    "Institution": "University of North Florida Foundation, Inc.",
+    "State": "FL",
+    "2007 Endowment": 88785,
+    "2006 Endowment": 76126,
+    "% Change": 0.166
+  },
+  {
+    "Rank": 401,
+    "Institution": "Pratt Institute",
+    "State": "NY",
+    "2007 Endowment": 87901,
+    "2006 Endowment": 73573,
+    "% Change": 0.195
+  },
+  {
+    "Rank": 402,
+    "Institution": "East Tennessee State University Foundation",
+    "State": "TN",
+    "2007 Endowment": 87860,
+    "2006 Endowment": 74341,
+    "% Change": 0.182
+  },
+  {
+    "Rank": 403,
+    "Institution": "Whitworth College",
+    "State": "WA",
+    "2007 Endowment": 86801,
+    "2006 Endowment": 72393,
+    "% Change": 0.199
+  },
+  {
+    "Rank": 404,
+    "Institution": "University of Georgia and Arch Foundation",
+    "State": "GA",
+    "2007 Endowment": 86478,
+    "2006 Endowment": 55753,
+    "% Change": 0.551
+  },
+  {
+    "Rank": 405,
+    "Institution": "Widener University",
+    "State": "PA",
+    "2007 Endowment": 85790,
+    "2006 Endowment": 68622,
+    "% Change": 0.25
+  },
+  {
+    "Rank": 406,
+    "Institution": "Meredith College",
+    "State": "NC",
+    "2007 Endowment": 85587,
+    "2006 Endowment": 73004,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 407,
+    "Institution": "Angelo State University",
+    "State": "TX",
+    "2007 Endowment": 85566,
+    "2006 Endowment": 77786,
+    "% Change": 0.1
+  },
+  {
+    "Rank": 408,
+    "Institution": "Southern Illinois University Foundation",
+    "State": "IL",
+    "2007 Endowment": 85426,
+    "2006 Endowment": 71784,
+    "% Change": 0.19
+  },
+  {
+    "Rank": 409,
+    "Institution": "Houston Baptist University",
+    "State": "TX",
+    "2007 Endowment": 85115,
+    "2006 Endowment": 82349,
+    "% Change": 0.034
+  },
+  {
+    "Rank": 410,
+    "Institution": "University of Evansville",
+    "State": "IN",
+    "2007 Endowment": 84789,
+    "2006 Endowment": 74912,
+    "% Change": 0.132
+  },
+  {
+    "Rank": 411,
+    "Institution": "Lynchburg College",
+    "State": "VA",
+    "2007 Endowment": 84521,
+    "2006 Endowment": 75631,
+    "% Change": 0.118
+  },
+  {
+    "Rank": 412,
+    "Institution": "New England Conservatory of Music",
+    "State": "MA",
+    "2007 Endowment": 84198,
+    "2006 Endowment": 71952,
+    "% Change": 0.17
+  },
+  {
+    "Rank": 413,
+    "Institution": "University of Northern Colorado",
+    "State": "CO",
+    "2007 Endowment": 82964
+  },
+  {
+    "Rank": 414,
+    "Institution": "Hamline University",
+    "State": "MN",
+    "2007 Endowment": 82924,
+    "2006 Endowment": 66831,
+    "% Change": 0.241
+  },
+  {
+    "Rank": 415,
+    "Institution": "Oregon University System",
+    "State": "OR",
+    "2007 Endowment": 82653,
+    "2006 Endowment": 72668,
+    "% Change": 0.137
+  },
+  {
+    "Rank": 416,
+    "Institution": "Texas State University-San Marcos and Foundation",
+    "State": "TX",
+    "2007 Endowment": 82539,
+    "2006 Endowment": 61596,
+    "% Change": 0.34
+  },
+  {
+    "Rank": 417,
+    "Institution": "Central Michigan University",
+    "State": "MI",
+    "2007 Endowment": 82304,
+    "2006 Endowment": 68042,
+    "% Change": 0.21
+  },
+  {
+    "Rank": 418,
+    "Institution": "Central College",
+    "State": "IA",
+    "2007 Endowment": 82138,
+    "2006 Endowment": 71517,
+    "% Change": 0.149
+  },
+  {
+    "Rank": 419,
+    "Institution": "Canisius College",
+    "State": "NY",
+    "2007 Endowment": 81830,
+    "2006 Endowment": 66556,
+    "% Change": 0.229
+  },
+  {
+    "Rank": 420,
+    "Institution": "Lipscomb University",
+    "State": "TN",
+    "2007 Endowment": 81030,
+    "2006 Endowment": 70055,
+    "% Change": 0.157
+  },
+  {
+    "Rank": 421,
+    "Institution": "Concordia College",
+    "State": "MN",
+    "2007 Endowment": 80862,
+    "2006 Endowment": 75051,
+    "% Change": 0.077
+  },
+  {
+    "Rank": 422,
+    "Institution": "University of California, Riverside",
+    "State": "CA",
+    "2007 Endowment": 80405
+  },
+  {
+    "Rank": 423,
+    "Institution": "Emmanuel College",
+    "State": "MA",
+    "2007 Endowment": 80133,
+    "2006 Endowment": 71014,
+    "% Change": 0.128
+  },
+  {
+    "Rank": 424,
+    "Institution": "Whittier College",
+    "State": "CA",
+    "2007 Endowment": 79966,
+    "2006 Endowment": 68990,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 425,
+    "Institution": "Simpson College (Iowa)",
+    "State": "IA",
+    "2007 Endowment": 79912,
+    "2006 Endowment": 68920,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 426,
+    "Institution": "Westmont College",
+    "State": "CA",
+    "2007 Endowment": 79541,
+    "2006 Endowment": 66180,
+    "% Change": 0.202
+  },
+  {
+    "Rank": 427,
+    "Institution": "Knox College",
+    "State": "IL",
+    "2007 Endowment": 79473,
+    "2006 Endowment": 66219,
+    "% Change": 0.2
+  },
+  {
+    "Rank": 428,
+    "Institution": "Michigan Technological University",
+    "State": "MI",
+    "2007 Endowment": 78991,
+    "2006 Endowment": 66005,
+    "% Change": 0.197
+  },
+  {
+    "Rank": 429,
+    "Institution": "Illinois State University Foundation",
+    "State": "IL",
+    "2007 Endowment": 78966,
+    "2006 Endowment": 70077,
+    "% Change": 0.127
+  },
+  {
+    "Rank": 430,
+    "Institution": "North Central College",
+    "State": "IL",
+    "2007 Endowment": 78813,
+    "2006 Endowment": 69494,
+    "% Change": 0.134
+  },
+  {
+    "Rank": 431,
+    "Institution": "Coe College",
+    "State": "IA",
+    "2007 Endowment": 78571,
+    "2006 Endowment": 74921,
+    "% Change": 0.049
+  },
+  {
+    "Rank": 432,
+    "Institution": "Elon University",
+    "State": "NC",
+    "2007 Endowment": 78526,
+    "2006 Endowment": 65042,
+    "% Change": 0.207
+  },
+  {
+    "Rank": 433,
+    "Institution": "Meharry Medical College",
+    "State": "TN",
+    "2007 Endowment": 78421,
+    "2006 Endowment": 65627,
+    "% Change": 0.195
+  },
+  {
+    "Rank": 434,
+    "Institution": "St. Francis College",
+    "State": "NY",
+    "2007 Endowment": 78296,
+    "2006 Endowment": 75812,
+    "% Change": 0.033
+  },
+  {
+    "Rank": 435,
+    "Institution": "Hiram College",
+    "State": "OH",
+    "2007 Endowment": 77750,
+    "2006 Endowment": 68722,
+    "% Change": 0.131
+  },
+  {
+    "Rank": 436,
+    "Institution": "Ouachita Baptist University",
+    "State": "AR",
+    "2007 Endowment": 77316,
+    "2006 Endowment": 68864,
+    "% Change": 0.123
+  },
+  {
+    "Rank": 437,
+    "Institution": "University of Indianapolis",
+    "State": "IN",
+    "2007 Endowment": 77212,
+    "2006 Endowment": 67450,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 438,
+    "Institution": "Saint Michael's College",
+    "State": "VT",
+    "2007 Endowment": 77168,
+    "2006 Endowment": 63878,
+    "% Change": 0.208
+  },
+  {
+    "Rank": 439,
+    "Institution": "Taylor University",
+    "State": "IN",
+    "2007 Endowment": 76810,
+    "2006 Endowment": 62406,
+    "% Change": 0.231
+  },
+  {
+    "Rank": 440,
+    "Institution": "Guilford College",
+    "State": "NC",
+    "2007 Endowment": 75491,
+    "2006 Endowment": 64842,
+    "% Change": 0.164
+  },
+  {
+    "Rank": 441,
+    "Institution": "Niagara University",
+    "State": "NY",
+    "2007 Endowment": 75249,
+    "2006 Endowment": 62229,
+    "% Change": 0.209
+  },
+  {
+    "Rank": 442,
+    "Institution": "Boise State University Foundation, Inc.",
+    "State": "ID",
+    "2007 Endowment": 74008,
+    "2006 Endowment": 61091,
+    "% Change": 0.211
+  },
+  {
+    "Rank": 443,
+    "Institution": "Monmouth College (Illinois)",
+    "State": "IL",
+    "2007 Endowment": 73704,
+    "2006 Endowment": 61872,
+    "% Change": 0.191
+  },
+  {
+    "Rank": 444,
+    "Institution": "Lake Forest College",
+    "State": "IL",
+    "2007 Endowment": 73272,
+    "2006 Endowment": 61207,
+    "% Change": 0.197
+  },
+  {
+    "Rank": 445,
+    "Institution": "Linfield College",
+    "State": "OR",
+    "2007 Endowment": 73142,
+    "2006 Endowment": 61354,
+    "% Change": 0.192
+  },
+  {
+    "Rank": 446,
+    "Institution": "Sarah Lawrence College",
+    "State": "NY",
+    "2007 Endowment": 72209,
+    "2006 Endowment": 62582,
+    "% Change": 0.154
+  },
+  {
+    "Rank": 447,
+    "Institution": "South Dakota State University",
+    "State": "SD",
+    "2007 Endowment": 71579,
+    "2006 Endowment": 58556,
+    "% Change": 0.222
+  },
+  {
+    "Rank": 448,
+    "Institution": "Marietta College",
+    "State": "OH",
+    "2007 Endowment": 71291,
+    "2006 Endowment": 62102,
+    "% Change": 0.148
+  },
+  {
+    "Rank": 449,
+    "Institution": "Juniata College",
+    "State": "PA",
+    "2007 Endowment": 71127,
+    "2006 Endowment": 63102,
+    "% Change": 0.127
+  },
+  {
+    "Rank": 450,
+    "Institution": "St. Norbert College",
+    "State": "WI",
+    "2007 Endowment": 71060,
+    "2006 Endowment": 61090,
+    "% Change": 0.163
+  },
+  {
+    "Rank": 451,
+    "Institution": "Roosevelt University",
+    "State": "IL",
+    "2007 Endowment": 70871,
+    "2006 Endowment": 64162,
+    "% Change": 0.105
+  },
+  {
+    "Rank": 452,
+    "Institution": "New Jersey Institute of Technology",
+    "State": "NJ",
+    "2007 Endowment": 70644,
+    "2006 Endowment": 58530,
+    "% Change": 0.207
+  },
+  {
+    "Rank": 453,
+    "Institution": "Cornell College",
+    "State": "IA",
+    "2007 Endowment": 70342,
+    "2006 Endowment": 63136,
+    "% Change": 0.114
+  },
+  {
+    "Rank": 454,
+    "Institution": "Florida Southern College",
+    "State": "FL",
+    "2007 Endowment": 70332,
+    "2006 Endowment": 62674,
+    "% Change": 0.122
+  },
+  {
+    "Rank": 455,
+    "Institution": "Emporia State University Foundation",
+    "State": "KS",
+    "2007 Endowment": 69912,
+    "2006 Endowment": 60039,
+    "% Change": 0.164
+  },
+  {
+    "Rank": 456,
+    "Institution": "Sacred Heart University",
+    "State": "CT",
+    "2007 Endowment": 69472,
+    "2006 Endowment": 53921,
+    "% Change": 0.288
+  },
+  {
+    "Rank": 457,
+    "Institution": "Pacific Lutheran University",
+    "State": "WA",
+    "2007 Endowment": 69197,
+    "2006 Endowment": 61662,
+    "% Change": 0.122
+  },
+  {
+    "Rank": 458,
+    "Institution": "Texas Lutheran University",
+    "State": "TX",
+    "2007 Endowment": 69022,
+    "2006 Endowment": 58524,
+    "% Change": 0.179
+  },
+  {
+    "Rank": 459,
+    "Institution": "SUNY, Binghamton University",
+    "State": "NY",
+    "2007 Endowment": 68971,
+    "2006 Endowment": 56200,
+    "% Change": 0.227
+  },
+  {
+    "Rank": 460,
+    "Institution": "Hastings College",
+    "State": "NE",
+    "2007 Endowment": 68885,
+    "2006 Endowment": 59489,
+    "% Change": 0.158
+  },
+  {
+    "Rank": 461,
+    "Institution": "Assumption College",
+    "State": "MA",
+    "2007 Endowment": 68857,
+    "2006 Endowment": 55157,
+    "% Change": 0.248
+  },
+  {
+    "Rank": 462,
+    "Institution": "Valencia Community College and Foundation",
+    "State": "FL",
+    "2007 Endowment": 68004,
+    "2006 Endowment": 56968,
+    "% Change": 0.194
+  },
+  {
+    "Rank": 463,
+    "Institution": "Oklahoma Christian University",
+    "State": "OK",
+    "2007 Endowment": 67592,
+    "2006 Endowment": 60108,
+    "% Change": 0.125
+  },
+  {
+    "Rank": 464,
+    "Institution": "Hartwick College",
+    "State": "NY",
+    "2007 Endowment": 66873,
+    "2006 Endowment": 59425,
+    "% Change": 0.125
+  },
+  {
+    "Rank": 465,
+    "Institution": "John Brown University",
+    "State": "AR",
+    "2007 Endowment": 66457,
+    "2006 Endowment": 57147,
+    "% Change": 0.163
+  },
+  {
+    "Rank": 466,
+    "Institution": "Wilson College",
+    "State": "PA",
+    "2007 Endowment": 66004,
+    "2006 Endowment": 51678,
+    "% Change": 0.277
+  },
+  {
+    "Rank": 467,
+    "Institution": "University of Northern Iowa and Foundation",
+    "State": "IA",
+    "2007 Endowment": 65780,
+    "2006 Endowment": 57543,
+    "% Change": 0.143
+  },
+  {
+    "Rank": 468,
+    "Institution": "La Salle University",
+    "State": "PA",
+    "2007 Endowment": 65669,
+    "2006 Endowment": 56349,
+    "% Change": 0.165
+  },
+  {
+    "Rank": 469,
+    "Institution": "Kettering University",
+    "State": "MI",
+    "2007 Endowment": 64998,
+    "2006 Endowment": 55458,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 470,
+    "Institution": "Converse College",
+    "State": "SC",
+    "2007 Endowment": 64648,
+    "2006 Endowment": 53371,
+    "% Change": 0.211
+  },
+  {
+    "Rank": 471,
+    "Institution": "University of West Florida Foundation",
+    "State": "FL",
+    "2007 Endowment": 64239,
+    "2006 Endowment": 55035,
+    "% Change": 0.167
+  },
+  {
+    "Rank": 472,
+    "Institution": "Chatham College",
+    "State": "PA",
+    "2007 Endowment": 64085,
+    "2006 Endowment": 59485,
+    "% Change": 0.077
+  },
+  {
+    "Rank": 473,
+    "Institution": "Muskingum College",
+    "State": "OH",
+    "2007 Endowment": 63967,
+    "2006 Endowment": 56684,
+    "% Change": 0.128
+  },
+  {
+    "Rank": 474,
+    "Institution": "Westminster College of Salt Lake City",
+    "State": "UT",
+    "2007 Endowment": 63508,
+    "2006 Endowment": 54741,
+    "% Change": 0.16
+  },
+  {
+    "Rank": 475,
+    "Institution": "Capital University",
+    "State": "OH",
+    "2007 Endowment": 63382,
+    "2006 Endowment": 54804,
+    "% Change": 0.157
+  },
+  {
+    "Rank": 476,
+    "Institution": "St. Edward's University",
+    "State": "TX",
+    "2007 Endowment": 63007,
+    "2006 Endowment": 54362,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 477,
+    "Institution": "St. John's College (Annapolis)",
+    "State": "MD",
+    "2007 Endowment": 63005,
+    "2006 Endowment": 59968,
+    "% Change": 0.051
+  },
+  {
+    "Rank": 478,
+    "Institution": "College of Charleston Foundation",
+    "State": "SC",
+    "2007 Endowment": 62912,
+    "2006 Endowment": 54430,
+    "% Change": 0.156
+  },
+  {
+    "Rank": 479,
+    "Institution": "McMurry University",
+    "State": "TX",
+    "2007 Endowment": 62859,
+    "2006 Endowment": 53270,
+    "% Change": 0.18
+  },
+  {
+    "Rank": 480,
+    "Institution": "Appalachian State University and Foundation",
+    "State": "NC",
+    "2007 Endowment": 62245,
+    "2006 Endowment": 53123,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 481,
+    "Institution": "Belmont University",
+    "State": "TN",
+    "2007 Endowment": 61962,
+    "2006 Endowment": 52291,
+    "% Change": 0.185
+  },
+  {
+    "Rank": 482,
+    "Institution": "University of the Cumberlands",
+    "State": "KY",
+    "2007 Endowment": 61759,
+    "2006 Endowment": 58323,
+    "% Change": 0.059
+  },
+  {
+    "Rank": 483,
+    "Institution": "Grand Valley State University",
+    "State": "MI",
+    "2007 Endowment": 61745,
+    "2006 Endowment": 51917,
+    "% Change": 0.189
+  },
+  {
+    "Rank": 484,
+    "Institution": "Rider University",
+    "State": "NJ",
+    "2007 Endowment": 61600,
+    "2006 Endowment": 56047,
+    "% Change": 0.099
+  },
+  {
+    "Rank": 485,
+    "Institution": "Bridgewater College",
+    "State": "VA",
+    "2007 Endowment": 61536,
+    "2006 Endowment": 54052,
+    "% Change": 0.138
+  },
+  {
+    "Rank": 486,
+    "Institution": "Nazareth College of Rochester",
+    "State": "NY",
+    "2007 Endowment": 61409,
+    "2006 Endowment": 53706,
+    "% Change": 0.143
+  },
+  {
+    "Rank": 487,
+    "Institution": "Jacksonville University",
+    "State": "FL",
+    "2007 Endowment": 60865,
+    "2006 Endowment": 54286,
+    "% Change": 0.121
+  },
+  {
+    "Rank": 488,
+    "Institution": "Salem Academy and College",
+    "State": "NC",
+    "2007 Endowment": 60842,
+    "2006 Endowment": 50907,
+    "% Change": 0.195
+  },
+  {
+    "Rank": 489,
+    "Institution": "King's College (Pennsylvania)",
+    "State": "PA",
+    "2007 Endowment": 60743,
+    "2006 Endowment": 51840,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 490,
+    "Institution": "Palm Beach Atlantic University",
+    "State": "FL",
+    "2007 Endowment": 60595,
+    "2006 Endowment": 56440,
+    "% Change": 0.074
+  },
+  {
+    "Rank": 491,
+    "Institution": "California State University, Northridge",
+    "State": "CA",
+    "2007 Endowment": 60227,
+    "2006 Endowment": 52663,
+    "% Change": 0.144
+  },
+  {
+    "Rank": 492,
+    "Institution": "Embry-Riddle Aeronautical University",
+    "State": "FL",
+    "2007 Endowment": 60025,
+    "2006 Endowment": 52499,
+    "% Change": 0.143
+  },
+  {
+    "Rank": 493,
+    "Institution": "Webb Institute",
+    "State": "NY",
+    "2007 Endowment": 59944,
+    "2006 Endowment": 52977,
+    "% Change": 0.132
+  },
+  {
+    "Rank": 494,
+    "Institution": "Ripon College",
+    "State": "WI",
+    "2007 Endowment": 59421,
+    "2006 Endowment": 50064,
+    "% Change": 0.187
+  },
+  {
+    "Rank": 495,
+    "Institution": "Hood College",
+    "State": "MD",
+    "2007 Endowment": 59420,
+    "2006 Endowment": 52658,
+    "% Change": 0.128
+  },
+  {
+    "Rank": 496,
+    "Institution": "Pittsburg State University",
+    "State": "KS",
+    "2007 Endowment": 59216,
+    "2006 Endowment": 49799,
+    "% Change": 0.189
+  },
+  {
+    "Rank": 497,
+    "Institution": "Lenoir-Rhyne College",
+    "State": "NC",
+    "2007 Endowment": 58887,
+    "2006 Endowment": 51470,
+    "% Change": 0.144
+  },
+  {
+    "Rank": 498,
+    "Institution": "Tennessee Technological University",
+    "State": "TN",
+    "2007 Endowment": 58812,
+    "2006 Endowment": 50628,
+    "% Change": 0.162
+  },
+  {
+    "Rank": 499,
+    "Institution": "Indiana State University",
+    "State": "IN",
+    "2007 Endowment": 57557,
+    "2006 Endowment": 51032,
+    "% Change": 0.128
+  },
+  {
+    "Rank": 500,
+    "Institution": "California Lutheran University",
+    "State": "CA",
+    "2007 Endowment": 56727,
+    "2006 Endowment": 48819,
+    "% Change": 0.162
+  },
+  {
+    "Rank": 501,
+    "Institution": "University of St. Thomas (Texas)",
+    "State": "TX",
+    "2007 Endowment": 56715,
+    "2006 Endowment": 48649,
+    "% Change": 0.166
+  },
+  {
+    "Rank": 502,
+    "Institution": "Morehouse School of Medicine",
+    "State": "GA",
+    "2007 Endowment": 56385,
+    "2006 Endowment": 46105,
+    "% Change": 0.223
+  },
+  {
+    "Rank": 503,
+    "Institution": "Missouri State University Foundation",
+    "State": "MO",
+    "2007 Endowment": 55803,
+    "2006 Endowment": 46953,
+    "% Change": 0.188
+  },
+  {
+    "Rank": 504,
+    "Institution": "Marine Biological Laboratory",
+    "State": "MA",
+    "2007 Endowment": 55798,
+    "2006 Endowment": 51617,
+    "% Change": 0.081
+  },
+  {
+    "Rank": 505,
+    "Institution": "Eastern Kentucky University Foundation",
+    "State": "KY",
+    "2007 Endowment": 55455,
+    "2006 Endowment": 46426,
+    "% Change": 0.194
+  },
+  {
+    "Rank": 506,
+    "Institution": "SUNY, HSC at Brooklyn, College of Medicine",
+    "State": "NY",
+    "2007 Endowment": 55286,
+    "2006 Endowment": 47332,
+    "% Change": 0.168
+  },
+  {
+    "Rank": 507,
+    "Institution": "University of the Incarnate Word",
+    "State": "TX",
+    "2007 Endowment": 55065,
+    "2006 Endowment": 42750,
+    "% Change": 0.288
+  },
+  {
+    "Rank": 508,
+    "Institution": "East Texas Baptist University",
+    "State": "TX",
+    "2007 Endowment": 54729,
+    "2006 Endowment": 47524,
+    "% Change": 0.152
+  },
+  {
+    "Rank": 509,
+    "Institution": "George Mason University",
+    "State": "VA",
+    "2007 Endowment": 54724,
+    "2006 Endowment": 46523,
+    "% Change": 0.176
+  },
+  {
+    "Rank": 510,
+    "Institution": "Westminster College (Missouri)",
+    "State": "MO",
+    "2007 Endowment": 54215,
+    "2006 Endowment": 44599,
+    "% Change": 0.216
+  },
+  {
+    "Rank": 511,
+    "Institution": "Biola University",
+    "State": "CA",
+    "2007 Endowment": 53957,
+    "2006 Endowment": 43657,
+    "% Change": 0.236
+  },
+  {
+    "Rank": 512,
+    "Institution": "Wheelock College",
+    "State": "MA",
+    "2007 Endowment": 53483,
+    "2006 Endowment": 46877,
+    "% Change": 0.141
+  },
+  {
+    "Rank": 513,
+    "Institution": "Johnson C. Smith University",
+    "State": "NC",
+    "2007 Endowment": 53129,
+    "2006 Endowment": 44193,
+    "% Change": 0.202
+  },
+  {
+    "Rank": 514,
+    "Institution": "Virginia Wesleyan College",
+    "State": "VA",
+    "2007 Endowment": 53051,
+    "2006 Endowment": 45870,
+    "% Change": 0.157
+  },
+  {
+    "Rank": 515,
+    "Institution": "Springfield College",
+    "State": "MA",
+    "2007 Endowment": 52997,
+    "2006 Endowment": 45619,
+    "% Change": 0.162
+  },
+  {
+    "Rank": 516,
+    "Institution": "Albertson College of Idaho",
+    "State": "ID",
+    "2007 Endowment": 52738,
+    "2006 Endowment": 46618,
+    "% Change": 0.131
+  },
+  {
+    "Rank": 517,
+    "Institution": "Northern Kentucky University Foundation, Inc.",
+    "State": "KY",
+    "2007 Endowment": 52477,
+    "2006 Endowment": 41546,
+    "% Change": 0.263
+  },
+  {
+    "Rank": 518,
+    "Institution": "Fort Hays State University Endowment Association",
+    "State": "KS",
+    "2007 Endowment": 52378,
+    "2006 Endowment": 42979,
+    "% Change": 0.219
+  },
+  {
+    "Rank": 519,
+    "Institution": "Peace College",
+    "State": "NC",
+    "2007 Endowment": 52269,
+    "2006 Endowment": 45393,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 520,
+    "Institution": "Elizabethtown College",
+    "State": "PA",
+    "2007 Endowment": 52200,
+    "2006 Endowment": 44762,
+    "% Change": 0.166
+  },
+  {
+    "Rank": 521,
+    "Institution": "Bethany Lutheran College",
+    "State": "MN",
+    "2007 Endowment": 52079,
+    "2006 Endowment": 47290,
+    "% Change": 0.101
+  },
+  {
+    "Rank": 522,
+    "Institution": "Milwaukee School of Engineering",
+    "State": "WI",
+    "2007 Endowment": 51745,
+    "2006 Endowment": 43934,
+    "% Change": 0.178
+  },
+  {
+    "Rank": 523,
+    "Institution": "Arcadia University",
+    "State": "PA",
+    "2007 Endowment": 51637,
+    "2006 Endowment": 42424,
+    "% Change": 0.217
+  },
+  {
+    "Rank": 524,
+    "Institution": "Erskine College",
+    "State": "SC",
+    "2007 Endowment": 51504,
+    "2006 Endowment": 45413,
+    "% Change": 0.134
+  },
+  {
+    "Rank": 525,
+    "Institution": "University of North Carolina at Wilmington",
+    "State": "NC",
+    "2007 Endowment": 50794,
+    "2006 Endowment": 42807,
+    "% Change": 0.187
+  },
+  {
+    "Rank": 526,
+    "Institution": "James Madison University Foundation, Inc.",
+    "State": "VA",
+    "2007 Endowment": 50726,
+    "2006 Endowment": 39073,
+    "% Change": 0.298
+  },
+  {
+    "Rank": 527,
+    "Institution": "Howard Payne University",
+    "State": "TX",
+    "2007 Endowment": 50157,
+    "2006 Endowment": 44355,
+    "% Change": 0.131
+  },
+  {
+    "Rank": 528,
+    "Institution": "McNeese State University",
+    "State": "LA",
+    "2007 Endowment": 50086,
+    "2006 Endowment": 47499,
+    "% Change": 0.054
+  },
+  {
+    "Rank": 529,
+    "Institution": "San Jose State University and Tower Foundation",
+    "State": "CA",
+    "2007 Endowment": 50020,
+    "2006 Endowment": 39157,
+    "% Change": 0.277
+  },
+  {
+    "Rank": 530,
+    "Institution": "Winthrop University",
+    "State": "SC",
+    "2007 Endowment": 49981,
+    "2006 Endowment": 49325,
+    "% Change": 0.013
+  },
+  {
+    "Rank": 531,
+    "Institution": "Monmouth University",
+    "State": "NJ",
+    "2007 Endowment": 49209,
+    "2006 Endowment": 39896,
+    "% Change": 0.233
+  },
+  {
+    "Rank": 532,
+    "Institution": "Shenandoah University",
+    "State": "VA",
+    "2007 Endowment": 49201,
+    "2006 Endowment": 44742,
+    "% Change": 0.1
+  },
+  {
+    "Rank": 533,
+    "Institution": "Le Moyne College",
+    "State": "NY",
+    "2007 Endowment": 49132,
+    "2006 Endowment": 39825,
+    "% Change": 0.234
+  },
+  {
+    "Rank": 534,
+    "Institution": "Eastern Michigan University Foundation",
+    "State": "MI",
+    "2007 Endowment": 48988,
+    "2006 Endowment": 43285,
+    "% Change": 0.132
+  },
+  {
+    "Rank": 535,
+    "Institution": "Carthage College",
+    "State": "WI",
+    "2007 Endowment": 48910,
+    "2006 Endowment": 42442,
+    "% Change": 0.152
+  },
+  {
+    "Rank": 536,
+    "Institution": "University of Dallas",
+    "State": "TX",
+    "2007 Endowment": 48734,
+    "2006 Endowment": 45372,
+    "% Change": 0.074
+  },
+  {
+    "Rank": 537,
+    "Institution": "Western New England College",
+    "State": "MA",
+    "2007 Endowment": 48692,
+    "2006 Endowment": 41926,
+    "% Change": 0.161
+  },
+  {
+    "Rank": 538,
+    "Institution": "Manhattan College",
+    "State": "NY",
+    "2007 Endowment": 48497,
+    "2006 Endowment": 40485,
+    "% Change": 0.198
+  },
+  {
+    "Rank": 539,
+    "Institution": "Wagner College",
+    "State": "NY",
+    "2007 Endowment": 48032
+  },
+  {
+    "Rank": 540,
+    "Institution": "New York Chiropractic College",
+    "State": "NY",
+    "2007 Endowment": 47987,
+    "2006 Endowment": 45072,
+    "% Change": 0.065
+  },
+  {
+    "Rank": 541,
+    "Institution": "Ana G. Mendez University System",
+    "State": "PR",
+    "2007 Endowment": 47874,
+    "2006 Endowment": 42945,
+    "% Change": 0.115
+  },
+  {
+    "Rank": 542,
+    "Institution": "Lebanon Valley College",
+    "State": "PA",
+    "2007 Endowment": 47589,
+    "2006 Endowment": 41153,
+    "% Change": 0.156
+  },
+  {
+    "Rank": 543,
+    "Institution": "Seattle Pacific University",
+    "State": "WA",
+    "2007 Endowment": 47407,
+    "2006 Endowment": 40317,
+    "% Change": 0.176
+  },
+  {
+    "Rank": 544,
+    "Institution": "High Point University",
+    "State": "NC",
+    "2007 Endowment": 47114,
+    "2006 Endowment": 48011,
+    "% Change": -0.019
+  },
+  {
+    "Rank": 545,
+    "Institution": "Nebraska Wesleyan University",
+    "State": "NE",
+    "2007 Endowment": 46857,
+    "2006 Endowment": 40583,
+    "% Change": 0.155
+  },
+  {
+    "Rank": 546,
+    "Institution": "Indiana Wesleyan University",
+    "State": "IN",
+    "2007 Endowment": 46639,
+    "2006 Endowment": 40595,
+    "% Change": 0.149
+  },
+  {
+    "Rank": 547,
+    "Institution": "Georgian Court University",
+    "State": "NJ",
+    "2007 Endowment": 46583,
+    "2006 Endowment": 43592,
+    "% Change": 0.069
+  },
+  {
+    "Rank": 548,
+    "Institution": "St. Bonaventure University",
+    "State": "NY",
+    "2007 Endowment": 46411,
+    "2006 Endowment": 37661,
+    "% Change": 0.232
+  },
+  {
+    "Rank": 549,
+    "Institution": "Lewis University",
+    "State": "IL",
+    "2007 Endowment": 46300,
+    "2006 Endowment": 40682,
+    "% Change": 0.138
+  },
+  {
+    "Rank": 550,
+    "Institution": "DeSales University",
+    "State": "PA",
+    "2007 Endowment": 46276,
+    "2006 Endowment": 40408,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 551,
+    "Institution": "Purchase College, State University of New York",
+    "State": "NY",
+    "2007 Endowment": 45968,
+    "2006 Endowment": 37298,
+    "% Change": 0.232
+  },
+  {
+    "Rank": 552,
+    "Institution": "Albright College",
+    "State": "PA",
+    "2007 Endowment": 45693,
+    "2006 Endowment": 37000,
+    "% Change": 0.235
+  },
+  {
+    "Rank": 553,
+    "Institution": "Ferrum College",
+    "State": "VA",
+    "2007 Endowment": 45495,
+    "2006 Endowment": 39412,
+    "% Change": 0.154
+  },
+  {
+    "Rank": 554,
+    "Institution": "Bethany College (West Virginia)",
+    "State": "WV",
+    "2007 Endowment": 45180,
+    "2006 Endowment": 40136,
+    "% Change": 0.126
+  },
+  {
+    "Rank": 555,
+    "Institution": "Friends University",
+    "State": "KS",
+    "2007 Endowment": 44912,
+    "2006 Endowment": 34612,
+    "% Change": 0.298
+  },
+  {
+    "Rank": 556,
+    "Institution": "Wilkes University",
+    "State": "PA",
+    "2007 Endowment": 44550,
+    "2006 Endowment": 39823,
+    "% Change": 0.119
+  },
+  {
+    "Rank": 557,
+    "Institution": "Ashland University",
+    "State": "OH",
+    "2007 Endowment": 44455,
+    "2006 Endowment": 40850,
+    "% Change": 0.088
+  },
+  {
+    "Rank": 558,
+    "Institution": "Eastern Illinois University",
+    "State": "IL",
+    "2007 Endowment": 44318,
+    "2006 Endowment": 35779,
+    "% Change": 0.239
+  },
+  {
+    "Rank": 559,
+    "Institution": "Indiana University of Pennsylvania and Affiliates",
+    "State": "PA",
+    "2007 Endowment": 44216,
+    "2006 Endowment": 38608,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 560,
+    "Institution": "Georgetown College",
+    "State": "KY",
+    "2007 Endowment": 43764,
+    "2006 Endowment": 38651,
+    "% Change": 0.132
+  },
+  {
+    "Rank": 561,
+    "Institution": "Elmira College",
+    "State": "NY",
+    "2007 Endowment": 43685,
+    "2006 Endowment": 42150,
+    "% Change": 0.036
+  },
+  {
+    "Rank": 562,
+    "Institution": "Arkansas State University and Foundation",
+    "State": "AR",
+    "2007 Endowment": 43562,
+    "2006 Endowment": 36264,
+    "% Change": 0.201
+  },
+  {
+    "Rank": 563,
+    "Institution": "Mount Saint Mary's College",
+    "State": "MD",
+    "2007 Endowment": 43385,
+    "2006 Endowment": 38004,
+    "% Change": 0.142
+  },
+  {
+    "Rank": 564,
+    "Institution": "Carroll College (Wisconsin)",
+    "State": "WI",
+    "2007 Endowment": 43143,
+    "2006 Endowment": 37168,
+    "% Change": 0.161
+  },
+  {
+    "Rank": 565,
+    "Institution": "Longwood College Foundation, Inc.",
+    "State": "VA",
+    "2007 Endowment": 43129,
+    "2006 Endowment": 37588,
+    "% Change": 0.147
+  },
+  {
+    "Rank": 566,
+    "Institution": "Manchester College",
+    "State": "IN",
+    "2007 Endowment": 42982,
+    "2006 Endowment": 36795,
+    "% Change": 0.168
+  },
+  {
+    "Rank": 567,
+    "Institution": "Florida Institute of Technology",
+    "State": "FL",
+    "2007 Endowment": 42916,
+    "2006 Endowment": 41104,
+    "% Change": 0.044
+  },
+  {
+    "Rank": 568,
+    "Institution": "Bethune-Cookman College",
+    "State": "FL",
+    "2007 Endowment": 42854,
+    "2006 Endowment": 35351,
+    "% Change": 0.212
+  },
+  {
+    "Rank": 569,
+    "Institution": "University of Arkansas at Fort Smith",
+    "State": "AR",
+    "2007 Endowment": 42135,
+    "2006 Endowment": 32375,
+    "% Change": 0.301
+  },
+  {
+    "Rank": 570,
+    "Institution": "Montclair State University",
+    "State": "NJ",
+    "2007 Endowment": 42120,
+    "2006 Endowment": 30035,
+    "% Change": 0.402
+  },
+  {
+    "Rank": 571,
+    "Institution": "Maryville University (Missouri)",
+    "State": "MO",
+    "2007 Endowment": 42113,
+    "2006 Endowment": 36681,
+    "% Change": 0.148
+  },
+  {
+    "Rank": 572,
+    "Institution": "Oakland University and Foundation",
+    "State": "MI",
+    "2007 Endowment": 41721,
+    "2006 Endowment": 31101,
+    "% Change": 0.341
+  },
+  {
+    "Rank": 573,
+    "Institution": "Northwestern College",
+    "State": "IA",
+    "2007 Endowment": 41683,
+    "2006 Endowment": 38015,
+    "% Change": 0.096
+  },
+  {
+    "Rank": 574,
+    "Institution": "Brenau University",
+    "State": "GA",
+    "2007 Endowment": 41416,
+    "2006 Endowment": 36981,
+    "% Change": 0.12
+  },
+  {
+    "Rank": 575,
+    "Institution": "Rockhurst University",
+    "State": "MO",
+    "2007 Endowment": 41281,
+    "2006 Endowment": 35280,
+    "% Change": 0.17
+  },
+  {
+    "Rank": 576,
+    "Institution": "San Francisco State University Foundation",
+    "State": "CA",
+    "2007 Endowment": 41202,
+    "2006 Endowment": 29761,
+    "% Change": 0.384
+  },
+  {
+    "Rank": 577,
+    "Institution": "Salve Regina University",
+    "State": "RI",
+    "2007 Endowment": 41120,
+    "2006 Endowment": 35730,
+    "% Change": 0.151
+  },
+  {
+    "Rank": 578,
+    "Institution": "The Cleveland Institute of Music",
+    "State": "OH",
+    "2007 Endowment": 40792,
+    "2006 Endowment": 35901,
+    "% Change": 0.136
+  },
+  {
+    "Rank": 579,
+    "Institution": "Murray State University",
+    "State": "KY",
+    "2007 Endowment": 40671,
+    "2006 Endowment": 39724,
+    "% Change": 0.024
+  },
+  {
+    "Rank": 580,
+    "Institution": "Mary Baldwin College",
+    "State": "VA",
+    "2007 Endowment": 40450,
+    "2006 Endowment": 38030,
+    "% Change": 0.064
+  },
+  {
+    "Rank": 581,
+    "Institution": "Houghton College",
+    "State": "NY",
+    "2007 Endowment": 40278,
+    "2006 Endowment": 35542,
+    "% Change": 0.133
+  },
+  {
+    "Rank": 582,
+    "Institution": "College of Notre Dame of Maryland",
+    "State": "MD",
+    "2007 Endowment": 39964,
+    "2006 Endowment": 34195,
+    "% Change": 0.169
+  },
+  {
+    "Rank": 583,
+    "Institution": "Saginaw Valley State University (SVSU Foundation)",
+    "State": "MI",
+    "2007 Endowment": 39821,
+    "2006 Endowment": 31326,
+    "% Change": 0.271
+  },
+  {
+    "Rank": 584,
+    "Institution": "Regis University",
+    "State": "CO",
+    "2007 Endowment": 39446,
+    "2006 Endowment": 36260,
+    "% Change": 0.088
+  },
+  {
+    "Rank": 585,
+    "Institution": "Maryville College (Tennessee)",
+    "State": "TN",
+    "2007 Endowment": 39249,
+    "2006 Endowment": 33323,
+    "% Change": 0.178
+  },
+  {
+    "Rank": 586,
+    "Institution": "Radford University Foundation, Inc.",
+    "State": "VA",
+    "2007 Endowment": 38886,
+    "2006 Endowment": 25305,
+    "% Change": 0.537
+  },
+  {
+    "Rank": 587,
+    "Institution": "University of Mary Washington",
+    "State": "VA",
+    "2007 Endowment": 38883,
+    "2006 Endowment": 33525,
+    "% Change": 0.16
+  },
+  {
+    "Rank": 588,
+    "Institution": "Warren Wilson College, Inc.",
+    "State": "NC",
+    "2007 Endowment": 38438,
+    "2006 Endowment": 34970,
+    "% Change": 0.099
+  },
+  {
+    "Rank": 589,
+    "Institution": "Gannon University",
+    "State": "PA",
+    "2007 Endowment": 37568,
+    "2006 Endowment": 31957,
+    "% Change": 0.176
+  },
+  {
+    "Rank": 590,
+    "Institution": "Sonoma State University",
+    "State": "CA",
+    "2007 Endowment": 37417,
+    "2006 Endowment": 31678,
+    "% Change": 0.181
+  },
+  {
+    "Rank": 591,
+    "Institution": "Georgia Southern University",
+    "State": "GA",
+    "2007 Endowment": 37046,
+    "2006 Endowment": 31553,
+    "% Change": 0.174
+  },
+  {
+    "Rank": 592,
+    "Institution": "Indiana Institute of Technology",
+    "State": "IN",
+    "2007 Endowment": 36616,
+    "2006 Endowment": 27505,
+    "% Change": 0.331
+  },
+  {
+    "Rank": 593,
+    "Institution": "College of Saint Benedict",
+    "State": "MN",
+    "2007 Endowment": 36436,
+    "2006 Endowment": 30788,
+    "% Change": 0.183
+  },
+  {
+    "Rank": 594,
+    "Institution": "Ferris State University and Foundation",
+    "State": "MI",
+    "2007 Endowment": 36237,
+    "2006 Endowment": 29420,
+    "% Change": 0.232
+  },
+  {
+    "Rank": 595,
+    "Institution": "Freed-Hardeman University",
+    "State": "TN",
+    "2007 Endowment": 36095,
+    "2006 Endowment": 30429,
+    "% Change": 0.186
+  },
+  {
+    "Rank": 596,
+    "Institution": "California State University, Long Beach Foundation",
+    "State": "CA",
+    "2007 Endowment": 36072,
+    "2006 Endowment": 30341,
+    "% Change": 0.189
+  },
+  {
+    "Rank": 597,
+    "Institution": "California State University, Chico",
+    "State": "CA",
+    "2007 Endowment": 35741,
+    "2006 Endowment": 30840,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 598,
+    "Institution": "Northern Michigan University",
+    "State": "MI",
+    "2007 Endowment": 35613,
+    "2006 Endowment": 33304,
+    "% Change": 0.069
+  },
+  {
+    "Rank": 599,
+    "Institution": "Flagler College",
+    "State": "FL",
+    "2007 Endowment": 35137,
+    "2006 Endowment": 31314,
+    "% Change": 0.122
+  },
+  {
+    "Rank": 600,
+    "Institution": "Eastern Virginia Medical School Foundation",
+    "State": "VA",
+    "2007 Endowment": 34989,
+    "2006 Endowment": 31398,
+    "% Change": 0.114
+  },
+  {
+    "Rank": 601,
+    "Institution": "Heidelberg College",
+    "State": "OH",
+    "2007 Endowment": 34789
+  },
+  {
+    "Rank": 602,
+    "Institution": "San Francisco Conservatory of Music",
+    "State": "CA",
+    "2007 Endowment": 34177,
+    "2006 Endowment": 30348,
+    "% Change": 0.126
+  },
+  {
+    "Rank": 603,
+    "Institution": "Morningside College",
+    "State": "IA",
+    "2007 Endowment": 33985,
+    "2006 Endowment": 31571,
+    "% Change": 0.076
+  },
+  {
+    "Rank": 604,
+    "Institution": "California State Polytechnic University, Pomona",
+    "State": "CA",
+    "2007 Endowment": 33717,
+    "2006 Endowment": 27404,
+    "% Change": 0.23
+  },
+  {
+    "Rank": 605,
+    "Institution": "Madonna University",
+    "State": "MI",
+    "2007 Endowment": 33672,
+    "2006 Endowment": 29927,
+    "% Change": 0.125
+  },
+  {
+    "Rank": 606,
+    "Institution": "Asbury College",
+    "State": "KY",
+    "2007 Endowment": 33667,
+    "2006 Endowment": 29432,
+    "% Change": 0.144
+  },
+  {
+    "Rank": 607,
+    "Institution": "New College Foundation",
+    "State": "FL",
+    "2007 Endowment": 33550,
+    "2006 Endowment": 32162,
+    "% Change": 0.043
+  },
+  {
+    "Rank": 608,
+    "Institution": "Lamar University",
+    "State": "TX",
+    "2007 Endowment": 33526
+  },
+  {
+    "Rank": 609,
+    "Institution": "Saint Peter's College",
+    "State": "NJ",
+    "2007 Endowment": 33445,
+    "2006 Endowment": 28962,
+    "% Change": 0.155
+  },
+  {
+    "Rank": 610,
+    "Institution": "School of American Research",
+    "State": "NM",
+    "2007 Endowment": 33244,
+    "2006 Endowment": 28142,
+    "% Change": 0.181
+  },
+  {
+    "Rank": 611,
+    "Institution": "Erikson Institute",
+    "State": "IL",
+    "2007 Endowment": 33098,
+    "2006 Endowment": 29801,
+    "% Change": 0.111
+  },
+  {
+    "Rank": 612,
+    "Institution": "Florida Community College at Jacksonville",
+    "State": "FL",
+    "2007 Endowment": 32923,
+    "2006 Endowment": 24229,
+    "% Change": 0.359
+  },
+  {
+    "Rank": 613,
+    "Institution": "Western Carolina University",
+    "State": "NC",
+    "2007 Endowment": 32700,
+    "2006 Endowment": 28504,
+    "% Change": 0.147
+  },
+  {
+    "Rank": 614,
+    "Institution": "University of La Verne",
+    "State": "CA",
+    "2007 Endowment": 32642,
+    "2006 Endowment": 28166,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 615,
+    "Institution": "Columbia College of Missouri",
+    "State": "MO",
+    "2007 Endowment": 32237,
+    "2006 Endowment": 22488,
+    "% Change": 0.434
+  },
+  {
+    "Rank": 616,
+    "Institution": "The Sage Colleges",
+    "State": "NY",
+    "2007 Endowment": 31947,
+    "2006 Endowment": 30439,
+    "% Change": 0.05
+  },
+  {
+    "Rank": 617,
+    "Institution": "Columbus State University",
+    "State": "GA",
+    "2007 Endowment": 31608,
+    "2006 Endowment": 24366,
+    "% Change": 0.297
+  },
+  {
+    "Rank": 618,
+    "Institution": "Golden Gate University",
+    "State": "CA",
+    "2007 Endowment": 31419,
+    "2006 Endowment": 27925,
+    "% Change": 0.125
+  },
+  {
+    "Rank": 619,
+    "Institution": "Bellarmine University",
+    "State": "KY",
+    "2007 Endowment": 31310,
+    "2006 Endowment": 25775,
+    "% Change": 0.215
+  },
+  {
+    "Rank": 620,
+    "Institution": "Andrews University",
+    "State": "MI",
+    "2007 Endowment": 31051,
+    "2006 Endowment": 23502,
+    "% Change": 0.321
+  },
+  {
+    "Rank": 621,
+    "Institution": "Cazenovia College",
+    "State": "NY",
+    "2007 Endowment": 30708,
+    "2006 Endowment": 27143,
+    "% Change": 0.131
+  },
+  {
+    "Rank": 622,
+    "Institution": "Alverno College",
+    "State": "WI",
+    "2007 Endowment": 30590,
+    "2006 Endowment": 26619,
+    "% Change": 0.149
+  },
+  {
+    "Rank": 623,
+    "Institution": "Harrisburg Area Community College",
+    "State": "PA",
+    "2007 Endowment": 30563,
+    "2006 Endowment": 27637,
+    "% Change": 0.106
+  },
+  {
+    "Rank": 624,
+    "Institution": "Graduate Theological Union",
+    "State": "CA",
+    "2007 Endowment": 30424,
+    "2006 Endowment": 27282,
+    "% Change": 0.115
+  },
+  {
+    "Rank": 625,
+    "Institution": "Mercy College",
+    "State": "NY",
+    "2007 Endowment": 30395,
+    "2006 Endowment": 26521,
+    "% Change": 0.146
+  },
+  {
+    "Rank": 626,
+    "Institution": "Towson University",
+    "State": "MD",
+    "2007 Endowment": 30091,
+    "2006 Endowment": 22601,
+    "% Change": 0.331
+  },
+  {
+    "Rank": 627,
+    "Institution": "Marywood University",
+    "State": "PA",
+    "2007 Endowment": 30022,
+    "2006 Endowment": 26119,
+    "% Change": 0.149
+  },
+  {
+    "Rank": 628,
+    "Institution": "Loras College",
+    "State": "IA",
+    "2007 Endowment": 29906,
+    "2006 Endowment": 25798,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 629,
+    "Institution": "Western Illinois University Foundation",
+    "State": "IL",
+    "2007 Endowment": 29876,
+    "2006 Endowment": 24717,
+    "% Change": 0.209
+  },
+  {
+    "Rank": 630,
+    "Institution": "UW-Eau Claire",
+    "State": "WI",
+    "2007 Endowment": 29747,
+    "2006 Endowment": 24997,
+    "% Change": 0.19
+  },
+  {
+    "Rank": 631,
+    "Institution": "King College",
+    "State": "TN",
+    "2007 Endowment": 29599,
+    "2006 Endowment": 27408,
+    "% Change": 0.08
+  },
+  {
+    "Rank": 632,
+    "Institution": "SUNY, Oneonta",
+    "State": "NY",
+    "2007 Endowment": 29529,
+    "2006 Endowment": 24831,
+    "% Change": 0.189
+  },
+  {
+    "Rank": 633,
+    "Institution": "Bank Street College of Education",
+    "State": "NY",
+    "2007 Endowment": 29387,
+    "2006 Endowment": 24952,
+    "% Change": 0.178
+  },
+  {
+    "Rank": 634,
+    "Institution": "North Carolina School of the Arts",
+    "State": "NC",
+    "2007 Endowment": 28527,
+    "2006 Endowment": 26515,
+    "% Change": 0.076
+  },
+  {
+    "Rank": 635,
+    "Institution": "University of New England",
+    "State": "ME",
+    "2007 Endowment": 28476,
+    "2006 Endowment": 24424,
+    "% Change": 0.166
+  },
+  {
+    "Rank": 636,
+    "Institution": "Colby-Sawyer College",
+    "State": "NH",
+    "2007 Endowment": 28179,
+    "2006 Endowment": 24500,
+    "% Change": 0.15
+  },
+  {
+    "Rank": 637,
+    "Institution": "Wilmington College",
+    "State": "OH",
+    "2007 Endowment": 28081,
+    "2006 Endowment": 25473,
+    "% Change": 0.102
+  },
+  {
+    "Rank": 638,
+    "Institution": "The College of Saint Rose",
+    "State": "NY",
+    "2007 Endowment": 27981,
+    "2006 Endowment": 23756,
+    "% Change": 0.178
+  },
+  {
+    "Rank": 639,
+    "Institution": "Concordia University, Nebraska",
+    "State": "NE",
+    "2007 Endowment": 27923
+  },
+  {
+    "Rank": 640,
+    "Institution": "Aquinas College",
+    "State": "MI",
+    "2007 Endowment": 27812,
+    "2006 Endowment": 20450,
+    "% Change": 0.36
+  },
+  {
+    "Rank": 641,
+    "Institution": "College of St. Scholastica",
+    "State": "MN",
+    "2007 Endowment": 27776,
+    "2006 Endowment": 23742,
+    "% Change": 0.17
+  },
+  {
+    "Rank": 642,
+    "Institution": "Sinclair Community College Foundation",
+    "State": "OH",
+    "2007 Endowment": 27690,
+    "2006 Endowment": 23605,
+    "% Change": 0.173
+  },
+  {
+    "Rank": 643,
+    "Institution": "Covenant College",
+    "State": "GA",
+    "2007 Endowment": 27627,
+    "2006 Endowment": 21532,
+    "% Change": 0.283
+  },
+  {
+    "Rank": 644,
+    "Institution": "Kentucky Community and Technical College System",
+    "State": "KY",
+    "2007 Endowment": 27422,
+    "2006 Endowment": 21212,
+    "% Change": 0.293
+  },
+  {
+    "Rank": 645,
+    "Institution": "Carroll College",
+    "State": "MT",
+    "2007 Endowment": 27200,
+    "2006 Endowment": 24296,
+    "% Change": 0.12
+  },
+  {
+    "Rank": 646,
+    "Institution": "Troy State University",
+    "State": "AL",
+    "2007 Endowment": 27178,
+    "2006 Endowment": 21105,
+    "% Change": 0.288
+  },
+  {
+    "Rank": 647,
+    "Institution": "Mercyhurst College",
+    "State": "PA",
+    "2007 Endowment": 26880,
+    "2006 Endowment": 22303,
+    "% Change": 0.205
+  },
+  {
+    "Rank": 648,
+    "Institution": "Philadelphia University",
+    "State": "PA",
+    "2007 Endowment": 26858,
+    "2006 Endowment": 23191,
+    "% Change": 0.158
+  },
+  {
+    "Rank": 649,
+    "Institution": "University of Albany Foundation",
+    "State": "NY",
+    "2007 Endowment": 26728,
+    "2006 Endowment": 20198,
+    "% Change": 0.323
+  },
+  {
+    "Rank": 650,
+    "Institution": "University of Central Missouri Foundation",
+    "State": "MO",
+    "2007 Endowment": 26662,
+    "2006 Endowment": 23831,
+    "% Change": 0.119
+  },
+  {
+    "Rank": 651,
+    "Institution": "Iona College",
+    "State": "NY",
+    "2007 Endowment": 26533,
+    "2006 Endowment": 20762,
+    "% Change": 0.278
+  },
+  {
+    "Rank": 652,
+    "Institution": "Dordt College",
+    "State": "IA",
+    "2007 Endowment": 26196,
+    "2006 Endowment": 22115,
+    "% Change": 0.185
+  },
+  {
+    "Rank": 653,
+    "Institution": "Southern Adventist University",
+    "State": "TN",
+    "2007 Endowment": 25586,
+    "2006 Endowment": 22869,
+    "% Change": 0.119
+  },
+  {
+    "Rank": 654,
+    "Institution": "Eastern Mennonite University",
+    "State": "VA",
+    "2007 Endowment": 25431,
+    "2006 Endowment": 21867,
+    "% Change": 0.163
+  },
+  {
+    "Rank": 655,
+    "Institution": "College of Saint Elizabeth",
+    "State": "NJ",
+    "2007 Endowment": 25062,
+    "2006 Endowment": 23315,
+    "% Change": 0.075
+  },
+  {
+    "Rank": 656,
+    "Institution": "Wisconsin Lutheran College",
+    "State": "WI",
+    "2007 Endowment": 24974,
+    "2006 Endowment": 20379,
+    "% Change": 0.225
+  },
+  {
+    "Rank": 657,
+    "Institution": "Saint Francis University",
+    "State": "PA",
+    "2007 Endowment": 24902,
+    "2006 Endowment": 21667,
+    "% Change": 0.149
+  },
+  {
+    "Rank": 658,
+    "Institution": "Columbia College (South Carolina)",
+    "State": "SC",
+    "2007 Endowment": 24748,
+    "2006 Endowment": 21632,
+    "% Change": 0.144
+  },
+  {
+    "Rank": 659,
+    "Institution": "Covenant Theological Seminary",
+    "State": "MO",
+    "2007 Endowment": 24658,
+    "2006 Endowment": 22173,
+    "% Change": 0.112
+  },
+  {
+    "Rank": 660,
+    "Institution": "Georgia Southwestern State University",
+    "State": "GA",
+    "2007 Endowment": 24606,
+    "2006 Endowment": 23536,
+    "% Change": 0.045
+  },
+  {
+    "Rank": 661,
+    "Institution": "Cardinal Stritch University",
+    "State": "WI",
+    "2007 Endowment": 24562,
+    "2006 Endowment": 21320,
+    "% Change": 0.152
+  },
+  {
+    "Rank": 662,
+    "Institution": "Huntington College",
+    "State": "IN",
+    "2007 Endowment": 24372,
+    "2006 Endowment": 21359,
+    "% Change": 0.141
+  },
+  {
+    "Rank": 663,
+    "Institution": "College of Mount St. Joseph",
+    "State": "OH",
+    "2007 Endowment": 23985,
+    "2006 Endowment": 20717,
+    "% Change": 0.158
+  },
+  {
+    "Rank": 664,
+    "Institution": "Averett University",
+    "State": "VA",
+    "2007 Endowment": 23791,
+    "2006 Endowment": 21540,
+    "% Change": 0.105
+  },
+  {
+    "Rank": 665,
+    "Institution": "Montana Tech Foundation",
+    "State": "MT",
+    "2007 Endowment": 23769,
+    "2006 Endowment": 20095,
+    "% Change": 0.183
+  },
+  {
+    "Rank": 666,
+    "Institution": "Lasell College",
+    "State": "MA",
+    "2007 Endowment": 23523,
+    "2006 Endowment": 14168,
+    "% Change": 0.66
+  },
+  {
+    "Rank": 667,
+    "Institution": "St. Thomas University",
+    "State": "FL",
+    "2007 Endowment": 23469,
+    "2006 Endowment": 20502,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 668,
+    "Institution": "Fairleigh Dickinson University",
+    "State": "NJ",
+    "2007 Endowment": 23246,
+    "2006 Endowment": 19165,
+    "% Change": 0.213
+  },
+  {
+    "Rank": 669,
+    "Institution": "University of North Carolina at Asheville",
+    "State": "NC",
+    "2007 Endowment": 22720,
+    "2006 Endowment": 18769,
+    "% Change": 0.211
+  },
+  {
+    "Rank": 670,
+    "Institution": "Mount Mercy College",
+    "State": "IA",
+    "2007 Endowment": 22608,
+    "2006 Endowment": 19047,
+    "% Change": 0.187
+  },
+  {
+    "Rank": 671,
+    "Institution": "McKendree College",
+    "State": "IL",
+    "2007 Endowment": 22397,
+    "2006 Endowment": 20755,
+    "% Change": 0.079
+  },
+  {
+    "Rank": 672,
+    "Institution": "George Fox University",
+    "State": "OR",
+    "2007 Endowment": 22355,
+    "2006 Endowment": 20407,
+    "% Change": 0.095
+  },
+  {
+    "Rank": 673,
+    "Institution": "Lees-McRae College",
+    "State": "NC",
+    "2007 Endowment": 22325,
+    "2006 Endowment": 20490,
+    "% Change": 0.09
+  },
+  {
+    "Rank": 674,
+    "Institution": "Central Piedmont Community College and Foundation",
+    "State": "NC",
+    "2007 Endowment": 22159,
+    "2006 Endowment": 17635,
+    "% Change": 0.257
+  },
+  {
+    "Rank": 675,
+    "Institution": "Northampton Community College",
+    "State": "PA",
+    "2007 Endowment": 22150,
+    "2006 Endowment": 17416,
+    "% Change": 0.272
+  },
+  {
+    "Rank": 676,
+    "Institution": "Winston-Salem State University and Foundation",
+    "State": "NC",
+    "2007 Endowment": 21759,
+    "2006 Endowment": 18265,
+    "% Change": 0.191
+  },
+  {
+    "Rank": 677,
+    "Institution": "University of the Arts",
+    "State": "PA",
+    "2007 Endowment": 21491,
+    "2006 Endowment": 17911,
+    "% Change": 0.2
+  },
+  {
+    "Rank": 678,
+    "Institution": "Northland College",
+    "State": "WI",
+    "2007 Endowment": 21305,
+    "2006 Endowment": 18455,
+    "% Change": 0.154
+  },
+  {
+    "Rank": 679,
+    "Institution": "Shepherd University",
+    "State": "WV",
+    "2007 Endowment": 21209,
+    "2006 Endowment": 19213,
+    "% Change": 0.104
+  },
+  {
+    "Rank": 680,
+    "Institution": "Winona State University",
+    "State": "MN",
+    "2007 Endowment": 21194
+  },
+  {
+    "Rank": 681,
+    "Institution": "Reconstructionist Rabbinical College",
+    "State": "PA",
+    "2007 Endowment": 21122,
+    "2006 Endowment": 19081,
+    "% Change": 0.107
+  },
+  {
+    "Rank": 682,
+    "Institution": "California Western School of Law",
+    "State": "CA",
+    "2007 Endowment": 21102,
+    "2006 Endowment": 19089,
+    "% Change": 0.105
+  },
+  {
+    "Rank": 683,
+    "Institution": "Ohio Dominican University",
+    "State": "OH",
+    "2007 Endowment": 20992,
+    "2006 Endowment": 15997,
+    "% Change": 0.312
+  },
+  {
+    "Rank": 684,
+    "Institution": "Virginia State University",
+    "State": "VA",
+    "2007 Endowment": 20860,
+    "2006 Endowment": 16888,
+    "% Change": 0.235
+  },
+  {
+    "Rank": 685,
+    "Institution": "SUNY, Health Science Center at Syracuse",
+    "State": "NY",
+    "2007 Endowment": 20777,
+    "2006 Endowment": 47869,
+    "% Change": -0.566
+  },
+  {
+    "Rank": 686,
+    "Institution": "Culver-Stockton College",
+    "State": "MO",
+    "2007 Endowment": 20483,
+    "2006 Endowment": 18995,
+    "% Change": 0.078
+  },
+  {
+    "Rank": 687,
+    "Institution": "Saint Joseph College",
+    "State": "CT",
+    "2007 Endowment": 20053,
+    "2006 Endowment": 16147,
+    "% Change": 0.242
+  },
+  {
+    "Rank": 688,
+    "Institution": "University of Montevallo",
+    "State": "AL",
+    "2007 Endowment": 19968,
+    "2006 Endowment": 17219,
+    "% Change": 0.16
+  },
+  {
+    "Rank": 689,
+    "Institution": "Cedar Crest College",
+    "State": "PA",
+    "2007 Endowment": 19952,
+    "2006 Endowment": 17020,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 690,
+    "Institution": "Rhode Island College Foundation",
+    "State": "RI",
+    "2007 Endowment": 19933,
+    "2006 Endowment": 14330,
+    "% Change": 0.391
+  },
+  {
+    "Rank": 691,
+    "Institution": "Robert Morris University",
+    "State": "PA",
+    "2007 Endowment": 19843,
+    "2006 Endowment": 17848,
+    "% Change": 0.112
+  },
+  {
+    "Rank": 692,
+    "Institution": "Central Washington University",
+    "State": "WA",
+    "2007 Endowment": 19777,
+    "2006 Endowment": 16436,
+    "% Change": 0.203
+  },
+  {
+    "Rank": 693,
+    "Institution": "Southern California College of Optometry",
+    "State": "CA",
+    "2007 Endowment": 19438,
+    "2006 Endowment": 13192,
+    "% Change": 0.473
+  },
+  {
+    "Rank": 694,
+    "Institution": "Pacific Union College",
+    "State": "CA",
+    "2007 Endowment": 19317,
+    "2006 Endowment": 18391,
+    "% Change": 0.05
+  },
+  {
+    "Rank": 695,
+    "Institution": "California State University, Sacramento",
+    "State": "CA",
+    "2007 Endowment": 19155,
+    "2006 Endowment": 15661,
+    "% Change": 0.223
+  },
+  {
+    "Rank": 696,
+    "Institution": "Utica College",
+    "State": "NY",
+    "2007 Endowment": 19120,
+    "2006 Endowment": 16212,
+    "% Change": 0.179
+  },
+  {
+    "Rank": 697,
+    "Institution": "Olivet Nazarene University",
+    "State": "IL",
+    "2007 Endowment": 19016,
+    "2006 Endowment": 16834,
+    "% Change": 0.13
+  },
+  {
+    "Rank": 698,
+    "Institution": "California State University, Los Angeles Foundation",
+    "State": "CA",
+    "2007 Endowment": 18899,
+    "2006 Endowment": 15613,
+    "% Change": 0.21
+  },
+  {
+    "Rank": 699,
+    "Institution": "Humboldt State University and Advancement Foundation",
+    "State": "CA",
+    "2007 Endowment": 18797,
+    "2006 Endowment": 16072,
+    "% Change": 0.17
+  },
+  {
+    "Rank": 700,
+    "Institution": "Delaware Valley College of Science and Agriculture",
+    "State": "PA",
+    "2007 Endowment": 18590,
+    "2006 Endowment": 16180,
+    "% Change": 0.149
+  },
+  {
+    "Rank": 701,
+    "Institution": "Faulkner University",
+    "State": "AL",
+    "2007 Endowment": 18532,
+    "2006 Endowment": 16667,
+    "% Change": 0.112
+  },
+  {
+    "Rank": 702,
+    "Institution": "Clarke College",
+    "State": "IA",
+    "2007 Endowment": 18512,
+    "2006 Endowment": 15534,
+    "% Change": 0.192
+  },
+  {
+    "Rank": 703,
+    "Institution": "St. Cloud State University",
+    "State": "MN",
+    "2007 Endowment": 18373,
+    "2006 Endowment": 16542,
+    "% Change": 0.111
+  },
+  {
+    "Rank": 704,
+    "Institution": "Cal State Fullerton Philanthropic Foundation",
+    "State": "CA",
+    "2007 Endowment": 17592,
+    "2006 Endowment": 13663,
+    "% Change": 0.288
+  },
+  {
+    "Rank": 705,
+    "Institution": "SUNY, Potsdam College Foundation",
+    "State": "NY",
+    "2007 Endowment": 17141,
+    "2006 Endowment": 14586,
+    "% Change": 0.175
+  },
+  {
+    "Rank": 706,
+    "Institution": "Bridgewater State College",
+    "State": "MA",
+    "2007 Endowment": 17089,
+    "2006 Endowment": 14324,
+    "% Change": 0.193
+  },
+  {
+    "Rank": 707,
+    "Institution": "SUNY College at Buffalo",
+    "State": "NY",
+    "2007 Endowment": 16948,
+    "2006 Endowment": 13817,
+    "% Change": 0.227
+  },
+  {
+    "Rank": 708,
+    "Institution": "Southern Oregon University Foundation",
+    "State": "OR",
+    "2007 Endowment": 16833,
+    "2006 Endowment": 14582,
+    "% Change": 0.154
+  },
+  {
+    "Rank": 709,
+    "Institution": "Defiance College",
+    "State": "OH",
+    "2007 Endowment": 16751,
+    "2006 Endowment": 15416,
+    "% Change": 0.087
+  },
+  {
+    "Rank": 710,
+    "Institution": "Thomas M. Cooley Law School",
+    "State": "MI",
+    "2007 Endowment": 16504,
+    "2006 Endowment": 14267,
+    "% Change": 0.157
+  },
+  {
+    "Rank": 711,
+    "Institution": "California State University, Bakersfield",
+    "State": "CA",
+    "2007 Endowment": 16460,
+    "2006 Endowment": 10318,
+    "% Change": 0.595
+  },
+  {
+    "Rank": 712,
+    "Institution": "Francis Marion University",
+    "State": "SC",
+    "2007 Endowment": 16360,
+    "2006 Endowment": 14783,
+    "% Change": 0.107
+  },
+  {
+    "Rank": 713,
+    "Institution": "Mount Aloysius College",
+    "State": "PA",
+    "2007 Endowment": 16334,
+    "2006 Endowment": 13241,
+    "% Change": 0.234
+  },
+  {
+    "Rank": 714,
+    "Institution": "Delta State University",
+    "State": "MS",
+    "2007 Endowment": 16287,
+    "2006 Endowment": 13573,
+    "% Change": 0.2
+  },
+  {
+    "Rank": 715,
+    "Institution": "American University in Bulgaria",
+    "2007 Endowment": 16263,
+    "2006 Endowment": 8832,
+    "% Change": 0.841
+  },
+  {
+    "Rank": 716,
+    "Institution": "Roberts Wesleyan College",
+    "State": "NY",
+    "2007 Endowment": 16262,
+    "2006 Endowment": 13521,
+    "% Change": 0.203
+  },
+  {
+    "Rank": 717,
+    "Institution": "Tri-County Technical College",
+    "State": "SC",
+    "2007 Endowment": 15993,
+    "2006 Endowment": 13779,
+    "% Change": 0.161
+  },
+  {
+    "Rank": 718,
+    "Institution": "University of Guam",
+    "State": "GU",
+    "2007 Endowment": 15960,
+    "2006 Endowment": 14125,
+    "% Change": 0.13
+  },
+  {
+    "Rank": 719,
+    "Institution": "Montgomery College",
+    "State": "MD",
+    "2007 Endowment": 15421,
+    "2006 Endowment": 10124,
+    "% Change": 0.523
+  },
+  {
+    "Rank": 720,
+    "Institution": "Southern Illinois University at Edwardsville",
+    "State": "IL",
+    "2007 Endowment": 15276,
+    "2006 Endowment": 11242,
+    "% Change": 0.359
+  },
+  {
+    "Rank": 721,
+    "Institution": "California State University, San Marcos Foundation",
+    "State": "CA",
+    "2007 Endowment": 15158,
+    "2006 Endowment": 13115,
+    "% Change": 0.156
+  },
+  {
+    "Rank": 722,
+    "Institution": "Marymount Manhattan College",
+    "State": "NY",
+    "2007 Endowment": 15140,
+    "2006 Endowment": 12960,
+    "% Change": 0.168
+  },
+  {
+    "Rank": 723,
+    "Institution": "Misericordia University",
+    "State": "PA",
+    "2007 Endowment": 15082,
+    "2006 Endowment": 12505,
+    "% Change": 0.206
+  },
+  {
+    "Rank": 724,
+    "Institution": "Franklin Pierce Law Center",
+    "State": "NH",
+    "2007 Endowment": 15022,
+    "2006 Endowment": 9109,
+    "% Change": 0.649
+  },
+  {
+    "Rank": 725,
+    "Institution": "Neumann College",
+    "State": "PA",
+    "2007 Endowment": 14935,
+    "2006 Endowment": 13667,
+    "% Change": 0.093
+  },
+  {
+    "Rank": 726,
+    "Institution": "West Chester University of Pennsylvania",
+    "State": "PA",
+    "2007 Endowment": 14908,
+    "2006 Endowment": 12733,
+    "% Change": 0.171
+  },
+  {
+    "Rank": 727,
+    "Institution": "Belmont Abbey College",
+    "State": "NC",
+    "2007 Endowment": 14659
+  },
+  {
+    "Rank": 728,
+    "Institution": "Macomb Community College",
+    "State": "MI",
+    "2007 Endowment": 14109,
+    "2006 Endowment": 5198,
+    "% Change": 1.714
+  },
+  {
+    "Rank": 729,
+    "Institution": "SUNY, Cortland",
+    "State": "NY",
+    "2007 Endowment": 13650,
+    "2006 Endowment": 11397,
+    "% Change": 0.198
+  },
+  {
+    "Rank": 730,
+    "Institution": "Saint Mary-of-the-Woods College",
+    "State": "IN",
+    "2007 Endowment": 13396,
+    "2006 Endowment": 11675,
+    "% Change": 0.147
+  },
+  {
+    "Rank": 731,
+    "Institution": "Shawnee State University",
+    "State": "OH",
+    "2007 Endowment": 13138,
+    "2006 Endowment": 11108,
+    "% Change": 0.183
+  },
+  {
+    "Rank": 732,
+    "Institution": "Regis College (Massachusetts)",
+    "State": "MA",
+    "2007 Endowment": 13096,
+    "2006 Endowment": 16052,
+    "% Change": -0.184
+  },
+  {
+    "Rank": 733,
+    "Institution": "Northwest Christian College",
+    "State": "OR",
+    "2007 Endowment": 13063
+  },
+  {
+    "Rank": 734,
+    "Institution": "Plattsburgh College Foundation",
+    "State": "NY",
+    "2007 Endowment": 13031,
+    "2006 Endowment": 11076,
+    "% Change": 0.177
+  },
+  {
+    "Rank": 735,
+    "Institution": "Vermont Law School",
+    "State": "VT",
+    "2007 Endowment": 12829,
+    "2006 Endowment": 10613,
+    "% Change": 0.209
+  },
+  {
+    "Rank": 736,
+    "Institution": "California State University, San Bernardino",
+    "State": "CA",
+    "2007 Endowment": 12651,
+    "2006 Endowment": 11143,
+    "% Change": 0.135
+  },
+  {
+    "Rank": 737,
+    "Institution": "Delta College",
+    "State": "MI",
+    "2007 Endowment": 12601,
+    "2006 Endowment": 10356,
+    "% Change": 0.217
+  },
+  {
+    "Rank": 738,
+    "Institution": "Worcester State College",
+    "State": "MA",
+    "2007 Endowment": 12387,
+    "2006 Endowment": 10413,
+    "% Change": 0.19
+  },
+  {
+    "Rank": 739,
+    "Institution": "Saint Xavier University",
+    "State": "IL",
+    "2007 Endowment": 12064,
+    "2006 Endowment": 10406,
+    "% Change": 0.159
+  },
+  {
+    "Rank": 740,
+    "Institution": "Grand View College",
+    "State": "IA",
+    "2007 Endowment": 11866,
+    "2006 Endowment": 10359,
+    "% Change": 0.145
+  },
+  {
+    "Rank": 741,
+    "Institution": "Northeastern State University",
+    "State": "OK",
+    "2007 Endowment": 11405,
+    "2006 Endowment": 9773,
+    "% Change": 0.167
+  },
+  {
+    "Rank": 742,
+    "Institution": "Fayetteville State University",
+    "State": "NC",
+    "2007 Endowment": 11350,
+    "2006 Endowment": 10015,
+    "% Change": 0.133
+  },
+  {
+    "Rank": 743,
+    "Institution": "California State University, Stanislaus",
+    "State": "CA",
+    "2007 Endowment": 11000,
+    "2006 Endowment": 7837,
+    "% Change": 0.404
+  },
+  {
+    "Rank": 744,
+    "Institution": "Patrick Henry Community College",
+    "State": "VA",
+    "2007 Endowment": 10940,
+    "2006 Endowment": 9512,
+    "% Change": 0.15
+  },
+  {
+    "Rank": 745,
+    "Institution": "Trinity University (Washington, DC)",
+    "State": "DC",
+    "2007 Endowment": 10776
+  },
+  {
+    "Rank": 746,
+    "Institution": "Mount Ida College",
+    "State": "MA",
+    "2007 Endowment": 10578,
+    "2006 Endowment": 8725,
+    "% Change": 0.212
+  },
+  {
+    "Rank": 747,
+    "Institution": "Paine College",
+    "State": "GA",
+    "2007 Endowment": 10129,
+    "2006 Endowment": 10327,
+    "% Change": -0.019
+  },
+  {
+    "Rank": 748,
+    "Institution": "Hesston College",
+    "State": "KS",
+    "2007 Endowment": 9898,
+    "2006 Endowment": 8443,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 749,
+    "Institution": "California State University, Hayward",
+    "State": "CA",
+    "2007 Endowment": 9762,
+    "2006 Endowment": 6133,
+    "% Change": 0.592
+  },
+  {
+    "Rank": 750,
+    "Institution": "California State University Foundation",
+    "State": "CA",
+    "2007 Endowment": 9744,
+    "2006 Endowment": 8533,
+    "% Change": 0.142
+  },
+  {
+    "Rank": 751,
+    "Institution": "The College of New Jersey Foundation",
+    "State": "NJ",
+    "2007 Endowment": 9145,
+    "2006 Endowment": 6424,
+    "% Change": 0.424
+  },
+  {
+    "Rank": 752,
+    "Institution": "Briar Cliff University",
+    "State": "IA",
+    "2007 Endowment": 8995,
+    "2006 Endowment": 7789,
+    "% Change": 0.155
+  },
+  {
+    "Rank": 753,
+    "Institution": "Denver Seminary",
+    "State": "CO",
+    "2007 Endowment": 8789,
+    "2006 Endowment": 7883,
+    "% Change": 0.115
+  },
+  {
+    "Rank": 754,
+    "Institution": "SUNY, Oswego",
+    "State": "NY",
+    "2007 Endowment": 8667,
+    "2006 Endowment": 6537,
+    "% Change": 0.326
+  },
+  {
+    "Rank": 755,
+    "Institution": "Holy Family University",
+    "State": "PA",
+    "2007 Endowment": 8605,
+    "2006 Endowment": 6836,
+    "% Change": 0.259
+  },
+  {
+    "Rank": 756,
+    "Institution": "Boston Architectural College",
+    "State": "MA",
+    "2007 Endowment": 8603,
+    "2006 Endowment": 7805,
+    "% Change": 0.102
+  },
+  {
+    "Rank": 757,
+    "Institution": "SUNY, All Other Campuses",
+    "State": "NY",
+    "2007 Endowment": 8540,
+    "2006 Endowment": 6261,
+    "% Change": 0.364
+  },
+  {
+    "Rank": 758,
+    "Institution": "Longy School of Music, Inc.",
+    "State": "MA",
+    "2007 Endowment": 8528,
+    "2006 Endowment": 7641,
+    "% Change": 0.116
+  },
+  {
+    "Rank": 759,
+    "Institution": "Southwestern Michigan College",
+    "State": "MI",
+    "2007 Endowment": 8474,
+    "2006 Endowment": 7765,
+    "% Change": 0.091
+  },
+  {
+    "Rank": 760,
+    "Institution": "Chaminade University",
+    "State": "HI",
+    "2007 Endowment": 8033,
+    "2006 Endowment": 6856,
+    "% Change": 0.172
+  },
+  {
+    "Rank": 761,
+    "Institution": "California State University, Channel Islands",
+    "State": "CA",
+    "2007 Endowment": 7722,
+    "2006 Endowment": 10032,
+    "% Change": -0.23
+  },
+  {
+    "Rank": 762,
+    "Institution": "Trinity Western University",
+    "State": "BC",
+    "2007 Endowment": 7613,
+    "2006 Endowment": 6259,
+    "% Change": 0.216
+  },
+  {
+    "Rank": 763,
+    "Institution": "Thomas College",
+    "State": "ME",
+    "2007 Endowment": 7443,
+    "2006 Endowment": 6596,
+    "% Change": 0.128
+  },
+  {
+    "Rank": 764,
+    "Institution": "Holy Names University",
+    "State": "CA",
+    "2007 Endowment": 7270,
+    "2006 Endowment": 7873,
+    "% Change": -0.077
+  },
+  {
+    "Rank": 765,
+    "Institution": "California State University, Dominguez Hill",
+    "State": "CA",
+    "2007 Endowment": 6730,
+    "2006 Endowment": 5960,
+    "% Change": 0.129
+  },
+  {
+    "Rank": 766,
+    "Institution": "Cornerstone University",
+    "State": "MI",
+    "2007 Endowment": 6454,
+    "2006 Endowment": 5795,
+    "% Change": 0.114
+  },
+  {
+    "Rank": 767,
+    "Institution": "Community College of Philadelphia",
+    "State": "PA",
+    "2007 Endowment": 6331,
+    "2006 Endowment": 4911,
+    "% Change": 0.289
+  },
+  {
+    "Rank": 768,
+    "Institution": "Henry Ford Community College",
+    "State": "MI",
+    "2007 Endowment": 6101,
+    "2006 Endowment": 5406,
+    "% Change": 0.129
+  },
+  {
+    "Rank": 769,
+    "Institution": "Midlands Technical College",
+    "State": "SC",
+    "2007 Endowment": 6026,
+    "2006 Endowment": 5437,
+    "% Change": 0.108
+  },
+  {
+    "Rank": 770,
+    "Institution": "Caldwell College",
+    "State": "NJ",
+    "2007 Endowment": 6004,
+    "2006 Endowment": 5027,
+    "% Change": 0.194
+  },
+  {
+    "Rank": 771,
+    "Institution": "Centralia College",
+    "State": "WA",
+    "2007 Endowment": 5928,
+    "2006 Endowment": 5355,
+    "% Change": 0.107
+  },
+  {
+    "Rank": 772,
+    "Institution": "Keuka College",
+    "State": "NY",
+    "2007 Endowment": 5736,
+    "2006 Endowment": 4573,
+    "% Change": 0.254
+  },
+  {
+    "Rank": 773,
+    "Institution": "Harford Community College",
+    "State": "MD",
+    "2007 Endowment": 5310,
+    "2006 Endowment": 4429,
+    "% Change": 0.199
+  },
+  {
+    "Rank": 774,
+    "Institution": "SUNY, Brockport",
+    "State": "NY",
+    "2007 Endowment": 4890,
+    "2006 Endowment": 3780,
+    "% Change": 0.294
+  },
+  {
+    "Rank": 775,
+    "Institution": "Pellissippi State Technical Community College",
+    "State": "TN",
+    "2007 Endowment": 4816,
+    "2006 Endowment": 3313,
+    "% Change": 0.454
+  },
+  {
+    "Rank": 776,
+    "Institution": "California State University, Monterey Bay",
+    "State": "CA",
+    "2007 Endowment": 4801,
+    "2006 Endowment": 3833,
+    "% Change": 0.253
+  },
+  {
+    "Rank": 777,
+    "Institution": "Fort Lewis College",
+    "State": "CO",
+    "2007 Endowment": 4700,
+    "2006 Endowment": 4025,
+    "% Change": 0.168
+  },
+  {
+    "Rank": 778,
+    "Institution": "Northeast State Technical Community College",
+    "State": "TN",
+    "2007 Endowment": 4239,
+    "2006 Endowment": 3902,
+    "% Change": 0.086
+  },
+  {
+    "Rank": 779,
+    "Institution": "Lord Fairfax Community College",
+    "State": "VA",
+    "2007 Endowment": 4034,
+    "2006 Endowment": 2478,
+    "% Change": 0.628
+  },
+  {
+    "Rank": 780,
+    "Institution": "Tidewater Comm. College Educational Foundation Inc.",
+    "State": "VA",
+    "2007 Endowment": 3696,
+    "2006 Endowment": 2936,
+    "% Change": 0.259
+  },
+  {
+    "Rank": 781,
+    "Institution": "Cochise College Foundation",
+    "State": "AZ",
+    "2007 Endowment": 3244
+  },
+  {
+    "Rank": 782,
+    "Institution": "Massachusetts Bay Community College",
+    "State": "MA",
+    "2007 Endowment": 3027,
+    "2006 Endowment": 2647,
+    "% Change": 0.144
+  },
+  {
+    "Rank": 783,
+    "Institution": "Laredo Community College",
+    "State": "TX",
+    "2007 Endowment": 1956,
+    "2006 Endowment": 1931,
+    "% Change": 0.013
+  },
+  {
+    "Rank": 784,
+    "Institution": "California Maritime Academy Foundation",
+    "State": "CA",
+    "2007 Endowment": 1837,
+    "2006 Endowment": 1730,
+    "% Change": 0.062
+  },
+  {
+    "Rank": 785,
+    "Institution": "Georgia Perimeter College",
+    "State": "GA",
+    "2007 Endowment": 571,
+    "2006 Endowment": 488,
+    "% Change": 0.17
+  }
+]
