@@ -473,16 +473,15 @@ export class DataPreview {
       case '.tab':
         data = fileUtils.readDataFile(dataFilePath, 'utf8'); // file encoding to read data as string
         break;
+      case '.dif':
+      case '.ods':
+      case '.slk':
       case '.xls':
       case '.xlsb':
       case '.xlsx':
       case '.xlsm':
-      case '.ods':
         data = this.getBinaryExcelData(dataFilePath);
         break;
-      case '.dif':
-      case '.slk':
-      case '.prn':
       case '.xml':
       case '.html':
         data = this.getTextExcelData(dataFilePath);
@@ -503,7 +502,6 @@ export class DataPreview {
         data = this.getJsonData(dataFilePath);
         break;
       case '.json5':
-        // see https://json5.org/ for more info
         data = this.getJson5Data(dataFilePath);
         break;
       case '.hjson':
@@ -550,9 +548,8 @@ export class DataPreview {
    * @returns Array of row objects.
    */  
   private getTextExcelData(dataFilePath: string): any[] {
-    // load Excel workbook
-    const workbook: xlsx.WorkBook = xlsx.readFile(dataFilePath, {
-      type: 'file',
+    const dataString: string = fileUtils.readDataFile(dataFilePath, 'utf8');
+    const workbook: xlsx.WorkBook = xlsx.read(dataString, {
       cellDates: true,
     });
     return this.getExcelData(workbook);
