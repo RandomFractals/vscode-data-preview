@@ -337,7 +337,7 @@ export class DataPreview {
       JSON.stringify(this._viewConfig) !== JSON.stringify(viewConfig)) {
       // update view config for the loaded data table
       this._viewConfig = viewConfig;
-      this._logger.debug(`updateConfig(${this._dataTable}): config:`, this._viewConfig);
+      // this._logger.debug(`updateConfig(${this._dataTable}): config:`, this._viewConfig);
       if (this._dataTable.length > 0) {
         // save updated config in data views for reload
         this._dataViews[this._dataTable] = this._viewConfig;
