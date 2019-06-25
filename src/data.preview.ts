@@ -251,22 +251,29 @@ export class DataPreview {
    */
   private loadView(viewName: string, url: string) {
     try {
-      this._logger.debug(`loadView(): ${viewName}`, url);
-      let isRemoteUrl: boolean = url.startsWith('http://') || url.startsWith('https://');
-      if (isRemoteUrl || fs.existsSync(url)) {
-        // create uri for new view
-        const documentUri: Uri = Uri.parse(url);
-        // launch requested view command
-        commands.executeCommand(viewName, documentUri);
-      } else {
+      // strip out file scheme
+      url = url.replace('file:///', '');
+      if (url.startsWith('http://') || url.startsWith('https://')) {
+        // launch requested remote data view command
+        this._logger.debug(`loadView():executeCommand: ${viewName}`, url);
+        commands.executeCommand(viewName, Uri.parse(url));
+      }
+      else if (fs.existsSync(url)) {
+        // launch requested local data view command
+        this._logger.debug(`loadView():executeCommand: ${viewName}`, url);
+        commands.executeCommand(viewName, Uri.parse(url));
+      } 
+      else {
         // try to find requested data file(s) in open workspace
         workspace.findFiles(`**/${url}`).then(files => {
-          if (files.length > 0 && fs.existsSync(files[0].fsPath)) {
+          if (files.length > 0) {
             // pick the 1st matching file from the workspace
-            const dataUri: Uri = Uri.parse(files[0].fsPath);
+            const dataUri: Uri = files[0];
             // launch requested view command
+            this._logger.debug(`loadView():executeCommand: ${viewName}`, dataUri.toString(true)); // skip encoding
             commands.executeCommand(viewName, dataUri);
           } else {
+            this._logger.logMessage(LogLevel.Error, `loadView(): no such files in workspace:`, url);
             window.showErrorMessage(`${url} file doesn't exist in this workspace!`);
           }
         });
@@ -296,8 +303,8 @@ export class DataPreview {
   private getLocalResourceRoots(): Uri[] {
     const localResourceRoots: Uri[] = [];
     const workspaceFolder: WorkspaceFolder = workspace.getWorkspaceFolder(this.uri);
-    if (workspaceFolder) {
-      localResourceRoots.push(workspaceFolder.uri);
+    if (workspaceFolder && workspaceFolder !== undefined) {
+      localResourceRoots.push(Uri.file(workspaceFolder.uri.fsPath));
     }
     else if (!this.uri.scheme || this.uri.scheme === 'file') {
       localResourceRoots.push(Uri.file(path.dirname(this.uri.fsPath)));
@@ -387,7 +394,7 @@ export class DataPreview {
         this.webview.postMessage({
           command: 'refresh',
           fileName: this._fileName,
-          uri: this._uri.toString(),
+          uri: this._uri.toString(true), // skip encoding
           config: this.config,
           schema: this.schema,
           tableList: this._tableList,
