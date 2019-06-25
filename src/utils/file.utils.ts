@@ -10,12 +10,11 @@ const logger: Logger = new Logger(`file.utils:`, config.logLevel);
  * Reads local data file or fetches public data source data.
  * @param dataFilePath Data file path or public data source url.
  * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
- * TODO: change this to read data async later
  */
 export function readDataFile(dataFilePath: string, encoding:string = null): any {
   let data: any = '';
   const fileName: string = path.basename(dataFilePath);
-  logger.debug('readDataFile(): ', dataFilePath);
+  logger.debug('readDataFile():', dataFilePath);
   if (!config.supportedDataFiles.test(fileName)) {
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
   }
@@ -24,14 +23,15 @@ export function readDataFile(dataFilePath: string, encoding:string = null): any 
     window.showInformationMessage('Remote data loading coming soon!');
   } 
   else if (fs.existsSync(dataFilePath)) {
-    // read local data file via fs read file api
-    data = fs.readFileSync(dataFilePath, encoding);
+    // read local data file
+    data = readLocalData(dataFilePath, encoding);
   } 
   else {
     // try to find requested data file(s) in open workspace
     workspace.findFiles(`**/${dataFilePath}`).then(files => {
       if (files.length > 0 && fs.existsSync(files[0].fsPath)) {
-        data = fs.readFileSync(dataFilePath, encoding);
+        // read workspace file data
+        data = readLocalData(dataFilePath, encoding);
       } else {
         window.showErrorMessage(`${dataFilePath} file doesn't exist!`);
       }
@@ -60,5 +60,19 @@ export function createJsonFile(jsonFilePath: string, jsonData: any): void {
       window.showErrorMessage(errorMessage);
     }
   }
+}
+
+/**
+ * Reads local file data.
+ * @param dataFilePath Data file path.
+ * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
+ * TODO: change this to read data async later
+ */
+function readLocalData(dataFilePath: string, encoding: string = null): any {
+  let data: any = '';
+  logger.debug('readLocalData():', dataFilePath);
+  // read local data file via fs read file api
+  data = fs.readFileSync(dataFilePath, encoding);
+  return data;
 }
 
