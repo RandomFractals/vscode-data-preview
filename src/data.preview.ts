@@ -132,26 +132,18 @@ export class DataPreview {
     this._dataTable = (table !== undefined) ? table: '';
     this._dataViews = (views !== undefined) ? views: {};
     this._viewConfig = viewConfig;
-    this._fileName = path.basename(uri.fsPath);
+    this._fileName = path.basename(uri.fsPath);    
     this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
     this._previewUri = this._uri.with({scheme: 'data'});
+    this._title = `${this._fileName} 🈸`;
     this._logger = new Logger(`${viewType}:`, config.logLevel);
+    this._logger.debug('(): creating data.preview for:', uri.toString(true)); // skip uri encoding
 
     // initilize charts plugin
     this._charts = this.charts;
     if (viewConfig && viewConfig.hasOwnProperty('view') && viewConfig.view.startsWith('d3')) {
       // reset it to highcharts for older ext v.s configs
       this._charts = 'highcharts';
-    }
-
-    // create preview panel title
-    switch (viewType) {
-      case 'data.preview':
-        this._title = `${this._fileName} 🈸`;
-        break;
-      default: // TODO: add data.preview.help
-        this._title = 'Data Preview 🈸 Help';
-        break;
     }
 
     // create html template for data preview with local scripts, styles and theme params replaced
@@ -315,8 +307,10 @@ export class DataPreview {
 
     // add data preview styles
     localResourceRoots.push(Uri.file(path.join(this._extensionPath, 'styles')));
-
-    this._logger.debug('getLocalResourceRoots():', localResourceRoots);
+    if (config.logLevel === LogLevel.Debug) {
+      this._logger.debug('getLocalResourceRoots():', 
+        localResourceRoots.map(uri => uri.path));
+    }
     return localResourceRoots;
   }
 
