@@ -67,6 +67,7 @@ export function createJsonFile(jsonFilePath: string, jsonData: any): void {
  * @param dataFilePath Data file path.
  * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
  * TODO: change this to read data async later
+ * TODO: rework this to using fs.ReadStream for large data files support later
  */
 function readLocalData(dataFilePath: string, encoding: string = null): any {
   let data: any = '';
@@ -75,4 +76,3 @@ function readLocalData(dataFilePath: string, encoding: string = null): any {
   data = fs.readFileSync(dataFilePath, encoding);
   return data;
 }
-

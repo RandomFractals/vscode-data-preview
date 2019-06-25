@@ -457,15 +457,9 @@ export class DataPreview {
   private getFileData(filePath: string): any {
     let data: any = null;
     const dataFilePath = path.join(path.dirname(this._uri.fsPath), filePath);
-    if (!fs.existsSync(dataFilePath)) {
-      this._logger.logMessage(LogLevel.Error, 'getFileData():', `${filePath} doesn't exist!`);
-      window.showErrorMessage(`${filePath} doesn't exist!`);
-      return data;
-    }
 
     // read file data
-    // TODO: convert this to data reader factory
-    // TODO: rework this to using fs.ReadStream for large data files support later
+    // TODO: convert this to data reader/provider factory
     switch (this._fileExtension) {
       case '.csv':
       case '.tsv':
