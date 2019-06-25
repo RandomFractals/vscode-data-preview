@@ -96,6 +96,7 @@ export class DataPreview {
   private _logger: Logger;
 
   // data view vars
+  private _dataUrl: string;
   private _dataSchema: any;  
   private _tableList: Array<string> = [];
   private _viewConfig: any = {};
@@ -129,6 +130,7 @@ export class DataPreview {
     // save ext path, document uri, view config, and create preview uri
     this._extensionPath = extensionPath;
     this._uri = uri;
+    this._dataUrl = uri.toString(true).replace('file:///', ''); // skip uri encoding, strip out file scheme
     this._dataTable = (table !== undefined) ? table: '';
     this._dataViews = (views !== undefined) ? views: {};
     this._viewConfig = viewConfig;
@@ -137,7 +139,7 @@ export class DataPreview {
     this._previewUri = this._uri.with({scheme: 'data'});
     this._title = `${this._fileName} 🈸`;
     this._logger = new Logger(`${viewType}:`, config.logLevel);
-    this._logger.debug('(): creating data.preview for:', uri.toString(true)); // skip uri encoding
+    this._logger.debug('(): creating data.preview for:', this._dataUrl);
 
     // initilize charts plugin
     this._charts = this.charts;
@@ -360,12 +362,12 @@ export class DataPreview {
 
     // read and send updated data to webview
     // workspace.openTextDocument(this.uri).then(document => {
-      this._logger.debug(`refresh(${this._dataTable}): file:`, this._fileName);
+      this._logger.debug(`refresh(${this._dataTable}): data url:`, this._dataUrl);
       //const textData: string = document.getText();
       let data = [];
       try {
         // get file data
-        data = this.getFileData(this._fileName);
+        data = this.getFileData(this._dataUrl);
       }
       catch (error) {
         this._logger.logMessage(LogLevel.Error, `refresh(${this._dataTable}):`, error.message);
@@ -388,7 +390,7 @@ export class DataPreview {
         this.webview.postMessage({
           command: 'refresh',
           fileName: this._fileName,
-          uri: this._uri.toString(true), // skip encoding
+          uri: this._dataUrl,
           config: this.config,
           schema: this.schema,
           tableList: this._tableList,
@@ -443,23 +445,21 @@ export class DataPreview {
   /*------------------------------ Get/Save Data Methods ---------------------------------------*/
 
   /**
-   * Loads actual local data file content.
-   * @param filePath Local data file path.
+   * Loads actual data file content.
+   * @param dataUrl Local data file path or remote data url.
    * @returns CSV/JSON string or Array of row objects.
    * TODO: change this to async later
    */
-  private getFileData(filePath: string): any {
-    let data: any = null;
-    const dataFilePath = path.join(path.dirname(this._uri.fsPath), filePath);
-
+  private getFileData(dataUrl: string): any {
     // read file data
     // TODO: convert this to data reader/provider factory
+    let data: any = null;
     switch (this._fileExtension) {
       case '.csv':
       case '.tsv':
       case '.txt':
       case '.tab':
-        data = fileUtils.readDataFile(dataFilePath, 'utf8'); // file encoding to read data as string
+        data = fileUtils.readDataFile(dataUrl, 'utf8'); // file encoding to read data as string
         break;
       case '.dif':
       case '.ods':
@@ -470,38 +470,38 @@ export class DataPreview {
       case '.xlsm':
       case '.xml':
       case '.html':        
-        data = this.getBinaryExcelData(dataFilePath);
+        data = this.getBinaryExcelData(dataUrl);
         break;
       case '.env':
-        data = jsonUtils.configToPropertyArray(fs.readFileSync(dataFilePath, 'utf8'));
+        data = jsonUtils.configToPropertyArray(fs.readFileSync(dataUrl, 'utf8'));
         break;
       case '.properties':
-        data = this.getPropertiesData(dataFilePath);
+        data = this.getPropertiesData(dataUrl);
         break;
       case '.ini':
-          data = this.getIniData(dataFilePath);
+          data = this.getIniData(dataUrl);
           break;  
       case '.config':
-        data = this.getConfigData(dataFilePath);
+        data = this.getConfigData(dataUrl);
         break;
       case '.json':
-        data = this.getJsonData(dataFilePath);
+        data = this.getJsonData(dataUrl);
         break;
       case '.json5':
-        data = this.getJson5Data(dataFilePath);
+        data = this.getJson5Data(dataUrl);
         break;
       case '.hjson':
-        data = this.getHJsonData(dataFilePath);
+        data = this.getHJsonData(dataUrl);
         break;
       case '.yaml':
       case '.yml':
-        data = this.getYamlData(dataFilePath);
+        data = this.getYamlData(dataUrl);
         break;
       case '.arrow':
-        data = this.getArrowData(dataFilePath);
+        data = this.getArrowData(dataUrl);
         break;
       case '.avro':
-        data = this.getAvroData(dataFilePath);
+        data = this.getAvroData(dataUrl);
         break;
       case '.parquet':
         // TODO: sort out node-gyp lzo lib loading for parquet data files parse
