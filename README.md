@@ -138,8 +138,7 @@ Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data For
 `.ini` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file
 `.yml` `.yaml` | text | [js-yaml](https://github.com/nodeca/js-yaml)/[`yaml.load()`](https://github.com/nodeca/js-yaml#load-string---options-) | https://yaml.org/
 `.csv` `.tsv` `.txt` `.tab` | text | [perspective](https://github.com/finos/perspective/)/[`perspectiveViewer.load(text)`](https://github.com/finos/perspective/tree/master/packages/perspective-viewer#module_perspective-viewer..PerspectiveViewer+load) | https://en.wikipedia.org/wiki/Comma-separated_values https://en.wikipedia.org/wiki/Tab-separated_values
-`.xml` `.html` | text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read(string)`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on text `Excel` file formats
-`.dif` `.ods` `.slk` `.xls` `.xlsb` `.xlsx` `.xlsm` | binary | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read(buffer)`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on binary `Excel` file formats
+`.dif` `.ods` `.slk` `.xls` `.xlsb` `.xlsx` `.xlsm` `.xml` `.html` | binary/text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read()`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on `Excel` file formats
 
 ![Data Preview Data](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-data.png?raw=true 
 "Data Preview Data")

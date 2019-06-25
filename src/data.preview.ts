@@ -480,11 +480,9 @@ export class DataPreview {
       case '.xlsb':
       case '.xlsx':
       case '.xlsm':
-        data = this.getBinaryExcelData(dataFilePath);
-        break;
       case '.xml':
-      case '.html':
-        data = this.getTextExcelData(dataFilePath);
+      case '.html':        
+        data = this.getBinaryExcelData(dataFilePath);
         break;
       case '.env':
         data = jsonUtils.configToPropertyArray(fs.readFileSync(dataFilePath, 'utf8'));
