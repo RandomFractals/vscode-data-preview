@@ -139,7 +139,7 @@ export class DataPreview {
     this._previewUri = this._uri.with({scheme: 'data'});
     this._title = `${this._fileName} 🈸`;
     this._logger = new Logger(`${viewType}:`, config.logLevel);
-    this._logger.debug('(): creating data.preview for:', this._dataUrl);
+    this._logger.debug('(): creating data.preview:', this._dataUrl);
 
     // initilize charts plugin
     this._charts = this.charts;
@@ -154,6 +154,7 @@ export class DataPreview {
     const stylesPath: string = Uri.file(path.join(this._extensionPath, 'styles'))
       .with({scheme: 'vscode-resource'}).toString(true);
     this._html = htmlTemplate.replace({
+      title: this._fileName,
       scripts: scriptsPath,
       styles: stylesPath,
       theme: this.theme,
@@ -187,11 +188,12 @@ export class DataPreview {
    * @param viewType Preview webview type, i.e. data.preview.
    * @param viewColumn vscode IDE view column to display preview in.
    */
-  private initWebview(viewType: string, viewColumn: ViewColumn): void {
+  private initWebview(viewType: string, viewColumn: ViewColumn): void {    
     if (!this._panel) {
       // create new webview panel
       this._panel = window.createWebviewPanel(viewType, this._title, viewColumn, this.getWebviewOptions());
     }
+    this._logger.debug('initWebview(): data.view created:', this._dataUrl);
 
     // dispose preview panel handler
     this._panel.onDidDispose(() => {
@@ -207,6 +209,10 @@ export class DataPreview {
     // process web view messages
     this.webview.onDidReceiveMessage(message => {
       switch (message.command) {
+        case 'getDataInfo':
+          // post initial data view info
+          this.postDataInfo();
+          break;
         case 'refresh':
           // reload file data for preview
           this.refresh(message.table);
@@ -230,7 +236,7 @@ export class DataPreview {
         case 'undoConfig':
           // TODO: implement view config undo
           break;
-        case 'undoConfig':
+        case 'redoConfig':
           // TODO: implement view config redo
           break;    
       }
@@ -238,12 +244,35 @@ export class DataPreview {
   } // end of initWebview()
 
   /**
+   * Sends initial data info to data view.
+   */
+  private postDataInfo(): void {
+    this._logger.debug('postDataInfo(): data url:', this._dataUrl);
+    try {
+      // update web view
+      this.webview.postMessage({
+        command: 'dataInfo',
+        fileName: this._fileName,
+        uri: this._dataUrl,
+        config: this.config,
+        schema: this.schema,
+        tableList: this._tableList,
+        views: this._dataViews,
+        table: this._dataTable,
+      });
+    }
+    catch (error) {
+      this._logger.logMessage(LogLevel.Error, 'postDataInfo():', error.message);
+    }
+  }
+
+  /**
    * Launches new view via commands.executeCommand interface.
    * @param viewName View name to launch.
    * @param url View document url parameter.
    * @see https://code.visualstudio.com/api/extension-guides/command
    */
-  private loadView(viewName: string, url: string) {
+  private loadView(viewName: string, url: string): void {
     try {
       // strip out file scheme
       url = url.replace('file:///', '');

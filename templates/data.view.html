@@ -115,8 +115,10 @@
         <a id="help-link" title="Data Preview Help" href="#" onClick="loadHelp()"><span id="help-icon">?</span></a>
       </div>
       <div id="toolbar-left">
-        <a id="app-link" title="Launch new Data Preview" href="#" onClick="loadDataPreview()"><span id="app-icon">🈸</span></a>
-        <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">...</a>
+        <a id="app-link" title="Launch new Data Preview" href="#" onClick="loadDataPreview()">
+          <span id="app-icon">🈸</span>
+        </a>
+        <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">{title}</a>
         <select id="table-selector" title="Select Data Table" 
           style="display: none;" onChange="loadTableData()">
         </select>
@@ -137,7 +139,7 @@
     <script type="text/javascript">
       // data preview vars
       let vscode, title, tableSelector, rowCounter, saveFileTypeSelector, 
-        dataUrlInput, dataUri, dataFileName, 
+        dataUrlInput, dataUrl, dataFileName, 
         viewer, toggleConfig = true, 
         dataTable = '', dataViews = {}, tableList = [], 
         viewConfig = {}, viewData = [];
@@ -145,12 +147,8 @@
       // check web assembly support. uncomment this for dev debug:
       // console.log(`data.view:supportsWebAssembly(): ${supportsWebAssembly()}`);
       
-      // tag perspective viewer loading
-      window.addEventListener('WebComponentsReady', event => {
-        console.log('data.view:WebComponentsReady: perspective viewer initialized!');
-      });
-
-      document.addEventListener('DOMContentLoaded', event => initializeDataView());
+      // initialize vs code api for messaging
+      vscode = acquireVsCodeApi();
 
       // add webview post message even handler
       window.addEventListener('message', event => {
@@ -158,19 +156,60 @@
           case 'refresh':
             refresh(event.data);
             break;
-          default: // help
-            // TODO: add quick data preivew popup display
-            // with info how to work prespective viewer toggles UI
+          case 'dataInfo':
+            loadDataInfo(event.data);
             break;
         }
       });
 
+      // wire document load state changes
+      document.addEventListener('readystatechange', event => {
+        switch (document.readyState) {
+          case 'loading':
+            console.log(`data.view:loading: data url: ${dataUrl}`);
+          break;
+          case 'interactive':
+            // document loading finished, images and stylesheets are still loading
+            console.log(`data.view:interactive!`);
+            // get initial data info: document url, views, etc.
+            vscode.postMessage({command: 'getDataInfo'});
+            break;
+          case "complete":
+            // web page is fully loaded
+            console.log(`data.view:complete!`);
+            break;
+        }      
+      });
+
+      // tag perspective viewer loading
+      window.addEventListener('WebComponentsReady', event => {
+        console.log('data.view:WebComponentsReady: perspective viewer initialized!');
+      });
+
+      // initialize data view on content loaded
+      document.addEventListener('DOMContentLoaded', event => initializeDataView());
+
       /**
-       * Initializes data view UI elements and vs code api
-       * for webview message data updates.
+       * Loads initial data view info.
+       * @param data Data info with data url, views, etc.
+       */
+      function loadDataInfo(data) {
+        // initialize data view vars
+        dataUrl = data.uri;
+        dataFileName = data.fileName;
+        dataTable = data.table;
+        dataViews = data.views;
+        console.log(`data.view:loadDataInfo(): data url: ${dataUrl}`);
+      }
+
+      /**
+       * Initializes data view UI elements,
+       * updates view state, config, and 
+       * requests first data load for display.
        */
       function initializeDataView() {
         // initialize toolbar & perspective data viewer
+        console.log(`data.view:initializeDataView(): initializing...`);
         title = document.getElementById('title');
         tableSelector = document.getElementById('table-selector');
         rowCounter = document.getElementById('row-counter');
@@ -178,17 +217,16 @@
         saveFileTypeSelector = document.getElementById('save-file-type-selector');
         viewer = document.getElementsByTagName('perspective-viewer')[0];
         try {
-          // init vs code api for messaging
-          vscode = acquireVsCodeApi();
-
           // request first data update
           vscode.postMessage({command: 'refresh'});
 
           // add rows update handler
           viewer.addEventListener('perspective-view-update', event => {
             // update row counter display
-            viewer.view.num_rows().then(rowCount => rowCounter.innerHTML = `${rowCount.toLocaleString()} rows`);
-            console.log(`data.view:refresh(${dataTable}): rowCount=${rowCount}`);
+            viewer.view.num_rows().then(rowCount => {
+              rowCounter.innerHTML = `${rowCount.toLocaleString()} rows`;
+              console.log(`data.view:refresh(${dataTable}): rowCount=${rowCount}`);
+            });
           });
 
           // add viewer config change handler for saving view state
@@ -200,7 +238,7 @@
             deleteProperty('render_time', viewConfig);
             // save view config for vscode reload
             vscode.setState({
-              uri: dataUri, 
+              uri: dataUrl,
               table: dataTable, 
               config: viewConfig,
               views: dataViews
@@ -216,7 +254,7 @@
         catch (error) {
           console.error(`data.view:vscode:error ${error.message}`);
         }
-      }
+      } // end of initializeDataView()
 
       /**
        * Deletes object property.
@@ -235,7 +273,7 @@
       function refresh(data) {
         try {
           // initialize data view vars and UI elements
-          dataUri = data.uri;
+          dataUrl = data.uri;
           dataFileName = data.fileName;
           dataTable = data.table;
           dataViews = data.views;
@@ -264,8 +302,8 @@
             viewData = [];
             // update data view state
             vscode.setState({
-              uri: dataUri, 
-              table: dataTable, 
+              uri: dataUrl,
+              table: dataTable,
               config: viewConfig,
               views: dataViews
             });
@@ -366,7 +404,7 @@
         const dataFileType = saveFileTypeSelector.value;
         switch (dataFileType) {
           case '.config':
-            const dataFileName = dataUri.substr(dataUri.lastIndexOf('/') + 1);
+            const dataFileName = dataUrl.substr(dataUri.lastIndexOf('/') + 1);
             const data = {
               dataFileName: dataFileName,
               dataTable: dataTable,
@@ -442,9 +480,9 @@
        * Launches new data preview.
        */
       function loadDataPreview() {
-        let documentUri = dataUri; // for new data.preview launch
+        let documentUri = dataUrl; // for new data.preview launch
         // check if loaded data view is for a view config file
-        if (dataUri.endsWith('.config') && 
+        if (dataUrl.endsWith('.config') && 
             viewData.length > 0 &&
             viewData[0].hasOwnProperty('key') && 
             viewData[0].hasOwnProperty('value')) {
@@ -453,7 +491,7 @@
           const view = viewData.find(config => config.key === 'config.view');
           if (view !== undefined && dataViewFileName !== undefined) {
             // must be our data.view config: swap it out to load that data
-            documentUri = dataUri.replace(dataFileName, dataViewFileName.value);
+            documentUri = dataUrl.replace(dataFileName, dataViewFileName.value);
           }
         } 
         // launch new data preview
