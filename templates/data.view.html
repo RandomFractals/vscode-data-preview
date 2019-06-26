@@ -135,7 +135,7 @@
           onKeyPress="loadDataPreviewForUrl()" />
       </div>
     </div>    
-    <perspective-viewer id="data-viewer" view="grid"></perspective-viewer>
+    <perspective-viewer id="data-viewer" view="hypergrid"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
       let vscode, title, tableSelector, rowCounter, saveFileTypeSelector, 
@@ -199,6 +199,9 @@
         dataFileName = data.fileName;
         dataTable = data.table;
         dataViews = data.views;
+        viewConfig = data.config;
+        // update view config
+        viewer.restore(viewConfig);
         console.log(`data.view:loadDataInfo(): data url: ${dataUrl}`);
       }
 
