@@ -97,7 +97,8 @@ export class DataPreview {
 
   // data view vars
   private _dataUrl: string;
-  private _dataSchema: any;  
+  private _dataSchema: any;
+  private _isRemoteData: boolean = false;
   private _tableList: Array<string> = [];
   private _viewConfig: any = {};
   private _dataTable: string = '';
@@ -131,6 +132,7 @@ export class DataPreview {
     this._extensionPath = extensionPath;
     this._uri = uri;
     this._dataUrl = uri.toString(true).replace('file:///', ''); // skip uri encoding, strip out file scheme
+    this._isRemoteData = (this._dataUrl.startsWith('http://') || this._dataUrl.startsWith('https://'));
     this._dataTable = (table !== undefined) ? table: '';
     this._dataViews = (views !== undefined) ? views: {};
     this._viewConfig = viewConfig;
@@ -206,6 +208,14 @@ export class DataPreview {
       (viewStateEvent: WebviewPanelOnDidChangeViewStateEvent) => {
       let active = viewStateEvent.webviewPanel.visible;
     }, null, this._disposables);
+
+    // load matching view config, if available
+    const viewConfigFilePath:string = this._dataUrl.replace(this._fileExtension, '.config');
+    if (!this._isRemoteData && 
+      !this._viewConfig.hasOwnProperty('view') && // blank view config
+      fs.existsSync(viewConfigFilePath)) {
+      this.loadConfigFromFile(viewConfigFilePath, false, false); // don't refresh data, don't show errors
+    }
 
     // process web view messages
     this.webview.onDidReceiveMessage(message => {
@@ -352,7 +362,7 @@ export class DataPreview {
   public configure(): void {
     this.webview.html = this.html;
     // NOTE: let webview fire refresh message
-    // when data preview DOM content is initialized
+    // when data view DOM content is initialized
     // see: data.view.html/this.refresh();
   }
 
@@ -439,8 +449,9 @@ export class DataPreview {
    * Prompts to load saved data view config.
    */
    private async loadConfig(): Promise<void> {
-    let configFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
-    this._logger.debug('loadConfig(): loading config:', configFilePath);
+    // create config files path
+    let configFilePath: string = this._uri.fsPath.replace(this._fileName, '');
+    this._logger.debug('loadConfig(): showing configs:', configFilePath);
 
     // display open config files dialog
     const configFiles: Uri[] = await window.showOpenDialog({
@@ -450,27 +461,41 @@ export class DataPreview {
     });
 
     if (configFiles.length > 0) {
-      // get the first selected config file
+      // load the first selected view config file
       configFilePath = configFiles[0].fsPath;
       this._logger.debug('loadConfig(): loading config:', configFilePath);
-
-      // load view config
-      const configString: string = fs.readFileSync(configFilePath, 'utf8'); // file encoding to read data as string
-      const viewConfig: any = JSON.parse(configString);
-
-      if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) { // matching data file config
-        // save loaded view config, and data table reference if present
-        this._viewConfig = viewConfig.config;
-        this._dataTable = (viewConfig.dataTable === undefined) ? '': viewConfig.dataTable;
-        this._logger.debug('loadConfig(): loaded view config:', this._viewConfig);
-        this.refresh(this._dataTable); // reload data & config for display
-      }
-      else {
-        window.showErrorMessage(`Config data file '${viewConfig.dataFileName}' doesn't match '${this._fileName}'!`);
-      }
+      this.loadConfigFromFile(configFilePath);
     }
   } // end of loadConfig()
 
+  /**
+   * Loads data view config from local config json file.
+   * @param configFilePath Data view config file path.
+   * @param refreshData Refreshes data on new view config load.
+   * @param showErrors Shows errors messages if data view config doesn't match data preview data file.
+   */
+  private loadConfigFromFile(configFilePath: string, 
+    refreshData: boolean = true, 
+    showErrors: boolean = true): void {
+    // load view config
+    const configString: string = fs.readFileSync(configFilePath, 'utf8'); // file encoding to read data as string
+    const viewConfig: any = JSON.parse(configString);
+
+    // check for matching data file
+    if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) {
+      // save loaded view config, and data table reference if present
+      this._viewConfig = viewConfig.config;
+      this._dataTable = (viewConfig.dataTable === undefined) ? '': viewConfig.dataTable;
+      this._logger.debug('loadConfig(): loaded view config:', this._viewConfig);
+      if (refreshData) {
+        // reload data & config for display
+        this.refresh(this._dataTable);
+      }
+    }
+    else if (showErrors) {
+      window.showErrorMessage(`Config data file '${viewConfig.dataFileName}' doesn't match '${this._fileName}'!`);
+    }
+  }
 
   /*------------------------------ Get/Save Data Methods ---------------------------------------*/
 
