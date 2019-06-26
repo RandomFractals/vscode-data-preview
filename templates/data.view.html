@@ -242,6 +242,7 @@
             // strip out updating and render time props for view config save
             deleteProperty('updating', viewConfig);
             deleteProperty('render_time', viewConfig);
+            deleteProperty('style', viewConfig);
             // save view config for vscode reload
             vscode.setState({
               uri: dataUrl,
