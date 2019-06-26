@@ -158,6 +158,7 @@ export class DataPreview {
       scripts: scriptsPath,
       styles: stylesPath,
       theme: this.theme,
+      themeColor: (this.theme === '.dark') ? '#2f3136': '#eee', // for viewer dropdowns background
       charts: this._charts
     });
 
