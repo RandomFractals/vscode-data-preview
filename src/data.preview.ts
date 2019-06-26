@@ -450,7 +450,7 @@ export class DataPreview {
    */
    private async loadConfig(): Promise<void> {
     // create config files path
-    let configFilePath: string = this._uri.fsPath.replace(this._fileName, '');
+    let configFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
     this._logger.debug('loadConfig(): showing configs:', configFilePath);
 
     // display open config files dialog
@@ -525,7 +525,7 @@ export class DataPreview {
       case '.xlsm':
       case '.xml':
       case '.html':        
-        data = this.getBinaryExcelData(dataUrl);
+        data = this.getExcelData(dataUrl);
         break;
       case '.env':
         data = jsonUtils.configToPropertyArray(fs.readFileSync(dataUrl, 'utf8'));
@@ -570,38 +570,19 @@ export class DataPreview {
   // TODO: Move these data loading methods to separate data.provders per file type
 
   /**
-   * Gets binary Excel file data.
+   * Gets Excel file data.
    * @param dataFilePath Excel file path.
    * @returns Array of row objects.
-   */  
-  private getBinaryExcelData(dataFilePath: string): any[] {
+   */
+  private getExcelData(dataFilePath: string): any[] {
+    // load workbooks
     const dataBuffer: Buffer = fileUtils.readDataFile(dataFilePath);
     const workbook: xlsx.WorkBook = xlsx.read(dataBuffer, {
       cellDates: true,
     });
-    return this.getExcelData(workbook);
-  }
-
-  /**
-   * Gets text Excel file data.
-   * @param dataFilePath Excel file path.
-   * @returns Array of row objects.
-   */  
-  private getTextExcelData(dataFilePath: string): any[] {
-    const dataString: string = fileUtils.readDataFile(dataFilePath, 'utf8');
-    const workbook: xlsx.WorkBook = xlsx.read(dataString, {
-      cellDates: true,
-    });
-    return this.getExcelData(workbook);
-  }
-
-  /**
-   * Gets Excel file data.
-   * @param workbook Excel workbook.
-   * @returns Array of row objects.
-   */
-  private getExcelData(workbook: xlsx.WorkBook): any[] {
     this._logger.debug(`getExcelData(): file: ${this._fileName} sheetNames:`, workbook.SheetNames);
+
+    // load data sheets
     let dataRows: Array<any> = [];
     const dataSchema = null;
     if (workbook.SheetNames.length > 0) {
