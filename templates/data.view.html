@@ -162,6 +162,11 @@
           case 'dataInfo':
             loadDataInfo(event.data);
             break;
+          default: // raw data
+            // console.log(`data: ${JSON.stringify(event.data, null, 2)}`);
+            // update view data
+            // viewData = event.data;
+            break;
         }
       });
 
@@ -257,6 +262,12 @@
               config: viewConfig
             });
           });
+
+          // add viewer click handler for cross-filtering
+          viewer.addEventListener('perspective-click', event => {
+            // TODO: experiment with this cross filter selection later
+            // console.log(`data.view:dataClick(${dataTable}): detail=${event.detail.row} columns=${event.detail.column_names}`);
+          });
         }
         catch (error) {
           console.error(`data.view:vscode:error ${error.message}`);
@@ -285,8 +296,9 @@
           dataTable = data.table;
           dataViews = data.views;
           title.innerText = data.fileName;
+
+          // load table list for multi-table data views display
           if (tableList.length <= 0) {
-            // load table list for data view display
             console.log(`data.view:refresh(): table list: ${data.tableList}`);
             data.tableList.forEach(tableName => {
               tableSelector.innerHTML += `<option value="${tableName}">${tableName}</option>"`;
@@ -317,10 +329,11 @@
           }
 
           // load file data
+          console.log(`data.view:refresh(${dataTable}): loading data view: ${data.fileName}`);
           const tableData = getData(data.fileName, data.data, data.schema);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
-            console.log(`data.view:refresh(${dataTable}): initializing view data for: ${data.fileName}`);
+            console.log(`data.view:refresh(${dataTable}): initializing data view: ${data.fileName}`);
             if (data.schema !== undefined && Object.keys(data.schema).length > 0) {
               // viewer.columns = viewConfig['columns'];
               viewer.load(data.schema);
@@ -335,7 +348,7 @@
               toggleConfig = false;
             }
           } else {  // update viewer data without toggles reset
-            console.log(`data.view:refresh(${dataTable}): updating view data for: ${data.fileName}`);
+            console.log(`data.view:refresh(${dataTable}): updating view data: ${data.fileName}`);
             viewer.clear();
             viewer.update(tableData);
           }

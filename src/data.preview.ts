@@ -100,9 +100,9 @@ export class DataPreview {
   private _dataSchema: any;
   private _isRemoteData: boolean = false;
   private _tableList: Array<string> = [];
+  private _dataViews: any = {};
   private _viewConfig: any = {};
   private _dataTable: string = '';
-  private _dataViews: any = {};
   private _charts: string = 'd3fc';
 
   /**
@@ -269,7 +269,7 @@ export class DataPreview {
         schema: this.schema,
         tableList: this._tableList,
         views: this._dataViews,
-        table: this._dataTable,
+        table: this._dataTable
       });
     }
     catch (error) {
@@ -620,18 +620,15 @@ export class DataPreview {
    * @returns Array of row objects.
    */
   private getArrowData(dataFilePath: string): any[] {
+    // get binary arrow data
     const dataBuffer: Buffer = fileUtils.readDataFile(dataFilePath);
-    const dataTable: Table = Table.from(new Uint8Array(dataBuffer));
-    const dataRows: Array<any> = Array(dataTable.length);
-    const fields = dataTable.schema.fields.map(field => field.name);
-    for (let i=0, n=dataRows.length; i<n; ++i) {
-      const proto = {};
-      fields.forEach((fieldName, index) => {
-        const column = dataTable.getColumnAt(index);
-        proto[fieldName] = column.get(i);
-      });
-      dataRows[i] = proto;
-    }
+    // create typed octet data array
+    const octetDataArray: Uint8Array = new Uint8Array(dataBuffer);
+    // create arrow table
+    const dataTable: Table = Table.from(octetDataArray);
+    let dataRows: Array<any> = [];
+    // post typed array to data.view for data load
+    //this.webview.postMessage(octetDataArray);
 
     // remap arrow data schema to columns for data viewer
     this._dataSchema = {};
@@ -643,13 +640,30 @@ export class DataPreview {
       }
       this._dataSchema[field.name] = config.dataTypes[fieldType];
     });
-
     // initialized typed data set columns config
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
 
-    // create data json and schema.json for text arrow data preview
-    fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+    // create arrow data schema.json for text arrow metadata preview
     fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
+
+    // create arrow data .json for text arrow data preview
+    //if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {
+      // convert arrow table data to array of objects (happens only on the 1st run :)
+      const dataArray: Array<any> = Array(dataTable.length);
+      const fields = dataTable.schema.fields.map(field => field.name);
+      for (let i=0, n=dataRows.length; i<n; ++i) {
+        const proto = {};
+        fields.forEach((fieldName, index) => {
+          const column = dataTable.getColumnAt(index);
+          proto[fieldName] = column.get(i);
+        });
+        dataArray[i] = proto;
+      }
+      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataArray);
+      dataRows = dataArray;
+    //}
+
+    // log arrow data stats and gracefully return :)
     this.logDataStats(dataTable.schema, dataRows);
     return dataRows;
   } // end of getArrowData()
@@ -780,7 +794,7 @@ export class DataPreview {
   private logDataStats(dataSchema: any, dataRows: Array<any>): void {
     if (config.logLevel === LogLevel.Debug) {
       if (dataSchema !== null) {
-        this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
+        // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
         this._logger.debug('logDataStats(): data view schema:', this._dataSchema);
       }
       this._logger.debug('logDataStats(): records count:', dataRows.length);
