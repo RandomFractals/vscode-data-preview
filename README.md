@@ -224,6 +224,7 @@ vscode-data-preview>vsce package
 ```
 to generate `VSIX` Data Preview 🈸 extension package from our latest for local dev install in VSCode.
 
+**Note:** Use `Help -> Toggle Developer Tools` vscode menu option to view Data Preview 🈸 console log.
 
 # Contributions
 
