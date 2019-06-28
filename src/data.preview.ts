@@ -602,7 +602,7 @@ export class DataPreview {
       const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
       dataRows = xlsx.utils.sheet_to_json(worksheet);
 
-      if (this.createJsonFiles) {
+      if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
         // create json data file for Excel text data preview
         let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
         if (this._dataTable.length > 0 && this._tableList.length > 1) {
