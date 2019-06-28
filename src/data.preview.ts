@@ -602,13 +602,15 @@ export class DataPreview {
       const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
       dataRows = xlsx.utils.sheet_to_json(worksheet);
 
-      // create json data file for text data preview
-      let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
-      if (this._dataTable.length > 0 && this._tableList.length > 1) {
-        // append sheet name to generated json data file
-        jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
+      if (this.createJsonFiles) {
+        // create json data file for Excel text data preview
+        let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
+        if (this._dataTable.length > 0 && this._tableList.length > 1) {
+          // append sheet name to generated json data file name
+          jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
+        }
+        fileUtils.createJsonFile(jsonFilePath, dataRows);
       }
-      fileUtils.createJsonFile(jsonFilePath, dataRows);
       this.logDataStats(dataSchema, dataRows);
     }
     return dataRows;
@@ -679,13 +681,15 @@ export class DataPreview {
     dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
-      // create data json and schema.json files for text data preview
-      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
-      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
       this.logDataStats(dataSchema, dataRows);
       // update web view: flatten data rows for now since Avro format has hierarchical data structure
       dataRows = dataRows.map(rowObject => jsonUtils.flattenObject(rowObject));
       this.loadData(dataRows);
+      if (this.createJsonFiles) {
+        // create data json and schema.json files for text data preview
+        fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+        fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
+      }
     });
     return dataRows;
   }

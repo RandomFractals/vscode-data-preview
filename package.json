@@ -307,7 +307,7 @@
         },
         "data.preview.create.json.files": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Creates '.json' data & '.schema.json' files, if available, for Arrow, Avro & Excel binary data files."
         }
       }
