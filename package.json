@@ -308,12 +308,21 @@
         "data.preview.create.json.files": {
           "type": "boolean",
           "default": false,
-          "description": "Creates '.json' data files for Arrow, Avro & Excel binary data formats"
+          "description": "Create '.json' data files for Arrow, Avro & Excel binary data formats"
         },
         "data.preview.create.json.schema": {
           "type": "boolean",
           "default": false,
-          "description": "Creates '.schema.json' files for Arrow & Avro metadata binary data formats"
+          "description": "Create '.schema.json' file for Arrow & Avro metadata binary data formats"
+        },
+        "data.preview.log.level": {
+          "type": "string",
+          "enum": [
+            "info",
+            "debug"
+          ],
+          "default": "info",
+          "description": "Data Preview run log level: info || debug"
         }
       }
     }

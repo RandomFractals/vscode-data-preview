@@ -128,7 +128,7 @@ export class DataPreview {
     htmlTemplate: Template, 
     panel?: WebviewPanel) {
 
-    // save ext path, document uri, view config, and create preview uri
+    // save ext path, document uri, view config, preview uri, title, etc.
     this._extensionPath = extensionPath;
     this._uri = uri;
     this._dataUrl = uri.toString(true).replace('file:///', ''); // skip uri encoding, strip out file scheme
@@ -140,7 +140,9 @@ export class DataPreview {
     this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
     this._previewUri = this._uri.with({scheme: 'data'});
     this._title = `${this._fileName} 🈸`;
-    this._logger = new Logger(`${viewType}:`, config.logLevel);
+
+    // initialize data preview logger
+    this._logger = new Logger(`${viewType}:`, (this.logLevel === 'info') ? LogLevel.Info: LogLevel.Debug);
     this._logger.debug('(): creating data.preview:', this._dataUrl);
 
     // initilize charts plugin
@@ -269,7 +271,8 @@ export class DataPreview {
         schema: this.schema,
         tableList: this._tableList,
         views: this._dataViews,
-        table: this._dataTable
+        table: this._dataTable,
+        logLevel: this.logLevel
       });
     }
     catch (error) {
@@ -436,6 +439,7 @@ export class DataPreview {
           tableList: this._tableList,
           views: this._dataViews,
           table: this._dataTable,
+          logLevel: this.logLevel,
           data: data
         });
     }
@@ -976,4 +980,12 @@ export class DataPreview {
   get createJsonSchema(): boolean {
     return <boolean>workspace.getConfiguration('data.preview').get('create.json.schema');
   }
+
+  /**
+   * Gets data preivew log level setting for troubleshooting user issues.
+   */
+  get logLevel(): string {
+    return <string>workspace.getConfiguration('data.preview').get('log.level');
+  }
+
 }
