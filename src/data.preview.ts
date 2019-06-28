@@ -644,8 +644,10 @@ export class DataPreview {
     // initialized typed data set columns config
     // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
 
-    // create arrow data schema.json for text arrow metadata preview
-    fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
+    if (this.createJsonSchema) {
+      // create schema.json file for text data preview
+      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
+    }
 
     // create arrow data .json for text arrow data preview
     let dataRows: Array<any> = [];
@@ -685,10 +687,13 @@ export class DataPreview {
       // update web view: flatten data rows for now since Avro format has hierarchical data structure
       dataRows = dataRows.map(rowObject => jsonUtils.flattenObject(rowObject));
       this.loadData(dataRows);
-      if (this.createJsonFiles) {
-        // create data json and schema.json files for text data preview
-        fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
+      if (this.createJsonSchema) {
+        // create schema.json file for text data preview
         fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
+      }
+      if (this.createJsonFiles) {
+        // create data json file for text data preview
+        fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
       }
     });
     return dataRows;
@@ -959,9 +964,16 @@ export class DataPreview {
   }
 
   /**
-   * Create JSON data & schema.json files config option for Arrow, Avro & Excel data files.
+   * Create JSON data files config option for Arrow, Avro & Excel binary data formats.
    */
   get createJsonFiles(): boolean {
     return <boolean>workspace.getConfiguration('data.preview').get('create.json.files');
+  }
+
+  /**
+   * Create schema.json files config option for Arrow & Avro metadata binary data formats.
+   */
+  get createJsonSchema(): boolean {
+    return <boolean>workspace.getConfiguration('data.preview').get('create.json.schema');
   }
 }

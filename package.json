@@ -294,7 +294,7 @@
             "dark"
           ],
           "default": "dark",
-          "description": "Data Preview UI Theme: light || dark."
+          "description": "Data Preview UI Theme: light || dark"
         },
         "data.preview.charts.plugin": {
           "type": "string",
@@ -303,12 +303,17 @@
             "highcharts"
           ],
           "default": "d3fc",
-          "description": "Data Preview Charts library to use: d3fc || highcharts."
+          "description": "Data Preview Charts library to use: d3fc || highcharts"
         },
         "data.preview.create.json.files": {
           "type": "boolean",
           "default": false,
-          "description": "Creates '.json' data & '.schema.json' files, if available, for Arrow, Avro & Excel binary data files."
+          "description": "Creates '.json' data files for Arrow, Avro & Excel binary data formats"
+        },
+        "data.preview.create.json.schema": {
+          "type": "boolean",
+          "default": false,
+          "description": "Creates '.schema.json' files for Arrow & Avro metadata binary data formats"
         }
       }
     }
