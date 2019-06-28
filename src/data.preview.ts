@@ -626,7 +626,6 @@ export class DataPreview {
     const octetDataArray: Uint8Array = new Uint8Array(dataBuffer);
     // create arrow table
     const dataTable: Table = Table.from(octetDataArray);
-    let dataRows: Array<any> = [];
     // post typed array to data.view for data load
     //this.webview.postMessage(octetDataArray);
 
@@ -647,9 +646,10 @@ export class DataPreview {
     fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
 
     // create arrow data .json for text arrow data preview
+    let dataRows: Array<any> = [];
     //if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {
       // convert arrow table data to array of objects (happens only on the 1st run :)
-      const dataArray: Array<any> = Array(dataTable.length);
+      dataRows = Array(dataTable.length);
       const fields = dataTable.schema.fields.map(field => field.name);
       for (let i=0, n=dataRows.length; i<n; ++i) {
         const proto = {};
@@ -657,10 +657,9 @@ export class DataPreview {
           const column = dataTable.getColumnAt(index);
           proto[fieldName] = column.get(i);
         });
-        dataArray[i] = proto;
+        dataRows[i] = proto;
       }
-      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataArray);
-      dataRows = dataArray;
+      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
     //}
 
     // log arrow data stats and gracefully return :)
