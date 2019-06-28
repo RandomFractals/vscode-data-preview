@@ -633,7 +633,7 @@ export class DataPreview {
     // create arrow table
     const dataTable: Table = Table.from(octetDataArray);
     // post typed array to data.view for data load
-    //this.webview.postMessage(octetDataArray);
+    this.webview.postMessage(octetDataArray);
 
     // remap arrow data schema to columns for data viewer
     this._dataSchema = {};
@@ -655,7 +655,7 @@ export class DataPreview {
 
     // create arrow data .json for text arrow data preview
     let dataRows: Array<any> = [];
-    //if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {
+    // if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {
       // convert arrow table data to array of objects (happens only on the 1st run :)
       dataRows = Array(dataTable.length);
       const fields = dataTable.schema.fields.map(field => field.name);
@@ -667,8 +667,9 @@ export class DataPreview {
         });
         dataRows[i] = proto;
       }
+    if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {      
       fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
-    //}
+    }
 
     // log arrow data stats and gracefully return :)
     this.logDataStats(dataTable.schema, dataRows);
@@ -804,7 +805,7 @@ export class DataPreview {
    * @param dataRows data rows.
    */
   private logDataStats(dataSchema: any, dataRows: Array<any>): void {
-    if (config.logLevel === LogLevel.Debug) {
+    if (this.logLevel === 'debug') {
       if (dataSchema !== null) {
         // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
         this._logger.debug('logDataStats(): data view schema:', this._dataSchema);
