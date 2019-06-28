@@ -298,35 +298,10 @@
           title.innerText = data.fileName;
 
           // load table list for multi-table data views display
-          if (tableList.length <= 0) {
-            console.log(`data.view:refresh(): table list: ${data.tableList}`);
-            data.tableList.forEach(tableName => {
-              tableSelector.innerHTML += `<option value="${tableName}">${tableName}</option>"`;
-              tableList.push(tableName);
-            });
-            if (tableList.length > 0) {
-              // show table selector dropdown
-              tableSelector.style.display = 'inline-block';
-              // set requested data table
-              tableSelector.value = dataTable;
-            }
-          }
+          loadTableList(data.tableList, dataTable);
 
-          // check view config
-          if (JSON.stringify(viewConfig) !== JSON.stringify(data.config)) {
-            viewConfig = data.config;
-            // update view config
-            viewer.restore(viewConfig);
-            // reset view data for reaload
-            viewData = [];
-            // update data view state
-            vscode.setState({
-              uri: dataUrl,
-              table: dataTable,
-              config: viewConfig,
-              views: dataViews
-            });
-          }
+          // load new data view config, if different
+          reloadDataViewConfig(data.config);
 
           // load file data
           console.log(`data.view:refresh(${dataTable}): loading data view: ${data.fileName}`);
@@ -358,6 +333,52 @@
           console.error(`data.view:refresh(): error: ${error.message}`);
         }
       } // end of refresh(data)
+
+      /**
+       * Loads data table list for multi-table data views display.
+       * @param dataTableList Data source table list.
+       * @param dataTable Requested data view table name.
+       **/
+      function loadTableList(dataTableList, dataTable) {
+        if (tableList.length <= 0) {
+          console.log(`data.view:loadTableList(): table list: ${dataTableList}`);
+          dataTableList.forEach(tableName => {
+            tableSelector.innerHTML += `<option value="${tableName}">${tableName}</option>"`;
+            tableList.push(tableName);
+          });
+          if (tableList.length > 0) {
+            // show table selector dropdown
+            tableSelector.style.display = 'inline-block';
+            // set requested data table
+            tableSelector.value = dataTable;
+          }
+        }
+      }
+
+      /**
+       * Reloads data view config, resets view data and state
+       * on new data view load, view config load, or data refresh.
+       * @param dataViewConfig Data view config to load.
+       **/
+      function reloadDataViewConfig(dataViewConfig) {
+        // check view config
+        if (JSON.stringify(viewConfig) !== JSON.stringify(dataViewConfig)) {
+          console.log(`data.view:reloadDataViewConfig(): config: ${JSON.stringify(dataViewConfig, null, 2)}`);
+          // save updated view config
+          viewConfig = dataViewConfig;
+          // update data viewer for new view config display
+          viewer.restore(viewConfig);
+          // reset view data for reaload
+          viewData = [];
+          // update data view state
+          vscode.setState({
+            uri: dataUrl,
+            table: dataTable,
+            config: viewConfig,
+            views: dataViews
+          });
+        }
+      }
 
       /** 
        * Gets data for display in perspective viewer.
