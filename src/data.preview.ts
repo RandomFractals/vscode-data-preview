@@ -710,8 +710,8 @@ export class DataPreview {
    * @see https://github.com/lorenwest/node-config/wiki/Configuration-Files
    */
   private getConfigData(dataFilePath: string): any {
-    let data: any = JSON.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
-    return jsonUtils.convertJsonData(data);
+    // Note: this ext. assumes .config files are nodejs, i.e. in json format
+    return this.getJsonData(dataFilePath);
   }
 
   /**
