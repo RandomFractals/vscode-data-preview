@@ -366,7 +366,7 @@ export class DataPreview {
     this.webview.html = this.html;
     // NOTE: let webview fire refresh message
     // when data view DOM content is initialized
-    // see: data.view.html/this.refresh();
+    // see: data.view.html/refresh();
   }
 
   /**
@@ -720,7 +720,15 @@ export class DataPreview {
    * @see http://json.org/
    */
   private getJsonData(dataFilePath: string): any {
-    let data: any = JSON.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
+    let data: any = [];
+    try {
+      data = JSON.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
+    }
+    catch (error) {
+      this._logger.logMessage(LogLevel.Error, 
+        `getJsonData(): Error parsing '${this._dataUrl}' \n\tError:`, error.message);
+      window.showErrorMessage(`Unable to parse JSON file: '${this._dataUrl}'. Error:`, error.message);
+    }
     return jsonUtils.convertJsonData(data);
   }
 

@@ -1,8 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import * as config from '../config';
-import {Logger, LogLevel} from '../logger';
-import {window} from 'vscode';
+import {Logger} from '../logger';
 
 const logger: Logger = new Logger(`json.utils:`, config.logLevel);
 
