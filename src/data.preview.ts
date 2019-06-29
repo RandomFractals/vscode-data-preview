@@ -541,16 +541,14 @@ export class DataPreview {
           data = this.getIniData(dataUrl);
           break;  
       case '.config':
-        data = this.getConfigData(dataUrl);
-        break;
       case '.json':
-        data = this.getJsonData(dataUrl);
+        data = this.getJsonData(dataUrl, JSON.parse);
         break;
       case '.json5':
-        data = this.getJson5Data(dataUrl);
+        data = this.getJsonData(dataUrl, json5.parse);
         break;
       case '.hjson':
-        data = this.getHJsonData(dataUrl);
+        data = this.getJsonData(dataUrl, hjson.parse);
         break;
       case '.yaml':
       case '.yml':
@@ -705,50 +703,22 @@ export class DataPreview {
   }
 
   /**
-   * Gets .config data array or config object.
-   * @param dataFilePath Config data file path.
-   * @see https://github.com/lorenwest/node-config/wiki/Configuration-Files
-   */
-  private getConfigData(dataFilePath: string): any {
-    // Note: this ext. assumes .config files are nodejs, i.e. in json format
-    return this.getJsonData(dataFilePath);
-  }
-
-  /**
    * Gets JSON data array or config object.
    * @param dataFilePath Json data file path.
-   * @see http://json.org/
+   * @param parseJson Json parse function 
+   * for the different supported JSON data formats: .config, .json, .json5, .hjson.
    */
-  private getJsonData(dataFilePath: string): any {
+  private getJsonData(dataFilePath: string, parseJson: Function): any {
     let data: any = [];
     try {
-      data = JSON.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
+      const jsonString: string = fileUtils.readDataFile(dataFilePath, 'utf8');
+      data = parseJson(jsonString);
     }
     catch (error) {
       this._logger.logMessage(LogLevel.Error, 
         `getJsonData(): Error parsing '${this._dataUrl}' \n\tError:`, error.message);
       window.showErrorMessage(`Unable to parse JSON file: '${this._dataUrl}'. Error:`, error.message);
     }
-    return jsonUtils.convertJsonData(data);
-  }
-
-  /**
-   * Gets JSON5 data array or config object.
-   * @param dataFilePath Json5 data file path.
-   * @see https://json5.org
-   */
-  private getJson5Data(dataFilePath: string): any {
-    let data: any = json5.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
-    return jsonUtils.convertJsonData(data);
-  }
-
-  /**
-   * Gets HJSON data array or config object.
-   * @param dataFilePath HJson data file path.
-   * @see https://github.com/hjson/hjson-js
-   */
-  private getHJsonData(dataFilePath: string): any {
-    let data: any = hjson.parse(fileUtils.readDataFile(dataFilePath, 'utf8'));
     return jsonUtils.convertJsonData(data);
   }
 
