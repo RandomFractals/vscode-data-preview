@@ -25,7 +25,7 @@
 - Property Grid display for `.json` `.config` `.env` `.properties` `.ini` & `.yml` configuration files
 - Open Data Preview on Side option for slim data || config files
 - Quick Launch new Data Preivew input box for data files in open workspace
-- Save Filtered Data Grid || Chart 📊 Data in `.csv` `.json(s)` `.yml` & `.properties` formats
+- Save Filtered Data Grid || Chart 📊 Data in `.arrow` `.csv` `.json(s)` `.yml` & `.properties` formats
 - Save & Load Data View `.config` options
 - Dark & Light Data Preview 🈸 Panel Themes
 
@@ -91,13 +91,14 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 
 Use Data Preview 🈸 to:
 
-- Load large data files for data sorting, filtering, charting and export to `.csv` `.json` || `.yml` text data formats
+- Load large data files for sorting, filtering, and charting 📊 
+- Export loaded data in compact binary `.arrow` data format || `.csv` `.json` || `.yml` text data formats
 - Preview `.properites` and other key-value pairs configuration files to reformat them || find set config option values
 - Generate Arrow & Avro `.shema.json` for metadata text preview of those binary data files
 - Generate `.json` files for text data preview of binary Excel files
 - Preview Excel files and workbooks with multiple workseets without opening Excel
 - Convert `.csv` || `.tsv` data to `.json` || `.yml` format
-- Use built-in Charts 📊 for exploratory data analysis
+- Use built-in Charts 📊 for exploratory Data Analysis
 
 # Supported JSON, Config, Binary & Excel Data File Formats
 
