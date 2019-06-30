@@ -532,14 +532,15 @@ export class DataPreview {
         data = this.getExcelData(dataUrl);
         break;
       case '.env':
-        data = jsonUtils.configToPropertyArray(fs.readFileSync(dataUrl, 'utf8'));
-        break;
-      case '.properties':
-        data = this.getPropertiesData(dataUrl);
+        data = this.getJsonData(dataUrl, props.parse,  {sections: true, comments: ['#']});
         break;
       case '.ini':
-          data = this.getIniData(dataUrl);
-          break;  
+        // NOTE: some INI files consider # as a comment
+        data = this.getJsonData(dataUrl, props.parse,  {sections: true, comments: [';', '#']});
+        break;
+      case '.properties':
+        data = this.getJsonData(dataUrl, props.parse, {sections: true});
+        break;    
       case '.config':
       case '.json':
         data = this.getJsonData(dataUrl, JSON.parse);
@@ -552,7 +553,7 @@ export class DataPreview {
         break;
       case '.yaml':
       case '.yml':
-        data = this.getYamlData(dataUrl);
+        data = this.getJsonData(dataUrl, yaml.load);
         break;
       case '.arrow':
         data = this.getArrowData(dataUrl);
@@ -617,6 +618,28 @@ export class DataPreview {
     }
     return dataRows;
   } // end of getExcelData()
+
+  /**
+   * Gets JSON data array or config object.
+   * @param dataFilePath Data file path.
+   * @param parseFunction Data parse function for the supported json/config files.
+   * @param options Data parsing options.
+   */
+  private getJsonData(dataFilePath: string,
+    parseFunction: Function,
+    options: any = null): any {
+    let data: any = [];
+    try {
+      const content: string = fileUtils.readDataFile(dataFilePath, 'utf8');
+      data = (options) ? parseFunction(content, options) : parseFunction(content);
+    }
+    catch (error) {
+      this._logger.logMessage(LogLevel.Error, 
+        `getJsonData(): Error parsing '${this._dataUrl}' \n\tError:`, error.message);
+      window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. Error:`, error.message);
+    }
+    return jsonUtils.convertJsonData(data);
+  }
 
   /**
    * Gets binary Arrow file data.
@@ -700,58 +723,6 @@ export class DataPreview {
       }
     });
     return dataRows;
-  }
-
-  /**
-   * Gets JSON data array or config object.
-   * @param dataFilePath Json data file path.
-   * @param parseJson Json parse function 
-   * for the different supported JSON data formats: .config, .json, .json5, .hjson.
-   */
-  private getJsonData(dataFilePath: string, parseJson: Function): any {
-    let data: any = [];
-    try {
-      const jsonString: string = fileUtils.readDataFile(dataFilePath, 'utf8');
-      data = parseJson(jsonString);
-    }
-    catch (error) {
-      this._logger.logMessage(LogLevel.Error, 
-        `getJsonData(): Error parsing '${this._dataUrl}' \n\tError:`, error.message);
-      window.showErrorMessage(`Unable to parse JSON file: '${this._dataUrl}'. Error:`, error.message);
-    }
-    return jsonUtils.convertJsonData(data);
-  }
-
-  /**
-   * Gets YAML data array or config object.
-   * @param dataFilePath YAML data file path.
-   */
-  private getYamlData(dataFilePath: string): any {
-    let data: any = yaml.load(fileUtils.readDataFile(dataFilePath, 'utf8'));
-    return jsonUtils.convertJsonData(data);
-  }
-
-  /**
-   * Gets properties data array with key/value pairs.
-   * @param dataFilePath Properties data file path.
-   */
-  private getPropertiesData(dataFilePath: string): any {
-    const dataString: string = fileUtils.readDataFile(dataFilePath, 'utf8');
-    const data: any = jsonUtils.convertJsonData(
-      props.parse(dataString, {sections: true}));
-    return data;
-  }
-
-  /**
-   * Gets INI properties data array with key/value pairs.
-   * @param dataFilePath INI file path.
-   * @see https://github.com/gagle/node-properties#ini
-   */
-  private getIniData(dataFilePath: string): any {
-    const dataString: string = fileUtils.readDataFile(dataFilePath, 'utf8');
-    const data: any = jsonUtils.convertJsonData(
-      props.parse(dataString, {sections: true, comments: [';', '#']})); // NOTE: some INI files consider # as a comment
-    return data;
   }
 
   /**

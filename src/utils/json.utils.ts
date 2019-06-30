@@ -58,25 +58,3 @@ export function objectToPropertyArray(obj: any): Array<any> {
   }
   return properties;
 }
-
-/**
- * Converts .env or .properties config file
- * to an array of property key/value objects.
- * @param configString Config file content.
- */
-export function configToPropertyArray(configString: string): Array<any> {
-  const properties: Array<any> = [];
-  if (configString && configString.length > 0) {
-    const configLines: Array<string> = configString.split(/\r\n|\r|\n/);
-    configLines.forEach(line => {
-      if (line.length > 0 && !line.startsWith('#') && !line.startsWith('!')) { // skip comments        
-        const keyValue: Array<string> = line.split('=');
-        properties.push({
-            key: keyValue[0] || '<space>',
-            value: keyValue[1] || ''
-          });
-      }
-    });
-  }
-  return properties;
-}
