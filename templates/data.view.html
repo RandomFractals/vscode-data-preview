@@ -162,13 +162,12 @@
           case 'dataInfo':
             loadDataInfo(event.data);
             break;
-          default: // raw array data as object
-            // convert array data object to typed data array for loading into data view
-            const keys = Object.keys(event.data)
-            viewData = Uint8Array.from(keys, key => event.data[key]);
+          default: // raw byte array
+            // convert byte array to typed data array for loading into data view
+            viewData = Uint8Array.from(event.data);
             logMessage(`data size in bytes: ${viewData.byteLength}`);
             // update data viewer
-            viewer.load(viewData.buffer.slice());
+            viewer.load(viewData.buffer);
             if (toggleConfig) {
               // show viewer toggles on the 1st run
               viewer.toggleConfig();
@@ -436,10 +435,9 @@
             logMessage(`getData(): records count: ${tableData.length}`);
             break;
           case '.arrow':
-            // pass through arrow table data json
-            tableData = data;
+            // return empty data array since binary data is loaded elsewhere
+            tableData = [];
             logMessage(`getData(): schema: ${JSON.stringify(schema, null, 2)}`);
-            logMessage(`getData(): records count: ${tableData.length}`);
             break;
           case '.parquet':
             // TODO: add parquet data read

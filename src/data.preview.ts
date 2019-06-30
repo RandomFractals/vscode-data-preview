@@ -656,8 +656,6 @@ export class DataPreview {
 
     // create arrow table
     const dataTable: Table = Table.from(dataArray);
-    // post typed array to data.view for data load
-    this.webview.postMessage(dataArray);
 
     // remap arrow data schema to columns for data viewer
     this._dataSchema = {};
@@ -677,7 +675,10 @@ export class DataPreview {
       fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
     }
 
-    // create arrow data .json for text arrow data preview
+    // post typed array to data.view for data load
+    this.webview.postMessage(Array.from(dataArray));
+
+    // create arrow data.json for text arrow data preview
     let dataRows: Array<any> = [];
     if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {
       // convert arrow table data to array of objects (happens only on the 1st run :)
