@@ -163,13 +163,17 @@
             loadDataInfo(event.data);
             break;
           default: // raw array data as object
-            // convert array data object to typed data array for loading into data view:
+            // convert array data object to typed data array for loading into data view
             const keys = Object.keys(event.data)
-            logMessage(`data array length: ${keys.length}`);
-            const dataArray = Uint8Array.from(keys, key => event.data[key]);
-            logMessage(`data size in bytes: ${dataArray.byteLength}`);
-            // update view data
-            // viewData = event.data;
+            viewData = Uint8Array.from(keys, key => event.data[key]);
+            logMessage(`data size in bytes: ${viewData.byteLength}`);
+            // update data viewer
+            viewer.load(viewData.buffer.slice());
+            if (toggleConfig) {
+              // show viewer toggles on the 1st run
+              viewer.toggleConfig();
+              toggleConfig = false;
+            }
             break;
         }
       });

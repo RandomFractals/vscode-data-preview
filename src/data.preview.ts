@@ -652,7 +652,7 @@ export class DataPreview {
 
     // create typed data array
     const dataArray: Uint8Array = new Uint8Array(dataBuffer);
-    this._logger.debug('getArrowData(): data array size:', dataArray.length);
+    this._logger.debug('getArrowData(): data size in bytes:', dataArray.byteLength.toLocaleString());
 
     // create arrow table
     const dataTable: Table = Table.from(dataArray);
@@ -679,7 +679,7 @@ export class DataPreview {
 
     // create arrow data .json for text arrow data preview
     let dataRows: Array<any> = [];
-    // if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {
+    if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {
       // convert arrow table data to array of objects (happens only on the 1st run :)
       dataRows = Array(dataTable.length);
       const fields = dataTable.schema.fields.map(field => field.name);
@@ -691,7 +691,6 @@ export class DataPreview {
         });
         dataRows[i] = proto;
       }
-    if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {      
       fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
     }
 
