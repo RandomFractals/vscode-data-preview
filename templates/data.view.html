@@ -165,7 +165,7 @@
           default: // raw byte array
             // convert byte array to typed data array for loading into data view
             viewData = Uint8Array.from(event.data);
-            logMessage(`data size in bytes: ${viewData.byteLength}`);
+            logMessage(`data size in bytes: ${viewData.byteLength.toLocaleString()}`);
             // update data viewer
             viewer.load(viewData.buffer);
             if (toggleConfig) {

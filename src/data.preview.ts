@@ -675,6 +675,9 @@ export class DataPreview {
       fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
     }
 
+    // send initial data info to data view
+    this.postDataInfo(); 
+
     // post typed array to data.view for data load
     this.webview.postMessage(Array.from(dataArray));
 
@@ -697,7 +700,7 @@ export class DataPreview {
 
     // log arrow data stats and gracefully return :)
     this.logDataStats(dataTable.schema, dataRows);
-    return dataRows;
+    return []; //  dataRows already sent
   } // end of getArrowData()
 
   /**
