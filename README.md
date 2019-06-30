@@ -7,7 +7,7 @@
 [![](https://vsmarketplacebadge.apphb.com/trending-daily/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 
 
-[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for viewing 🔎 slicing 🔪 dicing 🎲 & charting 📊 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
@@ -91,8 +91,8 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 
 Use Data Preview 🈸 to:
 
-- Load large data files for sorting, filtering, and charting 📊 
-- Export loaded data in compact binary `.arrow` data format || `.csv` `.json` || `.yml` text data formats
+- Load large data files for sorting, filtering & charting 📊 
+- Export displayed data in compact binary `.arrow` data format, `.csv` `.json` `.yml` || `.properties` text data formats
 - Preview `.properites` and other key-value pairs configuration files to reformat them || find set config option values
 - Generate Arrow & Avro `.shema.json` for metadata text preview of those binary data files
 - Generate `.json` files for text data preview of binary Excel files
