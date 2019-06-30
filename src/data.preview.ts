@@ -789,13 +789,17 @@ export class DataPreview {
     this._logger.debug('saveData(): saving data file:', dataFilePath);
 
     // display save file dialog
-    const dataFileUri: Uri = await window.showSaveDialog({
+    const dataFileUri = await window.showSaveDialog({
       defaultUri: Uri.parse(dataFilePath).with({scheme: 'file'})
     });
 
     if (dataFileUri) {
       const dataFileExtension = dataFilePath.substr(dataFilePath.lastIndexOf('.'));
       switch (dataFileExtension) {
+        case '.arrow':
+          fileData = Buffer.from(fileData);
+          this._logger.debug('saveData(): arrow data size in bytes:', fileData.byteLength);
+          break;
         case '.config':
         case '.json':
           fileData = JSON.stringify(fileData, null, 2);
