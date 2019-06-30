@@ -765,10 +765,10 @@ export class DataPreview {
         // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
         this._logger.debug('logDataStats(): data view schema:', this._dataSchema);
       }
-      this._logger.debug('logDataStats(): records count:', dataRows.length);
       if (dataRows.length > 0) {
         const firstRow = dataRows[0];
         this._logger.debug('logDataStats(): 1st row:', firstRow);
+        this._logger.debug('logDataStats(): records count:', dataRows.length);
       }
     }
   }
