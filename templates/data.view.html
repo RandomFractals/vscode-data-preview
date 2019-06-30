@@ -162,8 +162,12 @@
           case 'dataInfo':
             loadDataInfo(event.data);
             break;
-          default: // raw data
-            // logMessage(`data: ${JSON.stringify(event.data, null, 2)}`);
+          default: // raw array data as object
+            // convert array data object to typed data array for loading into data view:
+            const keys = Object.keys(event.data)
+            logMessage(`data array length: ${keys.length}`);
+            const dataArray = Uint8Array.from(keys, key => event.data[key]);
+            logMessage(`data size in bytes: ${dataArray.byteLength}`);
             // update view data
             // viewData = event.data;
             break;

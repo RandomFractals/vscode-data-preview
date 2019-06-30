@@ -649,12 +649,15 @@ export class DataPreview {
   private getArrowData(dataFilePath: string): any[] {
     // get binary arrow data
     const dataBuffer: Buffer = fileUtils.readDataFile(dataFilePath);
-    // create typed octet data array
-    const octetDataArray: Uint8Array = new Uint8Array(dataBuffer);
+
+    // create typed data array
+    const dataArray: Uint8Array = new Uint8Array(dataBuffer);
+    this._logger.debug('getArrowData(): data array size:', dataArray.length);
+
     // create arrow table
-    const dataTable: Table = Table.from(octetDataArray);
+    const dataTable: Table = Table.from(dataArray);
     // post typed array to data.view for data load
-    this.webview.postMessage(octetDataArray);
+    this.webview.postMessage(dataArray);
 
     // remap arrow data schema to columns for data viewer
     this._dataSchema = {};
