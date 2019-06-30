@@ -798,7 +798,7 @@ export class DataPreview {
       switch (dataFileExtension) {
         case '.arrow':
           fileData = Buffer.from(fileData);
-          this._logger.debug('saveData(): arrow data size in bytes:', fileData.byteLength);
+          this._logger.debug('saveData(): arrow data size in bytes:', fileData.byteLength.toLocaleString());
           break;
         case '.config':
         case '.json':
