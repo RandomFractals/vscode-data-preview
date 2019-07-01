@@ -349,19 +349,18 @@
     "vscode": "^1.1.34"
   },
   "dependencies": {
-    "@finos/perspective": "^0.3.0",
-    "@finos/perspective-viewer": "^0.3.0",
-    "@finos/perspective-viewer-d3fc": "^0.3.0",
-    "@finos/perspective-viewer-highcharts": "^0.3.0",
-    "@finos/perspective-viewer-hypergrid": "^0.3.0",
+    "@finos/perspective": "^0.3.1",
+    "@finos/perspective-viewer": "^0.3.1",
+    "@finos/perspective-viewer-d3fc": "^0.3.1",
+    "@finos/perspective-viewer-highcharts": "^0.3.1",
+    "@finos/perspective-viewer-hypergrid": "^0.3.1",
     "apache-arrow": "^0.4.1",
-    "avsc": "^5.4.10",
-    "d3-fetch": "^1.1.2",
+    "avsc": "^5.4.12",
     "hjson": "^3.1.2",
     "js-yaml": "^3.13.1",
     "json5": "^2.1.0",
     "properties": "^1.2.1",
-    "snappy": "^6.2.2",
+    "snappy": "^6.2.3",
     "xlsx": "^0.14.3"
   }
 }
