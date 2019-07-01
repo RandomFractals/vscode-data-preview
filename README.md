@@ -1,16 +1,15 @@
 # vscode-data-preview
 [![Build Status](https://travis-ci.org/HoangNguyen17193/vscode-simple-rest-client.svg?branch=master)](https://travis-ci.com/RandomFractals/vscode-data-preview)
 
-[![Version](https://vsmarketplacebadge.apphb.com/version/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
-[![Downloads](https://vsmarketplacebadge.apphb.com/downloads/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
-[![Installs](https://vsmarketplacebadge.apphb.com/installs/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
+[![Version](https://vsmarketplacebadge.apphb.com/version/RandomFractalsInc.vscode-data-preview.svg?color=orange&style=?style=for-the-badge&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
+[![Downloads](https://vsmarketplacebadge.apphb.com/downloads/RandomFractalsInc.vscode-data-preview.svg?color=orange)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
+[![Installs](https://vsmarketplacebadge.apphb.com/installs/RandomFractalsInc.vscode-data-preview.svg?color=orange)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 
-[![Trending Monthly](https://vsmarketplacebadge.apphb.com/trending-monthly/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
-[![Trending Weekly](https://vsmarketplacebadge.apphb.com/trending-weekly/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
-[![Trending Daily](https://vsmarketplacebadge.apphb.com/trending-daily/RandomFractalsInc.vscode-data-preview.svg)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
+[![Trending Monthly](https://vsmarketplacebadge.apphb.com/trending-monthly/RandomFractalsInc.vscode-data-preview.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
+[![Trending Weekly](https://vsmarketplacebadge.apphb.com/trending-weekly/RandomFractalsInc.vscode-data-preview.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
+[![Trending Daily](https://vsmarketplacebadge.apphb.com/trending-daily/RandomFractalsInc.vscode-data-preview.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 
-
-[VSCode](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+<a href="https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview"><img src="./images/data-preview.png" width="64"></a> A [Visual Studio Code](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
