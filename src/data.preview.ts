@@ -141,16 +141,16 @@ export class DataPreview {
     this._previewUri = this._uri.with({scheme: 'data'});
     this._title = `${this._fileName} 🈸`;
 
-    // initialize data preview logger
-    this._logger = new Logger(`${viewType}:`, (this.logLevel === 'info') ? LogLevel.Info: LogLevel.Debug);
-    this._logger.debug('(): creating data.preview:', this._dataUrl);
-
     // initilize charts plugin
     this._charts = this.charts;
     if (viewConfig && viewConfig.hasOwnProperty('view') && viewConfig.view.startsWith('d3')) {
       // reset it to highcharts for older ext v.s configs
       this._charts = 'highcharts';
     }
+
+    // initialize data preview logger
+    this._logger = new Logger(`${viewType}:`, (this.logLevel === 'info') ? LogLevel.Info: LogLevel.Debug);
+    this._logger.debug(`(): creating data.preview: theme: ${this.theme} charts: ${this._charts} data url:`, this._dataUrl);
 
     // create html template for data preview with local scripts, styles and theme params replaced
     const scriptsPath: string = Uri.file(path.join(this._extensionPath, 'scripts'))
