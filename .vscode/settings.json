@@ -9,5 +9,5 @@
     // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
     "typescript.tsc.autoDetect": "off",
     "data.preview.charts.plugin": "d3fc",
-    "data.preview.theme": ".dark"
+    "data.preview.theme": "dark"
 }
