@@ -11,13 +11,17 @@ export interface IDataProvider {
   /**
    * Gets data format data.
    * @param dataUrl Local data file path or remote data url.
+   * @param parseFunction Optional data parse function override.
+   * @param parseOptions Optional data parsing options.
    */
-  getData(dataUrl: string): any;
+  getData(dataUrl: string, parseFunction: Function, parseOptions: any): any;
+ 
 
   /**
    * Saves raw Data Provider data.
    * @param filePath Data file path. 
    * @param fileData Raw data to save.
+   * @param stringifyFunction Optional stringiy function override.
    */
-  saveData(fileData: any): void;
+  saveData(filePath: string, fileData: any, stringifyFunction: Function): void;
 }
