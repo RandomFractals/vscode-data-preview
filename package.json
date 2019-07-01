@@ -9,7 +9,7 @@
   "contributors": [
     "Taras Novak"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "readme": "README.md",
   "repository": {
     "type": "git",
