@@ -235,8 +235,8 @@ export class DataPreview {
           this.updateConfig(message.config, message.table);
           break;
         case 'saveData':
-          // saves data view config, or filtered json or csv data
-          this.saveData(message.fileType, message.data);
+          // saves data view config, or filtered .arrow, .csv, .json(s), .md, .yml, etc. data
+          this.saveData(message.data, message.fileType);
           break;
         case 'loadView':
           // launch new view
@@ -634,9 +634,9 @@ export class DataPreview {
       data = (options) ? parseFunction(content, options) : parseFunction(content);
     }
     catch (error) {
-      this._logger.logMessage(LogLevel.Error, 
-        `getJsonData(): Error parsing '${this._dataUrl}' \n\tError:`, error.message);
-      window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. Error:`, error.message);
+      this._logger.logMessage(LogLevel.Error,
+        `getJsonData(): Error parsing '${this._dataUrl}' \n\t Error:`, error.message);
+      window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. \n\t Error: ${error.message}`);
     }
     return jsonUtils.convertJsonData(data);
   }
@@ -775,15 +775,16 @@ export class DataPreview {
 
   /**
    * Saves posted data from data view.
-   * @param fileType Data file type.
    * @param fileData File data to save.
+   * @param fileType Data file type.
    */
-  private async saveData(fileType: string, fileData: any): Promise<void> {
+  private async saveData(fileData: any, fileType: string): Promise<void> {
     let dataFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
     if (this._dataTable.length > 0) {
       // append data table name to new config or data export file name
       dataFilePath += `-${this._dataTable}`;
     }
+
     // add requested data file ext.
     dataFilePath += fileType;
     this._logger.debug('saveData(): saving data file:', dataFilePath);
@@ -794,11 +795,19 @@ export class DataPreview {
     });
 
     if (dataFileUri) {
-      const dataFileExtension = dataFilePath.substr(dataFilePath.lastIndexOf('.'));
+      const dataFileExtension: string = dataFilePath.substr(dataFilePath.lastIndexOf('.'));
       switch (dataFileExtension) {
         case '.arrow':
           fileData = Buffer.from(fileData);
           this._logger.debug('saveData(): arrow data size in bytes:', fileData.byteLength.toLocaleString());
+          break;
+        case '.md':
+            // TODO: convert binary arrow data to md table text
+            fileData = Buffer.from(fileData);
+            this._logger.debug('saveData(): arrow data size in bytes:', fileData.byteLength.toLocaleString());  
+          break;
+        case '.csv':
+          // do nothing: already in csv text format from data view export
           break;
         case '.config':
         case '.json':
@@ -815,8 +824,10 @@ export class DataPreview {
           fileData = yaml.dump(fileData, {skipInvalid: true});
           break;
         case '.properties':
+          // check if data is from Properties Grid Data View
           if (fileData.length > 0 && 
-            fileData[0].hasOwnProperty('key') && fileData[0].hasOwnProperty('value')) { // data in properties format
+            fileData[0].hasOwnProperty('key') && 
+            fileData[0].hasOwnProperty('value')) {
               let propertiesString: string = '';
               const newLineRegExp: RegExp = new RegExp('\n', 'g');
               fileData = fileData.forEach(property => {
@@ -836,15 +847,15 @@ export class DataPreview {
           }
           break;
       }
-
-      if (fileData.length > 0) {
-        // save exported data
+      
+      // save exported data
+      if ( fileData.length > 0) {
         // TODO: change this to async later
         fs.writeFile(dataFileUri.fsPath, fileData, (error) => {
           if (error) {
-            const errorMessage: string = `Failed to save file: ${dataFileUri.fsPath}`;
-            this._logger.logMessage(LogLevel.Error, 'saveData():', errorMessage);
-            window.showErrorMessage(errorMessage);
+            this._logger.logMessage(LogLevel.Error,
+              `saveData(): Error saving '${dataFileUri.fsPath}' \n\t Error:`, error.message);
+            window.showErrorMessage(`Unable to save data file: '${dataFileUri.fsPath}'. \n\t Error: ${error.message}`);
           }
         });
       }

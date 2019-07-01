@@ -112,7 +112,8 @@
           <option value=".json">json</option>
           <option value=".json5">json5</option>
           <option value=".hjson">hjson</option>
-          <option value=".yml">yaml</option>
+          <option value=".md">md</option>
+          <option value=".yml">yml</option>
           <option value=".properties">properties</option>
         </select>
         <a id="help-link" title="Data Preview Help" href="#" onClick="loadHelp()"><span id="help-icon">?</span></a>
@@ -461,37 +462,55 @@
               dataTable: dataTable,
               config: viewConfig
             };
-            postData(dataFileType, data);
+            if (dataUrl.startsWith('http')) {
+              // append remote data url
+              data['dataUrl'] = dataUrl;
+            }
+            postData(data, dataFileType);
             break;
           case '.arrow':
             viewer.view.to_arrow().then(arrayBuffer => {
-              const dataArray = new Uint8Array(arrayBuffer);
-              postData(dataFileType, Array.from(dataArray));
+              postArrowData(arrayBuffer, dataFileType);
+            });
+            break;
+          case '.md':
+            viewer.view.to_arrow().then(arrayBuffer => {
+              postArrowData(arrayBuffer, dataFileType);
             });
             break;
           case '.csv':
-            viewer.view.to_csv().then(csv => postData(dataFileType, csv));
+            viewer.view.to_csv().then(csv => postData(csv, dataFileType));
             break;
           case '.json':
           case '.json5':
           case '.hjson':
           case '.yml':
           case '.properties':
-            viewer.view.to_json().then(json => postData(dataFileType, json));
+            viewer.view.to_json().then(json => postData(json, dataFileType));
             break;
         }
+      } // end of saveData()
+
+      /**
+       * Posts binary Arrow data for saving.
+       * @param arrayBuffer Arrow data ArrayBuffer to save.
+       * @param dataFileType Data file type to save: .arrow, .md, etc.
+       */
+      function postArrowData(arrayBuffer, dataFileType) {
+        const dataArray = new Uint8Array(arrayBuffer);
+        postData(Array.from(dataArray), dataFileType);
       }
 
       /**
-       * Posts data view data for saving.
-       * @param dataFileType Data file type to save.
+       * Posts Data View data for saving.
        * @param fileData File data to save.
+       * @param dataFileType Data file type to save: .config, .arrow, .csv, .json(s), .md, .yml, etc.
        */
-      function postData(dataFileType, fileData) {
+      function postData(fileData, dataFileType) {
         vscode.postMessage({
           command:'saveData',
-          fileType: dataFileType,
-          data: fileData
+          data: fileData,
+          fileType: dataFileType
         });
       }
 
