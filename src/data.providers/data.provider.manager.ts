@@ -35,8 +35,7 @@ export class DataProviderManager implements IDataProviderManager {
   }
 
   /**
-   * Loads .html and .json templates from the specified template folder.
-   * @param templateFolder Template folder to inspect.
+   * Initializes data providers for the supported data formats.
    */
   private loadDataProviders(): Array<IDataProvider> {
     this.logger.debug('loadDataProviders(): loading data providers...');
