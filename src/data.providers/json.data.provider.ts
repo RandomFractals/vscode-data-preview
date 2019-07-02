@@ -19,6 +19,13 @@ export class JsonDataProvider implements IDataProvider {
   private logger: Logger = new Logger('json.data.provider:', config.logLevel);
 
   /**
+   * Creates new JSON data provider for .json, .json5, and .hjson data files.
+   * @param name Data provider name.
+   */
+  constructor(public name: string = '.json') {
+  }
+
+  /**
    * Gets data format data.
    * @param dataUrl Local data file path or remote data url.
    * @param parseFunction Optional data parse function override.

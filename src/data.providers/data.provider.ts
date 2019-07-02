@@ -9,6 +9,11 @@ import {Logger, LogLevel} from '../logger';
 export interface IDataProvider {
 
   /**
+   * Data provider name.
+   */
+  name: string;
+
+  /**
    * Gets data format data.
    * @param dataUrl Local data file path or remote data url.
    * @param parseFunction Optional data parse function override.
