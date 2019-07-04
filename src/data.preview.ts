@@ -802,9 +802,8 @@ export class DataPreview {
           this._logger.debug('saveData(): arrow data size in bytes:', fileData.byteLength.toLocaleString());
           break;
         case '.md':
-            // TODO: convert binary arrow data to md table text
-            fileData = Buffer.from(fileData);
-            this._logger.debug('saveData(): arrow data size in bytes:', fileData.byteLength.toLocaleString());  
+            // convert CSV text to markdown table
+            fileData = this.csvToMarkdownTable(fileData);
           break;
         case '.csv':
           // do nothing: already in csv text format from data view export
@@ -861,6 +860,84 @@ export class DataPreview {
       }
     }
   } // end of saveData()
+
+
+  /**
+   * Converts CSV to markdown table.
+   *
+   * @param {string} csvContent Csv/tsv data content.
+   * @param {string} delimiter Csv/tsv delimiter.
+   * @param {boolean} hasTableHeaderRow Has table header row.
+   * @returns {string} Markdown table content.
+   */
+  private csvToMarkdownTable(csvContent: string, delimiter: string = ',', hasTableHeaderRow: boolean = true) : string {
+    if (delimiter !== '\t') {
+      // replace all tabs with spaces
+      csvContent = csvContent.replace(/\t/g, '    ');
+    }
+
+    // extract table rows and data from csv content
+    const rows: Array<string> = csvContent.split('\n');
+    const tableData: string[][] = [];
+    const maxColumnLength: number[] = []; // for pretty markdown table cell spacing
+    rows.forEach((row, rowIndex) => {
+      if (typeof tableData[rowIndex] === 'undefined') {
+        // create new table row cells data array
+        tableData[rowIndex] = [];
+      }
+      // extract row cells data from csv text line
+      const cellRegExp: RegExp = new RegExp(delimiter + '(?![^"]*"\\B)');
+      const cells: Array<string> = row.replace('\r', '').split(cellRegExp);
+      cells.forEach((cellData, columnIndex) => {
+        if (typeof maxColumnLength[columnIndex] === 'undefined') {
+          maxColumnLength[columnIndex] = 0;
+        }
+        // update max column length for pretty markdwon table cells spacing
+        maxColumnLength[columnIndex] = Math.max(maxColumnLength[columnIndex], cellData.length);
+        // save extracted cell data for table rows output
+        tableData[rowIndex][columnIndex] = cellData;
+      });
+    });
+
+    // create markdown table header and separator text lines
+    let tableHeader: string = '';
+    let tableHeaderSeparator: string = '';
+    maxColumnLength.forEach((columnLength) => {
+      const columnHeader = Array(columnLength + 1 + 2);
+      tableHeader += '|' + columnHeader.join(' ');
+      tableHeaderSeparator += '|' + columnHeader.join('-');
+    });
+    // end table header and separator text lines
+    tableHeader += '| \n';
+    tableHeaderSeparator += '| \n';
+    if (hasTableHeaderRow) {
+      // reset: use table data instead
+      tableHeader = '';
+    }
+
+    // create markdown table data text lines
+    let tableRows = '';
+    tableData.forEach((row, rowIndex) => {
+      maxColumnLength.forEach((columnLength, columnIndex) => {
+        const cellData: string = typeof row[columnIndex] === 'undefined' ? '' : row[columnIndex];
+        const cellSpacing: string = Array((columnLength - cellData.length) + 1).join(' ');
+        const cellString: string = `| ${cellData}${cellSpacing} `;
+        if (hasTableHeaderRow && rowIndex === 0) {
+          tableHeader += cellString;
+        } else {
+          tableRows += cellString;
+        }
+      });
+      // end table header or data row text line
+      if (hasTableHeaderRow && rowIndex === 0) {
+        tableHeader += '| \n';
+      } else {
+        tableRows += '| \n';
+      }
+    });
+
+    return `${tableHeader}${tableHeaderSeparator}${tableRows}`;
+  } // end of csvToMarkdownTable()
 
 
   /*----------------------------- Data Preview Properties ----------------------------*/

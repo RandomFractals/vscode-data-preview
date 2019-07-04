@@ -473,12 +473,8 @@
               postArrowData(arrayBuffer, dataFileType);
             });
             break;
-          case '.md':
-            viewer.view.to_arrow().then(arrayBuffer => {
-              postArrowData(arrayBuffer, dataFileType);
-            });
-            break;
           case '.csv':
+          case '.md':
             viewer.view.to_csv().then(csv => postData(csv, dataFileType));
             break;
           case '.json':
