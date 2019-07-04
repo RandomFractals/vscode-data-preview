@@ -405,6 +405,7 @@
         const fileExt = fileName.substr(fileName.lastIndexOf('.'));
         // TODO: rework this for large data files streaming
         switch (fileExt) {
+          case '.md':
           case '.csv':
           case '.tsv':
           case '.txt':

@@ -555,6 +555,9 @@ export class DataPreview {
       case '.yml':
         data = this.getJsonData(dataUrl, yaml.load);
         break;
+      case '.md':
+        data = this.getMarkdownData(dataUrl);
+        break;
       case '.arrow':
         data = this.getArrowData(dataUrl);
         break;
@@ -639,6 +642,28 @@ export class DataPreview {
       window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. \n\t Error: ${error.message}`);
     }
     return jsonUtils.convertJsonData(data);
+  }
+
+  /**
+   * Gets markdown data tables array or config object.
+   * @param dataFilePath Data file path.
+   * @param parseFunction Data parse function for the supported json/config files.
+   * @param options Data parsing options.
+   */
+  private getMarkdownData(dataFilePath: string): any {
+    let content:string = '';
+    try {
+      // read markdown file content
+      content = fileUtils.readDataFile(dataFilePath, 'utf8');
+      // conver it to to CSV for loading into data view
+      content = this.markdownToCsv(content);
+    }
+    catch (error) {
+      this._logger.logMessage(LogLevel.Error,
+        `getMarkdownData(): Error parsing '${this._dataUrl}' \n\t Error:`, error.message);
+      window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. \n\t Error: ${error.message}`);
+    }
+    return content;
   }
 
   /**
@@ -939,6 +964,16 @@ export class DataPreview {
     return `${tableHeader}${tableHeaderSeparator}${tableRows}`;
   } // end of csvToMarkdownTable()
 
+
+  /**
+   * Converts markdown content to csv data for display in data view.
+   * @param markdownContent Markdown file content to convert to csv string.
+   */
+  private markdownToCsv(markdownContent: string): string {
+    let csvContent: string = markdownContent;
+    // TODO: convert markdown to csv and generates tables list for data view(s) display
+    return csvContent;
+  }
 
   /*----------------------------- Data Preview Properties ----------------------------*/
 
