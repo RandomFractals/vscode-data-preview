@@ -974,19 +974,25 @@ export class DataPreview {
     // extract markdown sections
     const sections: Array<string> = markdownContent.split('\n#');
     const sectionMarkerRegExp: RegExp = new RegExp(/(#)/g);
-    sections.forEach(section => {
+    const tableMarkdownRegExp: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
+    sections.forEach(sectionText => {
       // get section title
       let sectionTitle: string = '';
-      const sectionLines: Array<string> = section.split('\n');
+      const sectionLines: Array<string> = sectionText.split('\n');
       if (sectionLines.length > 0) {
         sectionTitle = sectionLines[0].replace(sectionMarkerRegExp, ''); // strip out #'s
         this._logger.debug('markdownToCsv(): section:', sectionTitle);
+      }
+      // extract section table data
+      const tableData: Array<string> = sectionText.match(tableMarkdownRegExp);
+      if (tableData) {
+        this._logger.debug('markdownToCsv(): table data:', tableData);
       }
     });
 
     // TODO: convert markdown to csv and generate tables list for data view(s) display
     return csvContent;
-  }
+  } // end of markdownToCsv()
 
   /*----------------------------- Data Preview Properties ----------------------------*/
 
