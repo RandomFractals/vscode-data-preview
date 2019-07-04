@@ -971,7 +971,20 @@ export class DataPreview {
    */
   private markdownToCsv(markdownContent: string): string {
     let csvContent: string = markdownContent;
-    // TODO: convert markdown to csv and generates tables list for data view(s) display
+    // extract markdown sections
+    const sections: Array<string> = markdownContent.split('\n#');
+    const sectionMarkerRegExp: RegExp = new RegExp(/(#)/g);
+    sections.forEach(section => {
+      // get section title
+      let sectionTitle: string = '';
+      const sectionLines: Array<string> = section.split('\n');
+      if (sectionLines.length > 0) {
+        sectionTitle = sectionLines[0].replace(sectionMarkerRegExp, ''); // strip out #'s
+        this._logger.debug('markdownToCsv(): section:', sectionTitle);
+      }
+    });
+
+    // TODO: convert markdown to csv and generate tables list for data view(s) display
     return csvContent;
   }
 
