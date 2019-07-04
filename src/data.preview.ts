@@ -973,21 +973,39 @@ export class DataPreview {
     let csvContent: string = markdownContent;
     // extract markdown sections
     const sections: Array<string> = markdownContent.split('\n#');
-    const sectionMarkerRegExp: RegExp = new RegExp(/(#)/g);
-    const tableMarkdownRegExp: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
+    const sectionMarker: RegExp = new RegExp(/(#)/g);
+    const tableMarkdown: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
     sections.forEach(sectionText => {
       // get section title
       let sectionTitle: string = '';
       const sectionLines: Array<string> = sectionText.split('\n');
       if (sectionLines.length > 0) {
-        sectionTitle = sectionLines[0].replace(sectionMarkerRegExp, ''); // strip out #'s
+        sectionTitle = sectionLines[0].replace(sectionMarker, ''); // strip out #'s
         this._logger.debug('markdownToCsv(): section:', sectionTitle);
       }
-      // extract section table data
-      const tableData: Array<string> = sectionText.match(tableMarkdownRegExp);
-      if (tableData) {
-        this._logger.debug('markdownToCsv(): table data:', tableData);
-      }
+      // create section text blocks
+      const textBlocks: Array<string> = [];
+      let textBlock: string = '';
+      sectionLines.forEach(textLine => {
+        if (textLine.trim().length === 0) {          
+          // create new text block
+          textBlocks.push(textBlock);
+          textBlock = '';
+        }
+        else {
+          // append to current text block
+          textBlock += textLine + '\n';
+        }
+      });
+      this._logger.debug('markdownToCsv(): textBlocks:', textBlocks.length);
+
+      // extract section table data from each section text block
+      textBlocks.forEach(textBlock => {
+        const tableData: Array<string> = textBlock.match(tableMarkdown);
+        if (tableData) {
+          this._logger.debug('markdownToCsv(): table data:', tableData);
+        }  
+      });
     });
 
     // TODO: convert markdown to csv and generate tables list for data view(s) display
