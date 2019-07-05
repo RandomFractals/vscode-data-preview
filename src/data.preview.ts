@@ -633,7 +633,12 @@ export class DataPreview {
     options: any = null): any {
     let data: any = [];
     try {
-      const content: string = fileUtils.readDataFile(dataFilePath, 'utf8');
+      let content: string = fileUtils.readDataFile(dataFilePath, 'utf8');
+      if (dataFilePath.endsWith('.json')) {
+        // strip out comments for vscode settings .json config files loading :)
+        const comments: RegExp = new RegExp(/\/\*[\s\S]*?\*\/|\/\/.*/g);
+        content = content.replace(comments, '');
+      }
       data = (options) ? parseFunction(content, options) : parseFunction(content);
     }
     catch (error) {
