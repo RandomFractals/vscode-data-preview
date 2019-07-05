@@ -989,7 +989,7 @@ export class DataPreview {
       const textBlocks: Array<string> = [];
       let textBlock: string = '';
       sectionLines.forEach(textLine => {
-        if (textLine.trim().length === 0) {          
+        if (textLine.trim().length === 0) {
           // create new text block
           textBlocks.push(textBlock);
           textBlock = '';
@@ -1062,7 +1062,7 @@ export class DataPreview {
     if (table) {
       this._logger.debug('markdownToCsv(): table data:', table);
       table.forEach(row => {
-        csvContent += row.replace('|\r\n', '\n');
+        csvContent += row + '\n';
       });
     }
 
