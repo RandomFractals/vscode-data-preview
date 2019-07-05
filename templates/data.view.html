@@ -28,10 +28,6 @@
         color: orange;
         font-weight: bold;
         font-size: 11pt;
-        padding: 0px 2px 0px 2px;
-      }
-      #help-icon {
-        margin-left: 5px;
       }
       #toolbar {
         margin: 0px;
@@ -50,7 +46,7 @@
         position: absolute;
         top: 5px;
         right: 0px;
-        width: 120px;
+        width: 130px;
         height: 30px;
         padding-left: 5px;
         background-color: var(--vscode-editor-background);
@@ -58,14 +54,14 @@
       #toolbar a {
         color: dodgerblue;
         text-decoration: none;
-        margin: 0px;
-        padding: 0px 5px 3px 5px;
+        padding: 2px 5px 2px 5px;
       }
       #title {
         margin: 0px;
         padding: 0px;
       }
       #row-counter {
+        padding-left: 5px;
         padding-right: 10px;
       }
       #data-url-label {
@@ -103,6 +99,7 @@
   <body>
     <div id="toolbar">
       <div id="toolbar-right">
+        <label for="save-file-type-selector"> 📥 </label>
         <select id="save-file-type-selector" 
           title="Save Data View .config or Data" onChange="saveData()">
           <option value="">Save</option>
@@ -130,11 +127,12 @@
         <a title="Undo" href="#" onclick="undoConfig()"> ↩ </a>
         <a title="Redo" href="#" onclick="redoConfig()"> ↪ </a>
         -->
-        <a id="refresh-data-link" style="color: orange;" title="Refresh Data" href="#" onclick="reloadData()"> 🔃 </a>
+        <a id="refresh-data-link" style="color: orange;" title="Refresh Data" href="#" onclick="reloadData()">🔃</a>
         <span id="row-counter">...</span>
         <!--
         <label id="data-url-label" for="data-url-input">| new data url:</label>
         -->
+        <label for="data-url-input">📤</label>
         <input id="data-url-input" type="text" title="Enter new Data File Path to Preview" 
           onKeyPress="loadDataPreviewForUrl()" />
       </div>
