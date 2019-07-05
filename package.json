@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview 🈸 extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲 charting 📊 & exporting 📥 large JSON array/config, YAML, Apache Arrow, Avro & Excel data files",
-  "version": "1.24.0",
+  "version": "1.24.1",
   "icon": "images/data-preview.png",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak",
@@ -186,15 +186,6 @@
         ]
       },
       {
-        "id": "md",
-        "extensions": [
-          ".md"
-        ],
-        "aliases": [
-          "Markdown"
-        ]
-      },
-      {
         "id": "csv",
         "extensions": [
           ".csv"
@@ -280,7 +271,7 @@
         },
         {
           "command": "data.preview.on.side",
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|csv|tsv|txt|tab|dif|ods|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
           "group": "navigation"
         }
       ],
