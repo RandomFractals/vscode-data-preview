@@ -1012,18 +1012,7 @@ export class DataPreview {
 
       // process markdown tables
       tables.forEach((table, tableIndex) => {
-        let tableTitle: string = sectionTitle.trim();
-        if (tables.length > 1) {
-          // append table index
-          tableTitle += '-table-' + (tableIndex + 1);
-        }
-
-        // update table list for data view display
-        tablesMap[tableTitle] = table;
-        this._tableList.push(tableTitle);
-
-        this._logger.debug('markdownToCsv(): processing table data:', tableTitle);
-        this._logger.debug('markdownToCsv(): table data:', table);
+        // process markdown table data
         const tableData: Array<string> = [];
         table.forEach(row => {
           // trim table text row lines
@@ -1043,10 +1032,23 @@ export class DataPreview {
             tableData.push(row);
           }
         });
-        tablesMap[tableTitle] = tableData;
-        this._logger.debug('markdownToCsv(): table rows:', tableData.length);
-      });
-    }); // end of sections.forEach()
+
+        if (tableData.length > 0 ) {
+          // create section table title
+          let tableTitle: string = sectionTitle.trim();
+          if (tables.length > 1) {
+            // append table index
+            tableTitle += '-table-' + (tableIndex + 1);
+          }
+          // update table list for data view display
+          tablesMap[tableTitle] = tableData;
+          this._tableList.push(tableTitle);
+          this._logger.debug('markdownToCsv(): table:', tableTitle);
+          this._logger.debug('markdownToCsv(): table data:', table);  
+          this._logger.debug('markdownToCsv(): table rows:', tableData.length);
+        }
+      }); // end of tables.forEach(row)
+    }); // end of sections.forEach(textBlock/table)
 
     // get requested table data
     let table: Array<string> = tablesMap[this._tableList[0]]; // default to 1st table in the loaded tables list
