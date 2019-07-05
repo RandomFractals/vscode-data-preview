@@ -981,8 +981,9 @@ export class DataPreview {
       const sectionLines: Array<string> = sectionText.split('\n');
       if (sectionLines.length > 0) {
         sectionTitle = sectionLines[0].replace(sectionMarker, ''); // strip out #'s
-        this._logger.debug('markdownToCsv(): section:', sectionTitle);
+        // this._logger.debug('markdownToCsv(): section:', sectionTitle);
       }
+
       // create section text blocks
       const textBlocks: Array<string> = [];
       let textBlock: string = '';
@@ -997,14 +998,27 @@ export class DataPreview {
           textBlock += textLine + '\n';
         }
       });
-      this._logger.debug('markdownToCsv(): textBlocks:', textBlocks.length);
 
       // extract section table data from each section text block
+      const tables: Array<Array<string>> = [];
       textBlocks.forEach(textBlock => {
         const tableData: Array<string> = textBlock.match(tableMarkdown);
         if (tableData) {
-          this._logger.debug('markdownToCsv(): table data:', tableData);
+          tables.push(tableData);
+          // this._logger.debug('markdownToCsv(): table data:', tableData);
         }  
+      });
+
+      // process markdown tables
+      tables.forEach((table, tableIndex) => {
+        let tableTitle: string = sectionTitle;
+        if (tables.length > 1) {
+          // append table index
+          tableTitle += '-table-' + (tableIndex + 1);
+        }
+        this._logger.debug('markdownToCsv(): processing table data:', tableTitle);
+        this._logger.debug('markdownToCsv(): table data:', table);
+        this._logger.debug('markdownToCsv(): table rows:', table.length);
       });
     });
 
