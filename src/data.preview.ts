@@ -1049,7 +1049,7 @@ export class DataPreview {
           tablesMap[tableTitle] = tableData;
           this._tableList.push(tableTitle);
           this._logger.debug('markdownToCsv(): table:', tableTitle);
-          this._logger.debug('markdownToCsv(): table data:', table);  
+          // this._logger.debug('markdownToCsv(): table data:', table);  
           this._logger.debug('markdownToCsv(): table rows:', tableData.length);
         }
       }); // end of tables.forEach(row)
@@ -1065,7 +1065,7 @@ export class DataPreview {
     // convert requested markdown table to csv for data view display
     let csvContent: string = '';
     if (table) {
-      this._logger.debug('markdownToCsv(): table data:', table);
+      // this._logger.debug('markdownToCsv(): table data:', table);
       table.forEach(row => {
         const cells: Array<string> = row.split(' | ');
         cells.forEach(cell => {
@@ -1078,7 +1078,7 @@ export class DataPreview {
         row = cells.join(',');
         csvContent += row + '\n';
       });
-      this._logger.debug('markdownToCsv(): csv table data:', csvContent);
+      // this._logger.debug('markdownToCsv(): csv table data:', csvContent);
     }
     return csvContent;
   } // end of markdownToCsv()
