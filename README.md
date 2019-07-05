@@ -10,19 +10,20 @@
 [![Trending Weekly](https://vsmarketplacebadge.apphb.com/trending-weekly/RandomFractalsInc.vscode-data-preview.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 [![Trending Daily](https://vsmarketplacebadge.apphb.com/trending-daily/RandomFractalsInc.vscode-data-preview.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 
-<a href="https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview"><img src="https://github.com/RandomFractals/vscode-data-preview/blob/master/images/data-preview.png" width="64"></a> A [Visual Studio Code](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` data files with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+<a href="https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview"><img src="https://github.com/RandomFractals/vscode-data-preview/blob/master/images/data-preview.png" width="64"></a> A [Visual Studio Code](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` Excel files, and `.md` markdown tables with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
-# Data Preview 🈸 Features
+# 🈸 Features
 
-- Preview 🈸 flat `.json` `.arrow` `.avro` `.yml` `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid w/Sorting & Filtering
+- Preview flat `.json` `.arrow` `.avro` `.yml` `.csv/.tsv` & `.xlsx/.xlsm` data files in a Data Grid w/Sorting & Filtering
 - Grid Data Summary display w/Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts 📊 creation w/Aggregate Functions, Row & Column Pivots
 - Pluggable Charting 📊 libraries for bult-in Charts: [d3fc](https://d3fc.io/) || [highcharts](https://www.highcharts.com/demo)
 - Persistent Data Preview Settings (View, Sort, Filter, Pivots, etc.) for restore of open Data View panels on VSCode Reload
 - Mulptiple Spreadsheets Data Preview for `Excel` data files
+- Markdown tables data preview for `.md` documentation files
 - Data `.schema.json` generation for Arrow & Avro Data Schema Text Previews in JSON format 
 - Binary Data files `.json` generation for Arrow, Avro & `Excel` formats for Text Data Preview
 - Property Grid display for `.json` `.config` `.env` `.properties` `.ini` & `.yml` configuration files
@@ -95,13 +96,14 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 Use Data Preview 🈸 to:
 
 - Load large data files for sorting, filtering & charting 📊 
-- Export displayed data in compact binary `.arrow` data format, `.csv` `.json` `.yml` or `.properties` text data formats
+- Export displayed data in a compact binary `.arrow` data format, or `.csv` `.json` `.yml` `.md` or `.properties` text formats
 - Preview `.properites` and other key-value pairs configuration files to reformat them or find set config option values
 - Generate Arrow & Avro `.shema.json` for metadata text preview of those binary data files
 - Generate `.json` files for text data preview of binary Excel files
 - Preview Excel files and workbooks with multiple workseets without opening Excel
 - Convert `.csv` or `.tsv` data to `.json` or `.yml` format
-- Use built-in Charts 📊 for exploratory Data Analysis
+- Extract, sort, filter and save markdown tables from `.md` documentation files
+- Use built-in Charts 📊 for Exploratory Data Analysis
 
 # Supported JSON, Config, Binary & Excel Data File Formats
 
@@ -120,7 +122,7 @@ Use Data Preview 🈸 to:
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|env|config|properties|ini|yml|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+  "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
@@ -219,16 +221,16 @@ $ cd vscode-data-preview
 $ npm install
 $ code .
 ```
-`F5` to launch Data Preview 🈸 extension VSCode debug session.
+`F5` to launch Data Preview extension VSCode debug session.
 
 ||
 
 ```bash
 vscode-data-preview>vsce package
 ```
-to generate `VSIX` Data Preview 🈸 extension package from our latest for local dev install in VSCode.
+to generate `VSIX` Data Preview extension package from our latest for local dev install in VSCode.
 
-**Note:** Use `Help -> Toggle Developer Tools` vscode menu option to view Data Preview 🈸 console log.
+**Note:** Use `Help -> Toggle Developer Tools` vscode menu option to view Data Preview console log.
 
 # Contributions
 
