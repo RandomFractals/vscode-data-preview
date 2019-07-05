@@ -970,11 +970,11 @@ export class DataPreview {
    * @param markdownContent Markdown file content to convert to csv string.
    */
   private markdownToCsv(markdownContent: string): string {
-    let csvContent: string = markdownContent;
-    // extract markdown sections
+    // extract markdown sections and tables
     const sections: Array<string> = markdownContent.split('\n#');
     const sectionMarker: RegExp = new RegExp(/(#)/g);
     const tableMarkdown: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
+    let tablesMap: any = {};
     sections.forEach(sectionText => {
       // get section title
       let sectionTitle: string = '';
@@ -1016,13 +1016,30 @@ export class DataPreview {
           // append table index
           tableTitle += '-table-' + (tableIndex + 1);
         }
+        // update table list for data view display
+        tablesMap[tableTitle] = table;
+        this._tableList.push(tableTitle);
         this._logger.debug('markdownToCsv(): processing table data:', tableTitle);
         this._logger.debug('markdownToCsv(): table data:', table);
-        this._logger.debug('markdownToCsv(): table rows:', table.length);
+        this._logger.debug('markdownToCsv(): table rows:', table.length);  
       });
-    });
+    }); // end of sections.forEach()
 
-    // TODO: convert markdown to csv and generate tables list for data view(s) display
+    // get requested table data
+    let table: Array<string> = tablesMap[this._tableList[0]]; // default to 1st table in the loaded tables list
+    if (this._dataTable.length > 0) {
+      table = tablesMap[this._dataTable];
+      this._logger.debug('markdownToCsv(): requested table:', this._dataTable);
+    }
+
+    // convert requested markdown table to csv for data view display
+    let csvContent: string = '';
+    if (table) {
+      table.forEach(row => {
+        csvContent += row.replace('|\r\n', '\n');
+      });
+    }
+
     return csvContent;
   } // end of markdownToCsv()
 
