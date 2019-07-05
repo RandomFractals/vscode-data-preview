@@ -1062,10 +1062,19 @@ export class DataPreview {
     if (table) {
       this._logger.debug('markdownToCsv(): table data:', table);
       table.forEach(row => {
+        const cells: Array<string> = row.split(' | ');
+        cells.forEach(cell => {
+          cell = cell.trim();
+          if (cell.indexOf(',') > 0) {
+            // quote cell string
+            cell = `"${cell}"`;
+          }
+        });
+        row = cells.join(',');
         csvContent += row + '\n';
       });
+      this._logger.debug('markdownToCsv(): csv table data:', csvContent);
     }
-
     return csvContent;
   } // end of markdownToCsv()
 
