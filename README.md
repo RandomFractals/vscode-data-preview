@@ -56,13 +56,13 @@ List of Data Preview 🈸 extension config Settings, `data.preview` command(s), 
 # Configuration
 [Create User or Workspace Settings in vscode](http://code.visualstudio.com/docs/customization/userandworkspace#_creating-user-and-workspace-settings) to change default Data Preview 🈸 extension Settings:
 
-Setting | Type | Default Value | Description
-------- | ---- | ------------- | -----------
-data.preview.theme | string | dark | Data Preview UI Theme: `dark` or `light`
-data.preview.charts.plugin | string | d3fc | Data Preview Charts 📊 library to use for built-in charts: [d3fc](https://d3fc.io/) or [highcharts](https://www.highcharts.com/demo)
-data.preview.create.json.files | boolean | false | Creates `.json` data files for Arrow, Avro & Excel binary data formats
-data.preview.create.json.schema | boolean | false | Creates `.schema.json` files for Arrow & Avro metadata binary data formats
-data.preview.log.level | string | `info` | Data Preview run log level: `info` or `debug` for issues troubleshooting
+| Setting | Type | Default Value | Description |
+| ------- | ---- | ------------- | ----------- |
+| data.preview.theme | string | dark | Data Preview UI Theme: `dark` or `light` |
+| data.preview.charts.plugin | string | d3fc | Data Preview Charts 📊 library to use for built-in charts: [d3fc](https://d3fc.io/) or [highcharts](https://www.highcharts.com/demo) |
+| data.preview.create.json.files | boolean | false | Creates `.json` data files for Arrow, Avro & Excel binary data formats |
+| data.preview.create.json.schema | boolean | false | Creates `.schema.json` files for Arrow & Avro metadata binary data formats |
+| data.preview.log.level | string | `info` | Data Preview run log level: `info` or `debug` for issues troubleshooting |
 
 Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data View `config`, viewing 
 [superstore](https://github.com/finos/perspective/blob/master/examples/simple/superstore.arrow)`.arrow` data file :)
@@ -74,11 +74,11 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 
 ## Data Preview 🈸 Launch Tips
 
-1. Run `View -> Command Palette...>Data: Preview Data 🈸` command || `Ctrl+Shift+D` in an open 
-`.json` `.config` `.env` `.properties` `.ini` `.yml` || `.csv/.tsv` text  data file document to launch Data Preview panel.
+1. Run `View -> Command Palette...>Data: Preview Data 🈸` command or `Ctrl+Shift+D` in an open 
+`.json` `.config` `.env` `.properties` `.ini` `.yml` or `.csv/.tsv` text  data file document to launch Data Preview panel.
 2. `File -> Save` (`Ctrl+S`) your text data file for immediate updates in an open Data Preview panel.
-3. Right-click on a Binary `.xlsx/.xlsm`, `.arrow` || `.avro` data file in VSCode File Explorer to launch Data Preview panel.
-4. Use exposed `explorer/context`, `editor/title` || `editor/title/context` Preview Data 🈸 || Preview Data on Side context menu options to preview your data files.
+3. Right-click on a Binary `.xlsx/.xlsm`, `.arrow` or `.avro` data file in VSCode File Explorer to launch Data Preview panel.
+4. Use exposed `explorer/context`, `editor/title` or `editor/title/context` Preview Data 🈸 or Preview Data on Side context menu options to preview your data files.
 5. Click on the Data View Filename toolbar link to Load saved Data View Grid || Chart 📊 `.config`.
 6. Click on the Data View 🈸 icon to Launch new Data Preview Panel for new view config changes.
 
@@ -95,12 +95,12 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 Use Data Preview 🈸 to:
 
 - Load large data files for sorting, filtering & charting 📊 
-- Export displayed data in compact binary `.arrow` data format, `.csv` `.json` `.yml` || `.properties` text data formats
-- Preview `.properites` and other key-value pairs configuration files to reformat them || find set config option values
+- Export displayed data in compact binary `.arrow` data format, `.csv` `.json` `.yml` or `.properties` text data formats
+- Preview `.properites` and other key-value pairs configuration files to reformat them or find set config option values
 - Generate Arrow & Avro `.shema.json` for metadata text preview of those binary data files
 - Generate `.json` files for text data preview of binary Excel files
 - Preview Excel files and workbooks with multiple workseets without opening Excel
-- Convert `.csv` || `.tsv` data to `.json` || `.yml` format
+- Convert `.csv` or `.tsv` data to `.json` or `.yml` format
 - Use built-in Charts 📊 for exploratory Data Analysis
 
 # Supported JSON, Config, Binary & Excel Data File Formats
@@ -133,18 +133,18 @@ flat properties key/value pairs Object and displayed in a Property Grid Data Vie
 See [json.utils.ts](https://github.com/RandomFractals/vscode-data-preview/blob/master/src/utils/json.utils.ts)
 for more info.
 
-Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data Format Specification
---- | --- | --- | ---
-`.json` `.config` | text | `JSON.parse()` | https://json.org/
-`.json5` | text | [json5](https://github.com/json5/json5)/[`JSON5.parse()`](https://github.com/json5/json5#json5parse) | https://json5.org/
-`.hjson` | text | [hjson-js](https://github.com/hjson/hjson-js)/[`Hjson.parse()`](https://github.com/hjson/hjson-js#hjsonparsetext-options) | https://hjson.org/
-`.arrow` `.arr` | binary | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/
-`.avro` | binary | [avsc](https://github.com/mtth/avsc)/[`avro.createFileDecoder()`](https://github.com/mtth/avsc/wiki/API#createfiledecoderpath-opts) | https://avro.apache.org/docs/current/
-`.properties` `.env` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#parse) | https://en.wikipedia.org/wiki/.properties
-`.ini` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file
-`.yml` `.yaml` | text | [js-yaml](https://github.com/nodeca/js-yaml)/[`yaml.load()`](https://github.com/nodeca/js-yaml#load-string---options-) | https://yaml.org/
-`.csv` `.tsv` `.txt` `.tab` | text | [perspective](https://github.com/finos/perspective/)/[`perspectiveViewer.load(text)`](https://github.com/finos/perspective/tree/master/packages/perspective-viewer#module_perspective-viewer..PerspectiveViewer+load) | https://en.wikipedia.org/wiki/Comma-separated_values https://en.wikipedia.org/wiki/Tab-separated_values
-`.dif` `.ods` `.slk` `.xls` `.xlsb` `.xlsx` `.xlsm` `.xml` `.html` | binary/text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read()`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on `Excel` file formats
+| Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data Format Specification |
+| --- | --- | --- | --- |
+| `.json` `.config` | text | `JSON.parse()` | https://json.org/ |
+| `.json5` | text | [json5](https://github.com/json5/json5)/[`JSON5.parse()`](https://github.com/json5/json5#json5parse) | https://json5.org/ |
+| `.hjson` | text | [hjson-js](https://github.com/hjson/hjson-js)/[`Hjson.parse()`](https://github.com/hjson/hjson-js#hjsonparsetext-options) | https://hjson.org/ |
+| `.arrow` `.arr` | binary | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/ |
+| `.avro` | binary | [avsc](https://github.com/mtth/avsc)/[`avro.createFileDecoder()`](https://github.com/mtth/avsc/wiki/API#createfiledecoderpath-opts) | https://avro.apache.org/docs/current/ |
+| `.properties` `.env` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#parse) | https://en.wikipedia.org/wiki/.properties |
+| `.ini` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file |
+| `.yml` `.yaml` | text | [js-yaml](https://github.com/nodeca/js-yaml)/[`yaml.load()`](https://github.com/nodeca/js-yaml#load-string---options-) | https://yaml.org/ |
+| `.csv` `.tsv` `.txt` `.tab` | text | [perspective](https://github.com/finos/perspective/)/[`perspectiveViewer.load(text)`](https://github.com/finos/perspective/tree/master/packages/perspective-viewer#module_perspective-viewer..PerspectiveViewer+load) | https://en.wikipedia.org/wiki/Comma-separated_values https://en.wikipedia.org/wiki/Tab-separated_values |
+| `.dif` `.ods` `.slk` `.xls` `.xlsb` `.xlsx` `.xlsm` `.xml` `.html` | binary/text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read()`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on `Excel` file formats |
 
 ![Data Preview Data](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-data.png?raw=true 
 "Data Preview Data")
@@ -191,21 +191,21 @@ Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data For
 
 # Recommended VSCode Extensions
 
-Other extensions Data Preview 🈸 replaces, enhances || supplements for working with [supported data file formats](https://github.com/RandomFractals/vscode-data-preview#supported-json-config-binary--excel-data-file-formats) in VSCode:
+Other extensions Data Preview 🈸 replaces, enhances or supplements for working with [supported data file formats](https://github.com/RandomFractals/vscode-data-preview#supported-json-config-binary--excel-data-file-formats) in VSCode:
 
-Extension | Description
---- | ---
-[Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) | View Excel spreadsheets and CSV files
-[Avro Viewer](https://marketplace.visualstudio.com/items?itemName=romiogaku.vscode-avro-viewer) | `.avro` file viewer 
-[avro-idl](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.avro) | Avro IDL Syntax Highlighter
-[DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv) | `.env` Syntax Highlighter
-[Ini for VSCode](https://marketplace.visualstudio.com/items?itemName=DavidWang.ini-for-vscode) | Provides outline view and section folding for INI files
-[Hjson](https://marketplace.visualstudio.com/items?itemName=laktak.hjson) | Hjson language syntax support
-[JSON5 syntax](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-json5) | Adds syntax highlighting of JSON5 files
-[YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) | YAML Language Support by Red Hat, with built-in Kubernetes and Kedge syntax support
-[docs-yaml](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-yaml) | YAML schema validation and auto-completion for docs.microsoft.com authoring
-[YAML to JSON](https://marketplace.visualstudio.com/items?itemName=ahebrank.yaml2json) | Convert YAML from clipboard or current document/selection to JSON and vice versa
-[Properties To Yaml](https://marketplace.visualstudio.com/items?itemName=tanaka-x.prop2yaml) | Convert properties to yaml
+| Extension | Description |
+| --- | --- |
+| [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) | View Excel spreadsheets and CSV files |
+| [Avro Viewer](https://marketplace.visualstudio.com/items?itemName=romiogaku.vscode-avro-viewer) | `.avro` file viewer |
+| [avro-idl](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.avro) | Avro IDL Syntax Highlighter |
+| [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv) | `.env` Syntax Highlighter |
+| [Ini for VSCode](https://marketplace.visualstudio.com/items?itemName=DavidWang.ini-for-vscode) | Provides outline view and section folding for INI files |
+| [Hjson](https://marketplace.visualstudio.com/items?itemName=laktak.hjson) | Hjson language syntax support |
+| [JSON5 syntax](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-json5) | Adds syntax highlighting of JSON5 files |
+| [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) | YAML Language Support by Red Hat, with built-in Kubernetes and Kedge syntax support |
+| [docs-yaml](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-yaml) | YAML schema validation and auto-completion for docs.microsoft.com authoring |
+| [YAML to JSON](https://marketplace.visualstudio.com/items?itemName=ahebrank.yaml2json) | Convert YAML from clipboard or current document/selection to JSON and vice versa |
+| [Properties To Yaml](https://marketplace.visualstudio.com/items?itemName=tanaka-x.prop2yaml) | Convert properties to yaml |
 
 # Dev Log
 
