@@ -973,6 +973,7 @@ export class DataPreview {
     // extract markdown sections and tables
     const sections: Array<string> = markdownContent.split('\n#');
     const sectionMarker: RegExp = new RegExp(/(#)/g);
+    const tableHeaderSeparator: RegExp = new RegExp(/((\|)|(\:)|(\-))+/g);
     const tableMarkdown: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
     let tablesMap: any = {};
     sections.forEach(sectionText => {
@@ -1011,17 +1012,39 @@ export class DataPreview {
 
       // process markdown tables
       tables.forEach((table, tableIndex) => {
-        let tableTitle: string = sectionTitle;
+        let tableTitle: string = sectionTitle.trim();
         if (tables.length > 1) {
           // append table index
           tableTitle += '-table-' + (tableIndex + 1);
         }
+
         // update table list for data view display
         tablesMap[tableTitle] = table;
         this._tableList.push(tableTitle);
+
         this._logger.debug('markdownToCsv(): processing table data:', tableTitle);
         this._logger.debug('markdownToCsv(): table data:', table);
-        this._logger.debug('markdownToCsv(): table rows:', table.length);  
+        const tableData: Array<string> = [];
+        table.forEach(row => {
+          // trim table text row lines
+          row = row.trim();
+          // strip out leading | table row sign
+          if (row.startsWith('| ')) {
+            row = row.slice(2);
+          }
+          // strip out trailing | table row sign
+          if (row.endsWith(' |')) {
+            row = row.slice(0, row.length-2);
+          }
+          // check for a table header separator row
+          const isTableHeaderSeparator: boolean = (row.replace(tableHeaderSeparator, '').length === 0);
+          if (!isTableHeaderSeparator && row.length > 0) {
+            // add data row
+            tableData.push(row);
+          }
+        });
+        tablesMap[tableTitle] = tableData;
+        this._logger.debug('markdownToCsv(): table rows:', tableData.length);
       });
     }); // end of sections.forEach()
 
@@ -1035,6 +1058,7 @@ export class DataPreview {
     // convert requested markdown table to csv for data view display
     let csvContent: string = '';
     if (table) {
+      this._logger.debug('markdownToCsv(): table data:', table);
       table.forEach(row => {
         csvContent += row.replace('|\r\n', '\n');
       });
