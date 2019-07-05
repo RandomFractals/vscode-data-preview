@@ -973,7 +973,7 @@ export class DataPreview {
     // extract markdown sections and tables
     const sections: Array<string> = markdownContent.split('\n#');
     const sectionMarker: RegExp = new RegExp(/(#)/g);
-    const tableHeaderSeparator: RegExp = new RegExp(/((\|)|(\:)|(\-))+/g);
+    const tableHeaderSeparator: RegExp = new RegExp(/((\|)|(\:)|(\-)|(\s))+/g);
     const tableMarkdown: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
     let tablesMap: any = {};
     sections.forEach(sectionText => {
