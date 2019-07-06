@@ -7,6 +7,18 @@ export const supportedDataFiles: RegExp = /.*\.(json|json5|hjson|arrow|arr|avro|
 
 export const supportedBinaryDataFiles: RegExp = /.*\.(arrow|arr|avro|parquet|parq|dif|ods|slk|xls|xlsb|xlsx|xlsm)/;
 
+export const supportedFilesFilters: any = {
+  'JSON': ['json', 'json5', 'hjson'],
+  'CSV/TSV': ['csv', 'tsv', 'tab', 'txt'],
+  'Excel': ['dif', 'ods', 'slk', 'xls', 'xlsb', 'xlsx', 'xlsm', 'xml', 'html'],
+  'Arrow': ['arrow'],
+  'Avro': ['avro'],
+  'Config': ['config'],
+  'Markdown': ['md'],
+  'Properties': ['env', 'properties', 'ini'],
+  'YAML': ['yml']
+};
+
 // arrow to data view type mappings
 // see: https://github.com/finos/perspective/blob/master/packages/perspective/src/js/utils.js
 // and https://github.com/finos/perspective/blob/master/packages/perspective/src/js/perspective.js#ArrowColumnLoader

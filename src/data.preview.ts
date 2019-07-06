@@ -299,7 +299,8 @@ export class DataPreview {
     const selectedFiles: Array<Uri> = await window.showOpenDialog({
       defaultUri: openFolderUri,
       canSelectMany: false,
-      canSelectFolders: false
+      canSelectFolders: false, 
+      filters: config.supportedFilesFilters
     });
     if (selectedFiles && selectedFiles.length >= 1) {
       // launch new data preview for the selected data file
