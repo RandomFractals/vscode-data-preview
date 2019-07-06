@@ -24,7 +24,7 @@
         margin: 0px;
         padding: 0px;
       }
-      #app-icon {
+      #data-preview-icon {
         color: orange;
         font-weight: bold;
         font-size: 11pt;
@@ -113,11 +113,11 @@
           <option value=".yml">yml</option>
           <option value=".properties">properties</option>
         </select>
-        <a id="help-link" title="Data Preview Help" href="#" onClick="loadHelp()">?</a>
+        <a id="help-button" title="Data Preview Help" href="#" onClick="loadHelp()">?</a>
       </div>
       <div id="toolbar-left">
-        <a id="app-link" title="Launch new Data Preview" href="#" onClick="loadDataPreview()">
-          <span id="app-icon">🈸</span>
+        <a id="data-preview-button" title="Launch new Data Preview" href="#" onClick="loadDataPreview()">
+          <span id="data-preview-icon">🈸</span>
         </a>
         <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">{title}</a>
         <select id="table-selector" title="Select Data Table" 
@@ -127,12 +127,12 @@
         <a title="Undo" href="#" onclick="undoConfig()"> ↩ </a>
         <a title="Redo" href="#" onclick="redoConfig()"> ↪ </a>
         -->
-        <a id="refresh-data-link" style="color: orange;" title="Refresh Data" href="#" onclick="reloadData()">🔃</a>
+        <a id="refresh-data-button" style="color: orange;" title="Refresh Data" href="#" onclick="reloadData()">🔃</a>
         <span id="row-counter">...</span>
         <!--
         <label id="data-url-label" for="data-url-input">| new data url:</label>
         -->
-        <a id="import-file-link" title="Open Data File" href="#" onClick="loadDataFile()">📤</a>
+        <a id="open-data-file-button" title="Open Data File" href="#" onClick="openDataFile()">📤</a>
         <input id="data-url-input" type="text" title="Enter new Data File Path to Preview" 
           onKeyPress="loadDataPreviewForUrl()" />
       </div>
