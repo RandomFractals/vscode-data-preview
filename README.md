@@ -10,7 +10,7 @@
 [![Trending Weekly](https://vsmarketplacebadge.apphb.com/trending-weekly/RandomFractalsInc.vscode-data-preview.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 [![Trending Daily](https://vsmarketplacebadge.apphb.com/trending-daily/RandomFractalsInc.vscode-data-preview.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 
-<a href="https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview"><img src="https://github.com/RandomFractals/vscode-data-preview/blob/master/images/data-preview.png" width="64"></a> A [Visual Studio Code](https://github.com/Microsoft/vscode) Data Preview 🈸 extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` Excel files, and `.md` markdown tables with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[Data Preview 🈸](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** flat `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsm` Excel files, and `.md` markdown tables with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
