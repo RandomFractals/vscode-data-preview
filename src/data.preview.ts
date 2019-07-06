@@ -238,6 +238,10 @@ export class DataPreview {
           // saves data view config, or filtered .arrow, .csv, .json(s), .md, .yml, etc. data
           this.saveData(message.data, message.fileType);
           break;
+        case 'openFile':
+          // shows open file dialog for lauching new data preview
+          this.openFile();
+          break;
         case 'loadView':
           // launch new view
           this.loadView(message.viewName, message.uri);
@@ -277,6 +281,29 @@ export class DataPreview {
     }
     catch (error) {
       this._logger.logMessage(LogLevel.Error, 'postDataInfo():', error.message);
+    }
+  }
+
+
+  /**
+   * Shows open file dialog for launchign new data preview.
+   */
+  private async openFile() {
+    // display open file dialog
+    let openFolderUri: Uri = Uri.parse(this._dataUrl).with({scheme: 'file'});
+    const workspaceFolders: Array<WorkspaceFolder> = workspace.workspaceFolders;
+    if (workspaceFolders && workspaceFolders.length >= 1) {
+      // change open file folder uri to the 1st workspace folder, usuallay workspace root
+      openFolderUri = workspaceFolders[0].uri;
+    }
+    const selectedFiles: Array<Uri> = await window.showOpenDialog({
+      defaultUri: openFolderUri,
+      canSelectMany: false,
+      canSelectFolders: false
+    });
+    if (selectedFiles && selectedFiles.length >= 1) {
+      // launch new data preview for the selected data file
+      this.loadView('data.preview', selectedFiles[0].fsPath);
     }
   }
 
@@ -891,6 +918,7 @@ export class DataPreview {
     }
   } // end of saveData()
 
+  /*-------------------- TODO: move these to new markdown.data.provider impl. and interface --------------------*/
 
   /**
    * Converts CSV to markdown table.

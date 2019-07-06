@@ -132,7 +132,7 @@
         <!--
         <label id="data-url-label" for="data-url-input">| new data url:</label>
         -->
-        <a id="open-data-file-button" title="Open Data File" href="#" onClick="openDataFile()">📤</a>
+        <a id="open-file-button" title="Open Data File" href="#" onClick="openFile()">📤</a>
         <input id="data-url-input" type="text" title="Enter new Data File Path to Preview" 
           onKeyPress="loadDataPreviewForUrl()" />
       </div>
@@ -588,6 +588,14 @@
             uri: url
           });
         }
+      }
+
+      /**
+       * Opens file dialog to launch new data preview
+       * for the selected data file from the supported data formats list.
+       **/
+      function openFile() {
+        vscode.postMessage({command: 'openFile'});
       }
 
       /**
