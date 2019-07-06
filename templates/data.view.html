@@ -24,7 +24,7 @@
         margin: 0px;
         padding: 0px;
       }
-      #app-icon, #help-icon {
+      #app-icon {
         color: orange;
         font-weight: bold;
         font-size: 11pt;
@@ -44,9 +44,9 @@
       }
       #toolbar-right {
         position: absolute;
-        top: 5px;
+        top: 7px;
         right: 0px;
-        width: 130px;
+        width: 115px;
         height: 30px;
         padding-left: 5px;
         background-color: var(--vscode-editor-background);
@@ -99,10 +99,9 @@
   <body>
     <div id="toolbar">
       <div id="toolbar-right">
-        <label for="save-file-type-selector"> 📥 </label>
         <select id="save-file-type-selector" 
           title="Save Data View .config or Data" onChange="saveData()">
-          <option value="">Save</option>
+          <option value="">📥 &nbsp; Save</option>
           <option value=".config">config</option>
           <option value=".arrow">arrow</option>
           <option value=".csv">csv</option>
@@ -113,7 +112,7 @@
           <option value=".yml">yml</option>
           <option value=".properties">properties</option>
         </select>
-        <a id="help-link" title="Data Preview Help" href="#" onClick="loadHelp()"><span id="help-icon">?</span></a>
+        <a id="help-link" title="Data Preview Help" href="#" onClick="loadHelp()">?</a>
       </div>
       <div id="toolbar-left">
         <a id="app-link" title="Launch new Data Preview" href="#" onClick="loadDataPreview()">
@@ -132,7 +131,7 @@
         <!--
         <label id="data-url-label" for="data-url-input">| new data url:</label>
         -->
-        <label for="data-url-input">📤</label>
+        <a id="import-file-link" title="Open Data File" href="#" onClick="loadDataFile()">📤</a>
         <input id="data-url-input" type="text" title="Enter new Data File Path to Preview" 
           onKeyPress="loadDataPreviewForUrl()" />
       </div>
