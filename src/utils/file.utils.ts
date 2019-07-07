@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as request from 'request';
 import * as path from 'path';
 import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
@@ -19,11 +20,11 @@ export function readDataFile(dataFilePath: string, encoding:string = null): any 
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
   }
   else if (dataFilePath.startsWith('http://') || dataFilePath.startsWith('https://')) {
-    // TODO: fetch remote data with https://github.com/d3/d3-fetch
-    window.showInformationMessage('Remote data loading coming soon!');
+    // fetch remote data using https://github.com/request/request lib api
+    data = readRemoteData(dataFilePath, encoding);
   } 
   else if (fs.existsSync(dataFilePath)) {
-    // read local data file
+    // read local data file via fs.readFile() api
     data = readLocalData(dataFilePath, encoding);
   } 
   else {
@@ -74,5 +75,28 @@ function readLocalData(dataFilePath: string, encoding: string = null): any {
   logger.debug('readLocalData():', dataFilePath);
   // read local data file via fs read file api
   data = fs.readFileSync(dataFilePath, encoding);
+  return data;
+}
+
+/**
+ * Reads remote file data.
+ * @param dataFileUrl Data file url.
+ * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
+ * TODO: change this to read data async later
+ * TODO: rework this to using streaming api for large data files support later
+ */
+function readRemoteData(dataFileUrl: string, encoding: string = null): any {
+  let data: any = '';
+  logger.debug('readRemoteData():', dataFileUrl);
+  request(dataFileUrl, (error, response, body) => {
+    if (error) {
+      logger.logMessage(LogLevel.Error, 'readRemoteData(): error:', error);
+    }
+    else {
+      data = body;
+      logger.debug('readRemoteData(): statusCode:', response && response.statusCode);
+      logger.debug('readRemoteData(): data:\n', body);
+    }
+  });
   return data;
 }
