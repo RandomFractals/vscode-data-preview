@@ -1,9 +1,9 @@
 import * as fs from 'fs';
-import * as request from 'request';
+import * as request from 'request-promise-native';
 import * as path from 'path';
 import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
-import {window, workspace, Uri} from 'vscode';
+import {window, workspace} from 'vscode';
 
 const logger: Logger = new Logger(`file.utils:`, config.logLevel);
 
@@ -85,18 +85,16 @@ function readLocalData(dataFilePath: string, encoding: string = null): any {
  * TODO: change this to read data async later
  * TODO: rework this to using streaming api for large data files support later
  */
-function readRemoteData(dataFileUrl: string, encoding: string = null): any {
+async function readRemoteData(dataFileUrl: string, encoding: string = null) {
   let data: any = '';
   logger.debug('readRemoteData():', dataFileUrl);
-  request(dataFileUrl, (error, response, body) => {
-    if (error) {
-      logger.logMessage(LogLevel.Error, 'readRemoteData(): error:', error);
-    }
-    else {
-      data = body;
-      logger.debug('readRemoteData(): statusCode:', response && response.statusCode);
-      logger.debug('readRemoteData(): data:\n', body);
-    }
-  });
+  try {
+    data = await request(dataFileUrl);
+    logger.debug('readRemoteData(): response data:\n', data);
+  }
+  catch(error) {
+    logger.logMessage(LogLevel.Error, 'readRemoteData(): error:', error);
+    window.showErrorMessage(`Unable to read '${dataFileUrl}. Error:\n${error}`);
+  }
   return data;
 }
