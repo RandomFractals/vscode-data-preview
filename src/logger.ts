@@ -26,8 +26,8 @@ export class Logger {
 
   /**
    * Logs new debug message.
-   * @param message log message.
-   * @param params log message params, if any.
+   * @param message Debug log message.
+   * @param params Debug log message params, if any.
    */
   public debug(message: string, params: any = null): void{
     if (this.logLevel <= LogLevel.Debug) {
@@ -36,6 +36,18 @@ export class Logger {
       }
       this.log(LogLevel.Debug, message, params);
     }
+  }
+
+  /**
+   * Logs new error message.
+   * @param message Error log message.
+   * @param params Error log message params, if any.
+   */
+  public error(message: string, params: any = null): void{
+    if (typeof params === 'object') {
+      params = JSON.stringify(params, null, 2);
+    }
+    this.log(LogLevel.Error, message, params);
   }
 
   /**
