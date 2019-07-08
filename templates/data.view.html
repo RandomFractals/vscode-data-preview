@@ -46,8 +46,8 @@
         position: absolute;
         top: 7px;
         right: 0px;
-        width: 115px;
-        height: 30px;
+        width: 130px;
+        height: 32px;
         padding-left: 5px;
         background-color: var(--vscode-editor-background);
       }
@@ -84,6 +84,9 @@
       .hidden {
         display: none;
       }
+      .label {
+        color: var(--vscode-editor-foreground);
+      }
       select {
         color: var(--vscode-editor-foreground);
         background-color: var(--vscode-editor-background);
@@ -102,22 +105,25 @@
       <div id="toolbar-right">
         <select id="save-file-type-selector" 
           title="Save Data View .config or Data" onChange="saveData()">
-          <option value="">📥 &nbsp; Save</option>
-          <option value=".config">config</option>
-          <option value=".arrow">arrow</option>
-          <option value=".csv">csv</option>
-          <option value=".json">json</option>
-          <option value=".json5">json5</option>
-          <option value=".hjson">hjson</option>
-          <option value=".md">md</option>
-          <option value=".yml">yml</option>
-          <option value=".properties">properties</option>
+          <option value="">📥&nbsp;Save</option>
+          <option value=".config">⚙️ &nbsp;config</option>
+          <option value=".arrow">➳ arrow</option>
+          <option value=".csv">📰&nbsp;csv</option>
+          <option value=".json">{} &nbsp;json</option>
+          <option value=".json5">{} &nbsp;json5</option>
+          <option value=".hjson">{} &nbsp;hjson</option>
+          <option value=".md">⇩ &nbsp;md</option>
+          <option value=".yml">&nbsp;!&nbsp; yml</option>
+          <option value=".properties">= &nbsp;properties</option>
         </select>
         <a id="help-button" title="Data Preview Help" href="#" onClick="loadHelp()">?</a>
       </div>
       <div id="toolbar-left">
         <a id="data-preview-button" title="Launch new Data Preview" href="#" onClick="loadDataPreview()">
           <span id="data-preview-icon">🈸</span>
+        </a>
+        <a id="data-view-log-button" title="View Data View Debug Log" href="#" onClick="showDebugLog()">
+          <span class="label">&gt;</span>
         </a>
         <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">{title}</a>
         <select id="table-selector" title="Select Data Table" 
