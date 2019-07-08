@@ -546,7 +546,7 @@ export class DataPreview {
       case '.tsv':
       case '.txt':
       case '.tab':
-        data = fileUtils.readDataFile(dataUrl, 'utf8'); // file encoding to read data as string
+        data = this.getTextData(dataUrl);
         break;
       case '.dif':
       case '.ods':
@@ -602,6 +602,22 @@ export class DataPreview {
   } // end of getFileData()
 
   // TODO: Move these data loading methods to separate data.provders per file type
+
+  /**
+   * Gets CSV/TSV text file data.
+   * @param dataUrl Text file path or url.
+   * @returns Text file data as string.
+   */
+  private getTextData(dataUrl: string): string {
+    const data: string = fileUtils.readDataFile(dataUrl, 'utf8'); // file encoding to read data as string
+    this._logger.debug('getTextData(): data:', data);
+    if (this._logger.logLevel === LogLevel.Debug) {
+      // dump 1st 10 text lines in console for debug
+      const dataLines: Array<string> = data.split('\n');
+      this._logger.debug(`getTextData(): file: ${this._fileName} 1st 10 text lines:\n`, dataLines.slice(0, 10));
+    }
+    return data;
+  }
 
   /**
    * Gets Excel file data.
