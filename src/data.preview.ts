@@ -280,7 +280,7 @@ export class DataPreview {
       });
     }
     catch (error) {
-      this._logger.logMessage(LogLevel.Error, 'postDataInfo():', error.message);
+      this._logger.error('postDataInfo(): Error:\n', error.message);
     }
   }
 
@@ -338,16 +338,16 @@ export class DataPreview {
             this._logger.debug(`loadView():executeCommand: ${viewName}`, dataUri.toString(true)); // skip encoding
             commands.executeCommand(viewName, dataUri);
           } else {
-            this._logger.logMessage(LogLevel.Error, `loadView(): no such files in workspace:`, url);
-            window.showErrorMessage(`${url} file doesn't exist in this workspace!`);
+            this._logger.error(`loadView(): Error:\n no such files in this workspace:`, url);
+            window.showErrorMessage(`No '**/${url}' file(s) found in this workspace!`);
           }
         });
       }
     } catch (error) {
-      this._logger.logMessage(LogLevel.Error, `loadView(${url}):`, error.message);
-      window.showErrorMessage(`Failed to load '${viewName}' for document: ${url}! ${error.message}`);
+      this._logger.error(`loadView(${url}): Error:\n`, error.message);
+      window.showErrorMessage(`Failed to load '${viewName}' for document: '${url}'! Error:\n${error.message}`);
     }
-  }
+  } // end of loadView()
 
   /**
    * Creates webview options with local resource roots, etc
@@ -441,12 +441,12 @@ export class DataPreview {
         data = this.getFileData(this._dataUrl);
       }
       catch (error) {
-        this._logger.logMessage(LogLevel.Error, `refresh(${this._dataTable}):`, error.message);
+        this._logger.error(`refresh(${this._dataTable}): Error:\n`, error.message);
         this.webview.postMessage({error: error});
       }
       this.loadData(data);
     // });
-  }
+  } // end of refresh()
 
   /**
    * Loads string or JSON data into data view.
@@ -472,10 +472,10 @@ export class DataPreview {
         });
     }
     catch (error) {
-      this._logger.logMessage(LogLevel.Error, 'loadData():', error.message);
+      this._logger.error('loadData(): Error:\n', error.message);
       this.webview.postMessage({error: error});
     }
-  }
+  } // end of loadData()
 
   /**
    * Prompts to load saved data view config.
@@ -686,8 +686,7 @@ export class DataPreview {
       data = (options) ? parseFunction(content, options) : parseFunction(content);
     }
     catch (error) {
-      this._logger.logMessage(LogLevel.Error,
-        `getJsonData(): Error parsing '${this._dataUrl}' \n\t Error:`, error.message);
+      this._logger.error(`getJsonData(): Error parsing '${this._dataUrl}'. \n\t Error:`, error.message);
       window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. \n\t Error: ${error.message}`);
     }
     return jsonUtils.convertJsonData(data);
@@ -708,8 +707,7 @@ export class DataPreview {
       content = this.markdownToCsv(content);
     }
     catch (error) {
-      this._logger.logMessage(LogLevel.Error,
-        `getMarkdownData(): Error parsing '${this._dataUrl}' \n\t Error:`, error.message);
+      this._logger.error(`getMarkdownData(): Error parsing '${this._dataUrl}'. \n\t Error:`, error.message);
       window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. \n\t Error: ${error.message}`);
     }
     return content;
@@ -926,8 +924,7 @@ export class DataPreview {
         // TODO: change this to async later
         fs.writeFile(dataFileUri.fsPath, fileData, (error) => {
           if (error) {
-            this._logger.logMessage(LogLevel.Error,
-              `saveData(): Error saving '${dataFileUri.fsPath}' \n\t Error:`, error.message);
+            this._logger.error(`saveData(): Error saving '${dataFileUri.fsPath}'. \n\t Error:`, error.message);
             window.showErrorMessage(`Unable to save data file: '${dataFileUri.fsPath}'. \n\t Error: ${error.message}`);
           }
         });
