@@ -65,9 +65,6 @@
         padding-right: 10px;
         cursor: pointer;
       }
-      #data-url-label {
-        font-size: 10pt;
-      }
       #data-url-input {
         width: 200px;
         color: var(--vscode-editor-foreground);
@@ -80,6 +77,19 @@
         bottom: 0;
         left: 0;
         right: 0;
+      }
+      #data-view-console-text {
+        color: var(--vscode-editor-foreground);
+        background-color: var(--vscode-editor-background);
+        width: 100%;
+        height: calc(100% - 32px);
+        position: absolute;
+        top: 32px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        z-index: 100;
       }
       .hidden {
         display: none;
@@ -122,7 +132,8 @@
         <a id="data-preview-button" title="Launch new Data Preview" href="#" onClick="loadDataPreview()">
           <span id="data-preview-icon">🈸</span>
         </a>
-        <a id="data-view-log-button" title="View Data View Debug Log" href="#" onClick="showDebugLog()">
+        <a id="data-view-log-button" title="View Data Console Log" href="#" 
+          onClick="toggleDataViewConsoleDisplay()">
           <span class="label">&gt;</span>
         </a>
         <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">{title}</a>
@@ -142,13 +153,15 @@
         <input id="data-url-input" type="text" title="Enter new Data File Path to Preview" 
           onKeyPress="loadDataPreviewForUrl()" />
       </div>
-    </div>    
-    <perspective-viewer id="data-viewer" view="hypergrid" 
+    </div>
+    <textarea id="data-view-console-text" readonly="readonly" title="Data View Console">&gt;</textarea>
+    <perspective-viewer id="data-viewer" view="hypergrid"
       style="--select--background-color: {themeColor}"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
       let vscode, title, tableSelector, rowCounter, saveFileTypeSelector, 
-        dataUrlInput, dataUrl, dataFileName, 
+        dataViewConsoleText, dataUrlInput, 
+        dataUrl, dataFileName, 
         viewer, toggleConfig = true, 
         dataTable = '', dataViews = {}, tableList = [], 
         viewConfig = {}, viewData = [], logLevel = 'info';
@@ -237,6 +250,7 @@
         // initialize toolbar & perspective data viewer
         logMessage('initializeDataView(): initializing...');
         title = document.getElementById('title');
+        dataViewConsoleText = document.getElementById('data-view-console-text');
         tableSelector = document.getElementById('table-selector');
         rowCounter = document.getElementById('row-counter');
         dataUrlInput = document.getElementById('data-url-input');
@@ -337,6 +351,7 @@
               // show viewer toggles on the 1st run
               viewer.toggleConfig();
               toggleConfig = false;
+              toggleDataViewConsoleDisplay();
             }
           } else {  // update viewer data without toggles reset
             logMessage(`refresh(${dataTable}): updating view data: ${data.fileName}`);
@@ -379,7 +394,7 @@
       function reloadDataViewConfig(dataViewConfig) {
         // check view config
         if (JSON.stringify(viewConfig) !== JSON.stringify(dataViewConfig)) {
-          logMessage(`reloadDataViewConfig(): config: ${JSON.stringify(dataViewConfig, null, 2)}`);
+          logMessage(`reloadDataViewConfig(): config:\n${logConfig(dataViewConfig)}`);
           // save updated view config
           viewConfig = dataViewConfig;
           // update data viewer for new view config display
@@ -658,6 +673,29 @@
             console.log(category + message);
             break;
         }
+        if (dataViewConsoleText) {
+          // log data view message to text console for display
+          dataViewConsoleText.value += `${message}\n>`;
+        }
+      }
+
+      /**
+       * Converts data view config to string for console log display.
+       * @param dataViewConfig Data view config object.
+       */
+      function logConfig(dataViewConfig) {
+        return JSON.stringify(dataViewConfig, null, 2);
+      }
+
+      /**
+       * Toggles data view console text display
+       * with data loading or config/data refresh debug messages
+       * for issues troubleshooting and dev.
+       */
+      function toggleDataViewConsoleDisplay() {
+        // toggle data view console display
+        dataViewConsoleText.style.display = 
+          (dataViewConsoleText.style.display === 'none') ? 'block': 'none';
       }
 
       /**
