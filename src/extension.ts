@@ -88,8 +88,8 @@ export function deactivate() {
 /**
  * Creates a data preview command.
  * @param commandType Preview Data command type: data.preview || data.preview.on.side for now. 
- * @param viewType Preview Data view type: only data.prevview for now. might add maps & help later.
- * @param extensionPath Extension path for loading scripts, examples and data.
+ * @param viewType Preview Data view type: only data.preview for now. might add maps & help later.
+ * @param extensionPath Extension path for loading scripts, styles, images and data templates.
  * @param viewTemplate Preview html template.
  */
 function createDataPreviewCommand(
