@@ -5,7 +5,7 @@ export class Logger {
    * @param category Logger category, usually the source class name.
    * @param logLevel Log level to use or supress logging.
    */
-  constructor(private category: string, private logLevel: LogLevel = LogLevel.Debug) {
+  constructor(public category: string, public logLevel: LogLevel = LogLevel.Debug) {
   }
 
   /**
