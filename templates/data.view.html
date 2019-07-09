@@ -155,7 +155,7 @@
           onKeyPress="loadDataPreviewForUrl()" />
       </div>
     </div>
-    <textarea id="data-view-console-text" readonly="readonly" title="Data View Console">&gt;</textarea>
+    <textarea id="data-view-console-text" readonly="readonly" title="Data View Console">&gt;&nbsp;</textarea>
     <perspective-viewer id="data-viewer" view="hypergrid"
       style="--select--background-color: {themeColor}"></perspective-viewer>
     <script type="text/javascript">
@@ -211,14 +211,14 @@
             break;
           case "complete":
             // web page is fully loaded
-            logMessage('data.view:complete!');
+            logMessage('document.readystatechange complete\n\n data.view:complete!');
             break;
         }      
       });
 
-      // tag perspective viewer loading
+      // tag viewer loading
       window.addEventListener('WebComponentsReady', event => {
-        logMessage('WebComponentsReady: perspective viewer initialized!');
+        logMessage('window.WebComponentsReady\n\n data viewer initialized!');
       });
 
       // initialize data view on content loaded
@@ -239,7 +239,7 @@
 
         // update view config
         viewer.restore(viewConfig);
-        logMessage(`loadDataInfo(): data url: ${dataUrl}`);
+        logMessage(`loadDataInfo()\n\n data url: ${dataUrl}\n data table: ${dataTable}`);
       }
 
       /**
@@ -249,7 +249,7 @@
        */
       function initializeDataView() {
         // initialize toolbar & perspective data viewer
-        logMessage('initializeDataView(): initializing...');
+        logMessage('initializeDataView()\n\n initializing...');
         title = document.getElementById('title');
         dataViewConsoleText = document.getElementById('data-view-console-text');
         tableSelector = document.getElementById('table-selector');
@@ -266,7 +266,7 @@
             // update row counter display
             viewer.view.num_rows().then(rowCount => {
               rowCounter.innerHTML = `${rowCount.toLocaleString()} rows`;
-              logMessage(`refresh(${dataTable}): rowCount=${rowCount}`);
+              logMessage(`viewer.perspective-view-update\n\n rows: ${rowCount.toLocaleString()}`);
             });
           });
 
@@ -335,11 +335,11 @@
           reloadDataViewConfig(data.config);
 
           // load file data
-          logMessage(`refresh(${dataTable}): loading data view: ${data.fileName}`);
+          logMessage(`refresh('${dataTable}')\n\n loading data: ${data.fileName} ...`);
           const tableData = getData(data.fileName, data.data, data.schema);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
-            logMessage(`refresh(${dataTable}): initializing data view: ${data.fileName}`);
+            logMessage(`refresh('${dataTable}')\n\n initializing data view: ${data.fileName} ...`);
             if (data.schema !== undefined && Object.keys(data.schema).length > 0) {
               // viewer.columns = viewConfig['columns'];
               viewer.load(data.schema);
@@ -355,7 +355,7 @@
               toggleDataViewConsoleDisplay();
             }
           } else {  // update viewer data without toggles reset
-            logMessage(`refresh(${dataTable}): updating view data: ${data.fileName}`);
+            logMessage(`refresh('${dataTable}')\n\n updating view data: ${data.fileName} ...`);
             viewer.clear();
             viewer.update(tableData);
           }
@@ -373,7 +373,7 @@
        **/
       function loadTableList(dataTableList, dataTable) {
         if (tableList.length <= 0) {
-          logMessage(`loadTableList(): table list: ${dataTableList}`);
+          logMessage(`loadTableList(\n dataTableList = [${dataTableList}]\n requestedDataTable = '${dataTable}'\n)`);
           dataTableList.forEach(tableName => {
             tableSelector.innerHTML += `<option value="${tableName}">${tableName}</option>"`;
             tableList.push(tableName);
@@ -395,7 +395,7 @@
       function reloadDataViewConfig(dataViewConfig) {
         // check view config
         if (JSON.stringify(viewConfig) !== JSON.stringify(dataViewConfig)) {
-          logMessage(`reloadDataViewConfig(): config:\n${logConfig(dataViewConfig)}`);
+          logMessage(`reloadDataViewConfig(\n${logConfig(dataViewConfig)})`);
           // save updated view config
           viewConfig = dataViewConfig;
           // update data viewer for new view config display
@@ -420,7 +420,7 @@
        **/
       function getData(fileName, data, schema = {}) {
         let tableData = [];
-        logMessage(`getData(): loading file data: ${fileName}`);
+        logMessage(`getData()\n\n loading file data: ${fileName} ...`);
         // read file data
         const fileExt = fileName.substr(fileName.lastIndexOf('.'));
         // TODO: rework this for large data files streaming
@@ -455,16 +455,16 @@
           case '.hjson':
             // pass through loaded data json
             tableData = data;
-            logMessage(`getData(): records count: ${tableData.length}`);
+            logMessage(`getData()\n\n records count: ${tableData.length}`);
             break;
           case '.arrow':
             // return empty data array since binary data is loaded elsewhere
             tableData = [];
-            logMessage(`getData(): schema: ${JSON.stringify(schema, null, 2)}`);
+            logMessage(`getData()\n\n schema: ${JSON.stringify(schema, null, 2)}`);
             break;
           case '.parquet':
             // TODO: add parquet data read
-            console.info('data.preview: Parquet data format support coming soon!');
+            console.info('data.preview:\n\n Parquet data format support coming soon!');
             break;
         }
         return tableData;
@@ -676,7 +676,7 @@
         }
         if (dataViewConsoleText) {
           // log data view message to text console for display
-          dataViewConsoleText.value += `${message}\n>`;
+          dataViewConsoleText.value += `${message}\n\n> `;
         }
       }
 
