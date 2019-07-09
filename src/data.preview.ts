@@ -1021,15 +1021,14 @@ export class DataPreview {
     const sections: Array<string> = markdownContent.split('\n#');
     const sectionMarker: RegExp = new RegExp(/(#)/g);
     const tableHeaderSeparator: RegExp = new RegExp(/((\|)|(\:)|(\-)|(\s))+/g);
-    const tableMarkdown: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
-    let tablesMap: any = {};
-    sections.forEach(sectionText => {
+    const tableRowMarkdown: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
+    const tablesMap: any = {};
+    sections.forEach(section => {
       // get section title
       let sectionTitle: string = '';
-      const sectionLines: Array<string> = sectionText.split('\n');
+      const sectionLines: Array<string> = section.split('\n');
       if (sectionLines.length > 0) {
         sectionTitle = sectionLines[0].replace(sectionMarker, '').trim(); // strip out #'s and trim
-        // this._logger.debug('markdownToCsv(): section:', sectionTitle);
       }
 
       // create section text blocks
@@ -1042,27 +1041,31 @@ export class DataPreview {
           textBlock = '';
         }
         else {
-          // append to current text block
+          // append to the current text block
           textBlock += textLine + '\n';
         }
       });
 
       // extract section table data from each section text block
-      const tables: Array<Array<string>> = [];
+      const tables: Array<Array<string>> = []; // two-dimensional array of table rows
       textBlocks.forEach(textBlock => {
-        const tableData: Array<string> = textBlock.match(tableMarkdown);
-        if (tableData) {
-          tables.push(tableData);
-          // this._logger.debug('markdownToCsv(): table data:', tableData);
+        // extract markdown table data rows from a text block
+        const tableRows: Array<string> = textBlock.match(tableRowMarkdown);
+        if (tableRows) {
+          // add matching markdown table rows to the tables array
+          tables.push(tableRows);
+          this._logger.debug('markdownToCsv(): section:', sectionTitle);
+          this._logger.debug('markdownToCsv(): extractred markdown table rows:', tableRows);
         }  
       });
 
       // process markdown tables
+      const quotes: RegExp = new RegExp(/(")/g);
       tables.forEach((table, tableIndex) => {
-        // process markdown table data
-        const tableData: Array<string> = [];
+        // process markdown table row strings
+        const tableRows: Array<string> = [];
         table.forEach(row => {
-          // trim table text row lines
+          // trim markdown table text row lines
           row = row.trim();
           // strip out leading | table row sign
           if (row.startsWith('| ')) {
@@ -1075,24 +1078,23 @@ export class DataPreview {
           // check for a table header separator row
           const isTableHeaderSeparator: boolean = (row.replace(tableHeaderSeparator, '').length === 0);
           if (!isTableHeaderSeparator && row.length > 0) {
-            // add data row
-            tableData.push(row);
+            // add data table row
+            tableRows.push(row);
           }
         });
 
-        if (tableData.length > 0 ) {
-          // create section table title
+        if (tableRows.length > 0 ) {
+          // create table title
           let tableTitle: string = sectionTitle;
           if (tables.length > 1) {
             // append table index
             tableTitle += '-table-' + (tableIndex + 1);
           }
           // update table list for data view display
-          tablesMap[tableTitle] = tableData;
+          tablesMap[tableTitle] = tableRows;
           this._tableList.push(tableTitle);
-          this._logger.debug('markdownToCsv(): table:', tableTitle);
-          // this._logger.debug('markdownToCsv(): table data:', table);  
-          this._logger.debug('markdownToCsv(): table rows:', tableData.length);
+          this._logger.debug('markdownToCsv(): created data table:', tableTitle);
+          this._logger.debug('markdownToCsv(): table rows:', tableRows.length);
         }
       }); // end of tables.forEach(row)
     }); // end of sections.forEach(textBlock/table)
@@ -1112,7 +1114,7 @@ export class DataPreview {
     // convert requested markdown table to csv for data view display
     let csvContent: string = '';
     if (table) {
-      this._logger.debug('markdownToCsv(): table data:', table);
+      this._logger.debug('markdownToCsv(): markdown table rows:', table);
       table.forEach(row => {
         const cells: Array<string> = row.split(' | ');
         const csvCells: Array<string> = [];
@@ -1127,7 +1129,7 @@ export class DataPreview {
         const csvRow = csvCells.join(',');
         csvContent += csvRow + '\n';
       });
-      this._logger.debug('markdownToCsv(): csv table data:\n', csvContent);
+      this._logger.debug('markdownToCsv(): final csv table content string for data.view load:\n', csvContent);
     }
     return csvContent;
   } // end of markdownToCsv()
