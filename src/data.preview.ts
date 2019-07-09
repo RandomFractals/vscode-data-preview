@@ -1028,7 +1028,7 @@ export class DataPreview {
       let sectionTitle: string = '';
       const sectionLines: Array<string> = sectionText.split('\n');
       if (sectionLines.length > 0) {
-        sectionTitle = sectionLines[0].replace(sectionMarker, ''); // strip out #'s
+        sectionTitle = sectionLines[0].replace(sectionMarker, '').trim(); // strip out #'s and trim
         // this._logger.debug('markdownToCsv(): section:', sectionTitle);
       }
 
@@ -1082,7 +1082,7 @@ export class DataPreview {
 
         if (tableData.length > 0 ) {
           // create section table title
-          let tableTitle: string = sectionTitle.trim();
+          let tableTitle: string = sectionTitle;
           if (tables.length > 1) {
             // append table index
             tableTitle += '-table-' + (tableIndex + 1);
@@ -1107,20 +1107,22 @@ export class DataPreview {
     // convert requested markdown table to csv for data view display
     let csvContent: string = '';
     if (table) {
-      // this._logger.debug('markdownToCsv(): table data:', table);
+      this._logger.debug('markdownToCsv(): table data:', table);
       table.forEach(row => {
         const cells: Array<string> = row.split(' | ');
+        const csvCells: Array<string> = [];
         cells.forEach(cell => {
           cell = cell.trim();
           if (cell.indexOf(',') > 0) {
             // quote cell string
             cell = `"${cell}"`;
           }
+          csvCells.push(cell);
         });
-        row = cells.join(',');
-        csvContent += row + '\n';
+        const csvRow = csvCells.join(',');
+        csvContent += csvRow + '\n';
       });
-      // this._logger.debug('markdownToCsv(): csv table data:', csvContent);
+      this._logger.debug('markdownToCsv(): csv table data:\n', csvContent);
     }
     return csvContent;
   } // end of markdownToCsv()
