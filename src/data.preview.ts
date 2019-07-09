@@ -1104,6 +1104,11 @@ export class DataPreview {
       this._logger.debug('markdownToCsv(): requested table:', this._dataTable);
     }
 
+    if (this._tableList.length === 1) {
+      // clear data preview tables list if only one markdown table is present
+      this._tableList = [];
+    }
+
     // convert requested markdown table to csv for data view display
     let csvContent: string = '';
     if (table) {

@@ -1,3 +1,5 @@
+Excel formats max columns and row limits:
+
 | Format                                  | Last Cell  | Max Cols | Max Rows | 
 |-----------------------------------------|------------|----------|----------| 
 | Excel 5.0/95 (XLS BIFF5)                | IV16384    | 256      | 16384    | 
