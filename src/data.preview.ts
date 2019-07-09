@@ -1113,7 +1113,7 @@ export class DataPreview {
         const csvCells: Array<string> = [];
         cells.forEach(cell => {
           cell = cell.trim();
-          if (cell.indexOf(',') > 0) {
+          if (cell.indexOf(',') >= 0) {
             // quote cell string
             cell = `"${cell}"`;
           }
