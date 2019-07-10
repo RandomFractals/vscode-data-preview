@@ -1,3 +1,11 @@
+// supported log levels
+export enum LogLevel {
+  Debug = 0,
+  Warn = 1,
+  Info = 2,
+  Error = 3
+}
+
 export class Logger {
 
   /**
@@ -10,11 +18,11 @@ export class Logger {
 
   /**
    * Logs new message.
-   * @param logLevel log message level.
-   * @param message log message.
-   * @param params log message params, if any.
+   * @param logLevel Log message level.
+   * @param message Log message.
+   * @param params Log message params, if any.
    */
-  public logMessage(logLevel: LogLevel, message: string, params: any = null): void{
+  public logMessage(logLevel: LogLevel, message: string, params: any = ''): void{
     if (logLevel >= this.logLevel) {
       if (params) {
         this.log(logLevel, message, params);
@@ -29,7 +37,7 @@ export class Logger {
    * @param message Debug log message.
    * @param params Debug log message params, if any.
    */
-  public debug(message: string, params: any = null): void{
+  public debug(message: string, params: any = ''): void{
     if (this.logLevel <= LogLevel.Debug) {
       if (typeof params === 'object') {
         params = JSON.stringify(params, null, 2);
@@ -43,7 +51,7 @@ export class Logger {
    * @param message Error log message.
    * @param params Error log message params, if any.
    */
-  public error(message: string, params: any = null): void{
+  public error(message: string, params: any = ''): void{
     if (typeof params === 'object') {
       params = JSON.stringify(params, null, 2);
     }
@@ -52,11 +60,11 @@ export class Logger {
 
   /**
    * Logs new message to console based on the specified log level.
-   * @param logLevel log message level.
-   * @param message log message.
-   * @param params log message params, if any.
+   * @param logLevel Log message level.
+   * @param message Log message.
+   * @param params Log message params, if any.
    */
-  private log(logLevel: LogLevel, message: string, params: any = null): void {
+  private log(logLevel: LogLevel, message: string, params: any = ''): void {
     switch (logLevel) {
       case LogLevel.Warn:
         console.warn(this.category + message, params);
@@ -73,12 +81,4 @@ export class Logger {
     }
   }
 
-}
-
-// supported log levels
-export enum LogLevel {
-  Debug = 0,
-  Warn = 1,
-  Info = 2,
-  Error = 3
 }

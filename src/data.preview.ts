@@ -60,9 +60,9 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    */
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
     const dataTable: string = state.table;
-    this._logger.debug(`deserializeWeviewPanel(${dataTable}): uri:`, state.uri.toString());
-    this._logger.debug(`deserializeWeviewPanel(${dataTable}): config:`, state.config);
-    this._logger.debug(`deserializeWeviewPanel(${dataTable}): views:`, state.views);
+    this._logger.debug(`deserializeWeviewPanel(): \n data table: '${dataTable}'\n data url:`, state.uri.toString());
+    this._logger.debug(`deserializeWeviewPanel(): config:`, state.config);
+    this._logger.debug(`deserializeWeviewPanel(): views:`, state.views);
     previewManager.add(
       new DataPreview(
         this.viewType,
@@ -150,7 +150,8 @@ export class DataPreview {
 
     // initialize data preview logger
     this._logger = new Logger(`${viewType}:`, (this.logLevel === 'info') ? LogLevel.Info: LogLevel.Debug);
-    this._logger.debug(`(): creating data.preview: theme: ${this.theme} charts: ${this._charts} data url:`, this._dataUrl);
+    this._logger.debug(`(): creating data.preview... \n theme: '${this.theme}' \n charts: '${this._charts}' \
+      \n data url:`, this._dataUrl);
 
     // create html template for data preview with local scripts, styles and theme params replaced
     const scriptsPath: string = Uri.file(path.join(this._extensionPath, 'scripts'))
@@ -198,7 +199,7 @@ export class DataPreview {
       // create new webview panel
       this._panel = window.createWebviewPanel(viewType, this._title, viewColumn, this.getWebviewOptions());
     }
-    this._logger.debug('initWebview(): data.view created:', this._dataUrl);
+    this._logger.debug('initWebview(): data.view created!');
 
     // dispose preview panel handler
     this._panel.onDidDispose(() => {
@@ -264,7 +265,7 @@ export class DataPreview {
    * Sends initial data info to data view.
    */
   private postDataInfo(): void {
-    this._logger.debug('postDataInfo(): data url:', this._dataUrl);
+    this._logger.debug('postDataInfo(): \n data url:', this._dataUrl);
     try {
       // update web view
       this.webview.postMessage({
@@ -433,7 +434,7 @@ export class DataPreview {
 
     // read and send updated data to webview
     // workspace.openTextDocument(this.uri).then(document => {
-      this._logger.debug(`refresh(${this._dataTable}): data url:`, this._dataUrl);
+      this._logger.debug(`refresh(): \n data table: '${this._dataTable}' \n data url:`, this._dataUrl);
       //const textData: string = document.getText();
       let data = [];
       try {
@@ -952,13 +953,15 @@ export class DataPreview {
     const rows: Array<string> = csvContent.split('\n');
     const tableData: string[][] = [];
     const maxColumnLength: number[] = []; // for pretty markdown table cell spacing
+    const cellRegExp: RegExp = new RegExp(delimiter + '(?![^"]*"\\B)');
+    const quotes: RegExp = new RegExp(/(")/g);
+    this._logger.debug('csvToMarkdownTable(): csv rows:', rows);
     rows.forEach((row, rowIndex) => {
       if (typeof tableData[rowIndex] === 'undefined') {
         // create new table row cells data array
         tableData[rowIndex] = [];
       }
       // extract row cells data from csv text line
-      const cellRegExp: RegExp = new RegExp(delimiter + '(?![^"]*"\\B)');
       const cells: Array<string> = row.replace('\r', '').split(cellRegExp);
       cells.forEach((cellData, columnIndex) => {
         if (typeof maxColumnLength[columnIndex] === 'undefined') {
@@ -1055,8 +1058,8 @@ export class DataPreview {
         if (tableRows) {
           // add matching markdown table rows to the tables array
           tables.push(tableRows);
-          this._logger.debug('markdownToCsv(): section:', sectionTitle);
-          this._logger.debug('markdownToCsv(): extractred markdown table rows:', tableRows);
+          // this._logger.debug('markdownToCsv(): section:', sectionTitle);
+          // this._logger.debug('markdownToCsv(): extractred markdown table rows:', tableRows);
         }  
       });
 
@@ -1093,8 +1096,7 @@ export class DataPreview {
           // update table list for data view display
           tablesMap[tableTitle] = tableRows;
           this._tableList.push(tableTitle);
-          this._logger.debug('markdownToCsv(): created data table:', tableTitle);
-          this._logger.debug('markdownToCsv(): table rows:', tableRows.length);
+          this._logger.debug(`markdownToCsv(): created data table: '${tableTitle}' rows: ${tableRows.length}`);
         }
       }); // end of tables.forEach(row)
     }); // end of sections.forEach(textBlock/table)
@@ -1103,7 +1105,7 @@ export class DataPreview {
     let table: Array<string> = tablesMap[this._tableList[0]]; // default to 1st table in the loaded tables list
     if (this._dataTable.length > 0) {
       table = tablesMap[this._dataTable];
-      this._logger.debug('markdownToCsv(): requested table:', this._dataTable);
+      this._logger.debug(`markdownToCsv(): requested data table: '${this._dataTable}'`);
     }
 
     if (this._tableList.length === 1) {
