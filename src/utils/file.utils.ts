@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as request from 'request-promise-native';
+import * as request from 'superagent';
 import * as path from 'path';
 import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
@@ -12,7 +12,7 @@ const logger: Logger = new Logger(`file.utils:`, config.logLevel);
  * @param dataFilePath Data file path or public data source url.
  * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
  */
-export function readDataFile(dataFilePath: string, encoding:string = null): any {
+export function readDataFile(dataFilePath: string, encoding:string = null) {
   let data: any = '';
   const fileName: string = path.basename(dataFilePath);
   logger.debug('readDataFile():', dataFilePath);
@@ -20,8 +20,10 @@ export function readDataFile(dataFilePath: string, encoding:string = null): any 
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
   }
   else if (dataFilePath.startsWith('http://') || dataFilePath.startsWith('https://')) {
-    // fetch remote data using https://github.com/request/request lib api
+    window.showInformationMessage('Remote data loading coming soon!');
+    // TODO: finish this part with remote data read async
     data = readRemoteData(dataFilePath, encoding);
+    // logger.debug('readDataFile(): data:\n', data);
   } 
   else if (fs.existsSync(dataFilePath)) {
     // read local data file via fs.readFile() api
@@ -80,21 +82,44 @@ function readLocalData(dataFilePath: string, encoding: string = null): any {
 
 /**
  * Reads remote file data.
- * @param dataFileUrl Data file url.
+ * @param dataUrl Data file url.
  * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
  * TODO: change this to read data async later
  * TODO: rework this to using streaming api for large data files support later
  */
-async function readRemoteData(dataFileUrl: string, encoding: string = null) {
+function readRemoteData(dataUrl: string, encoding: string = null): any {
   let data: any = '';
-  logger.debug('readRemoteData():', dataFileUrl);
-  try {
-    data = await request(dataFileUrl);
-    logger.debug('readRemoteData(): response data:\n', data);
-  }
-  catch(error) {
-    logger.logMessage(LogLevel.Error, 'readRemoteData(): error:', error);
-    window.showErrorMessage(`Unable to read '${dataFileUrl}. Error:\n${error}`);
-  }
+  logger.debug('readRemoteData(): url:', dataUrl);
+  spawn(function *() {
+    try {
+      const response: any = yield Promise.resolve(request.get(dataUrl));
+      data = response.text;
+      // logger.debug('readRemoteData(): data:\n', data);
+    }
+    catch (error) {
+      data = '';
+      console.error(error);
+    }
+  });
   return data;
+}
+
+function spawn(generatorFunc) {
+  function continuer(verb, arg) {
+    var result;
+    try {
+      result = generator[verb](arg);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+    if (result.done) {
+      return result.value;
+    } else {
+      return Promise.resolve(result.value).then(onFulfilled, onRejected);
+    }
+  }
+  var generator = generatorFunc();
+  var onFulfilled = continuer.bind(continuer, "next");
+  var onRejected = continuer.bind(continuer, "throw");
+  return onFulfilled();
 }

@@ -362,8 +362,8 @@
     "js-yaml": "^3.13.1",
     "json5": "^2.1.0",
     "properties": "^1.2.1",
-    "request-promise-native": "^1.0.7",
     "snappy": "^6.2.3",
+    "superagent": "^5.1.0",
     "xlsx": "^0.14.3"
   }
 }
