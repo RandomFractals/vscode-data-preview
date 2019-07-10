@@ -1020,6 +1020,7 @@ export class DataPreview {
     // extract markdown sections and tables
     const sections: Array<string> = markdownContent.split('\n#');
     const sectionMarker: RegExp = new RegExp(/(#)/g);
+    const quotes: RegExp = new RegExp(/(")/g);
     const tableHeaderSeparator: RegExp = new RegExp(/((\|)|(\:)|(\-)|(\s))+/g);
     const tableRowMarkdown: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
     const tablesMap: any = {};
@@ -1060,7 +1061,6 @@ export class DataPreview {
       });
 
       // process markdown tables
-      const quotes: RegExp = new RegExp(/(")/g);
       tables.forEach((table, tableIndex) => {
         // process markdown table row strings
         const tableRows: Array<string> = [];
@@ -1120,7 +1120,12 @@ export class DataPreview {
         const csvCells: Array<string> = [];
         cells.forEach(cell => {
           cell = cell.trim();
-          if (cell.indexOf(',') >= 0) {
+          const cellHasQuotes: boolean = quotes.test(cell);
+          if (cellHasQuotes) {
+            // escape quotes for csv
+            cell = cell.replace(quotes, '""'); // double quote for csv quote escape
+          }
+          if (cellHasQuotes || cell.indexOf(',') >= 0) {
             // quote cell string
             cell = `"${cell}"`;
           }
