@@ -320,6 +320,11 @@
           "default": false,
           "description": "Create '.schema.json' file for Arrow & Avro metadata binary data formats"
         },
+        "data.preview.openSavedFileEditor": {
+          "type": "boolean",
+          "default": true,
+          "description": "Opens created data file raw content editor on data view Save."
+        },        
         "data.preview.log.level": {
           "type": "string",
           "enum": [

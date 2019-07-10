@@ -316,18 +316,18 @@ export class DataPreview {
    * @see https://code.visualstudio.com/api/extension-guides/command
    */
   private loadView(viewName: string, url: string): void {
+    const fileUri: Uri = Uri.parse(url);
     try {
-      // strip out file scheme
-      url = url.replace('file:///', '');
+      this._logger.debug(`loadView(): loading view... \n ${viewName}`, fileUri.toString(true)); // skip encoding
       if (url.startsWith('http://') || url.startsWith('https://')) {
         // launch requested remote data view command
-        this._logger.debug(`loadView():executeCommand: ${viewName}`, url);
-        commands.executeCommand(viewName, Uri.parse(url));
+        this._logger.debug(`loadView():executeCommand: \n ${viewName}`, url);
+        commands.executeCommand(viewName, fileUri);
       }
-      else if (fs.existsSync(url)) {
+      else if (fs.existsSync(fileUri.fsPath)) {
         // launch requested local data view command
-        this._logger.debug(`loadView():executeCommand: ${viewName}`, url);
-        commands.executeCommand(viewName, Uri.parse(url));
+        this._logger.debug(`loadView():executeCommand: \n ${viewName}`, fileUri.fsPath);
+        commands.executeCommand(viewName, fileUri);
       } 
       else {
         // try to find requested data file(s) in open workspace
@@ -336,7 +336,7 @@ export class DataPreview {
             // pick the 1st matching file from the workspace
             const dataUri: Uri = files[0];
             // launch requested view command
-            this._logger.debug(`loadView():executeCommand: ${viewName}`, dataUri.toString(true)); // skip encoding
+            this._logger.debug(`loadView():executeCommand: \n ${viewName}`, dataUri.toString(true)); // skip encoding
             commands.executeCommand(viewName, dataUri);
           } else {
             this._logger.error(`loadView(): Error:\n no such files in this workspace:`, url);
@@ -863,7 +863,7 @@ export class DataPreview {
     this._logger.debug('saveData(): saving data file:', dataFilePath);
 
     // display save file dialog
-    const dataFileUri = await window.showSaveDialog({
+    const dataFileUri: Uri = await window.showSaveDialog({
       defaultUri: Uri.parse(dataFilePath).with({scheme: 'file'})
     });
 
@@ -927,6 +927,9 @@ export class DataPreview {
           if (error) {
             this._logger.error(`saveData(): Error saving '${dataFileUri.fsPath}'. \n\t Error:`, error.message);
             window.showErrorMessage(`Unable to save data file: '${dataFileUri.fsPath}'. \n\t Error: ${error.message}`);
+          }
+          else if (this.openSavedFileEditor) {
+            this.loadView('vscode.open', dataFileUri.with({scheme: 'file'}).toString(false)); // skip encoding
           }
         });
       }
@@ -1242,6 +1245,13 @@ export class DataPreview {
    */
   get createJsonSchema(): boolean {
     return <boolean>workspace.getConfiguration('data.preview').get('create.json.schema');
+  }
+
+  /**
+   * Opens created data file raw Content Editor on Data Save.
+   */
+  get openSavedFileEditor(): boolean {
+    return <boolean>workspace.getConfiguration('data.preview').get('openSavedFileEditor');
   }
 
   /**
