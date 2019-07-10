@@ -323,8 +323,8 @@
         "data.preview.openSavedFileEditor": {
           "type": "boolean",
           "default": true,
-          "description": "Opens created data file raw content editor on data view Save."
-        },        
+          "description": "Opens created data file Content Editor on Data Save."
+        },
         "data.preview.log.level": {
           "type": "string",
           "enum": [
