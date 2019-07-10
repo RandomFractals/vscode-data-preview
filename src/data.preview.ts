@@ -950,27 +950,41 @@ export class DataPreview {
     }
 
     // extract table rows and data from csv content
-    const rows: Array<string> = csvContent.split('\n');
+    const csvRows: Array<string> = csvContent.split('\n');
     const tableData: string[][] = [];
     const maxColumnLength: number[] = []; // for pretty markdown table cell spacing
     const cellRegExp: RegExp = new RegExp(delimiter + '(?![^"]*"\\B)');
-    const quotes: RegExp = new RegExp(/(")/g);
-    this._logger.debug('csvToMarkdownTable(): csv rows:', rows);
-    rows.forEach((row, rowIndex) => {
+    const doubleQuotes: RegExp = new RegExp(/("")/g);
+    this._logger.debug('csvToMarkdownTable(): csv rows:', csvRows);
+    csvRows.forEach((row, rowIndex) => {
       if (typeof tableData[rowIndex] === 'undefined') {
         // create new table row cells data array
         tableData[rowIndex] = [];
       }
       // extract row cells data from csv text line
       const cells: Array<string> = row.replace('\r', '').split(cellRegExp);
-      cells.forEach((cellData, columnIndex) => {
+      cells.forEach((cell, columnIndex) => {
         if (typeof maxColumnLength[columnIndex] === 'undefined') {
+          // set initial column size to 0
           maxColumnLength[columnIndex] = 0;
         }
+
+        // strip out leading and trailing quotes
+        if (cell.startsWith('"')) {
+          cell = cell.substring(1);
+        }
+        if (cell.endsWith('"')) {
+          cell = cell.substring(0, cell.length - 1);
+        }
+
+        // replace escaped double quotes that come from csv text data format
+        cell = cell.replace(doubleQuotes, '"');
+
         // update max column length for pretty markdwon table cells spacing
-        maxColumnLength[columnIndex] = Math.max(maxColumnLength[columnIndex], cellData.length);
+        maxColumnLength[columnIndex] = Math.max(maxColumnLength[columnIndex], cell.length);
+
         // save extracted cell data for table rows output
-        tableData[rowIndex][columnIndex] = cellData;
+        tableData[rowIndex][columnIndex] = cell;
       });
     });
 
