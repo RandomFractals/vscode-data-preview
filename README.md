@@ -210,6 +210,7 @@ Other extensions Data Preview 🈸 replaces, enhances or supplements for working
 | [docs-yaml](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-yaml) | YAML schema validation and auto-completion for docs.microsoft.com authoring |
 | [YAML to JSON](https://marketplace.visualstudio.com/items?itemName=ahebrank.yaml2json) | Convert YAML from clipboard or current document/selection to JSON and vice versa |
 | [Properties To Yaml](https://marketplace.visualstudio.com/items?itemName=tanaka-x.prop2yaml) | Convert properties to yaml |
+| [Markdown Table Prettifier](https://marketplace.visualstudio.com/items?itemName=darkriszty.markdown-table-prettify) | Transforms markdown tables to be more readable |
 
 # Dev Log
 
