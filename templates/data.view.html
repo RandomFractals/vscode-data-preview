@@ -160,28 +160,28 @@
       style="--select--background-color: {themeColor}"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
-      let vscode, title, tableSelector, rowCounter, 
-        saveFileTypeSelector, 
-        dataViewConsoleText, dataUrlInput, 
-        dataUrl, dataFileName, 
+      let vscode, title, tableSelector, rowCounter,
+        saveFileTypeSelector,
+        dataViewConsoleText, dataUrlInput,
+        dataUrl, dataFileName,
         viewer, toggleConfig = true, restoringConfig = true,
         dataTable = '', dataViews = {}, tableList = [], 
         viewConfig = {}, viewData = [], logLevel = 'info';
 
-      // check web assembly support. uncomment this for dev debug:
+      // check web assembly support
       // console.log(`data.view:supportsWebAssembly(): ${supportsWebAssembly()}`);
       
       // initialize vs code api for messaging
       vscode = acquireVsCodeApi();
 
-      // add webview post message even handler
+      // add webview post message event handler
       window.addEventListener('message', event => {
         switch (event.data.command) {
-          case 'refresh':
-            refresh(event.data);
-            break;
           case 'dataInfo':
             loadDataInfo(event.data);
+            break;
+          case 'refresh':
+            refresh(event.data);
             break;
           default: // raw byte array
             // convert byte array to typed data array for loading into data view
@@ -206,7 +206,7 @@
             logMessage(`loading: data url: ${dataUrl}`);
           break;
           case 'interactive':
-            // document loading finished, images and stylesheets are still loading
+            // document loading finished, images and stylesheets are still loading ...
             logMessage('interactive!');
             // get initial data info: document url, views, etc.
             vscode.postMessage({command: 'getDataInfo'});
@@ -238,12 +238,10 @@
         dataViews = data.views;
         viewConfig = data.config;
         logLevel = data.logLevel;
+        logMessage(`loadDataInfo()\n\n data url: ${dataUrl}\n data table: ${dataTable}`);
 
         // update view config
-        restoringConfig = true;
-        viewer.restore(viewConfig);
-        restoringConfig = false;
-        logMessage(`loadDataInfo()\n\n data url: ${dataUrl}\n data table: ${dataTable}`);
+        restoreConfig(viewConfig);
       }
 
       /**
@@ -291,6 +289,22 @@
           console.error(`data.view:vscode:error ${error.message}`);
         }
       } // end of initializeDataView()
+
+      /**
+       * Restores data view config on new data view load or new view config load.
+       * @param viewConfig Data view config to restore.
+       */
+      function restoreConfig(viewConfig) {
+        // set updating view config flag
+        restoringConfig = true;
+
+        // restore view config
+        logMessage(`restoreConfig(\n${JSON.stringify(viewConfig, null, 2)})`);
+        viewer.restore(viewConfig);        
+
+        // clear updating view config flag
+        restoringConfig = false;
+      }
 
       /**
        * Updates view config caused by user interactions or new config load.
@@ -429,9 +443,7 @@
           // save updated view config
           viewConfig = dataViewConfig;
           // update data viewer for new view config display
-          restoringConfig = true;
-          viewer.restore(viewConfig);
-          restoringConfig = false;
+          restoreConfig(viewConfig);
           // reset view data for reaload
           viewData = [];
           // update data view state
@@ -590,7 +602,7 @@
           viewer.clear();
           if (dataViews.hasOwnProperty(dataTable)) {
             viewConfig = dataViews[dataTable];
-            viewer.restore(viewConfig);
+            restoreConfig(viewConfig);
           }
           vscode.postMessage({
             command: 'config',
