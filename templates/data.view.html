@@ -137,6 +137,10 @@
           onClick="toggleDataViewConsoleDisplay()">
           <span class="label">&gt;</span>
         </a>
+        <a id="view-data-source-button" title="View Data Source" href="#" 
+          onClick="viewDataSource()">
+          <span class="label">📖</span>
+        </a>
         <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">{title}</a>
         <select id="table-selector" title="Select Data Table" 
           style="display: none;" onChange="loadTableData()">
@@ -225,6 +229,17 @@
 
       // initialize data view on content loaded
       document.addEventListener('DOMContentLoaded', event => initializeDataView());
+
+      /**
+       * Loads raw data source content on view data source button click.
+       */
+      function viewDataSource() {
+        vscode.postMessage({
+            command: 'loadView',
+            viewName: 'vscode.open',
+            uri: `file:///${dataUrl}`
+          });
+      }
 
       /**
        * Loads initial data view info.
