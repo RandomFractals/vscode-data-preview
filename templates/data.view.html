@@ -160,10 +160,11 @@
       style="--select--background-color: {themeColor}"></perspective-viewer>
     <script type="text/javascript">
       // data preview vars
-      let vscode, title, tableSelector, rowCounter, saveFileTypeSelector, 
+      let vscode, title, tableSelector, rowCounter, 
+        saveFileTypeSelector, 
         dataViewConsoleText, dataUrlInput, 
         dataUrl, dataFileName, 
-        viewer, toggleConfig = true, 
+        viewer, toggleConfig = true, restoringConfig = true,
         dataTable = '', dataViews = {}, tableList = [], 
         viewConfig = {}, viewData = [], logLevel = 'info';
 
@@ -239,7 +240,9 @@
         logLevel = data.logLevel;
 
         // update view config
+        restoringConfig = true;
         viewer.restore(viewConfig);
+        restoringConfig = false;
         logMessage(`loadDataInfo()\n\n data url: ${dataUrl}\n data table: ${dataTable}`);
       }
 
@@ -273,25 +276,9 @@
 
           // add viewer config change handler for saving view state
           viewer.addEventListener('perspective-config-update', event => {
-            // get latest view config state
-            viewConfig = viewer.save();
-            // strip out updating and render time props for view config save
-            deleteProperty('updating', viewConfig);
-            deleteProperty('render_time', viewConfig);
-            deleteProperty('style', viewConfig);
-            // save view config for vscode reload
-            vscode.setState({
-              uri: dataUrl,
-              table: dataTable, 
-              config: viewConfig,
-              views: dataViews
-            });
-            // update data view config
-            vscode.postMessage({
-              command: 'config',
-              table: dataTable,
-              config: viewConfig
-            });
+            if (!restoringConfig) {
+              updateConfig();
+            }
           });
 
           // add viewer click handler for cross-filtering
@@ -304,6 +291,48 @@
           console.error(`data.view:vscode:error ${error.message}`);
         }
       } // end of initializeDataView()
+
+      /**
+       * Updates view config caused by user interactions or new config load.
+       */
+      function updateConfig() {
+        // get latest view config state from data viewer
+        const viewerConfig = viewer.save();
+        
+        // strip out updating, render time and style properties for clean view config compare and save
+        deleteProperty('updating', viewerConfig);
+        deleteProperty('render_time', viewerConfig);
+        deleteProperty('style', viewerConfig);
+        deleteProperty('class', viewerConfig);
+        // logMessage(`viewer.perspective-config-update\n${logConfig(viewConfig)}\n${logConfig(viewerConfig)}`);
+        
+        // update view config state and create config change log
+        let configChangeLog = '';
+        Object.keys(viewerConfig).forEach(propertyName => {
+          if (viewConfig[propertyName] === undefined || 
+              viewConfig[propertyName] !== viewerConfig[propertyName]) {
+            viewConfig[propertyName] = viewerConfig[propertyName];
+            configChangeLog += `\n ${propertyName}: ${viewConfig[propertyName]}`;
+          }
+        });
+
+        if (configChangeLog.length > 0 ) {
+          logMessage(`viewer.perspective-config-update \n${configChangeLog}`);
+          // save updated view config state for vscode data view panel reload
+          vscode.setState({
+            uri: dataUrl,
+            table: dataTable, 
+            config: viewConfig,
+            views: dataViews
+          });
+          // notify data preview
+          vscode.postMessage({
+            command: 'config',
+            table: dataTable,
+            config: viewConfig
+          });
+        }
+      } // end of updateConfig()
 
       /**
        * Deletes object property.
@@ -336,11 +365,11 @@
           reloadDataViewConfig(data.config);
 
           // load file data
-          logMessage(`refresh('${dataTable}')\n\n loading data: ${data.fileName} ...`);
+          logMessage(`refresh(dataTable='${dataTable}')\n\n loading data: ${data.fileName} ...`);
           const tableData = getData(data.fileName, data.data, data.schema);
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
-            logMessage(`refresh('${dataTable}')\n\n initializing data view: ${data.fileName} ...`);
+            logMessage(`refresh(dataTable='${dataTable}')\n\n initializing data view: ${data.fileName} ...`);
             if (data.schema !== undefined && Object.keys(data.schema).length > 0) {
               // viewer.columns = viewConfig['columns'];
               viewer.load(data.schema);
@@ -400,7 +429,9 @@
           // save updated view config
           viewConfig = dataViewConfig;
           // update data viewer for new view config display
+          restoringConfig = true;
           viewer.restore(viewConfig);
+          restoringConfig = false;
           // reset view data for reaload
           viewData = [];
           // update data view state
@@ -683,10 +714,10 @@
 
       /**
        * Converts data view config to string for console log display.
-       * @param dataViewConfig Data view config object.
+       * @param dataViewConfig Data view config object or string.
        */
       function logConfig(dataViewConfig) {
-        return JSON.stringify(dataViewConfig, null, 2);
+        return (typeof dataViewConfig === 'string') ? dataViewConfig: JSON.stringify(dataViewConfig, null, 2);
       }
 
       /**
