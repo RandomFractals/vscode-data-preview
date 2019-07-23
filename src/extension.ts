@@ -38,7 +38,7 @@ export function activate(context: ExtensionContext) {
   
   // create extension status bar items
   status = window.createStatusBarItem(StatusBarAlignment.Left, 0); // right align priority
-  status.text = '🈸';
+  status.text = '🈸 Activated!';
   status.show();
   
   // register Data preview serializer for restore on vscode restart
