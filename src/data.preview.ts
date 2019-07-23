@@ -214,8 +214,7 @@ export class DataPreview {
 
     // load matching view config, if available
     const viewConfigFilePath:string = this._dataUrl.replace(this._fileExtension, '.config');
-    if (!this._isRemoteData && 
-      !this._viewConfig.hasOwnProperty('view') && // blank view config
+    if (!this._isRemoteData && !this._viewConfig.hasOwnProperty('view') && // is a blank view config
       fs.existsSync(viewConfigFilePath)) {
       this.loadConfigFromFile(viewConfigFilePath, false, false); // don't refresh data, don't show errors
     }

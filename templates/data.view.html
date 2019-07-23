@@ -139,7 +139,7 @@
         </a>
         <a id="view-data-source-button" title="View Data Source" href="#" 
           onClick="viewDataSource()">
-          <span class="label">📖</span>
+          <span class="label">📘</span>
         </a>
         <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">{title}</a>
         <select id="table-selector" title="Select Data Table" 
@@ -605,6 +605,7 @@
        * Loads requested table data for data files with multiple data sets.
        */
       function loadTableData() {
+        // get new table selection
         let tableName = tableSelector.value;
         if (!tableName || tableName === undefined) {
           // reset to empty for default data load
@@ -613,7 +614,10 @@
           // reset view data table and config for new data load
           dataTable = tableName;
           viewData = [];
+          restoringConfig = true;
           viewConfig = {};
+          viewer.reset();
+          restoringConfig = false;
           viewer.clear();
           if (dataViews.hasOwnProperty(dataTable)) {
             viewConfig = dataViews[dataTable];
