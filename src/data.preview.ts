@@ -232,8 +232,12 @@ export class DataPreview {
       (viewStateEvent: WebviewPanelOnDidChangeViewStateEvent) => {
       let active = viewStateEvent.webviewPanel.visible;
       if (!active) {
-        // clear data preview status text
-        this.updateStatus('');
+        // hide data preview status display
+        this._status.hide();
+      } else {
+        // show data preview status display
+        this._status.show();
+        this._status.tooltip = `Data Stats for: ${this._fileName}`;
       }
     }, null, this._disposables);
 
@@ -450,6 +454,7 @@ export class DataPreview {
   public refresh(dataTable = ''): void {
     // reveal corresponding data preview panel
     this._panel.reveal(this._panel.viewColumn, true); // preserve focus
+    this._status.show();
     this.updateStatus('Loading data...');
 
     if (dataTable.length >  0) {
@@ -636,10 +641,10 @@ export class DataPreview {
    */
   private getTextData(dataUrl: string): string {
     const data: string = fileUtils.readDataFile(dataUrl, 'utf8'); // file encoding to read data as string
-    this._logger.debug('getTextData(): data:', data);
+    const dataLines: Array<string> = data.split('\n');
+    this.logDataStats(dataLines);
     if (this._logger.logLevel === LogLevel.Debug) {
       // dump 1st 10 text lines in console for debug
-      const dataLines: Array<string> = data.split('\n');
       this._logger.debug(`getTextData(): file: ${this._fileName} 1st 10 text lines:\n`, dataLines.slice(0, 10));
     }
     return data;
@@ -660,7 +665,6 @@ export class DataPreview {
 
     // load data sheets
     let dataRows: Array<any> = [];
-    const dataSchema = null;
     if (workbook.SheetNames.length > 0) {
       if (workbook.SheetNames.length > 1) {
         // save sheet names for table list UI display
@@ -677,9 +681,11 @@ export class DataPreview {
       // get worksheet data row objects array
       const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
       dataRows = xlsx.utils.sheet_to_json(worksheet);
+      this.logDataStats(dataRows);
 
+      // create json data file for binary Excel file text data preview
       if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
-        // create json data file for Excel text data preview
+        // create Excel spreadsheet json file path
         let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
         if (this._dataTable.length > 0 && this._tableList.length > 1) {
           // append sheet name to generated json data file name
@@ -687,7 +693,6 @@ export class DataPreview {
         }
         fileUtils.createJsonFile(jsonFilePath, dataRows);
       }
-      this.logDataStats(dataSchema, dataRows);
     }
     return dataRows;
   } // end of getExcelData()
@@ -710,12 +715,15 @@ export class DataPreview {
         content = content.replace(comments, '');
       }
       data = (options) ? parseFunction(content, options) : parseFunction(content);
+      // convert json configs to properties
+      data = jsonUtils.convertJsonData(data);
+      this.logDataStats(data);
     }
     catch (error) {
       this._logger.error(`getJsonData(): Error parsing '${this._dataUrl}'. \n\t Error:`, error.message);
       window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. \n\t Error: ${error.message}`);
     }
-    return jsonUtils.convertJsonData(data);
+    return data;
   }
 
   /**
@@ -725,12 +733,14 @@ export class DataPreview {
    * @param options Data parsing options.
    */
   private getMarkdownData(dataFilePath: string): any {
-    let content:string = '';
+    let content: string = '';
     try {
       // read markdown file content
       content = fileUtils.readDataFile(dataFilePath, 'utf8');
-      // conver it to to CSV for loading into data view
+      // convert it to to CSV for loading into data view
       content = this.markdownToCsv(content);
+      const dataLines: string[] = content.split('\n');
+      this.logDataStats(dataLines);
     }
     catch (error) {
       this._logger.error(`getMarkdownData(): Error parsing '${this._dataUrl}'. \n\t Error:`, error.message);
@@ -796,8 +806,8 @@ export class DataPreview {
       fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
     }
 
-    // log arrow data stats and gracefully return :)
-    this.logDataStats(dataTable.schema, dataRows);
+    // log arrow data stats and schema, and gracefully return :)
+    this.logDataStats(dataRows, dataTable.schema);
     return []; //  dataRows already sent
   } // end of getArrowData()
 
@@ -813,16 +823,16 @@ export class DataPreview {
     dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
-      this.logDataStats(dataSchema, dataRows);
-      // update web view: flatten data rows for now since Avro format has hierarchical data structure
+      this.logDataStats(dataRows, dataSchema);
+      // Note: flatten data rows for now since Avro format has hierarchical data structure
       dataRows = dataRows.map(rowObject => jsonUtils.flattenObject(rowObject));
       this.loadData(dataRows);
       if (this.createJsonSchema) {
-        // create schema.json file for text data preview
+        // create schema.json file for Avro metadata preview
         fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
       }
       if (this.createJsonFiles) {
-        // create data json file for text data preview
+        // create data json file for Avro text data preview
         fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
       }
     });
@@ -846,20 +856,22 @@ export class DataPreview {
     }
     await parquetReader.close();
     dataRows = dataRows.map(rowObject => this.flattenObject(rowObject));    
-    this.logDataStats(dataSchema, dataRows);
+    this.logDataStats(dataRows, dataSchema);
     // update web view
     this.loadData(dataRows);
     return dataRows;
   } */
 
   /**
-   * Logs data stats for debug.
-   * @param dataSchema metadata.
-   * @param dataRows data rows.
+   * Logs data stats and optional data schema or metadata for debug 
+   * and updates data preview status bar item.
+   * @param dataRows Data rows array.
+   * @param dataSchema Optional data schema or metadata for debug logging.
    */
-  private logDataStats(dataSchema: any, dataRows: Array<any>): void {
+  private logDataStats(dataRows: Array<any>, dataSchema: any = null): void {
+    this.updateStatus(`Rows: ${dataRows.length.toLocaleString()}`);
     if (this.logLevel === 'debug') {
-      if (dataSchema !== null) {
+      if (dataSchema) {
         // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
         this._logger.debug('logDataStats(): data view schema:', this._dataSchema);
       }
@@ -867,7 +879,6 @@ export class DataPreview {
         const firstRow = dataRows[0];
         this._logger.debug('logDataStats(): 1st row:', firstRow);
         this._logger.debug('logDataStats(): records count:', dataRows.length);
-        this.updateStatus(`Rows: ${dataRows.length.toLocaleString()}`);
       }
     }
   }
