@@ -227,10 +227,14 @@ export class DataPreview {
       this.dispose();
     }, null, this._disposables);
 
-    // TODO: handle view state changes later
+    // handle view state changes
     this._panel.onDidChangeViewState(
       (viewStateEvent: WebviewPanelOnDidChangeViewStateEvent) => {
       let active = viewStateEvent.webviewPanel.visible;
+      if (!active) {
+        // clear data preview status text
+        this.updateStatus('');
+      }
     }, null, this._disposables);
 
     // load matching view config, if available
