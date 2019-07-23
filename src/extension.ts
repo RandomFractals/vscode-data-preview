@@ -3,13 +3,15 @@ import {
   window, 
   workspace, 
   commands, 
-  ExtensionContext,
   Disposable,
-  Uri, 
-  ViewColumn, 
+  ExtensionContext,
+  StatusBarAlignment,
+  StatusBarItem,
   TextDocument,
   TextDocumentChangeEvent,
-  TextDocumentContentProvider  
+  TextDocumentContentProvider,
+  Uri, 
+  ViewColumn
 } from 'vscode';
 import * as path from 'path';
 import * as config from './config';
@@ -19,6 +21,7 @@ import {previewManager} from './preview.manager';
 import {Template, ITemplateManager, TemplateManager} from './template.manager';
 
 const logger: Logger = new Logger('data.preview:', config.logLevel);
+let status: StatusBarItem;
 
 /**
  * Activates this extension per rules set in package.json.
@@ -33,9 +36,14 @@ export function activate(context: ExtensionContext) {
   const templateManager: ITemplateManager = new TemplateManager(context.asAbsolutePath('templates'));
   const dataViewTemplate: Template = templateManager.getTemplate('data.view.html');
   
+  // create extension status bar items
+  status = window.createStatusBarItem(StatusBarAlignment.Left, 0); // right align priority
+  status.text = '🈸';
+  status.show();
+  
   // register Data preview serializer for restore on vscode restart
   window.registerWebviewPanelSerializer('data.preview', 
-    new DataPreviewSerializer('data.preview', extensionPath, dataViewTemplate));
+    new DataPreviewSerializer('data.preview', extensionPath, dataViewTemplate, status));
 
   // add Preview Data command
   const dataWebview: Disposable = 
@@ -82,7 +90,9 @@ export function activate(context: ExtensionContext) {
  * Deactivates this vscode extension to free up resources.
  */
 export function deactivate() {
-  // TODO: add extension cleanup code, if needed
+  status.text = '';
+  status.hide();
+  // add other extension cleanup code here, if needed
 }
 
 /**
@@ -118,6 +128,7 @@ function createDataPreviewCommand(
       {}, // data view config
       {}, // other data views
       viewColumn, viewTemplate);
+    preview.status = status;
     previewManager.add(preview);
     return preview.webview;
   });

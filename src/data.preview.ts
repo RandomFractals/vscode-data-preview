@@ -5,7 +5,9 @@ import {
   commands, 
   window,
   workspace, 
-  Disposable, 
+  Disposable,
+  StatusBarAlignment,
+  StatusBarItem, 
   Uri, 
   ViewColumn, 
   WorkspaceFolder, 
@@ -48,8 +50,11 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    * @param viewType Web view type.
    * @param extensionPath Extension path for loading scripts, examples and data.
    * @param htmlTemplate Webview preview html template.
+   * @param status Status bar item for data loading updates.
    */
-  constructor(private viewType: string, private extensionPath: string, private htmlTemplate: Template) {
+  constructor(private viewType: string, private extensionPath: string, 
+    private htmlTemplate: Template, 
+    private status: StatusBarItem) {
     this._logger = new Logger(`${this.viewType}.serializer:`, config.logLevel);
   }
 
@@ -60,21 +65,29 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    */
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
     const dataTable: string = state.table;
+    this.status.text = '🈸 Restoring data preview...';
     this._logger.debug(`deserializeWeviewPanel(): \n data table: '${dataTable}'\n data url:`, state.uri.toString());
     this._logger.debug(`deserializeWeviewPanel(): config:`, state.config);
     this._logger.debug(`deserializeWeviewPanel(): views:`, state.views);
-    previewManager.add(
-      new DataPreview(
-        this.viewType,
-        this.extensionPath, 
-        Uri.parse(state.uri),
-        dataTable,
-        state.config, // data view config
-        state.views, // other data views for data files with multiple data sets
-        webviewPanel.viewColumn, 
-        this.htmlTemplate,
-        webviewPanel
-    ));
+
+    // create new data preview
+    const dataPreview: DataPreview = new DataPreview(
+      this.viewType,
+      this.extensionPath, 
+      Uri.parse(state.uri),
+      dataTable,
+      state.config, // data view config
+      state.views, // other data views for data files with multiple data sets
+      webviewPanel.viewColumn, 
+      this.htmlTemplate,
+      webviewPanel
+    );
+
+    // set status bar item for data load updates
+    dataPreview.status = this.status;
+
+    // add new data preview to preview manager for config updates, etc.
+    previewManager.add(dataPreview);
   }
 }
 
@@ -93,6 +106,7 @@ export class DataPreview {
   private _title: string;
   private _html: string;
   private _panel: WebviewPanel;
+  private _status: StatusBarItem;
   private _logger: Logger;
 
   // data view vars
@@ -127,7 +141,7 @@ export class DataPreview {
     viewColumn: ViewColumn, 
     htmlTemplate: Template, 
     panel?: WebviewPanel) {
-
+    
     // save ext path, document uri, view config, preview uri, title, etc.
     this._extensionPath = extensionPath;
     this._uri = uri;
@@ -172,6 +186,13 @@ export class DataPreview {
     this.initWebview(viewType, viewColumn);
     this.configure();
   } // end of constructor()
+
+  /**
+   * Updates data preview status bar item text.
+   */
+  private updateStatus(statusMessage: string): void {
+    this._status.text = `🈸 ${statusMessage}`;
+  }
 
   /**
    * Disposes this data preview resources.
@@ -425,6 +446,7 @@ export class DataPreview {
   public refresh(dataTable = ''): void {
     // reveal corresponding data preview panel
     this._panel.reveal(this._panel.viewColumn, true); // preserve focus
+    this.updateStatus('Loading data...');
 
     if (dataTable.length >  0) {
       // save requested data table
@@ -841,6 +863,7 @@ export class DataPreview {
         const firstRow = dataRows[0];
         this._logger.debug('logDataStats(): 1st row:', firstRow);
         this._logger.debug('logDataStats(): records count:', dataRows.length);
+        this.updateStatus(`Rows: ${dataRows.length.toLocaleString()}`);
       }
     }
   }
@@ -1260,4 +1283,7 @@ export class DataPreview {
     return <string>workspace.getConfiguration('data.preview').get('log.level');
   }
 
+  set status(statusBarItem: StatusBarItem) {
+    this._status = statusBarItem;
+  }
 }
