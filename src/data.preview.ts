@@ -327,7 +327,7 @@ export class DataPreview {
     const fileSize: number = fileUtils.getFileSize(this._dataUrl);
     const fileSizeString: string = fileUtils.formatBytes(fileSize, 1); // decimals
     const dataTableStats: string = 
-      `Rows: ${rows.toLocaleString()}  Columns: ${columns.length.toLocaleString()}`;
+      `Rows: ${rows.toLocaleString()}  Cols: ${columns.length.toLocaleString()}`;
     this.updateStatus(`${dataTableStats}  File Size: ${fileSizeString}`);
   }
 

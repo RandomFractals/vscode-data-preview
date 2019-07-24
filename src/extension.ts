@@ -37,7 +37,7 @@ export function activate(context: ExtensionContext) {
   const dataViewTemplate: Template = templateManager.getTemplate('data.view.html');
   
   // create extension status bar items
-  status = window.createStatusBarItem(StatusBarAlignment.Left, 0); // right align priority
+  status = window.createStatusBarItem(StatusBarAlignment.Right, 300); // left align priority
   status.text = '🈸 Activated!';
   status.show();
   
