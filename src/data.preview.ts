@@ -869,7 +869,9 @@ export class DataPreview {
    * @param dataSchema Optional data schema or metadata for debug logging.
    */
   private logDataStats(dataRows: Array<any>, dataSchema: any = null): void {
-    this.updateStatus(`Rows: ${dataRows.length.toLocaleString()}`);
+    const fileSize: number = fileUtils.getFileSize(this._dataUrl);
+    const fileSizeString: string = fileUtils.formatBytes(fileSize, 1); // decimals
+    this.updateStatus(`Rows: ${dataRows.length.toLocaleString()}   File Size: ${fileSizeString}`);
     if (this.logLevel === 'debug') {
       if (dataSchema) {
         // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);

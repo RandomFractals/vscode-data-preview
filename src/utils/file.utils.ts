@@ -5,6 +5,7 @@ import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
 import {window, workspace} from 'vscode';
 
+const fileSizeLabels: string[] = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 const logger: Logger = new Logger(`file.utils:`, config.logLevel);
 
 /**
@@ -41,6 +42,33 @@ export function readDataFile(dataFilePath: string, encoding:string = null) {
     });
   }
   return data;
+}
+
+/**
+ * Gets local data file size for status display.
+ * @param dataFilePath Data file path to get size stats for.
+ */
+export function getFileSize(dataFilePath: string): number {
+  let fileSize: number = -1;
+  if (fs.existsSync(dataFilePath)) {
+    const stats: fs.Stats = fs.statSync(dataFilePath);
+    fileSize = stats.size;
+  } 
+  return fileSize;
+}
+
+/**
+ * Formats bytes for file size status display.
+ * @param bytes File size in bytes.
+ * @param decimals Number of decimals to include.
+ */
+export function formatBytes(bytes, decimals): string {
+  const base: number = 1024;
+  let remainder: number = bytes;
+  for(var i = 0; remainder > base; i++) {
+    remainder /= base;
+  }
+  return `${parseFloat(remainder.toFixed(decimals))} ${fileSizeLabels[i]}`;
 }
 
 /**
