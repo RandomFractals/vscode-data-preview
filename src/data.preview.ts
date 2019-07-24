@@ -330,10 +330,13 @@ export class DataPreview {
    * @param rows Loaded data rows count.
    */
   private updateStats(columns, rows) {
+    let dataStats: string = `Rows: ${rows.toLocaleString()}\tColumns: ${columns.length.toLocaleString()}`;
+    if (this._tableList.length > 0) {
+      // add tables count to data preview data stats status display
+      dataStats = `Tables: ${this._tableList.length.toLocaleString()}\t${dataStats}`;
+    }
     const fileSizeString: string = fileUtils.formatBytes(this._fileSize, 2); // decimals
-    const dataTableStats: string = 
-      `Rows: ${rows.toLocaleString()}\tColumns: ${columns.length.toLocaleString()}`;
-    this.updateStatus(`${dataTableStats}\tFileSize: ${fileSizeString}`);
+    this.updateStatus(`${dataStats}\tFileSize: ${fileSizeString}`);
   }
 
   /**
@@ -1099,6 +1102,9 @@ export class DataPreview {
    * @param markdownContent Markdown file content to convert to csv string.
    */
   private markdownToCsv(markdownContent: string): string {
+    // clear loaded tables list
+    this._tableList = [];
+    
     // extract markdown sections and tables
     const sections: Array<string> = markdownContent.split('\n#');
     const sectionMarker: RegExp = new RegExp(/(#)/g);
