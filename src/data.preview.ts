@@ -263,6 +263,11 @@ export class DataPreview {
           // save data viewer config for restore on vscode reload
           this.updateConfig(message.config, message.table);
           break;
+        case 'stats':
+          // update data preview status bar item
+          // with loaded rows count and columns info
+          this.updateStats(message.columns, message.rows);
+          break;
         case 'saveData':
           // saves data view config, or filtered .arrow, .csv, .json(s), .md, .yml, etc. data
           this.saveData(message.data, message.fileType);
@@ -313,6 +318,18 @@ export class DataPreview {
     }
   }
 
+  /**
+   * Updates data preivew status bar item with loaded data rows count and columns info.
+   * @param columns Displayed columns array.
+   * @param rows Loaded data rows count.
+   */
+  private updateStats(columns, rows) {
+    const fileSize: number = fileUtils.getFileSize(this._dataUrl);
+    const fileSizeString: string = fileUtils.formatBytes(fileSize, 1); // decimals
+    const dataTableStats: string = 
+      `Rows: ${rows.toLocaleString()}  Columns: ${columns.length.toLocaleString()}`;
+    this.updateStatus(`${dataTableStats}  File Size: ${fileSizeString}`);
+  }
 
   /**
    * Shows open file dialog for launchign new data preview.

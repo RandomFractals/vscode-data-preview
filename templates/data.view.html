@@ -61,11 +61,6 @@
         margin: 0px;
         padding: 0px;
       }
-      #row-counter {
-        padding-left: 5px;
-        padding-right: 10px;
-        cursor: pointer;
-      }
       #data-url-input {
         width: 200px;
         color: var(--vscode-editor-foreground);
@@ -115,7 +110,8 @@
     <div id="toolbar">
       <div id="toolbar-right">
         <select id="save-file-type-selector" 
-          title="Save Data View .config or Data" onChange="saveData()">
+          title="Save Data View .config or Data" 
+          onChange="saveData()">
           <option value="">📥&nbsp;Save</option>
           <option value=".config">⚙️ &nbsp;config</option>
           <option value=".arrow">➳ arrow</option>
@@ -127,10 +123,13 @@
           <option value=".yml">&nbsp;!&nbsp; yml</option>
           <option value=".properties">= &nbsp;properties</option>
         </select>
-        <a id="help-button" title="Data Preview Help" href="#" onClick="loadHelp()">?</a>
+        <a id="help-button" title="Data Preview Help" href="#"
+          style="color: orange;"
+          onClick="loadHelp()">?</a>
       </div>
       <div id="toolbar-left">
-        <a id="data-preview-button" title="Launch new Data Preview" href="#" onClick="loadDataPreview()">
+        <a id="data-preview-button" title="Launch new Data Preview" href="#" 
+          onClick="loadDataPreview()">
           <span id="data-preview-icon">🈸</span>
         </a>
         <a id="data-view-log-button" title="View Data Console Log" href="#" 
@@ -141,20 +140,21 @@
           onClick="viewDataSource()">
           <span class="label">📘</span>
         </a>
-        <a id="title" title="Load Data View .config" href="#" onClick="loadConfig()">{title}</a>
+        <a id="title" title="Load Data View .config" href="#" 
+          onClick="loadConfig()">{title}</a>
         <select id="table-selector" title="Select Data Table" 
-          style="display: none;" onChange="loadTableData()">
+          style="display: none;" 
+          onChange="loadTableData()">
         </select>
         <!-- |
         <a title="Undo" href="#" onclick="undoConfig()"> ↩ </a>
         <a title="Redo" href="#" onclick="redoConfig()"> ↪ </a>
         -->
-        <a id="refresh-data-button" style="color: orange;" title="Refresh Data" href="#" onclick="reloadData()">🔃</a>
-        <span id="row-counter">...</span>
-        <!--
-        <label id="data-url-label" for="data-url-input">| new data url:</label>
-        -->
-        <a id="open-file-button" title="Open Data File" href="#" onClick="openFile()">📤</a>
+        <a id="refresh-data-button" title="Refresh Data" href="#"
+          style="color: orange;"
+          onclick="reloadData()">🔃</a>
+        <a id="open-file-button" title="Open Data File" href="#" 
+          onClick="openFile()">📤</a>
         <input id="data-url-input" type="text" title="Enter new Data File Path to Preview" 
           onKeyPress="loadDataPreviewForUrl()" />
       </div>
@@ -270,7 +270,6 @@
         title = document.getElementById('title');
         dataViewConsoleText = document.getElementById('data-view-console-text');
         tableSelector = document.getElementById('table-selector');
-        rowCounter = document.getElementById('row-counter');
         dataUrlInput = document.getElementById('data-url-input');
         saveFileTypeSelector = document.getElementById('save-file-type-selector');
         viewer = document.getElementsByTagName('perspective-viewer')[0];
@@ -278,11 +277,16 @@
           // request first data update
           vscode.postMessage({command: 'refresh'});
 
-          // add rows update handler
+          // add view update handler
           viewer.addEventListener('perspective-view-update', event => {
-            // update row counter display
+            // get row counts and displayed columns stats
             viewer.view.num_rows().then(rowCount => {
-              rowCounter.innerHTML = `${rowCount.toLocaleString()} rows`;
+              // notify webview for data stats status update
+              vscode.postMessage({
+                command: 'stats',
+                columns: viewer['columns'],
+                rows: rowCount
+              });
               logMessage(`viewer.perspective-view-update
                 \n columns: ${viewer['columns']}\n rows: ${rowCount.toLocaleString()}`);
             });
