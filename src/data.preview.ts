@@ -121,6 +121,8 @@ export class DataPreview {
   private _rowCount: number = 0;
   private _columns: string[] = [];
   private _charts: string = 'd3fc';
+  private _dataLoadStartTime: Date = new Date();
+  private _dataLoadEndTime: Date = new Date(this._dataLoadStartTime.getTime());
 
   /**
    * Creates new data preview.
@@ -335,8 +337,16 @@ export class DataPreview {
       // add tables count to data preview data stats status display
       dataStats = `Tables: ${this._tableList.length.toLocaleString()}\t${dataStats}`;
     }
+    if (this._dataLoadStartTime.getTime() === this._dataLoadEndTime.getTime()) {
+      // update data load time
+      this._dataLoadEndTime = new Date();
+    }
+    const dataLoadTime: number = Math.round(
+      (this._dataLoadEndTime.getTime() - this._dataLoadStartTime.getTime()) / 1000 // msecs
+    );
     const fileSizeString: string = fileUtils.formatBytes(this._fileSize, 2); // decimals
-    this.updateStatus(`${dataStats}\tFileSize: ${fileSizeString}`);
+    this.updateStatus(
+      `${dataStats}\tFileSize: ${fileSizeString}\tLoadTime: ${dataLoadTime.toLocaleString()} secs`);
   }
 
   /**
@@ -1104,7 +1114,7 @@ export class DataPreview {
   private markdownToCsv(markdownContent: string): string {
     // clear loaded tables list
     this._tableList = [];
-    
+
     // extract markdown sections and tables
     const sections: Array<string> = markdownContent.split('\n#');
     const sectionMarker: RegExp = new RegExp(/(#)/g);
