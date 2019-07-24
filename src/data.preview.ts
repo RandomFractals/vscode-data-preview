@@ -103,6 +103,7 @@ export class DataPreview {
   private _previewUri: Uri;
   private _fileName: string;
   private _fileExtension: string;
+  private _fileSize: number;
   private _title: string;
   private _html: string;
   private _panel: WebviewPanel;
@@ -117,6 +118,8 @@ export class DataPreview {
   private _dataViews: any = {};
   private _viewConfig: any = {};
   private _dataTable: string = '';
+  private _rowCount: number = 0;
+  private _columns: string[] = [];
   private _charts: string = 'd3fc';
 
   /**
@@ -238,6 +241,8 @@ export class DataPreview {
         // show data preview status display
         this._status.show();
         this._status.tooltip = `Data Stats for: ${this._fileName}`;
+        // update status bar data stats
+        this.updateStats(this._columns, this._rowCount);
       }
     }, null, this._disposables);
 
@@ -266,7 +271,7 @@ export class DataPreview {
         case 'stats':
           // update data preview status bar item
           // with loaded rows count and columns info
-          this.updateStats(message.columns, message.rows);
+          this.updateStats(message.columns, message.rowCount);
           break;
         case 'saveData':
           // saves data view config, or filtered .arrow, .csv, .json(s), .md, .yml, etc. data
@@ -319,16 +324,16 @@ export class DataPreview {
   }
 
   /**
-   * Updates data preivew status bar item with loaded data rows count and columns info.
+   * Updates data preivew status bar item with loaded data rows count,
+   * columns info and loaded data file size in bytes on data view update.
    * @param columns Displayed columns array.
    * @param rows Loaded data rows count.
    */
   private updateStats(columns, rows) {
-    const fileSize: number = fileUtils.getFileSize(this._dataUrl);
-    const fileSizeString: string = fileUtils.formatBytes(fileSize, 1); // decimals
+    const fileSizeString: string = fileUtils.formatBytes(this._fileSize, 2); // decimals
     const dataTableStats: string = 
-      `Rows: ${rows.toLocaleString()}  Cols: ${columns.length.toLocaleString()}`;
-    this.updateStatus(`${dataTableStats}  File Size: ${fileSizeString}`);
+      `Rows: ${rows.toLocaleString()}\tColumns: ${columns.length.toLocaleString()}`;
+    this.updateStatus(`${dataTableStats}\tFileSize: ${fileSizeString}`);
   }
 
   /**
@@ -886,9 +891,10 @@ export class DataPreview {
    * @param dataSchema Optional data schema or metadata for debug logging.
    */
   private logDataStats(dataRows: Array<any>, dataSchema: any = null): void {
-    const fileSize: number = fileUtils.getFileSize(this._dataUrl);
-    const fileSizeString: string = fileUtils.formatBytes(fileSize, 1); // decimals
-    this.updateStatus(`Rows: ${dataRows.length.toLocaleString()}   File Size: ${fileSizeString}`);
+    // get data file size in bytes
+    this._fileSize = fileUtils.getFileSize(this._dataUrl);
+    this._rowCount = dataRows.length;
+    this.updateStats(this._columns, this._rowCount);
     if (this.logLevel === 'debug') {
       if (dataSchema) {
         // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);

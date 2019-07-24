@@ -5,7 +5,7 @@ import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
 import {window, workspace} from 'vscode';
 
-const fileSizeLabels: string[] = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+const fileSizeLabels: string[] = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 const logger: Logger = new Logger(`file.utils:`, config.logLevel);
 
 /**

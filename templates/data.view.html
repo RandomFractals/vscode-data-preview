@@ -285,7 +285,7 @@
               vscode.postMessage({
                 command: 'stats',
                 columns: viewer['columns'],
-                rows: rowCount
+                rowCount: rowCount
               });
               logMessage(`viewer.perspective-view-update
                 \n columns: ${viewer['columns']}\n rows: ${rowCount.toLocaleString()}`);
