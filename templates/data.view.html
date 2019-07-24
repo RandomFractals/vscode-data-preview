@@ -281,10 +281,15 @@
           viewer.addEventListener('perspective-view-update', event => {
             // get row counts and displayed columns stats
             viewer.view.num_rows().then(rowCount => {
+              let columns = viewer['columns'];
+              if (viewConfig.hasOwnProperty('columns')) {
+                // use view config columns property instead
+                columns = viewConfig['columns'].split('\",\"');
+              }
               // notify webview for data stats status update
               vscode.postMessage({
                 command: 'stats',
-                columns: viewer['columns'],
+                columns: columns,
                 rowCount: rowCount
               });
               logMessage(`viewer.perspective-view-update

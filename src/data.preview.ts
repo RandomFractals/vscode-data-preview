@@ -329,10 +329,13 @@ export class DataPreview {
    * Updates data preivew status bar item with loaded data rows count,
    * columns info and loaded data file size in bytes on data view update.
    * @param columns Displayed columns array.
-   * @param rows Loaded data rows count.
+   * @param rowCount Loaded data rows count.
    */
-  private updateStats(columns, rows) {
-    let dataStats: string = `Rows: ${rows.toLocaleString()}\tColumns: ${columns.length.toLocaleString()}`;
+  private updateStats(columns, rowCount) {
+    // update columns and rows state vars
+    this._columns = columns;
+    this._rowCount = rowCount;
+    let dataStats: string = `Rows: ${rowCount.toLocaleString()}\tColumns: ${columns.length.toLocaleString()}`;
     if (this._tableList.length > 0) {
       // add tables count to data preview data stats status display
       dataStats = `Tables: ${this._tableList.length.toLocaleString()}\t${dataStats}`;
