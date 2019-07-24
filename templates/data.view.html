@@ -283,7 +283,8 @@
             // update row counter display
             viewer.view.num_rows().then(rowCount => {
               rowCounter.innerHTML = `${rowCount.toLocaleString()} rows`;
-              logMessage(`viewer.perspective-view-update\n\n rows: ${rowCount.toLocaleString()}`);
+              logMessage(`viewer.perspective-view-update
+                \n columns: ${viewer['columns']}\n rows: ${rowCount.toLocaleString()}`);
             });
           });
 
