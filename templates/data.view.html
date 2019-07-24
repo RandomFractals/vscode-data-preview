@@ -279,28 +279,15 @@
 
           // add view update handler
           viewer.addEventListener('perspective-view-update', event => {
-            // get row counts and displayed columns stats
-            viewer.view.num_rows().then(rowCount => {
-              let columns = viewer['columns'];
-              if (viewConfig.hasOwnProperty('columns')) {
-                // use view config columns property instead
-                columns = viewConfig['columns'].split('\",\"');
-              }
-              // notify webview for data stats status update
-              vscode.postMessage({
-                command: 'stats',
-                columns: columns,
-                rowCount: rowCount
-              });
-              logMessage(`viewer.perspective-view-update
-                \n columns: ${viewer['columns']}\n rows: ${rowCount.toLocaleString()}`);
-            });
+              logMessage(`viewer.perspective-view-update...`);
+              updateStats();
           });
 
           // add viewer config change handler for saving view state
           viewer.addEventListener('perspective-config-update', event => {
             if (!restoringConfig) {
               updateConfig();
+              updateStats();
             }
           });
 
@@ -314,6 +301,27 @@
           console.error(`data.view:vscode:error ${error.message}`);
         }
       } // end of initializeDataView()
+
+      /**
+       * Updates data stats on view config changes or data load/update.
+       */
+      function updateStats() {
+        // get rows count and displayed columns info
+        viewer.view.num_rows().then(rowCount => {
+          let columns = viewer['columns'];
+          if (viewConfig.hasOwnProperty('columns')) {
+            // use view config columns property instead
+            columns = viewConfig['columns'].split('\",\"');
+          }
+          // notify webview for data stats status update
+          vscode.postMessage({
+            command: 'stats',
+            columns: columns,
+            rowCount: rowCount
+          });
+          logMessage(`updateStats()\n\n columns: ${columns}\n rows: ${rowCount.toLocaleString()}`);
+        });
+      } // end of updateStats()
 
       /**
        * Restores data view config on new data view load or new view config load.
@@ -427,6 +435,7 @@
             logMessage(`refresh('${dataTable}')\n\n updating view data: ${data.fileName} ...`);
             viewer.clear();
             viewer.update(tableData);
+            updateStats();
           }
           // save loaded view data for future data update checks
           viewData = tableData;
@@ -501,6 +510,9 @@
           case '.tab':
             // pass through text data for data view to load
             tableData = data;
+            // log records count, i.e. text lines - 1 (header) for text data in csv format
+            const recordCount = data.split('\n').length - 1;
+            logMessage(`getData()\n\n records count: ${recordCount.toLocaleString()}`);
             break;
           case '.xls':
           case '.xlsb':
@@ -524,7 +536,7 @@
           case '.hjson':
             // pass through loaded data json
             tableData = data;
-            logMessage(`getData()\n\n records count: ${tableData.length}`);
+            logMessage(`getData()\n\n records count: ${tableData.length.toLocaleString()}`);
             break;
           case '.arrow':
             // return empty data array since binary data is loaded elsewhere
