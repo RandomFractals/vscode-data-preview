@@ -172,7 +172,7 @@ export class DataPreview {
     // initialize data preview logger
     this._logger = new Logger(`${viewType}:`, (this.logLevel === 'info') ? LogLevel.Info: LogLevel.Debug);
     this._logger.debug(`(): creating data.preview... \n theme: '${this.theme}' \n charts: '${this._charts}' \
-      \n data url:`, this._dataUrl);
+      \n dataUrl:`, this._dataUrl);
 
     // create html template for data preview with local scripts, styles and theme params replaced
     const scriptsPath: string = Uri.file(path.join(this._extensionPath, 'scripts'))
@@ -307,7 +307,7 @@ export class DataPreview {
    * Sends initial data info to data view.
    */
   private postDataInfo(): void {
-    this._logger.debug('postDataInfo(): \n data url:', this._dataUrl);
+    this._logger.debug('postDataInfo(): \n dataUrl:', this._dataUrl);
     try {
       // update web view
       this.webview.postMessage({
@@ -504,7 +504,7 @@ export class DataPreview {
 
     // read and send updated data to webview
     // workspace.openTextDocument(this.uri).then(document => {
-      this._logger.debug(`refresh(): \n data table: '${this._dataTable}' \n data url:`, this._dataUrl);
+      this._logger.debug(`refresh(): \n dataTable: '${this._dataTable}' \n dataUrl:`, this._dataUrl);
       //const textData: string = document.getText();
       let data = [];
       try {
@@ -585,11 +585,12 @@ export class DataPreview {
     const viewConfig: any = JSON.parse(configString);
 
     // check for matching data file
+    this._logger.debug('loadConfigFromFile(): loading view config:', configFilePath);
     if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) {
       // save loaded view config, and data table reference if present
       this._viewConfig = viewConfig.config;
       this._dataTable = (viewConfig.dataTable === undefined) ? '': viewConfig.dataTable;
-      this._logger.debug('loadConfig(): loaded view config:', this._viewConfig);
+      this._logger.debug('loadConfigFromFile(): loaded view config:', this._viewConfig);
       if (refreshData) {
         // reload data & config for display
         this.refresh(this._dataTable);
@@ -685,7 +686,7 @@ export class DataPreview {
     this.logDataStats(dataLines);
     if (this._logger.logLevel === LogLevel.Debug) {
       // dump 1st 10 text lines in console for debug
-      this._logger.debug(`getTextData(): file: ${this._fileName} 1st 10 text lines:\n`, dataLines.slice(0, 10));
+      this._logger.debug(`getTextData(): file: ${this._fileName} 1st 3 text lines:\n`, dataLines.slice(0, 3));
     }
     return data;
   }
@@ -921,7 +922,7 @@ export class DataPreview {
       if (dataRows.length > 0) {
         const firstRow = dataRows[0];
         this._logger.debug('logDataStats(): 1st row:', firstRow);
-        this._logger.debug('logDataStats(): records count:', dataRows.length);
+        this._logger.debug('logDataStats(): rowCount:', this._rowCount);
       }
     }
   }
