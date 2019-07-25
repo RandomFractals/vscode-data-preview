@@ -6,7 +6,6 @@ import {
   window,
   workspace, 
   Disposable,
-  StatusBarAlignment,
   StatusBarItem, 
   Uri, 
   ViewColumn, 
@@ -55,7 +54,9 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
   constructor(private viewType: string, private extensionPath: string, 
     private htmlTemplate: Template, 
     private status: StatusBarItem) {
-    this._logger = new Logger(`${this.viewType}.serializer:`, config.logLevel);
+    const logLevel: string = <string>workspace.getConfiguration('data.preview').get('log.level');
+    this._logger = new Logger(`${this.viewType}.serializer:`, 
+      (logLevel === 'info') ? LogLevel.Info: LogLevel.Debug);
   }
 
   /**
@@ -66,7 +67,8 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
     const dataTable: string = state.table;
     this.status.text = '🈸 Restoring data preview...';
-    this._logger.debug(`deserializeWeviewPanel(): \n data table: '${dataTable}'\n data url:`, state.uri.toString());
+    this._logger.debug(`deserializeWeviewPanel(): \n data table: '${dataTable}' \n data url:`, 
+      state.uri.toString());
     this._logger.debug(`deserializeWeviewPanel(): config:`, state.config);
     this._logger.debug(`deserializeWeviewPanel(): views:`, state.views);
 
@@ -89,7 +91,7 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
     // add new data preview to preview manager for config updates, etc.
     previewManager.add(dataPreview);
   }
-}
+} // end of DataPreviewSerializer()
 
 /**
  * Main data preview webview implementation for this vscode extension.
@@ -1342,6 +1344,9 @@ export class DataPreview {
     return <string>workspace.getConfiguration('data.preview').get('log.level');
   }
 
+  /**
+   * Set status bar item for data preview data stats display in vscode status bar.
+   */
   set status(statusBarItem: StatusBarItem) {
     this._status = statusBarItem;
   }
