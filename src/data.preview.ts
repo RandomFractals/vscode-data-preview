@@ -160,7 +160,7 @@ export class DataPreview {
     this._fileName = path.basename(uri.fsPath);    
     this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
     this._previewUri = this._uri.with({scheme: 'data'});
-    this._title = `${this._fileName} 🈸`;
+    this._title = `${this._fileName}`;
 
     // initilize charts plugin
     this._charts = this.charts;
@@ -226,6 +226,7 @@ export class DataPreview {
     if (!this._panel) {
       // create new webview panel
       this._panel = window.createWebviewPanel(viewType, this._title, viewColumn, this.getWebviewOptions());
+      this._panel.iconPath = Uri.file(path.join(this._extensionPath, './images/data-preview.svg'));
     }
     this._logger.debug('initWebview(): data.view created!');
 
