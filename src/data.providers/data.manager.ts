@@ -6,9 +6,9 @@ import {IDataProvider} from './data.provider';
 import { JsonDataProvider } from './json.data.provider';
 
 /**
- * Data provider manager api interface.
+ * Data manager api interface.
  */
-export interface IDataProviderManager {
+export interface IDataManager {
 
   /**
    * Gets IDataProvider instance for the specified file type/extension.
@@ -18,16 +18,16 @@ export interface IDataProviderManager {
 }
 
 /**
- * IDataProviderManager implementation. 
- * TODO: make this pluggable via data.preview.data.provider.manager setting later on.
+ * IDataManager implementation. 
+ * TODO: make this pluggable via data.preview.data.manager setting later on.
  */
-export class DataProviderManager implements IDataProviderManager {
+export class DataManager implements IDataManager {
   
-  private dataProviders: Array<IDataProvider>; // loaded templates
-  private logger: Logger = new Logger('data.provider.manager:', config.logLevel);
+  private dataProviders: Array<IDataProvider>; // loaded data providers
+  private logger: Logger = new Logger('data.manager:', config.logLevel);
 
   /**
-   * Creates new IDataProviderManager and loads IDataProvider's
+   * Creates new data manager and loads IDataProvider's
    * for the supported data formats listed in package.json.
    */
   public constructor() {
