@@ -51,12 +51,25 @@ export class DataManager implements IDataManager {
   private dataProviders: Array<IDataProvider>; // loaded data providers
   private logger: Logger = new Logger('data.manager:', config.logLevel);
 
+  // singleton instance
+  private static _instance: DataManager;
+
   /**
-   * Creates new data manager and loads IDataProvider's
+   * Creates new Data manager instance and loads IDataProvider's
    * for the supported data formats listed in package.json.
    */
-  public constructor() {
+  private constructor() {
     this.dataProviders = this.loadDataProviders();
+  }
+
+  /**
+   * Creates Data manager singleton instance.
+   */
+  public static get Instance() {
+    if (!this._instance) {
+      this._instance = new this();
+    }
+    return this._instance;
   }
 
   /**
@@ -83,3 +96,6 @@ export class DataManager implements IDataManager {
     return this.dataProviders.find(dataProvider => dataProvider.name === fileType);
   }
 }
+
+// export Data manager singleton
+export const dataManager = DataManager.Instance;
