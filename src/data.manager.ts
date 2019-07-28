@@ -1,6 +1,6 @@
 import * as config from './config';
 import {Logger} from './logger';
-import { JsonDataProvider } from './data.providers/json.data.provider';
+import {JsonDataProvider} from './data.providers/json.data.provider';
 
 /**
  * Data manager api interface.
@@ -48,18 +48,17 @@ export interface IDataProvider {
  */
 export class DataManager implements IDataManager {
   
-  private dataProviders: Array<IDataProvider>; // loaded data providers
-  private logger: Logger = new Logger('data.manager:', config.logLevel);
-
   // singleton instance
   private static _instance: DataManager;
+  private _dataProviders: {}; // loaded data providers map
+  private _logger: Logger = new Logger('data.manager:', config.logLevel);
 
   /**
    * Creates new Data manager instance and loads IDataProvider's
    * for the supported data formats listed in package.json.
    */
   private constructor() {
-    this.dataProviders = this.loadDataProviders();
+    this._dataProviders = this.loadDataProviders();
   }
 
   /**
@@ -75,15 +74,15 @@ export class DataManager implements IDataManager {
   /**
    * Initializes data providers for the supported data formats.
    */
-  private loadDataProviders(): Array<IDataProvider> {
-    this.logger.debug('loadDataProviders(): loading data providers...');
+  private loadDataProviders(): any {
+    this._logger.debug('loadDataProviders(): loading data providers...');
 
     // create data providers instances for the supported data formats
-    const dataProviders: Array<IDataProvider> = [];
+    const dataProviders: any = {};
     const jsonDataProvider: IDataProvider = new JsonDataProvider('.json');
-    dataProviders.push(jsonDataProvider);
-
-    this.logger.debug('loadDataProviders(): loaded data providers:', dataProviders);
+    dataProviders['.json'] = jsonDataProvider;
+    // ...
+    this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
     return dataProviders;
   }
 
@@ -92,8 +91,10 @@ export class DataManager implements IDataManager {
    * @param fileType The data file type/extension to get data provider instance for.
    */
   getDataProvider(fileType: string): IDataProvider {
-    // TODO: change this to map or set later
-    return this.dataProviders.find(dataProvider => dataProvider.name === fileType);
+    if (this._dataProviders.hasOwnProperty(fileType)) {
+      return this._dataProviders[fileType]
+    }
+    throw new Error(`No matching data provider found for file type: ${fileType}`);
   }
 }
 
