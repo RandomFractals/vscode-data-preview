@@ -3,13 +3,11 @@
 // vscode imports
 import {window} from 'vscode';
 
-import * as fs from 'fs';
-import * as path from 'path';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
 import * as jsonUtils from '../utils/json.utils';
 import {Logger, LogLevel} from '../logger';
-import {IDataProvider} from './data.provider';
+import {IDataProvider} from '../data.manager';
 
 /**
  * JSON data provider.
