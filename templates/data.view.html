@@ -169,7 +169,7 @@
         dataViewConsoleText, dataUrlInput,
         dataUrl, dataFileName,
         viewer, toggleConfig = true, restoringConfig = true,
-        dataTable = '', dataViews = {}, tableList = [], 
+        dataTable = '', dataViews = {}, tableNames = [], 
         viewConfig = {}, viewData = [], logLevel = 'info';
 
       // check web assembly support
@@ -406,7 +406,7 @@
           title.innerText = data.fileName;
 
           // load table list for multi-table data views display
-          loadTableList(data.tableList, dataTable);
+          loadTableList(data.tableNames, dataTable);
 
           // load new data view config, if different
           reloadDataViewConfig(data.config);
@@ -445,18 +445,18 @@
       } // end of refresh(data)
 
       /**
-       * Loads data table list for multi-table data views display.
-       * @param dataTableList Data source table list.
+       * Loads data table names for multi-table data views display.
+       * @param dataTableNames Data source table names array.
        * @param dataTable Requested data view table name.
        **/
-      function loadTableList(dataTableList, dataTable) {
-        if (tableList.length <= 0) {
-          logMessage(`loadTableList(\n dataTableList = [${dataTableList}]\n requestedDataTable = '${dataTable}'\n)`);
-          dataTableList.forEach(tableName => {
+      function loadTableList(dataTableNames, dataTable) {
+        if (tableNames.length <= 0) {
+          logMessage(`loadTableList(\n tableNames = [${dataTableNames}]\n requestedDataTable = '${dataTable}'\n)`);
+          dataTableNames.forEach(tableName => {
             tableSelector.innerHTML += `<option value="${tableName}">${tableName}</option>"`;
-            tableList.push(tableName);
+            tableNames.push(tableName);
           });
-          if (tableList.length > 0) {
+          if (tableNames.length > 0) {
             // show table selector dropdown
             tableSelector.style.display = 'inline-block';
             // set requested data table
@@ -627,7 +627,7 @@
        * Loads requested table data for data files with multiple data sets.
        */
       function loadTableData() {
-        // get new table selection
+        // get new table name selection from table selector list
         let tableName = tableSelector.value;
         if (!tableName || tableName === undefined) {
           // reset to empty for default data load

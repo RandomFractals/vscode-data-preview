@@ -116,7 +116,7 @@ export class DataPreview {
   private _dataUrl: string;
   private _dataSchema: any;
   private _isRemoteData: boolean = false;
-  private _tableList: Array<string> = [];
+  private _tableNames: Array<string> = [];
   private _dataViews: any = {};
   private _viewConfig: any = {};
   private _dataTable: string = '';
@@ -317,7 +317,7 @@ export class DataPreview {
         uri: this._dataUrl,
         config: this.config,
         schema: this.schema,
-        tableList: this._tableList,
+        tableNames: this._tableNames,
         views: this._dataViews,
         table: this._dataTable,
         logLevel: this.logLevel
@@ -339,9 +339,9 @@ export class DataPreview {
     this._columns = columns;
     this._rowCount = rowCount;
     let dataStats: string = `Rows: ${rowCount.toLocaleString()}\tColumns: ${columns.length.toLocaleString()}`;
-    if (this._tableList.length > 0) {
+    if (this._tableNames.length > 0) {
       // add tables count to data preview data stats status display
-      dataStats = `Tables: ${this._tableList.length.toLocaleString()}\t${dataStats}`;
+      dataStats = `Tables: ${this._tableNames.length.toLocaleString()}\t${dataStats}`;
     }
     if (this._dataLoadStartTime.getTime() === this._dataLoadEndTime.getTime()) {
       // update data load time
@@ -536,7 +536,7 @@ export class DataPreview {
           uri: this._dataUrl,
           config: this.config,
           schema: this.schema,
-          tableList: this._tableList,
+          tableNames: this._tableNames,
           views: this._dataViews,
           table: this._dataTable,
           logLevel: this.logLevel,
@@ -710,7 +710,7 @@ export class DataPreview {
     if (workbook.SheetNames.length > 0) {
       if (workbook.SheetNames.length > 1) {
         // save sheet names for table list UI display
-        this._tableList = workbook.SheetNames;
+        this._tableNames = workbook.SheetNames;
       }
 
       // determine spreadsheet to load
@@ -729,7 +729,7 @@ export class DataPreview {
       if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
         // create Excel spreadsheet json file path
         let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
-        if (this._dataTable.length > 0 && this._tableList.length > 1) {
+        if (this._dataTable.length > 0 && this._tableNames.length > 1) {
           // append sheet name to generated json data file name
           jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
         }
@@ -1120,7 +1120,7 @@ export class DataPreview {
    */
   private markdownToCsv(markdownContent: string): string {
     // clear loaded tables list
-    this._tableList = [];
+    this._tableNames = [];
 
     // extract markdown sections and tables
     const sections: Array<string> = markdownContent.split('\n#');
@@ -1197,22 +1197,22 @@ export class DataPreview {
           }
           // update table list for data view display
           tablesMap[tableTitle] = tableRows;
-          this._tableList.push(tableTitle);
+          this._tableNames.push(tableTitle);
           this._logger.debug(`markdownToCsv(): created data table: '${tableTitle}' rows: ${tableRows.length}`);
         }
       }); // end of tables.forEach(row)
     }); // end of sections.forEach(textBlock/table)
 
     // get requested table data
-    let table: Array<string> = tablesMap[this._tableList[0]]; // default to 1st table in the loaded tables list
+    let table: Array<string> = tablesMap[this._tableNames[0]]; // default to 1st table in the loaded tables list
     if (this._dataTable.length > 0) {
       table = tablesMap[this._dataTable];
       this._logger.debug(`markdownToCsv(): requested data table: '${this._dataTable}'`);
     }
 
-    if (this._tableList.length === 1) {
+    if (this._tableNames.length === 1) {
       // clear data preview tables list if only one markdown table is present
-      this._tableList = [];
+      this._tableNames = [];
     }
 
     // convert requested markdown table to csv for data view display
