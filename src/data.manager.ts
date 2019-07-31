@@ -37,7 +37,7 @@ export interface IDataProvider {
    * Saves raw Data Provider data.
    * @param filePath Data file path. 
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param stringifyFunction Optional stringify function override.
    */
   saveData(filePath: string, fileData: any, stringifyFunction: Function): void;
 }
@@ -92,7 +92,7 @@ export class DataManager implements IDataManager {
    */
   getDataProvider(fileType: string): IDataProvider {
     if (this._dataProviders.hasOwnProperty(fileType)) {
-      return this._dataProviders[fileType]
+      return this._dataProviders[fileType];
     }
     throw new Error(`No matching data provider found for file type: ${fileType}`);
   }

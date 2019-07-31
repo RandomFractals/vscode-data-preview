@@ -3,7 +3,7 @@ import * as request from 'superagent';
 import * as path from 'path';
 import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
-import {window, workspace} from 'vscode';
+import {window, workspace, Uri} from 'vscode';
 
 const fileSizeLabels: string[] = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 const logger: Logger = new Logger(`file.utils:`, config.logLevel);
@@ -16,6 +16,8 @@ const logger: Logger = new Logger(`file.utils:`, config.logLevel);
 export function readDataFile(dataFilePath: string, encoding:string = null) {
   let data: any = '';
   const fileName: string = path.basename(dataFilePath);
+  const fileUri: Uri = Uri.parse(dataFilePath);
+  const filePath: string = fileUri.fsPath;
   logger.debug('readDataFile():', dataFilePath);
   if (!config.supportedDataFiles.test(fileName)) {
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
@@ -26,9 +28,9 @@ export function readDataFile(dataFilePath: string, encoding:string = null) {
     data = readRemoteData(dataFilePath, encoding);
     // logger.debug('readDataFile(): data:\n', data);
   } 
-  else if (fs.existsSync(dataFilePath)) {
+  else if (fs.existsSync(filePath)) {
     // read local data file via fs.readFile() api
-    data = readLocalData(dataFilePath, encoding);
+    data = readLocalData(filePath, encoding);
   } 
   else {
     // try to find requested data file(s) in open workspace

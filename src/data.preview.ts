@@ -152,7 +152,7 @@ export class DataPreview {
     // save ext path, document uri, view config, preview uri, title, etc.
     this._extensionPath = extensionPath;
     this._uri = uri;
-    this._dataUrl = uri.toString(true).replace('file:///', ''); // skip uri encoding, strip out file scheme
+    this._dataUrl = uri.toString(true); // skip uri encoding
     this._isRemoteData = (this._dataUrl.startsWith('http://') || this._dataUrl.startsWith('https://'));
     this._dataTable = (table !== undefined) ? table: '';
     this._dataViews = (views !== undefined) ? views: {};
@@ -861,7 +861,7 @@ export class DataPreview {
   private getAvroData(dataFilePath: string): any[] {
     let dataSchema: any = {};
     let dataRows: Array<any> = [];
-    const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataFilePath);
+    const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(this._uri.fsPath); //dataFilePath);
     dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
