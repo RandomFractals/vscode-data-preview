@@ -973,6 +973,12 @@ export class DataPreview {
         case '.hjson':
           fileData = hjson.stringify(fileData);
           break;
+        case '.xlsb':
+          fileData = this.jsonToExcelData(fileData, 'xlsb');
+          break;
+        case '.xlsx':
+          fileData = this.jsonToExcelData(fileData, 'xlsx');
+          break;
         case '.yml':
           // convert to yaml. see: https://github.com/nodeca/js-yaml#safedump-object---options-
           fileData = yaml.dump(fileData, {skipInvalid: true});
@@ -1018,7 +1024,26 @@ export class DataPreview {
     }
   } // end of saveData()
 
-  /*-------------------- TODO: move these to new markdown.data.provider impl. and interface --------------------*/
+  /*-------------------- TODO: move this to new excel.data.provider API later --------------------------*/
+  /**
+   * Converts json data to Excel data format: .xlsb or .xlsx
+   * @param jsonData Json data to convert.
+   * @param bookType Excel data file book type: xlsb or xlsx
+   */
+  private jsonToExcelData(jsonData: any, bookType: xlsx.BookType): any {
+    this._logger.debug('jsonToExcelData(): creating excel data:', bookType);
+    const workbook: xlsx.WorkBook = xlsx.utils.book_new();
+    const worksheet: xlsx.WorkSheet  = xlsx.utils.json_to_sheet(jsonData, {
+      header: JSON.parse(this._viewConfig.columns)
+    });
+    xlsx.utils.book_append_sheet(workbook, worksheet, this._dataTable);
+    return xlsx.write(workbook, {
+      type: 'buffer',
+      bookType: bookType
+    });
+  }
+
+  /*-------------------- TODO: move these to new markdown.data.provider impl. and interface ----------------*/
 
   /**
    * Converts CSV to markdown table.

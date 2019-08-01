@@ -116,12 +116,12 @@
           <option value=".config">⚙️ &nbsp;config</option>
           <option value=".arrow">⋙ arrow</option>
           <option value=".csv">,,, csv</option>
-          <option value=".xlsb">⊞ xlsb</option>
-          <option value=".xlsx">⊞ xlsx</option>
           <option value=".json">{} &nbsp;json</option>
           <option value=".json5">{} &nbsp;json5</option>
           <option value=".hjson">{} &nbsp;hjson</option>
           <option value=".md">⇩ &nbsp;md</option>
+          <option value=".xlsb">⊞ xlsb</option>
+          <option value=".xlsx">⊞ xlsx</option>
           <option value=".yml">&nbsp;!&nbsp; yml</option>
           <option value=".properties">= &nbsp;properties</option>
         </select>
@@ -584,6 +584,8 @@
           case '.json':
           case '.json5':
           case '.hjson':
+          case '.xlsb':
+          case '.xlsx':
           case '.yml':
           case '.properties':
             viewer.view.to_json().then(json => postData(json, dataFileType));
