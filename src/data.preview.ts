@@ -973,6 +973,9 @@ export class DataPreview {
         case '.hjson':
           fileData = hjson.stringify(fileData);
           break;
+        case '.ods':
+            fileData = this.jsonToExcelData(fileData, 'ods');
+            break;  
         case '.xlsb':
           fileData = this.jsonToExcelData(fileData, 'xlsb');
           break;
