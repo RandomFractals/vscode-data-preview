@@ -1003,7 +1003,7 @@ export class DataPreview {
           } else {
             // display not a properties collection warning
             fileData = '';
-            window.showWarningMessage(`Data loaded in Preview is not a Properties collection. Use Save other data formats to save it.`);
+            window.showWarningMessage(`Data loaded in Preview is not a Properties collection. Use other data formats to Save this data.`);
           }
           break;
       }
