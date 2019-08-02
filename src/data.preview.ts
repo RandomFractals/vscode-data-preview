@@ -352,7 +352,7 @@ export class DataPreview {
     );
     const fileSizeString: string = fileUtils.formatBytes(this._fileSize, 2); // decimals
     this.updateStatus(
-      `${dataStats}\tFileSize: ${fileSizeString}\tLoadTime: ${dataLoadTime.toLocaleString()} secs`);
+      `${dataStats}\tFileSize: ${fileSizeString}\tLoadTime: ${dataLoadTime.toLocaleString()} sec`);
   }
 
   /**
