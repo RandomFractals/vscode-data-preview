@@ -17,7 +17,6 @@ export function readDataFile(dataFilePath: string, encoding:string = null) {
   let data: any = '';
   const fileName: string = path.basename(dataFilePath);
   const fileUri: Uri = Uri.parse(dataFilePath);
-  const filePath: string = fileUri.fsPath;
   logger.debug('readDataFile():', dataFilePath);
   if (!config.supportedDataFiles.test(fileName)) {
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
@@ -28,9 +27,9 @@ export function readDataFile(dataFilePath: string, encoding:string = null) {
     data = readRemoteData(dataFilePath, encoding);
     // logger.debug('readDataFile(): data:\n', data);
   } 
-  else if (fs.existsSync(filePath)) {
+  else if (fs.existsSync(fileUri.fsPath)) {
     // read local data file via fs.readFile() api
-    data = readLocalData(filePath, encoding);
+    data = readLocalData(fileUri.fsPath, encoding);
   } 
   else {
     // try to find requested data file(s) in open workspace
@@ -52,8 +51,9 @@ export function readDataFile(dataFilePath: string, encoding:string = null) {
  */
 export function getFileSize(dataFilePath: string): number {
   let fileSize: number = -1;
-  if (fs.existsSync(dataFilePath)) {
-    const stats: fs.Stats = fs.statSync(dataFilePath);
+  const fileUri: Uri = Uri.parse(dataFilePath);
+  if (fs.existsSync(fileUri.fsPath)) {
+    const stats: fs.Stats = fs.statSync(fileUri.fsPath);
     fileSize = stats.size;
   } 
   return fileSize;
