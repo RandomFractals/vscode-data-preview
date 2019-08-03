@@ -940,7 +940,7 @@ export class DataPreview {
       dataFilePath += `-${this._dataTable}`;
     }
 
-    // add requested data file ext.
+    // add requested data file extension
     dataFilePath += fileType;
     this._logger.debug('saveData(): saving data file:', dataFilePath);
 
@@ -973,9 +973,15 @@ export class DataPreview {
         case '.hjson':
           fileData = hjson.stringify(fileData);
           break;
+        case '.html':
+          fileData = this.jsonToExcelData(fileData, 'html');
+          break;  
         case '.ods':
-            fileData = this.jsonToExcelData(fileData, 'ods');
-            break;  
+          fileData = this.jsonToExcelData(fileData, 'ods');
+          break;
+        case '.xml':
+          fileData = this.jsonToExcelData(fileData, 'xlml');
+          break;    
         case '.xlsb':
           fileData = this.jsonToExcelData(fileData, 'xlsb');
           break;
