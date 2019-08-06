@@ -623,7 +623,6 @@ export class DataPreview {
         break;
       case '.dif':
       case '.ods':
-      case '.slk':
       case '.xls':
       case '.xlsb':
       case '.xlsx':

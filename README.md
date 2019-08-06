@@ -24,7 +24,7 @@
 - Binary Data files `.json` generation for Arrow, Avro & `Excel` formats for Text Data Preview
 - Property Grid display for `.json` `.config` `.env` `.properties` `.ini` & `.yml` configuration files
 - Open Data Preview on Side option for slim data || config files
-- Quick Launch new Data Preivew input box for data files in open workspace
+- Quick Launch new Data Preview input box for data files in open workspace
 - Save Filtered Data Grid || Chart 📊 Data in `.arrow` `.csv` `.json(s)` `.yml` & `.properties` formats
 - Save & Load Data View `.config` options
 - Dark & Light Data Preview 🈸 Panel Themes
@@ -115,17 +115,17 @@ Use Data Preview 🈸 to:
 
 [Vega datasets](https://github.com/vega/vega-datasets) repository also has a broad collection of sample `.csv` & `.json` array data files you can try in Data Preview 🈸
 
-## Data Preivew 🈸 Files Matching Rules
+## Data Preview 🈸 Files Matching Rules
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|prn|slk|xls|xlsb|xlsx|xlsm|xml|html)/",
+  "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
 ```
 
-## Data Preivew 🈸 Files Loading Details
+## Data Preview 🈸 Files Loading Details
 
 **Note:** `.json` `.config` & `.yml` configuration files that don't contain array data are converted to
 flat properties key/value pairs Object and displayed in a Property Grid Data View mode. 
@@ -144,7 +144,7 @@ for more info.
 | `.md` | text | [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)/[`markdownToCsv()`](https://github.com/RandomFractals/vscode-data-preview/blob/f7d8db4062914822c3e74cfd6259a90cdc051b82/src/data.preview.ts#L1035)| https://en.wikipedia.org/wiki/Markdown | 
 | `.yml` `.yaml` | text | [js-yaml](https://github.com/nodeca/js-yaml)/[`yaml.load()`](https://github.com/nodeca/js-yaml#load-string---options-) | https://yaml.org/ |
 | `.csv` `.tsv` `.txt` `.tab` | text | [perspective](https://github.com/finos/perspective/)/[`perspectiveViewer.load(text)`](https://github.com/finos/perspective/tree/master/packages/perspective-viewer#module_perspective-viewer..PerspectiveViewer+load) | https://en.wikipedia.org/wiki/Comma-separated_values https://en.wikipedia.org/wiki/Tab-separated_values |
-| `.dif` `.ods` `.slk` `.xls` `.xlsb` `.xlsx` `.xlsm` `.xml` `.html` | binary/text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read()`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on `Excel` file formats |
+| `.dif` `.ods` `.xls` `.xlsb` `.xlsx` `.xlsm` `.xml` `.html` | binary/text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read()`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on `Excel` file formats |
 
 ![Data Preview Data](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-data.png?raw=true 
 "Data Preview Data")
