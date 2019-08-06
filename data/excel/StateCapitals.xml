@@ -1,0 +1,680 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>John Juback</Author>
+  <LastAuthor>Taras</LastAuthor>
+  <Created>2011-09-30T14:39:34Z</Created>
+  <LastSaved>2011-09-30T14:39:35Z</LastSaved>
+  <Version>14.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>12588</WindowHeight>
+  <WindowWidth>27792</WindowWidth>
+  <WindowTopX>480</WindowTopX>
+  <WindowTopY>120</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s57">
+   <Alignment ss:Vertical="Bottom"/>
+   <NumberFormat ss:Format="@"/>
+  </Style>
+  <Style ss:ID="s58">
+   <NumberFormat/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="owssvr">
+  <Names>
+   <NamedRange ss:Name="owssvr" ss:RefersTo="=owssvr!R1C1:R51C5"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="51" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="14.4">
+   <Column ss:Width="82.8"/>
+   <Column ss:Width="28.8"/>
+   <Column ss:Width="75.600000000000009"/>
+   <Column ss:Width="68.399999999999991"/>
+   <Column ss:Width="64.8"/>
+   <Row ss:Height="15">
+    <Cell><Data ss:Type="String">State</Data><NamedCell ss:Name="owssvr"/></Cell>
+    <Cell><Data ss:Type="String">ST</Data><NamedCell ss:Name="owssvr"/></Cell>
+    <Cell><Data ss:Type="String">Capital</Data><NamedCell ss:Name="owssvr"/></Cell>
+    <Cell><Data ss:Type="String">Longitude</Data><NamedCell ss:Name="owssvr"/></Cell>
+    <Cell><Data ss:Type="String">Latitude</Data><NamedCell ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Alabama</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">AL</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Montgomery</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-86.300280684889003</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">32.377844830057803</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Alaska</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">AK</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Juneau</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-134.41972008907899</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">58.301943562853801</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Arizona</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">AZ</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Phoenix</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-112.09700211464801</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">33.448056962118002</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Arkansas</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">AR</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Little Rock</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-92.289196615573104</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">34.746713899120003</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">California</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">CA</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Sacramento</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-121.493173407028</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">38.5766379822497</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Colorado</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">CO</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Denver</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-104.98488253563499</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">39.739301178288301</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Connecticut</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">CT</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Hartford</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-72.682265685282005</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">41.764047807549403</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Delaware</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">DE</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Dover</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-75.521440669349005</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">39.159818256342398</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Florida</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">FL</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Tallahassee</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-84.281410312420405</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">30.437980037908801</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Georgia</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">GA</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Atlanta</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-84.388272810246704</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">33.749110506931103</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Hawaii</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">HI</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Honolulu</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-157.85764468574899</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">21.307189125189701</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Idaho</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">ID</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Boise</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-116.200071549668</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">43.617397620572604</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Illinois</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">IL</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Springfield</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-89.683856129308694</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">39.799226643757699</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Indiana</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">IN</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Indianapolis</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-86.161916231874898</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">39.768287659007903</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Iowa</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">IA</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Des Moines</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-93.603829967646703</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">41.591203450586001</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Kansas</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">KS</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Topeka</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-95.678116578356907</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">39.0481868390344</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Kentucky</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">KY</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Frankfort</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-84.875202917742101</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">38.186829557910201</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Louisiana</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">LA</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Baton Rouge</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-91.187343544052396</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">30.456195974217401</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Maine</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">ME</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Augusta</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-69.782474054527796</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">44.306831191717599</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Maryland</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">MD</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Annapolis</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-76.490730353326001</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">38.978880975095301</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Massachusetts</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">MA</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Boston</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-71.063592000967702</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">42.358515659868402</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Michigan</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">MI</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Lansing</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-84.555489472447704</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">42.733755921406598</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Minnesota</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">MN</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">St. Paul</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-93.102366812999904</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">44.954448375475799</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Mississippi</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">MS</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Jackson</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-90.182157098585705</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">32.303859646407901</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Missouri</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">MO</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Jefferson City</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-92.172947161244593</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">38.579234252080397</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Montana</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">MT</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Helena</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-112.017030200267</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">46.584474879244098</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Nebraska</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">NE</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Lincoln</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-96.699732319676301</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">40.808084689322399</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Nevada</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">NV</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Carson City</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-119.765996538968</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">39.163965881813297</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">New Hampshire</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">NH</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Concord</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-71.536041291352504</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">43.207728665395102</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">New Jersey</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">NJ</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Trenton</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-74.770108239505504</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">40.220592541660402</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">New Mexico</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">NM</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Santa Fe</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-105.939263846866</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">35.682385674315</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">New York</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">NY</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Albany</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-73.758456676307901</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">42.6531923942429</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">North Carolina</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">NC</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Raleigh</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-78.639053672715306</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">35.780862097620201</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">North Dakota</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">ND</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Bismarck</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-100.78242530183201</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">46.820480062410702</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Ohio</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">OH</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Columbus</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-83.000216483073999</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">39.961197265530402</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Oklahoma</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">OK</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Oklahoma City</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-97.503308641770204</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">35.493091315656599</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Oregon</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">OR</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Salem</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-123.03060881840899</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">44.938365896584699</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Pennsylvania</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">PA</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Harrisburg</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-76.884111048457399</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">40.265155475888797</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Rhode Island</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">RI</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Providence</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-71.415069402169493</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">41.830436854327502</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">South Carolina</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">SC</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Columbia</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-81.033361075349006</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">34.0006222412432</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">South Dakota</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">SD</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Pierre</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-100.345546329203</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">44.367149972180798</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Tennessee</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">TN</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Nashville</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-86.784401198195496</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">36.1658136639888</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Texas</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">TX</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Austin</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-97.740378716292099</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">30.274649015103201</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Utah</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">UT</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Salt Lake City</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-111.88814351998801</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">40.776518956675098</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Vermont</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">VT</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Montpelier</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-72.580443141316394</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">44.261981263181298</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Virginia</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">VA</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Richmond</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-77.433496063249095</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">37.538772544158199</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Washington</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">WA</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Olympia</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-122.90476263741699</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">47.036241858904702</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">West Virginia</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">WV</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Charleston</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-81.612654235556903</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">38.336378677533098</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Wisconsin</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">WI</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Madison</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-89.384196048712994</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">43.075242946931098</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Wyoming</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">WY</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">Cheyenne</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">-104.820410067003</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+    <Cell ss:StyleID="s58"><Data ss:Type="Number">41.140776426092799</Data><NamedCell
+      ss:Name="owssvr"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>1</ActiveRow>
+     <ActiveCol>5</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

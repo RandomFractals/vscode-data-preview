@@ -2,7 +2,7 @@
   "name": "vscode-data-preview",
   "displayName": "Data Preview",
   "description": "Data Preview 🈸 extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲 charting 📊 & exporting 📥 large JSON array/config, YAML, Apache Arrow, Avro & Excel data files",
-  "version": "1.29.0",
+  "version": "1.29.1",
   "icon": "images/data-preview.png",
   "publisher": "RandomFractalsInc",
   "author": "Taras Novak a.k.a. dataPixy devTools maker :)",
@@ -377,6 +377,6 @@
     "properties": "^1.2.1",
     "snappy": "^6.2.3",
     "superagent": "^5.1.0",
-    "xlsx": "^0.14.4"
+    "xlsx": "^0.15.0"
   }
 }
