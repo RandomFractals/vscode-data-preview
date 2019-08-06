@@ -1048,6 +1048,7 @@ export class DataPreview {
     xlsx.utils.book_append_sheet(workbook, worksheet, this._dataTable);
     return xlsx.write(workbook, {
       type: 'buffer',
+      compression: true, // use zip compression for zip-based formats
       bookType: bookType
     });
   }
