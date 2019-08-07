@@ -31,11 +31,12 @@ import * as props from 'properties';
 
 // local ext. imports
 import * as config from './config';
-import {Logger, LogLevel} from './logger';
-import {previewManager} from './preview.manager';
-import {Template} from './template.manager';
 import * as fileUtils from './utils/file.utils';
 import * as jsonUtils from './utils/json.utils';
+import {Logger, LogLevel} from './logger';
+import {dataManager} from './data.manager';
+import {previewManager} from './preview.manager';
+import {Template} from './template.manager';
 
 /**
  * Data preview web panel serializer for restoring previews on vscode reload.
@@ -632,28 +633,26 @@ export class DataPreview {
         data = this.getExcelData(dataUrl);
         break;
       case '.env':
-        data = this.getJsonData(dataUrl, props.parse,  {sections: true, comments: ['#']});
+        data = dataManager.getData(dataUrl, {sections: true, comments: ['#']});
+        this.logDataStats(data);
         break;
       case '.ini':
         // NOTE: some INI files consider # as a comment
-        data = this.getJsonData(dataUrl, props.parse,  {sections: true, comments: [';', '#']});
+        data = dataManager.getData(dataUrl, {sections: true, comments: [';', '#']});
+        this.logDataStats(data);
         break;
       case '.properties':
-        data = this.getJsonData(dataUrl, props.parse, {sections: true});
+        data = dataManager.getData(dataUrl, {sections: true});
+        this.logDataStats(data);
         break;    
       case '.config':
       case '.json':
-        data = this.getJsonData(dataUrl, JSON.parse);
-        break;
       case '.json5':
-        data = this.getJsonData(dataUrl, json5.parse);
-        break;
       case '.hjson':
-        data = this.getJsonData(dataUrl, hjson.parse);
-        break;
       case '.yaml':
       case '.yml':
-        data = this.getJsonData(dataUrl, yaml.load);
+        data = dataManager.getData(dataUrl);
+        this.logDataStats(data);
         break;
       case '.md':
         data = this.getMarkdownData(dataUrl);
@@ -737,35 +736,6 @@ export class DataPreview {
     }
     return dataRows;
   } // end of getExcelData()
-
-  /**
-   * Gets JSON data array or config object.
-   * @param dataFilePath Data file path.
-   * @param parseFunction Data parse function for the supported json/config files.
-   * @param options Data parsing options.
-   */
-  private getJsonData(dataFilePath: string,
-    parseFunction: Function,
-    options: any = null): any {
-    let data: any = [];
-    try {
-      let content: string = fileUtils.readDataFile(dataFilePath, 'utf8');
-      if (dataFilePath.endsWith('.json')) {
-        // strip out comments for vscode settings .json config files loading :)
-        const comments: RegExp = new RegExp(/\/\*[\s\S]*?\*\/|\/\/.*/g);
-        content = content.replace(comments, '');
-      }
-      data = (options) ? parseFunction(content, options) : parseFunction(content);
-      // convert json configs to properties
-      data = jsonUtils.convertJsonData(data);
-      this.logDataStats(data);
-    }
-    catch (error) {
-      this._logger.error(`getJsonData(): Error parsing '${this._dataUrl}'. \n\t Error:`, error.message);
-      window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. \n\t Error: ${error.message}`);
-    }
-    return data;
-  }
 
   /**
    * Gets markdown data tables array or config object.
