@@ -616,6 +616,14 @@ export class DataPreview {
     // TODO: convert this to data reader/provider factory
     let data: any = null;
     switch (this._fileExtension) {
+      case '.csv':
+      case '.tsv':
+      case '.txt':
+      case '.tab':
+        data = dataManager.getData(dataUrl);
+        const dataLines: Array<string> = data.split('\n');
+        this.logDataStats(dataLines);
+        break;
       case '.dif':
       case '.ods':
       case '.xls':
