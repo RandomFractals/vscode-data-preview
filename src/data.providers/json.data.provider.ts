@@ -24,7 +24,8 @@ export class JsonDataProvider implements IDataProvider {
   private logger: Logger = new Logger('json.data.provider:', config.logLevel);
 
   /**
-   * Creates new JSON data provider for .json, .json5 and .hjson data files.
+   * Creates new JSON data provider for .json, .json5, .hjson data files,
+   * .config, .env, .ini, .properties and .yml config files.
    */
   constructor() {
     this.logger.debug('created for:', this.supportedDataFileTypes);
