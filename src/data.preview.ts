@@ -633,18 +633,8 @@ export class DataPreview {
         data = this.getExcelData(dataUrl);
         break;
       case '.env':
-        data = dataManager.getData(dataUrl, {sections: true, comments: ['#']});
-        this.logDataStats(data);
-        break;
       case '.ini':
-        // NOTE: some INI files consider # as a comment
-        data = dataManager.getData(dataUrl, {sections: true, comments: [';', '#']});
-        this.logDataStats(data);
-        break;
       case '.properties':
-        data = dataManager.getData(dataUrl, {sections: true});
-        this.logDataStats(data);
-        break;    
       case '.config':
       case '.json':
       case '.json5':

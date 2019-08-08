@@ -31,7 +31,7 @@ export class JsonDataProvider implements IDataProvider {
   }
 
   /**
-   * Gets supported json data file mime types or extensions.
+   * Gets supported config and json data file mime types or extensions.
    */
   public get supportedDataFileTypes(): Array<string> {
     // TODO: add mime types later for http data loading
@@ -40,12 +40,10 @@ export class JsonDataProvider implements IDataProvider {
   }
 
   /**
-   * Gets data provider parse function for the specified data url.
-   * @param dataUrl Local data file path or remote data url.
+   * Gets data provider parse function for the specified data file type.
+   * @param dataFileType Data file type.
    */
-  public getDataParseFunction(dataUrl: string): Function {
-    // TODO: add mime types later for remote http data loading
-    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // get local file extension for now
+  private getDataParseFunction(dataFileType: string): Function {
     let dataParseFunction: Function = JSON.parse; // default
     switch (dataFileType) {
       case '.env':
@@ -68,13 +66,35 @@ export class JsonDataProvider implements IDataProvider {
   }
 
   /**
+   * Gets data provider parse options for the specified data file type.
+   * @param dataFileType Data file type.
+   */
+  private getDataParseOptions(dataFileType: string): Function {
+    let dataParseOptions: any = null; // default
+    switch (dataFileType) {
+      case '.env':
+        dataParseOptions = {sections: true, comments: ['#']};
+        break;
+      case '.ini':
+        // NOTE: some INI files consider # as a comment
+        dataParseOptions = {sections: true, comments: [';', '#']};
+        break;
+      case '.properties':
+        dataParseOptions = {sections: true};
+        break;
+    }
+    return dataParseOptions;
+  }
+
+  /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * @param parseOptions Optional data parsing options.
    * TODO: change this to async later.
    */
-  public getData(dataUrl: string, dataParseOptions?: any): any {
+  public getData(dataUrl: string): any {
     let data: any = [];
+    // TODO: add mime types later for remote http data loading
+    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // get local file extension for now
     try {
       let content: string = fileUtils.readDataFile(dataUrl, 'utf8');
       if (dataUrl.endsWith('.json')) {
@@ -82,8 +102,9 @@ export class JsonDataProvider implements IDataProvider {
         const comments: RegExp = new RegExp(/\/\*[\s\S]*?\*\/|\/\/.*/g);
         content = content.replace(comments, '');
       }
-      const parseFunction: Function = this.getDataParseFunction(dataUrl);
-      data = (dataParseOptions) ? parseFunction(content, dataParseOptions) : parseFunction(content);
+      const parseFunction: Function = this.getDataParseFunction(dataFileType);
+      const parseOptions: any = this.getDataParseOptions(dataFileType);
+      data = (parseOptions) ? parseFunction(content, parseOptions) : parseFunction(content);
     }
     catch (error) {
       this.logger.logMessage(LogLevel.Error, `getData(): Error parsing '${dataUrl}' \n\t Error:`, error.message);

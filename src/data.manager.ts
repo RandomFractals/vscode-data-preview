@@ -16,9 +16,8 @@ export interface IDataManager {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * @param dataParseOptions Optional data parsing options.
    */
-  getData(dataUrl: string, dataParseOptions?: any): any;
+  getData(dataUrl: string): any;
 }
 
 /**
@@ -34,9 +33,8 @@ export interface IDataProvider {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * @param parseOptions Optional data parsing options.
    */
-  getData(dataUrl: string, parseOptions?: any): any;
+  getData(dataUrl: string): any;
  
   /**
    * Saves raw data provider data.
@@ -111,13 +109,12 @@ export class DataManager implements IDataManager {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * @param parseOptions Optional data parsing options.
    */
   public getData(dataUrl: string, parseOptions?: any): any {
     // TODO: add mime types later for remote http data loading
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // get file extension for now
     const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
-    return dataProvider.getData(dataUrl, parseOptions);
+    return dataProvider.getData(dataUrl);
   }
 
 }
