@@ -79,20 +79,27 @@ export class DataManager implements IDataManager {
    */
   private loadDataProviders(): any {
     this._logger.debug('loadDataProviders(): loading data providers...');
-
-    // create data providers instances for the supported data formats
     const dataProviders: any = {};
-    const jsonDataProvider: IDataProvider = new JsonDataProvider();
-    jsonDataProvider.supportedDataFileTypes.forEach(fileType => {
-      dataProviders[fileType] = jsonDataProvider;
-    });
+    // create data providers instances for the supported data formats
+    this.addDataProvider(dataProviders, new JsonDataProvider());
     // TODO: add other data providers loading and initialization here:
     // text.data.provider, excel.data.provider, markdown, arrow, avro, etc.
     // ...
     if (this._logger.logLevel === LogLevel.Debug) {
-      this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
+      this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(this._dataProviders));
     }
     return dataProviders;
+  }
+
+  /**
+   * Adds new data provider to the provider/file types map.
+   * @param dataProviderMap Data provider map to update.
+   * @param dataProvider Data provider to add.
+   */
+  private addDataProvider(dataProviderMap: any, dataProvider: IDataProvider): void {
+    dataProvider.supportedDataFileTypes.forEach(fileType => {
+      dataProviderMap[fileType] = dataProvider;
+    });
   }
 
   /**
