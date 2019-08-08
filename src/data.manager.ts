@@ -1,6 +1,7 @@
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
 import {JsonDataProvider} from './data.providers/json.data.provider';
+import {TextDataProvider} from './data.providers/text.data.provider';
 
 /**
  * Data Manager API interface.
@@ -82,11 +83,11 @@ export class DataManager implements IDataManager {
     const dataProviders: any = {};
     // create data providers instances for the supported data formats
     this.addDataProvider(dataProviders, new JsonDataProvider());
-    // TODO: add other data providers loading and initialization here:
-    // text.data.provider, excel.data.provider, markdown, arrow, avro, etc.
+    this.addDataProvider(dataProviders, new TextDataProvider());
+    // TODO: add other data providers here: excel.data.provider, markdown, arrow, avro, etc.
     // ...
     if (this._logger.logLevel === LogLevel.Debug) {
-      this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(this._dataProviders));
+      this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
     }
     return dataProviders;
   }

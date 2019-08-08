@@ -616,12 +616,6 @@ export class DataPreview {
     // TODO: convert this to data reader/provider factory
     let data: any = null;
     switch (this._fileExtension) {
-      case '.csv':
-      case '.tsv':
-      case '.txt':
-      case '.tab':
-        data = this.getTextData(dataUrl);
-        break;
       case '.dif':
       case '.ods':
       case '.xls':
@@ -631,18 +625,6 @@ export class DataPreview {
       case '.xml':
       case '.html':        
         data = this.getExcelData(dataUrl);
-        break;
-      case '.env':
-      case '.ini':
-      case '.properties':
-      case '.config':
-      case '.json':
-      case '.json5':
-      case '.hjson':
-      case '.yaml':
-      case '.yml':
-        data = dataManager.getData(dataUrl);
-        this.logDataStats(data);
         break;
       case '.md':
         data = this.getMarkdownData(dataUrl);
@@ -658,27 +640,15 @@ export class DataPreview {
         window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
         // data = this.getParquetData(dataFilePath);
         break;
+      default: // use new data.manager api for other data file types
+        data = dataManager.getData(dataUrl);
+        this.logDataStats(data);
+        break;
     }
     return data;
   } // end of getFileData()
 
   // TODO: Move these data loading methods to separate data.provders per file type
-
-  /**
-   * Gets CSV/TSV text file data.
-   * @param dataUrl Text file path or url.
-   * @returns Text file data as string.
-   */
-  private getTextData(dataUrl: string): string {
-    const data: string = fileUtils.readDataFile(dataUrl, 'utf8'); // file encoding to read data as string
-    const dataLines: Array<string> = data.split('\n');
-    this.logDataStats(dataLines);
-    if (this._logger.logLevel === LogLevel.Debug) {
-      // dump 1st 10 text lines in console for debug
-      this._logger.debug(`getTextData(): file: ${this._fileName} 1st 3 text lines:\n`, dataLines.slice(0, 3));
-    }
-    return data;
-  }
 
   /**
    * Gets Excel file data.
