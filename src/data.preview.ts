@@ -493,7 +493,7 @@ export class DataPreview {
    * Reloads data preview on data file save changes or vscode IDE reload.
    * @param dataTable Optional data table name for files with multiple data sets.
    */
-  public refresh(dataTable = ''): void {
+  public refresh(dataTable: string = ''): void {
     // reveal corresponding data preview panel
     this._panel.reveal(this._panel.viewColumn, true); // preserve focus
     this._status.show();
@@ -511,7 +511,7 @@ export class DataPreview {
       let data = [];
       try {
         // get file data
-        data = this.getFileData(this._dataUrl);
+        data = this.getFileData(this._dataUrl, this._dataTable);
       }
       catch (error) {
         this._logger.error(`refresh(${this._dataTable}): Error:\n`, error.message);
@@ -608,10 +608,11 @@ export class DataPreview {
   /**
    * Loads actual data file content.
    * @param dataUrl Local data file path or remote data url.
+   * @param dataTable Optional data table name for files with multiple data sets.
    * @returns CSV/JSON string or Array of row objects.
    * TODO: change this to async later
    */
-  private getFileData(dataUrl: string): any {
+  private getFileData(dataUrl: string, dataTable: string = ''): any {
     // read file data
     // TODO: convert this to data reader/provider factory
     let data: any = null;
@@ -632,10 +633,10 @@ export class DataPreview {
       case '.xlsm':
       case '.xml':
       case '.html':        
-        data = this.getExcelData(dataUrl);
+        data = this.getExcelData(dataUrl, dataTable);
         break;
       case '.md':
-        data = this.getMarkdownData(dataUrl);
+        data = this.getMarkdownData(dataUrl, dataTable);
         break;
       case '.arrow':
         data = this.getArrowData(dataUrl);
@@ -661,9 +662,10 @@ export class DataPreview {
   /**
    * Gets Excel file data.
    * @param dataFilePath Excel file path.
+   * @param dataTable Excel spreadsheet name to load for workbooks with multiple spreadsheets.
    * @returns Array of row objects.
    */
-  private getExcelData(dataFilePath: string): any[] {
+  private getExcelData(dataFilePath: string, dataTable: string): any[] {
     // load workbooks
     const dataBuffer: Buffer = fileUtils.readDataFile(dataFilePath);
     const workbook: xlsx.WorkBook = xlsx.read(dataBuffer, {
@@ -681,9 +683,9 @@ export class DataPreview {
 
       // determine spreadsheet to load
       let sheetName = workbook.SheetNames[0];
-      if (this._dataTable.length > 0) {
+      if (dataTable.length > 0) {
         // reset to requested table name
-        sheetName = this._dataTable;
+        sheetName = dataTable;
       }
       
       // get worksheet data row objects array
@@ -695,7 +697,7 @@ export class DataPreview {
       if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
         // create Excel spreadsheet json file path
         let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
-        if (this._dataTable.length > 0 && this._tableNames.length > 1) {
+        if (dataTable.length > 0 && this._tableNames.length > 1) {
           // append sheet name to generated json data file name
           jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
         }
@@ -706,18 +708,17 @@ export class DataPreview {
   } // end of getExcelData()
 
   /**
-   * Gets markdown data tables array or config object.
+   * Gets markdown table data.
    * @param dataFilePath Data file path.
-   * @param parseFunction Data parse function for the supported json/config files.
-   * @param options Data parsing options.
+   * @param dataTable Markdown data table name to load.
    */
-  private getMarkdownData(dataFilePath: string): any {
+  private getMarkdownData(dataFilePath: string, dataTable: string): any {
     let content: string = '';
     try {
       // read markdown file content
       content = fileUtils.readDataFile(dataFilePath, 'utf8');
       // convert it to to CSV for loading into data view
-      content = this.markdownToCsv(content);
+      content = this.markdownToCsv(content, dataTable);
       const dataLines: string[] = content.split('\n');
       this.logDataStats(dataLines);
     }
@@ -1089,8 +1090,9 @@ export class DataPreview {
   /**
    * Converts markdown content to csv data for display in data view.
    * @param markdownContent Markdown file content to convert to csv string.
+   * @param dataTable Markdown data table name to load.
    */
-  private markdownToCsv(markdownContent: string): string {
+  private markdownToCsv(markdownContent: string, dataTable: string): string {
     // clear loaded tables list
     this._tableNames = [];
 
@@ -1177,9 +1179,9 @@ export class DataPreview {
 
     // get requested table data
     let table: Array<string> = tablesMap[this._tableNames[0]]; // default to 1st table in the loaded tables list
-    if (this._dataTable.length > 0) {
-      table = tablesMap[this._dataTable];
-      this._logger.debug(`markdownToCsv(): requested data table: '${this._dataTable}'`);
+    if (dataTable.length > 0) {
+      table = tablesMap[dataTable];
+      this._logger.debug(`markdownToCsv(): requested data table: '${dataTable}'`);
     }
 
     if (this._tableNames.length === 1) {

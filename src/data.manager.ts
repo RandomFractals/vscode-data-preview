@@ -17,8 +17,9 @@ export interface IDataManager {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
+   * @param dataTable Optional data table name for data sources with multiple data sets.
    */
-  getData(dataUrl: string): any;
+  getData(dataUrl: string, dataTable?: string): any;
 }
 
 /**
@@ -34,8 +35,9 @@ export interface IDataProvider {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
+   * @param dataTable Optional data table name for data sources with multiple data sets.
    */
-  getData(dataUrl: string): any;
+  getData(dataUrl: string, dataTable?: string): any;
  
   /**
    * Saves raw data provider data.
