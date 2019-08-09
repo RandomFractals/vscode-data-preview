@@ -21,6 +21,11 @@ import {IDataProvider} from '../data.manager';
  */
 export class JsonDataProvider implements IDataProvider {
 
+  // TODO: add mime types later for http data loading
+  // TODO: consider implementing separate data provider for each config/json data file type
+  public supportedDataFileTypes: Array<string> = 
+    ['.config', '.env', '.ini', '.json', '.json5', '.hjson', '.properties', '.yaml', '.yml'];
+  
   private logger: Logger = new Logger('json.data.provider:', config.logLevel);
 
   /**
@@ -29,15 +34,6 @@ export class JsonDataProvider implements IDataProvider {
    */
   constructor() {
     this.logger.debug('created for:', this.supportedDataFileTypes);
-  }
-
-  /**
-   * Gets supported config and json data file mime types or extensions.
-   */
-  public get supportedDataFileTypes(): Array<string> {
-    // TODO: add mime types later for http data loading
-    // TODO: consider implementing separate data provider for each config/json data file type
-    return ['.config', '.env', '.ini', '.json', '.json5', '.hjson', '.properties', '.yaml', '.yml'];
   }
 
   /**
@@ -112,6 +108,23 @@ export class JsonDataProvider implements IDataProvider {
       window.showErrorMessage(`Unable to parse data file: '${dataUrl}'. \n\t Error: ${error.message}`);
     }
     return jsonUtils.convertJsonData(data);
+  }
+
+  /**
+   * Gets data table names for data sources with multiple data sets.
+   * @param dataUrl Local data file path or remote data url.
+   */
+  public getDataTableNames(dataUrl: string): Array<string> {
+    return []; // none json data files
+  }
+
+  /**
+   * Gets data schema in json format for file types that provide it.
+   * @param dataUrl Local data file path or remote data url.
+   */
+  public getDataSchema(dataUrl: string): any {
+    // TODO: auto-gen json schema ???
+    return null; // none json data files
   }
 
   /**

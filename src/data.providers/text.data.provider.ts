@@ -9,6 +9,10 @@ import {IDataProvider} from '../data.manager';
  */
 export class TextDataProvider implements IDataProvider {
 
+  // TODO: add mime types later for http data loading
+  // TODO: consider implementing separate data provider for each config/json data file type
+  public supportedDataFileTypes: Array<string> = ['.csv', '.tsv', '.txt', '.tab'];
+
   private logger: Logger = new Logger('text.data.provider:', config.logLevel);
 
   /**
@@ -16,15 +20,6 @@ export class TextDataProvider implements IDataProvider {
    */
   constructor() {
     this.logger.debug('created for:', this.supportedDataFileTypes);
-  }
-
-  /**
-   * Gets supported text data file mime types or extensions.
-   */
-  public get supportedDataFileTypes(): Array<string> {
-    // TODO: add mime types later for http data loading
-    // TODO: consider implementing separate data provider for each config/json data file type
-    return ['.csv', '.tsv', '.txt', '.tab'];
   }
 
   /**
@@ -43,6 +38,23 @@ export class TextDataProvider implements IDataProvider {
       window.showErrorMessage(`Unable to parse data file: '${dataUrl}'. \n\t Error: ${error.message}`);
     }
     return data;
+  }
+
+  /**
+   * Gets data table names for data sources with multiple data sets.
+   * @param dataUrl Local data file path or remote data url.
+   */
+  public getDataTableNames(dataUrl: string): Array<string> {
+    return []; // none for text data files
+  }
+
+  /**
+   * Gets data schema in json format for file types that provide it.
+   * @param dataUrl Local data file path or remote data url.
+   */
+  public getDataSchema(dataUrl: string): any {
+    // TODO: return headers row for text data ???
+    return null; // none for text data files
   }
 
   /**
