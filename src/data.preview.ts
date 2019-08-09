@@ -510,8 +510,7 @@ export class DataPreview {
       //const textData: string = document.getText();
       let data: any = [];
       try {
-        // get file data
-        data = this.getFileData(this._dataUrl, this._dataTable);
+        data = this.getData(this._dataUrl, this._dataTable);
       }
       catch (error) {
         this._logger.error(`refresh(${this._dataTable}): Error:\n`, error.message);
@@ -549,6 +548,8 @@ export class DataPreview {
       this.webview.postMessage({error: error});
     }
   } // end of loadData()
+
+  /*------------------------------ Load Config Methods ---------------------------------------*/
 
   /**
    * Prompts to load saved data view config.
@@ -612,13 +613,9 @@ export class DataPreview {
    * @returns string for text data or Array of row objects.
    * TODO: change this to async later
    */
-  private getFileData(dataUrl: string, dataTable: string = ''): any {
-    // read file data
+  private getData(dataUrl: string, dataTable: string = ''): any {
     let data: any = [];
     switch (this._fileExtension) {
-      case '.md':
-        data = this.getMarkdownData(dataUrl, dataTable);
-        break;
       case '.arrow':
         data = this.getArrowData(dataUrl);
         break;
@@ -630,7 +627,7 @@ export class DataPreview {
         window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
         // data = this.getParquetData(dataFilePath);
         break;
-      default: // get data, table names and schema via data.manager api for other data file types
+      default: // get data, table names, and data schema via data.manager api for other data file types
         data = dataManager.getData(dataUrl, dataTable);
         this._tableNames = dataManager.getDataTableNames(dataUrl);
         this._dataSchema = dataManager.getDataSchema(dataUrl);
@@ -657,7 +654,7 @@ export class DataPreview {
         break;
     }
     return data;
-  } // end of getFileData()
+  } // end of getData()
 
   /**
    * Logs data stats and optional data schema or metadata for debug 
@@ -684,28 +681,6 @@ export class DataPreview {
   }
 
   // TODO: Move these data loading methods to separate data.provders per file type
-
-  /**
-   * Gets markdown table data.
-   * @param dataFilePath Data file path.
-   * @param dataTable Markdown data table name to load.
-   */
-  private getMarkdownData(dataFilePath: string, dataTable: string): any {
-    let content: string = '';
-    try {
-      // read markdown file content
-      content = fileUtils.readDataFile(dataFilePath, 'utf8');
-      // convert it to to CSV for loading into data view
-      content = this.markdownToCsv(content, dataTable);
-      const dataLines: string[] = content.split('\n');
-      this.logDataStats(dataLines);
-    }
-    catch (error) {
-      this._logger.error(`getMarkdownData(): Error parsing '${this._dataUrl}'. \n\t Error:`, error.message);
-      window.showErrorMessage(`Unable to parse data file: '${this._dataUrl}'. \n\t Error: ${error.message}`);
-    }
-    return content;
-  }
 
   /**
    * Gets binary Arrow file data.
@@ -925,11 +900,11 @@ export class DataPreview {
     }
   } // end of saveData()
 
-  /*-------------------- TODO: move this to new excel.data.provider API later --------------------------*/
   /**
-   * Converts json data to Excel data format: .xlsb or .xlsx
+   * Converts json data to Excel data format: .xlsb or .xlsx.
+   * TODO: move this to new excel.data.provider.
    * @param jsonData Json data to convert.
-   * @param bookType Excel data file book type: xlsb or xlsx
+   * @param bookType Excel data file book type: xlsb or xlsx.
    */
   private jsonToExcelData(jsonData: any, bookType: xlsx.BookType): any {
     this._logger.debug('jsonToExcelData(): creating excel data:', bookType);
@@ -945,11 +920,9 @@ export class DataPreview {
     });
   }
 
-  /*-------------------- TODO: move these to new markdown.data.provider impl. and interface ----------------*/
-
   /**
    * Converts CSV to markdown table.
-   *
+   * TODO: move this to new markdown.data.provider impl.
    * @param {string} csvContent Csv/tsv data content.
    * @param {string} delimiter Csv/tsv delimiter.
    * @param {boolean} hasTableHeaderRow Has table header row.
@@ -1039,137 +1012,6 @@ export class DataPreview {
 
     return `${tableHeader}${tableHeaderSeparator}${tableRows}`;
   } // end of csvToMarkdownTable()
-
-
-  /**
-   * Converts markdown content to csv data for display in data view.
-   * @param markdownContent Markdown file content to convert to csv string.
-   * @param dataTable Markdown data table name to load.
-   */
-  private markdownToCsv(markdownContent: string, dataTable: string): string {
-    // clear loaded tables list
-    this._tableNames = [];
-
-    // extract markdown sections and tables
-    const sections: Array<string> = markdownContent.split('\n#');
-    const sectionMarker: RegExp = new RegExp(/(#)/g);
-    const quotes: RegExp = new RegExp(/(")/g);
-    const tableHeaderSeparator: RegExp = new RegExp(/((\|)|(\:)|(\-)|(\s))+/g);
-    const tableRowMarkdown: RegExp = new RegExp(/((\|[^|\r\n]*)+\|(\r?\n|\r)?)/g);
-    const tablesMap: any = {};
-    sections.forEach(section => {
-      // get section title
-      let sectionTitle: string = '';
-      const sectionLines: Array<string> = section.split('\n');
-      if (sectionLines.length > 0) {
-        sectionTitle = sectionLines[0].replace(sectionMarker, '').trim(); // strip out #'s and trim
-      }
-
-      // create section text blocks
-      const textBlocks: Array<string> = [];
-      let textBlock: string = '';
-      sectionLines.forEach(textLine => {
-        if (textLine.trim().length === 0) {
-          // create new text block
-          textBlocks.push(textBlock);
-          textBlock = '';
-        }
-        else {
-          // append to the current text block
-          textBlock += textLine + '\n';
-        }
-      });
-
-      // extract section table data from each section text block
-      const tables: Array<Array<string>> = []; // two-dimensional array of table rows
-      textBlocks.forEach(textBlock => {
-        // extract markdown table data rows from a text block
-        const tableRows: Array<string> = textBlock.match(tableRowMarkdown);
-        if (tableRows) {
-          // add matching markdown table rows to the tables array
-          tables.push(tableRows);
-          // this._logger.debug('markdownToCsv(): section:', sectionTitle);
-          // this._logger.debug('markdownToCsv(): extractred markdown table rows:', tableRows);
-        }  
-      });
-
-      // process markdown tables
-      tables.forEach((table, tableIndex) => {
-        // process markdown table row strings
-        const tableRows: Array<string> = [];
-        table.forEach(row => {
-          // trim markdown table text row lines
-          row = row.trim();
-          // strip out leading | table row sign
-          if (row.startsWith('| ')) {
-            row = row.slice(2);
-          }
-          // strip out trailing | table row sign
-          if (row.endsWith(' |')) {
-            row = row.slice(0, row.length-2);
-          }
-          // check for a table header separator row
-          const isTableHeaderSeparator: boolean = (row.replace(tableHeaderSeparator, '').length === 0);
-          if (!isTableHeaderSeparator && row.length > 0) {
-            // add data table row
-            tableRows.push(row);
-          }
-        });
-
-        if (tableRows.length > 0 ) {
-          // create table title
-          let tableTitle: string = sectionTitle;
-          if (tables.length > 1) {
-            // append table index
-            tableTitle += '-table-' + (tableIndex + 1);
-          }
-          // update table list for data view display
-          tablesMap[tableTitle] = tableRows;
-          this._tableNames.push(tableTitle);
-          this._logger.debug(`markdownToCsv(): created data table: '${tableTitle}' rows: ${tableRows.length}`);
-        }
-      }); // end of tables.forEach(row)
-    }); // end of sections.forEach(textBlock/table)
-
-    // get requested table data
-    let table: Array<string> = tablesMap[this._tableNames[0]]; // default to 1st table in the loaded tables list
-    if (dataTable.length > 0) {
-      table = tablesMap[dataTable];
-      this._logger.debug(`markdownToCsv(): requested data table: '${dataTable}'`);
-    }
-
-    if (this._tableNames.length === 1) {
-      // clear data preview tables list if only one markdown table is present
-      this._tableNames = [];
-    }
-
-    // convert requested markdown table to csv for data view display
-    let csvContent: string = '';
-    if (table) {
-      this._logger.debug('markdownToCsv(): markdown table rows:', table);
-      table.forEach(row => {
-        const cells: Array<string> = row.split(' | ');
-        const csvCells: Array<string> = [];
-        cells.forEach(cell => {
-          cell = cell.trim();
-          const cellHasQuotes: boolean = quotes.test(cell);
-          if (cellHasQuotes) {
-            // escape quotes for csv
-            cell = cell.replace(quotes, '""'); // double quote for csv quote escape
-          }
-          if (cellHasQuotes || cell.indexOf(',') >= 0) {
-            // quote cell string
-            cell = `"${cell}"`;
-          }
-          csvCells.push(cell);
-        });
-        const csvRow = csvCells.join(',');
-        csvContent += csvRow + '\n';
-      });
-      this._logger.debug('markdownToCsv(): final csv table content string for data.view load:\n', csvContent);
-    }
-    return csvContent;
-  } // end of markdownToCsv()
 
   /*----------------------------- Data Preview Properties ----------------------------*/
 

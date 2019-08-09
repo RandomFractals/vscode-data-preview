@@ -4,6 +4,7 @@ import {Logger, LogLevel} from './logger';
 // data provider imports
 import {ExcelDataProvider} from './data.providers/excel.data.provider';
 import {JsonDataProvider} from './data.providers/json.data.provider';
+import {MarkdownDataProvider} from './data.providers/markdown.data.provider';
 import {TextDataProvider} from './data.providers/text.data.provider';
 
 /**
@@ -107,16 +108,17 @@ export class DataManager implements IDataManager {
 
   /**
    * Initializes data providers for the supported data formats.
+   * @see package.json and config.ts for more info.
    */
   private loadDataProviders(): any {
     this._logger.debug('loadDataProviders(): loading data providers...');
-    const dataProviders: any = {};
     // create data providers instances for the supported data formats
+    // TODO: add arrow, avro and parquet .data.provider init here
+    const dataProviders: any = {};
     this.addDataProvider(dataProviders, new ExcelDataProvider());
     this.addDataProvider(dataProviders, new JsonDataProvider());
-    this.addDataProvider(dataProviders, new TextDataProvider());
-    // TODO: add other data providers here: markdown.data.provider, arrow, avro, etc.
-    // ...
+    this.addDataProvider(dataProviders, new MarkdownDataProvider());
+    this.addDataProvider(dataProviders, new TextDataProvider());    
     if (this._logger.logLevel === LogLevel.Debug) {
       this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
     }
