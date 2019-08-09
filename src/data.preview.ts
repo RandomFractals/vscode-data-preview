@@ -616,14 +616,6 @@ export class DataPreview {
     // read file data
     let data: any = [];
     switch (this._fileExtension) {
-      case '.csv':
-      case '.tsv':
-      case '.txt':
-      case '.tab':
-        data = dataManager.getData(dataUrl);
-        const dataLines: Array<string> = data.split('\n');
-        this.logDataStats(dataLines);
-        break;
       case '.md':
         data = this.getMarkdownData(dataUrl, dataTable);
         break;
@@ -642,7 +634,15 @@ export class DataPreview {
         data = dataManager.getData(dataUrl, dataTable);
         this._tableNames = dataManager.getDataTableNames(dataUrl);
         this._dataSchema = dataManager.getDataSchema(dataUrl);
-        this.logDataStats(data, this._dataSchema);
+
+        // log data stats
+        if (typeof data === 'string') {
+          const dataLines: Array<string> = data.split('\n');
+          this.logDataStats(dataLines);
+        }
+        else {
+          this.logDataStats(data, this._dataSchema);
+        }
 
         // create json data file for binary file text data preview
         if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
