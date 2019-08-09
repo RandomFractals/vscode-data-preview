@@ -1,5 +1,8 @@
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
+
+// data provider imports
+import {ExcelDataProvider} from './data.providers/excel.data.provider';
 import {JsonDataProvider} from './data.providers/json.data.provider';
 import {TextDataProvider} from './data.providers/text.data.provider';
 
@@ -19,7 +22,7 @@ export interface IDataManager {
    * @param dataUrl Local data file path or remote data url.
    * @param dataTable Optional data table name for data sources with multiple data sets.
    */
-  getData(dataUrl: string, dataTable?: string): any;
+  getData(dataUrl: string, dataTable: string): any;
 
   /**
    * Gets data table names for data sources with multiple data sets.
@@ -50,7 +53,7 @@ export interface IDataProvider {
    * @param dataUrl Local data file path or remote data url.
    * @param dataTable Optional data table name for data sources with multiple data sets.
    */
-  getData(dataUrl: string, dataTable?: string): any;
+  getData(dataUrl: string, dataTable: string): any;
  
   /**
    * Gets data table names for data sources with multiple data sets.
@@ -109,9 +112,10 @@ export class DataManager implements IDataManager {
     this._logger.debug('loadDataProviders(): loading data providers...');
     const dataProviders: any = {};
     // create data providers instances for the supported data formats
+    this.addDataProvider(dataProviders, new ExcelDataProvider());
     this.addDataProvider(dataProviders, new JsonDataProvider());
     this.addDataProvider(dataProviders, new TextDataProvider());
-    // TODO: add other data providers here: excel.data.provider, markdown, arrow, avro, etc.
+    // TODO: add other data providers here: markdown.data.provider, arrow, avro, etc.
     // ...
     if (this._logger.logLevel === LogLevel.Debug) {
       this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
@@ -144,12 +148,13 @@ export class DataManager implements IDataManager {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
+   * @param dataTable Optional data table name for data sources with multiple data sets.
    */
-  public getData(dataUrl: string, parseOptions?: any): any {
+  public getData(dataUrl: string, dataTable: string = ''): any {
     // TODO: add mime types later for remote http data loading
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
-    return dataProvider.getData(dataUrl);
+    return dataProvider.getData(dataUrl, dataTable);
   }
 
   /**
@@ -169,7 +174,7 @@ export class DataManager implements IDataManager {
   public getDataSchema(dataUrl: string): any {
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
-    return dataProvider.getDataTableNames(dataUrl);
+    return dataProvider.getDataSchema(dataUrl);
   }
 
 }

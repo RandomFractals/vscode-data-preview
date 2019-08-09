@@ -1,6 +1,3 @@
-'use strict';
-
-// vscode imports
 import {window} from 'vscode';
 
 // data loading imports
@@ -22,7 +19,7 @@ import {IDataProvider} from '../data.manager';
 export class JsonDataProvider implements IDataProvider {
 
   // TODO: add mime types later for http data loading
-  // TODO: consider implementing separate data provider for each config/json data file type
+  // TODO: consider implementing separate data providers for config and json data file types
   public supportedDataFileTypes: Array<string> = 
     ['.config', '.env', '.ini', '.json', '.json5', '.hjson', '.properties', '.yaml', '.yml'];
   
@@ -91,7 +88,7 @@ export class JsonDataProvider implements IDataProvider {
   public getData(dataUrl: string): any {
     let data: any = [];
     // TODO: add mime types later for remote http data loading
-    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // get local file extension for now
+    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     try {
       let content: string = fileUtils.readDataFile(dataUrl, 'utf8');
       if (dataUrl.endsWith('.json')) {
@@ -115,7 +112,7 @@ export class JsonDataProvider implements IDataProvider {
    * @param dataUrl Local data file path or remote data url.
    */
   public getDataTableNames(dataUrl: string): Array<string> {
-    return []; // none json data files
+    return []; // none for json data files
   }
 
   /**
@@ -124,7 +121,7 @@ export class JsonDataProvider implements IDataProvider {
    */
   public getDataSchema(dataUrl: string): any {
     // TODO: auto-gen json schema ???
-    return null; // none json data files
+    return null; // none for json data files
   }
 
   /**

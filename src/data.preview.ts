@@ -115,7 +115,7 @@ export class DataPreview {
 
   // data view vars
   private _dataUrl: string;
-  private _dataSchema: any;
+  private _dataSchema: any = null;
   private _isRemoteData: boolean = false;
   private _tableNames: Array<string> = [];
   private _dataViews: any = {};
@@ -508,7 +508,7 @@ export class DataPreview {
     // workspace.openTextDocument(this.uri).then(document => {
       this._logger.debug(`refresh(): \n dataTable: '${this._dataTable}' \n dataUrl:`, this._dataUrl);
       //const textData: string = document.getText();
-      let data = [];
+      let data: any = [];
       try {
         // get file data
         data = this.getFileData(this._dataUrl, this._dataTable);
@@ -609,13 +609,12 @@ export class DataPreview {
    * Loads actual data file content.
    * @param dataUrl Local data file path or remote data url.
    * @param dataTable Optional data table name for files with multiple data sets.
-   * @returns CSV/JSON string or Array of row objects.
+   * @returns string for text data or Array of row objects.
    * TODO: change this to async later
    */
   private getFileData(dataUrl: string, dataTable: string = ''): any {
     // read file data
-    // TODO: convert this to data reader/provider factory
-    let data: any = null;
+    let data: any = [];
     switch (this._fileExtension) {
       case '.csv':
       case '.tsv':
@@ -624,16 +623,6 @@ export class DataPreview {
         data = dataManager.getData(dataUrl);
         const dataLines: Array<string> = data.split('\n');
         this.logDataStats(dataLines);
-        break;
-      case '.dif':
-      case '.ods':
-      case '.xls':
-      case '.xlsb':
-      case '.xlsx':
-      case '.xlsm':
-      case '.xml':
-      case '.html':        
-        data = this.getExcelData(dataUrl, dataTable);
         break;
       case '.md':
         data = this.getMarkdownData(dataUrl, dataTable);
@@ -649,63 +638,52 @@ export class DataPreview {
         window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
         // data = this.getParquetData(dataFilePath);
         break;
-      default: // use new data.manager api for other data file types
-        data = dataManager.getData(dataUrl);
-        this.logDataStats(data);
+      default: // get data, table names and schema via data.manager api for other data file types
+        data = dataManager.getData(dataUrl, dataTable);
+        this._tableNames = dataManager.getDataTableNames(dataUrl);
+        this._dataSchema = dataManager.getDataSchema(dataUrl);
+        this.logDataStats(data, this._dataSchema);
+
+        // create json data file for binary file text data preview
+        if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
+          // create json data file path
+          let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
+          if (dataTable.length > 0 && this._tableNames.length > 1) {
+            // append table name to generated json data file name
+            jsonFilePath = jsonFilePath.replace('.json', `-${dataTable}.json`);
+          }
+          fileUtils.createJsonFile(jsonFilePath, data);
+        }        
         break;
     }
     return data;
   } // end of getFileData()
 
-  // TODO: Move these data loading methods to separate data.provders per file type
-
   /**
-   * Gets Excel file data.
-   * @param dataFilePath Excel file path.
-   * @param dataTable Excel spreadsheet name to load for workbooks with multiple spreadsheets.
-   * @returns Array of row objects.
+   * Logs data stats and optional data schema or metadata for debug 
+   * and updates data preview status bar item.
+   * @param dataRows Data rows array.
+   * @param dataSchema Optional data schema or metadata for debug logging.
    */
-  private getExcelData(dataFilePath: string, dataTable: string): any[] {
-    // load workbooks
-    const dataBuffer: Buffer = fileUtils.readDataFile(dataFilePath);
-    const workbook: xlsx.WorkBook = xlsx.read(dataBuffer, {
-      cellDates: true,
-    });
-    this._logger.debug(`getExcelData(): file: ${this._fileName} sheetNames:`, workbook.SheetNames);
-
-    // load data sheets
-    let dataRows: Array<any> = [];
-    if (workbook.SheetNames.length > 0) {
-      if (workbook.SheetNames.length > 1) {
-        // save sheet names for table list UI display
-        this._tableNames = workbook.SheetNames;
+  private logDataStats(dataRows: Array<any>, dataSchema: any = null): void {
+    // get data file size in bytes
+    this._fileSize = fileUtils.getFileSize(this._dataUrl);
+    this._rowCount = dataRows.length;
+    this.updateStats(this._columns, this._rowCount);
+    if (this.logLevel === 'debug') {
+      if (dataSchema) {
+        // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
+        this._logger.debug('logDataStats(): data view schema:', this._dataSchema);
       }
-
-      // determine spreadsheet to load
-      let sheetName = workbook.SheetNames[0];
-      if (dataTable.length > 0) {
-        // reset to requested table name
-        sheetName = dataTable;
-      }
-      
-      // get worksheet data row objects array
-      const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
-      dataRows = xlsx.utils.sheet_to_json(worksheet);
-      this.logDataStats(dataRows);
-
-      // create json data file for binary Excel file text data preview
-      if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
-        // create Excel spreadsheet json file path
-        let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
-        if (dataTable.length > 0 && this._tableNames.length > 1) {
-          // append sheet name to generated json data file name
-          jsonFilePath = jsonFilePath.replace('.json', `-${sheetName}.json`);
-        }
-        fileUtils.createJsonFile(jsonFilePath, dataRows);
+      if (dataRows.length > 0) {
+        const firstRow = dataRows[0];
+        this._logger.debug('logDataStats(): 1st row:', firstRow);
+        this._logger.debug('logDataStats(): rowCount:', this._rowCount);
       }
     }
-    return dataRows;
-  } // end of getExcelData()
+  }
+
+  // TODO: Move these data loading methods to separate data.provders per file type
 
   /**
    * Gets markdown table data.
@@ -841,30 +819,6 @@ export class DataPreview {
     this.loadData(dataRows);
     return dataRows;
   } */
-
-  /**
-   * Logs data stats and optional data schema or metadata for debug 
-   * and updates data preview status bar item.
-   * @param dataRows Data rows array.
-   * @param dataSchema Optional data schema or metadata for debug logging.
-   */
-  private logDataStats(dataRows: Array<any>, dataSchema: any = null): void {
-    // get data file size in bytes
-    this._fileSize = fileUtils.getFileSize(this._dataUrl);
-    this._rowCount = dataRows.length;
-    this.updateStats(this._columns, this._rowCount);
-    if (this.logLevel === 'debug') {
-      if (dataSchema) {
-        // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
-        this._logger.debug('logDataStats(): data view schema:', this._dataSchema);
-      }
-      if (dataRows.length > 0) {
-        const firstRow = dataRows[0];
-        this._logger.debug('logDataStats(): 1st row:', firstRow);
-        this._logger.debug('logDataStats(): rowCount:', this._rowCount);
-      }
-    }
-  }
 
   /**
    * Saves posted data from data view.

@@ -422,7 +422,7 @@
           if (Array.isArray(viewData) && viewData.length === 0) {
             // initialize perspective viewer
             logMessage(`refresh(dataTable='${dataTable}')\n\n initializing data view: ${data.fileName} ...`);
-            if (data.schema !== undefined && Object.keys(data.schema).length > 0) {
+            if (data.schema && Object.keys(data.schema).length > 0) {
               // viewer.columns = viewConfig['columns'];
               viewer.load(data.schema);
               viewer.update(tableData);
