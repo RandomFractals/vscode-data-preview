@@ -34,6 +34,7 @@ export class MarkdownDataProvider implements IDataProvider {
     try {
       // read markdown file content
       content = fileUtils.readDataFile(dataUrl, 'utf8');
+      
       // convert it to to CSV for loading into data view
       content = this.markdownToCsv(dataUrl, content, dataTable);
     }
@@ -117,8 +118,8 @@ export class MarkdownDataProvider implements IDataProvider {
         if (tableRows) {
           // add matching markdown table rows to the tables array
           tables.push(tableRows);
-          // this._logger.debug('markdownToCsv(): section:', sectionTitle);
-          // this._logger.debug('markdownToCsv(): extractred markdown table rows:', tableRows);
+          this.logger.debug('markdownToCsv(): section:', sectionTitle);
+          this.logger.debug('markdownToCsv(): extractred markdown table rows:', tableRows);
         }  
       });
 
@@ -154,7 +155,7 @@ export class MarkdownDataProvider implements IDataProvider {
           }
           // update table list for data view display
           tablesMap[tableTitle] = tableRows;
-          this.dataTableNamesMap[dataUrl].push(tableTitle);
+          tableNames.push(tableTitle);
           this.logger.debug(`markdownToCsv(): created data table: '${tableTitle}' rows: ${tableRows.length}`);
         }
       }); // end of tables.forEach(row)
@@ -162,7 +163,7 @@ export class MarkdownDataProvider implements IDataProvider {
 
     // get requested table data
     let table: Array<string> = tablesMap[tableNames[0]]; // default to 1st table in the loaded tables list
-    if (dataTable.length > 0) {
+    if (dataTable && dataTable.length > 0) {
       table = tablesMap[dataTable];
       this.logger.debug(`markdownToCsv(): requested data table: '${dataTable}'`);
     }
@@ -171,6 +172,7 @@ export class MarkdownDataProvider implements IDataProvider {
       // clear table names if only one markdown table is present
       tableNames = [];
     }
+    // update table names cache
     this.dataTableNamesMap[dataUrl] = tableNames;
 
     // convert requested markdown table to csv for data view display
