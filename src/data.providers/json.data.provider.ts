@@ -83,9 +83,10 @@ export class JsonDataProvider implements IDataProvider {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * TODO: change this to async later.
+   * @param dataTable Data table name for data sources with multiple data sets.
+   * @param loadData Load data callback.
    */
-  public getData(dataUrl: string): any {
+  public getData(dataUrl: string, dataTable: string = '', loadData: Function): void {
     let data: any = [];
     // TODO: add mime types later for remote http data loading
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
@@ -104,7 +105,7 @@ export class JsonDataProvider implements IDataProvider {
       this.logger.logMessage(LogLevel.Error, `getData(): Error parsing '${dataUrl}' \n\t Error:`, error.message);
       window.showErrorMessage(`Unable to parse data file: '${dataUrl}'. \n\t Error: ${error.message}`);
     }
-    return jsonUtils.convertJsonData(data);
+    loadData( jsonUtils.convertJsonData(data) );
   }
 
   /**

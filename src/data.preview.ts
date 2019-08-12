@@ -508,15 +508,13 @@ export class DataPreview {
     // workspace.openTextDocument(this.uri).then(document => {
       this._logger.debug(`refresh(): \n dataTable: '${this._dataTable}' \n dataUrl:`, this._dataUrl);
       //const textData: string = document.getText();
-      let data: any = [];
       try {
-        data = this.getData(this._dataUrl, this._dataTable);
+        this.getData(this._uri.fsPath, this._dataTable); //this._dataUrl, this._dataTable);
       }
       catch (error) {
         this._logger.error(`refresh(${this._dataTable}): Error:\n`, error.message);
         this.webview.postMessage({error: error});
       }
-      this.loadData(data);
     // });
   } // end of refresh()
 
@@ -527,7 +525,9 @@ export class DataPreview {
     if (data === undefined || data.length <= 0) {
       // no valid data to load
       return;
-    }    
+    }
+    this._logger.debug(
+      `loadData(): loading data... \n dataTable: '${this._dataTable}' \n dataUrl:`, this._dataUrl);
     try {
         // update web view
         this.webview.postMessage({
@@ -618,9 +618,7 @@ export class DataPreview {
     switch (this._fileExtension) {
       case '.arrow':
         data = this.getArrowData(dataUrl);
-        break;
-      case '.avro':
-        data = this.getAvroData(dataUrl);
+        this.loadData(data);
         break;
       case '.parquet':
         // TODO: sort out node-gyp lzo lib loading for parquet data files parse
@@ -628,9 +626,10 @@ export class DataPreview {
         // data = this.getParquetData(dataFilePath);
         break;
       default: // get data, table names, and data schema via data.manager api for other data file types
-        data = dataManager.getData(dataUrl, dataTable);
+        dataManager.getData(dataUrl, dataTable, (data) => {
         this._tableNames = dataManager.getDataTableNames(dataUrl);
         this._dataSchema = dataManager.getDataSchema(dataUrl);
+        this.loadData(data);
 
         // log data stats
         if (typeof data === 'string') {
@@ -641,6 +640,11 @@ export class DataPreview {
           this.logDataStats(data, this._dataSchema);
         }
 
+        if (this.createJsonSchema && this._dataSchema) {
+          // create schema.json file for text data preview
+          fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), this._dataSchema);
+        }
+  
         // create json data file for binary file text data preview
         if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
           // create json data file path
@@ -650,7 +654,8 @@ export class DataPreview {
             jsonFilePath = jsonFilePath.replace('.json', `-${dataTable}.json`);
           }
           fileUtils.createJsonFile(jsonFilePath, data);
-        }        
+        }
+      });
         break;
     }
     return data;
@@ -743,34 +748,6 @@ export class DataPreview {
     this.logDataStats(dataRows, dataTable.schema);
     return []; //  dataRows already sent
   } // end of getArrowData()
-
-  /**
-   * Gets binary Avro file data.
-   * @param dataFilePath Avro data file path.
-   * @returns Array of row objects.
-   */
-  private getAvroData(dataFilePath: string): any[] {
-    let dataSchema: any = {};
-    let dataRows: Array<any> = [];
-    const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(this._uri.fsPath); //dataFilePath);
-    dataBlockDecoder.on('metadata', (type: any) => dataSchema = type);
-		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
-    dataBlockDecoder.on('end', () => {
-      this.logDataStats(dataRows, dataSchema);
-      // Note: flatten data rows for now since Avro format has hierarchical data structure
-      dataRows = dataRows.map(rowObject => jsonUtils.flattenObject(rowObject));
-      this.loadData(dataRows);
-      if (this.createJsonSchema) {
-        // create schema.json file for Avro metadata preview
-        fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataSchema);
-      }
-      if (this.createJsonFiles) {
-        // create data json file for Avro text data preview
-        fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
-      }
-    });
-    return dataRows;
-  }
 
   /**
    * Gets binary Parquet file data.

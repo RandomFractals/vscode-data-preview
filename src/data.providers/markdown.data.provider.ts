@@ -28,8 +28,10 @@ export class MarkdownDataProvider implements IDataProvider {
   /**
    * Gets local or remote markdown file table data.
    * @param dataUrl Local data file path or remote data url.
+   * @param dataTable Data table name for data sources with multiple data sets.
+   * @param loadData Load data callback.
    */
-  public getData(dataUrl: string, dataTable?: string): any {
+  public getData(dataUrl: string, dataTable: string = '', loadData: Function): void {
     let content: string = '';
     try {
       // read markdown file content
@@ -42,7 +44,7 @@ export class MarkdownDataProvider implements IDataProvider {
       this.logger.error(`getMarkdownData(): Error parsing '${dataUrl}'. \n\t Error: ${error.message}`);
       window.showErrorMessage(`Unable to parse data file: '${dataUrl}'. \n\t Error: ${error.message}`);
     }
-    return content;
+    loadData(content);
   } // end of getData()
 
   /**

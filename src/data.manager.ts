@@ -2,6 +2,7 @@ import * as config from './config';
 import {Logger, LogLevel} from './logger';
 
 // data provider imports
+import {AvroDataProvider} from './data.providers/avro.data.provider';
 import {ExcelDataProvider} from './data.providers/excel.data.provider';
 import {JsonDataProvider} from './data.providers/json.data.provider';
 import {MarkdownDataProvider} from './data.providers/markdown.data.provider';
@@ -21,9 +22,10 @@ export interface IDataManager {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * @param dataTable Optional data table name for data sources with multiple data sets.
+   * @param dataTable Data table name for data sources with multiple data sets.
+   * @param loadData Load data callback.
    */
-  getData(dataUrl: string, dataTable: string): any;
+  getData(dataUrl: string, dataTable: string, loadData: Function): void;
 
   /**
    * Gets data table names for data sources with multiple data sets.
@@ -52,9 +54,10 @@ export interface IDataProvider {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * @param dataTable Optional data table name for data sources with multiple data sets.
+   * @param dataTable Data table name for data sources with multiple data sets.
+   * @param loadData Load data callback.
    */
-  getData(dataUrl: string, dataTable: string): any;
+  getData(dataUrl: string, dataTable: string, loadData: Function): void;
  
   /**
    * Gets data table names for data sources with multiple data sets.
@@ -113,8 +116,8 @@ export class DataManager implements IDataManager {
   private loadDataProviders(): any {
     this._logger.debug('loadDataProviders(): loading data providers...');
     // create data providers instances for the supported data formats
-    // TODO: add arrow, avro and parquet .data.provider init here
     const dataProviders: any = {};
+    this.addDataProvider(dataProviders, new AvroDataProvider());
     this.addDataProvider(dataProviders, new ExcelDataProvider());
     this.addDataProvider(dataProviders, new JsonDataProvider());
     this.addDataProvider(dataProviders, new MarkdownDataProvider());
@@ -150,13 +153,14 @@ export class DataManager implements IDataManager {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * @param dataTable Optional data table name for data sources with multiple data sets.
+   * @param dataTable Data table name for data sources with multiple data sets.
+   * @param loadData Load data callback.
    */
-  public getData(dataUrl: string, dataTable: string = ''): any {
+  public getData(dataUrl: string, dataTable: string = '', loadData: Function): void {
     // TODO: add mime types later for remote http data loading
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
-    return dataProvider.getData(dataUrl, dataTable);
+    dataProvider.getData(dataUrl, dataTable, loadData);
   }
 
   /**
