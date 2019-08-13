@@ -626,36 +626,40 @@ export class DataPreview {
         // data = this.getParquetData(dataFilePath);
         break;
       default: // get data, table names, and data schema via data.manager api for other data file types
-        dataManager.getData(dataUrl, dataTable, (data) => {
-        this._tableNames = dataManager.getDataTableNames(dataUrl);
-        this._dataSchema = dataManager.getDataSchema(dataUrl);
-        this.loadData(data);
+        dataManager.getData(dataUrl, {
+          dataTable: dataTable,
+          createJsonFiles: this.createJsonFiles,
+          createJsonSchema: this.createJsonSchema
+          }, (data: any) => {
+          this._tableNames = dataManager.getDataTableNames(dataUrl);
+          this._dataSchema = dataManager.getDataSchema(dataUrl);
+          this.loadData(data);
 
-        // log data stats
-        if (typeof data === 'string') {
-          const dataLines: Array<string> = data.split('\n');
-          this.logDataStats(dataLines);
-        }
-        else {
-          this.logDataStats(data, this._dataSchema);
-        }
-
-        if (this.createJsonSchema && this._dataSchema) {
-          // create schema.json file for text data preview
-          fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), this._dataSchema);
-        }
-  
-        // create json data file for binary file text data preview
-        if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
-          // create json data file path
-          let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
-          if (dataTable.length > 0 && this._tableNames.length > 1) {
-            // append table name to generated json data file name
-            jsonFilePath = jsonFilePath.replace('.json', `-${dataTable}.json`);
+          // log data stats
+          if (typeof data === 'string') {
+            const dataLines: Array<string> = data.split('\n');
+            this.logDataStats(dataLines);
           }
-          fileUtils.createJsonFile(jsonFilePath, data);
-        }
-      });
+          else {
+            this.logDataStats(data, this._dataSchema);
+          }
+
+          if (this.createJsonSchema && this._dataSchema) {
+            // create schema.json file for text data preview
+            fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), this._dataSchema);
+          }
+    
+          // create json data file for binary file text data preview
+          if (this.createJsonFiles && config.supportedBinaryDataFiles.test(this._fileName)) {
+            // create json data file path
+            let jsonFilePath: string = this._uri.fsPath.replace(this._fileExtension, '.json');
+            if (dataTable.length > 0 && this._tableNames.length > 1) {
+              // append table name to generated json data file name
+              jsonFilePath = jsonFilePath.replace('.json', `-${dataTable}.json`);
+            }
+            fileUtils.createJsonFile(jsonFilePath, data);
+          }
+        });
         break;
     }
     return data;

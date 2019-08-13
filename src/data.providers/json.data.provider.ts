@@ -83,10 +83,10 @@ export class JsonDataProvider implements IDataProvider {
   /**
    * Gets local or remote data.
    * @param dataUrl Local data file path or remote data url.
-   * @param dataTable Data table name for data sources with multiple data sets.
+   * @param parseOptions Data parse options.
    * @param loadData Load data callback.
    */
-  public getData(dataUrl: string, dataTable: string = '', loadData: Function): void {
+  public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
     let data: any = [];
     // TODO: add mime types later for remote http data loading
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension

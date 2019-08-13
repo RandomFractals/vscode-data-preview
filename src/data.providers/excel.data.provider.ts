@@ -30,10 +30,10 @@ export class ExcelDataProvider implements IDataProvider {
   /**
    * Gets local or remote Excel file data.
    * @param dataUrl Local data file path or remote data url.
-   * @param dataTable Data table name for data sources with multiple data sets.
+   * @param parseOptions Data parse options.
    * @param loadData Load data callback.
    */
-  public getData(dataUrl: string, dataTable: string = '', loadData: Function): void {
+  public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
     // load Excel workbook
     const fileName = path.basename(dataUrl);
     const dataBuffer: Buffer = fileUtils.readDataFile(dataUrl);
@@ -53,9 +53,10 @@ export class ExcelDataProvider implements IDataProvider {
 
       // determine spreadsheet to load
       let sheetName:string = workbook.SheetNames[0];
-      if (dataTable && dataTable.length > 0 && workbook.SheetNames.indexOf(dataTable) >= 0) {
+      if (parseOptions.dataTable.length > 0 && 
+          workbook.SheetNames.indexOf(parseOptions.dataTable) >= 0) {
         // reset to requested table name
-        sheetName = dataTable;
+        sheetName = parseOptions.dataTable;
       }
       
       // get worksheet data row objects array
