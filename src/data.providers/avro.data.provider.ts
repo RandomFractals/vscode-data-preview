@@ -1,4 +1,5 @@
 import {window} from 'vscode';
+import * as fs from 'fs';
 import * as path from 'path';
 import * as avro from 'avsc';
 import * as config from '../config';
@@ -31,15 +32,23 @@ export class AvroDataProvider implements IDataProvider {
    * @param loadData Load data callback.
    */
   public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
-    let dataSchema: any = {};
     let dataRows: Array<any> = [];
     const dataBlockDecoder: avro.streams.BlockDecoder = avro.createFileDecoder(dataUrl);
-    dataBlockDecoder.on('metadata', (type: any) => {
-      dataSchema = type;
+    dataBlockDecoder.on('metadata', (dataSchema: any) => {
       this.logger.debug('metadata', dataSchema);
+      // create schema.json file for Avro metadata preview
+      const dataSchemaFilePath: string = dataUrl.replace('.avro', '.schema.json');
+      if (parseOptions.createJsonSchema && !fs.existsSync(dataSchemaFilePath)) {
+        fileUtils.createJsonFile(dataSchemaFilePath, dataSchema);
+      }
     });
 		dataBlockDecoder.on('data', (data: any) => dataRows.push(data));
     dataBlockDecoder.on('end', () => {
+      // create data json file for Avro text data preview
+      const jsonFilePath: string = dataUrl.replace('.avro', '.json');
+      if (parseOptions.createJsonFiles && !fs.existsSync(jsonFilePath)) {
+        fileUtils.createJsonFile(jsonFilePath, dataRows);
+      }
       // Note: flatten data rows for now since Avro format has hierarchical data structure
       dataRows = dataRows.map(rowObject => jsonUtils.flattenObject(rowObject));
       loadData(dataRows);

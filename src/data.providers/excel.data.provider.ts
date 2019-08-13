@@ -1,9 +1,9 @@
-import {window} from 'vscode';
+import * as fs from 'fs';
 import * as path from 'path';
 import * as xlsx from 'xlsx';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
-import {Logger, LogLevel} from '../logger';
+import {Logger} from '../logger';
 import {IDataProvider} from '../data.manager';
 
 /**
@@ -35,7 +35,8 @@ export class ExcelDataProvider implements IDataProvider {
    */
   public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
     // load Excel workbook
-    const fileName = path.basename(dataUrl);
+    const dataFileName: string = path.basename(dataUrl);
+    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     const dataBuffer: Buffer = fileUtils.readDataFile(dataUrl);
     const workbook: xlsx.WorkBook = xlsx.read(dataBuffer, {
       cellDates: true,
@@ -48,7 +49,7 @@ export class ExcelDataProvider implements IDataProvider {
       if (workbook.SheetNames.length > 1) {
         // cache sheet names
         this.dataTableNamesMap[dataUrl] = workbook.SheetNames;
-        this.logger.debug(`getData(): file: ${fileName} sheetNames:`, workbook.SheetNames);
+        this.logger.debug(`getData(): file: ${dataFileName} sheetNames:`, workbook.SheetNames);
       }
 
       // determine spreadsheet to load
@@ -62,6 +63,19 @@ export class ExcelDataProvider implements IDataProvider {
       // get worksheet data row objects array
       const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
       dataRows = xlsx.utils.sheet_to_json(worksheet);
+
+      // create json data file for binary Excel file text data preview
+      if (parseOptions.createJsonFiles && config.supportedBinaryDataFiles.test(dataFileName)) {
+        // create json data file path
+        let jsonFilePath: string = dataUrl.replace(dataFileType, '.json');
+        if (parseOptions.dataTable.length > 0 && workbook.SheetNames.length > 1) {          
+          // append table name to the generated json data file name
+          jsonFilePath = jsonFilePath.replace('.json', `-${parseOptions.dataTable}.json`);
+        }
+        if (!fs.existsSync(jsonFilePath)) {
+          fileUtils.createJsonFile(jsonFilePath, dataRows);
+        }
+      }
     }    
     loadData(dataRows);
   } // end of getData()
