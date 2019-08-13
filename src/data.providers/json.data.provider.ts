@@ -11,7 +11,7 @@ import {IDataProvider} from '../data.manager';
 export class JsonDataProvider implements IDataProvider {
 
   // TODO: add mime types later for http data loading
-  // TODO: move .config to separate data.provider impl.
+  // TODO: move .config to separate data.provider ???
   public supportedDataFileTypes: Array<string> = ['.config', '.json'];  
   private logger: Logger = new Logger('json.data.provider:', config.logLevel);
 
@@ -30,12 +30,10 @@ export class JsonDataProvider implements IDataProvider {
    */
   public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
     let data: any = [];
-    // TODO: add mime types later for remote http data loading
-    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     try {
       let content: string = fileUtils.readDataFile(dataUrl, 'utf8');
       if (dataUrl.endsWith('.json')) {
-        // strip out comments for vscode settings .json config files loading :)
+        // strip out comments from vscode settings .json :)
         const comments: RegExp = new RegExp(/\/\*[\s\S]*?\*\/|\/\/.*/g);
         content = content.replace(comments, '');
       }
