@@ -519,7 +519,7 @@ export class DataPreview {
   } // end of refresh()
 
   /**
-   * Loads string or JSON data into data view.
+   * Loads binary, string or JSON data into data view.
    */
   private loadData(data: any): void {
     if (data === undefined || data.length <= 0) {
@@ -529,7 +529,13 @@ export class DataPreview {
     this._logger.debug(
       `loadData(): loading data... \n dataTable: '${this._dataTable}' \n dataUrl:`, this._dataUrl);
     try {
-        // update web view
+      if (data.constructor === Uint8Array) {
+        // send initial data info to data view
+        this.postDataInfo();
+        // post raw binary typed array to data.view for data load
+        this.webview.postMessage(Array.from(data));
+      }
+      else { // update web view for csv or json data load
         this.webview.postMessage({
           command: 'refresh',
           fileName: this._fileName,
@@ -542,6 +548,7 @@ export class DataPreview {
           logLevel: this.logLevel,
           data: data
         });
+      }
     }
     catch (error) {
       this._logger.error('loadData(): Error:\n', error.message);
@@ -611,39 +618,32 @@ export class DataPreview {
    * @param dataUrl Local data file path or remote data url.
    * @param dataTable Optional data table name for files with multiple data sets.
    * @returns string for text data or Array of row objects.
-   * TODO: change this to async later
    */
   private getData(dataUrl: string, dataTable: string = ''): any {
     let data: any = [];
-    switch (this._fileExtension) {
-      case '.arrow':
-        data = this.getArrowData(dataUrl);
+    if (this._fileExtension === '.parquet') {
+      // TODO: sort out node-gyp lzo lib loading for parquet data files parse
+      window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
+      // data = this.getParquetData(dataFilePath);
+    }
+    else { // get data, table names, and data schema via data.manager api
+      dataManager.getData(dataUrl, {
+          dataTable: dataTable,
+          createJsonFiles: this.createJsonFiles,
+          createJsonSchema: this.createJsonSchema
+        }, (data: any) => {
+        this._tableNames = dataManager.getDataTableNames(dataUrl);
+        this._dataSchema = dataManager.getDataSchema(dataUrl);
         this.loadData(data);
-        break;
-      case '.parquet':
-        // TODO: sort out node-gyp lzo lib loading for parquet data files parse
-        window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
-        // data = this.getParquetData(dataFilePath);
-        break;
-      default: // get data, table names, and data schema via data.manager api for other data file types
-        dataManager.getData(dataUrl, {
-            dataTable: dataTable,
-            createJsonFiles: this.createJsonFiles,
-            createJsonSchema: this.createJsonSchema
-          }, (data: any) => {
-          this._tableNames = dataManager.getDataTableNames(dataUrl);
-          this._dataSchema = dataManager.getDataSchema(dataUrl);
-          this.loadData(data);
-          // log data stats
-          if (typeof data === 'string') {
-            const dataLines: Array<string> = data.split('\n');
-            this.logDataStats(dataLines);
-          }
-          else {
-            this.logDataStats(data, this._dataSchema);
-          }    
-        });
-        break;
+        // log data stats
+        if (typeof data === 'string') {
+          const dataLines: Array<string> = data.split('\n');
+          this.logDataStats(dataLines);
+        }
+        else {
+          this.logDataStats(data, this._dataSchema);
+        }    
+      });
     }
     return data;
   } // end of getData()
@@ -661,80 +661,15 @@ export class DataPreview {
     this.updateStats(this._columns, this._rowCount);
     if (this.logLevel === 'debug') {
       if (dataSchema) {
-        // this._logger.debug(`logDataStats(): ${this._fileName} data schema:`, dataSchema);
-        this._logger.debug('logDataStats(): data view schema:', this._dataSchema);
+        this._logger.debug('logDataStats(): data view schema:', dataSchema);
       }
-      if (dataRows.length > 0) {
+      if (dataRows.length > 0 && dataRows.constructor !== Uint8Array) {
         const firstRow = dataRows[0];
         this._logger.debug('logDataStats(): 1st row:', firstRow);
         this._logger.debug('logDataStats(): rowCount:', this._rowCount);
       }
     }
   }
-
-  // TODO: Move these data loading methods to separate data.provders per file type
-
-  /**
-   * Gets binary Arrow file data.
-   * @param dataFilePath Arrow data file path.
-   * @returns Array of row objects.
-   */
-  private getArrowData(dataFilePath: string): any[] {
-    // get binary arrow data
-    const dataBuffer: Buffer = fileUtils.readDataFile(dataFilePath);
-
-    // create typed data array
-    const dataArray: Uint8Array = new Uint8Array(dataBuffer);
-    this._logger.debug('getArrowData(): data size in bytes:', dataArray.byteLength.toLocaleString());
-
-    // create arrow table
-    const dataTable: Table = Table.from(dataArray);
-
-    // remap arrow data schema to columns for data viewer
-    this._dataSchema = {};
-    dataTable.schema.fields.map(field => {
-      let fieldType: string = field.type.toString();
-      const typesIndex: number = fieldType.indexOf('<');
-      if (typesIndex > 0) {
-        fieldType = fieldType.substring(0, typesIndex);
-      }
-      this._dataSchema[field.name] = config.dataTypes[fieldType];
-    });
-    // initialized typed data set columns config
-    // this._config['columns'] = dataTable.schema.fields.map(field => field.name);
-
-    if (this.createJsonSchema) {
-      // create schema.json file for text data preview
-      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.schema.json'), dataTable.schema);
-    }
-
-    // send initial data info to data view
-    this.postDataInfo(); 
-
-    // post typed array to data.view for data load
-    this.webview.postMessage(Array.from(dataArray));
-
-    // create arrow data.json for text arrow data preview
-    let dataRows: Array<any> = [];
-    if (this.createJsonFiles && !fs.existsSync(dataFilePath.replace('.arrow', '.json'))) {
-      // convert arrow table data to array of objects (happens only on the 1st run :)
-      dataRows = Array(dataTable.length);
-      const fields = dataTable.schema.fields.map(field => field.name);
-      for (let i=0, n=dataRows.length; i<n; ++i) {
-        const proto = {};
-        fields.forEach((fieldName, index) => {
-          const column = dataTable.getColumnAt(index);
-          proto[fieldName] = column.get(i);
-        });
-        dataRows[i] = proto;
-      }
-      fileUtils.createJsonFile(this._uri.fsPath.replace(this._fileExtension, '.json'), dataRows);
-    }
-
-    // log arrow data stats and schema, and gracefully return :)
-    this.logDataStats(dataRows, dataTable.schema);
-    return []; //  dataRows already sent
-  } // end of getArrowData()
 
   /**
    * Gets binary Parquet file data.

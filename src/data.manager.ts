@@ -1,8 +1,10 @@
+import {window} from 'vscode';
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
 
 // data provider imports
 import {AvroDataProvider} from './data.providers/avro.data.provider';
+import {ArrowDataProvider} from './data.providers/arrow.data.provider';
 import {ExcelDataProvider} from './data.providers/excel.data.provider';
 import {JsonDataProvider} from './data.providers/json.data.provider';
 import {MarkdownDataProvider} from './data.providers/markdown.data.provider';
@@ -115,9 +117,10 @@ export class DataManager implements IDataManager {
    */
   private loadDataProviders(): any {
     this._logger.debug('loadDataProviders(): loading data providers...');
-    // create data providers instances for the supported data formats
+    // create data provider instances for the supported data formats
     const dataProviders: any = {};
     this.addDataProvider(dataProviders, new AvroDataProvider());
+    this.addDataProvider(dataProviders, new ArrowDataProvider());
     this.addDataProvider(dataProviders, new ExcelDataProvider());
     this.addDataProvider(dataProviders, new JsonDataProvider());
     this.addDataProvider(dataProviders, new MarkdownDataProvider());
@@ -147,7 +150,9 @@ export class DataManager implements IDataManager {
     if (this._dataProviders.hasOwnProperty(fileType)) {
       return this._dataProviders[fileType];
     }
-    throw new Error(`No matching data provider found for file type: ${fileType}`);
+    const errorMessage: string = `No matching Data Provider found for file type: ${fileType}`;
+    window.showErrorMessage(errorMessage)
+    throw new Error(errorMessage);
   }
 
   /**
