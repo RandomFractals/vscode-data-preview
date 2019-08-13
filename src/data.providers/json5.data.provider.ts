@@ -1,4 +1,5 @@
 import {window} from 'vscode';
+import * as json5 from 'json5';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
 import * as jsonUtils from '../utils/json.utils';
@@ -6,17 +7,17 @@ import {Logger, LogLevel} from '../logger';
 import {IDataProvider} from '../data.manager';
 
 /**
- * JSON data provider.
+ * JSON 5 data provider.
+ * @see https://json5.org/ for more info.
  */
-export class JsonDataProvider implements IDataProvider {
+export class Json5DataProvider implements IDataProvider {
 
   // TODO: add mime types later for http data loading
-  // TODO: move .config to separate data.provider impl.
-  public supportedDataFileTypes: Array<string> = ['.config', '.json'];  
-  private logger: Logger = new Logger('json.data.provider:', config.logLevel);
+  public supportedDataFileTypes: Array<string> = ['.json5'];
+  private logger: Logger = new Logger('json5.data.provider:', config.logLevel);
 
   /**
-   * Creates new JSON data provider for .config, .json, .json5, .hjson data files.
+   * Creates new JSON data provider for .json5 data files.
    */
   constructor() {
     this.logger.debug('created for:', this.supportedDataFileTypes);
@@ -30,16 +31,9 @@ export class JsonDataProvider implements IDataProvider {
    */
   public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
     let data: any = [];
-    // TODO: add mime types later for remote http data loading
-    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     try {
       let content: string = fileUtils.readDataFile(dataUrl, 'utf8');
-      if (dataUrl.endsWith('.json')) {
-        // strip out comments for vscode settings .json config files loading :)
-        const comments: RegExp = new RegExp(/\/\*[\s\S]*?\*\/|\/\/.*/g);
-        content = content.replace(comments, '');
-      }
-      data = JSON.parse(content);
+      data = json5.parse(content);
     }
     catch (error) {
       this.logger.logMessage(LogLevel.Error, `getData(): Error parsing '${dataUrl}' \n\t Error:`, error.message);
