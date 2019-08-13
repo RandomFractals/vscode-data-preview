@@ -10,6 +10,7 @@ import {JsonDataProvider} from './data.providers/json.data.provider';
 import {MarkdownDataProvider} from './data.providers/markdown.data.provider';
 import {TextDataProvider} from './data.providers/text.data.provider';
 import {PropertiesDataProvider} from './data.providers/properties.data.provider';
+import {YamlDataProvider} from './data.providers/yaml.data.provider';
 
 /**
  * Data Manager API interface.
@@ -127,9 +128,8 @@ export class DataManager implements IDataManager {
     this.addDataProvider(dataProviders, new MarkdownDataProvider());
     this.addDataProvider(dataProviders, new TextDataProvider());
     this.addDataProvider(dataProviders, new PropertiesDataProvider());
-    if (this._logger.logLevel === LogLevel.Debug) {
-      this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
-    }
+    this.addDataProvider(dataProviders, new YamlDataProvider());
+    this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
     return dataProviders;
   }
 
@@ -152,7 +152,7 @@ export class DataManager implements IDataManager {
     if (this._dataProviders.hasOwnProperty(fileType)) {
       return this._dataProviders[fileType];
     }
-    const errorMessage: string = `No matching Data Provider found for file type: ${fileType}`;
+    const errorMessage: string = `No matching Data Provider found for the File Type: '${fileType}'`;
     window.showErrorMessage(errorMessage);
     throw new Error(errorMessage);
   }

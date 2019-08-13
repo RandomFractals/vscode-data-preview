@@ -1,10 +1,5 @@
 import {window} from 'vscode';
-
-// data loading imports
-import * as hjson from 'hjson';
-import * as json5 from 'json5';
-
-// json data provider imports
+import * as yaml from 'js-yaml';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
 import * as jsonUtils from '../utils/json.utils';
@@ -12,38 +7,19 @@ import {Logger, LogLevel} from '../logger';
 import {IDataProvider} from '../data.manager';
 
 /**
- * JSON data provider.
+ * YAML data provider.
  */
-export class JsonDataProvider implements IDataProvider {
+export class YamlDataProvider implements IDataProvider {
 
   // TODO: add mime types later for http data loading
-  // TODO: move .config, .json5 and .hjson to separate data.provider impl.
-  public supportedDataFileTypes: Array<string> = ['.config', '.json', '.json5', '.hjson'];
-  
-  private logger: Logger = new Logger('json.data.provider:', config.logLevel);
+  public supportedDataFileTypes: Array<string> = ['.yaml', '.yml'];  
+  private logger: Logger = new Logger('yaml.data.provider:', config.logLevel);
 
   /**
-   * Creates new JSON data provider for .config, .json, .json5, .hjson data files.
+   * Creates new YAML data provider for .yml data/config files.
    */
   constructor() {
     this.logger.debug('created for:', this.supportedDataFileTypes);
-  }
-
-  /**
-   * Gets data provider parse function for the specified data file type.
-   * @param dataFileType Data file type.
-   */
-  private getDataParseFunction(dataFileType: string): Function {
-    let dataParseFunction: Function = JSON.parse; // default
-    switch (dataFileType) {
-      case '.json5':
-        dataParseFunction = json5.parse;
-        break;
-      case '.hjson':
-        dataParseFunction = hjson.parse;
-        break;
-    }
-    return dataParseFunction;
   }
 
   /**
@@ -54,17 +30,9 @@ export class JsonDataProvider implements IDataProvider {
    */
   public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
     let data: any = [];
-    // TODO: add mime types later for remote http data loading
-    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     try {
       let content: string = fileUtils.readDataFile(dataUrl, 'utf8');
-      if (dataUrl.endsWith('.json')) {
-        // strip out comments for vscode settings .json config files loading :)
-        const comments: RegExp = new RegExp(/\/\*[\s\S]*?\*\/|\/\/.*/g);
-        content = content.replace(comments, '');
-      }
-      const dataParseFunction: Function = this.getDataParseFunction(dataFileType);
-      data = dataParseFunction(content);
+      data = yaml.load(content);
     }
     catch (error) {
       this.logger.logMessage(LogLevel.Error, `getData(): Error parsing '${dataUrl}' \n\t Error:`, error.message);
@@ -78,7 +46,7 @@ export class JsonDataProvider implements IDataProvider {
    * @param dataUrl Local data file path or remote data url.
    */
   public getDataTableNames(dataUrl: string): Array<string> {
-    return []; // none for json data files
+    return []; // none for .yml data files
   }
 
   /**
@@ -86,8 +54,7 @@ export class JsonDataProvider implements IDataProvider {
    * @param dataUrl Local data file path or remote data url.
    */
   public getDataSchema(dataUrl: string): any {
-    // TODO: auto-gen json schema ???
-    return null; // none for json data files
+    return null; // none for .yml data files
   }
 
   /**
