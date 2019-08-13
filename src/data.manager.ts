@@ -151,7 +151,7 @@ export class DataManager implements IDataManager {
       return this._dataProviders[fileType];
     }
     const errorMessage: string = `No matching Data Provider found for file type: ${fileType}`;
-    window.showErrorMessage(errorMessage)
+    window.showErrorMessage(errorMessage);
     throw new Error(errorMessage);
   }
 
