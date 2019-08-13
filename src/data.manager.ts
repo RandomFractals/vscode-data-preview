@@ -9,6 +9,7 @@ import {ExcelDataProvider} from './data.providers/excel.data.provider';
 import {JsonDataProvider} from './data.providers/json.data.provider';
 import {MarkdownDataProvider} from './data.providers/markdown.data.provider';
 import {TextDataProvider} from './data.providers/text.data.provider';
+import {PropertiesDataProvider} from './data.providers/properties.data.provider';
 
 /**
  * Data Manager API interface.
@@ -124,7 +125,8 @@ export class DataManager implements IDataManager {
     this.addDataProvider(dataProviders, new ExcelDataProvider());
     this.addDataProvider(dataProviders, new JsonDataProvider());
     this.addDataProvider(dataProviders, new MarkdownDataProvider());
-    this.addDataProvider(dataProviders, new TextDataProvider());    
+    this.addDataProvider(dataProviders, new TextDataProvider());
+    this.addDataProvider(dataProviders, new PropertiesDataProvider());
     if (this._logger.logLevel === LogLevel.Debug) {
       this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
     }
