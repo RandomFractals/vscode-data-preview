@@ -106,7 +106,7 @@ export class ExcelDataProvider implements IDataProvider {
    * @param showData Show saved data callback.
    */
   public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
-    const fileType: string = filePath.substr(filePath.lastIndexOf('.') + 1);
+    const fileType: string = filePath.substr(filePath.lastIndexOf('.'));
     fileData = this.jsonToExcelData(fileData, fileType, tableName);
     if ( fileData.length > 0) {
       // TODO: change this to async later
@@ -121,21 +121,39 @@ export class ExcelDataProvider implements IDataProvider {
    */
   private jsonToExcelData(jsonData: any, fileType: string, tableName: string): any {
     this.logger.debug('jsonToExcelData(): creating excel data:', fileType);
+
+    // create new workbook
     const workbook: xlsx.WorkBook = xlsx.utils.book_new();
+
+    // convert json data to worksheet format
     const worksheet: xlsx.WorkSheet  = xlsx.utils.json_to_sheet(jsonData, {
       //header: JSON.parse(this._viewConfig.columns)
     });
+
+    // append worksheet to workbook
     xlsx.utils.book_append_sheet(workbook, worksheet, tableName);
-    return xlsx.write(workbook, {
-      type: 'buffer',
-      compression: true, // use zip compression for zip-based formats
-      bookType: this.getBookType(fileType)
-    });
+
+    // get text data string or binary spreadsheet data buffer
+    let data: any = '';
+    if (fileType === 'html' || fileType === 'xml') {
+      data = xlsx.write(workbook, {
+        type: 'string',
+        compression: false,
+        bookType: this.getBookType(fileType)
+      });  
+    } else {
+      data = xlsx.write(workbook, {
+        type: 'buffer',
+        compression: true, // use zip compression for zip-based formats
+        bookType: this.getBookType(fileType)
+      });  
+    }
+    return data;
   }
 
   /**
    * Converts file type to Excel book type.
-   * @param fileType File type: html, ods, xml, xlsb, xlsx, etc.
+   * @param fileType File type: .html, .ods, .xml, .xlsb, .xlsx, etc.
    */
   private getBookType(fileType: string): xlsx.BookType {
     let bookType: xlsx.BookType = 'xlsb'; // default

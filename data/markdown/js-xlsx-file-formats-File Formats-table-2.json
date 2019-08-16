@@ -1,0 +1,32 @@
+[
+  {
+    "Format": "Excel 2007+ XML Formats (XLSX/XLSM)",
+    "Last Cell": "XFD1048576",
+    "Max Cols": 16384,
+    "Max Rows": 1048576
+  },
+  {
+    "Format": "Excel 2007+ Binary Format (XLSB BIFF12)",
+    "Last Cell": "XFD1048576",
+    "Max Cols": 16384,
+    "Max Rows": 1048576
+  },
+  {
+    "Format": "Excel 97-2004 (XLS BIFF8)",
+    "Last Cell": "IV65536",
+    "Max Cols": 256,
+    "Max Rows": 65536
+  },
+  {
+    "Format": "Excel 5.0/95 (XLS BIFF5)",
+    "Last Cell": "IV16384",
+    "Max Cols": 256,
+    "Max Rows": 16384
+  },
+  {
+    "Format": "Excel 2.0/2.1 (XLS BIFF2)",
+    "Last Cell": "IV16384",
+    "Max Cols": 256,
+    "Max Rows": 16384
+  }
+]
