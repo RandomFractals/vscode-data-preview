@@ -1,0 +1,42 @@
+[
+  {
+    "Excel Description": "Summary tab \"Title\"",
+    "JS Name": "`Title`"
+  },
+  {
+    "Excel Description": "Summary tab \"Subject\"",
+    "JS Name": "`Subject`"
+  },
+  {
+    "Excel Description": "Summary tab \"Author\"",
+    "JS Name": "`Author`"
+  },
+  {
+    "Excel Description": "Summary tab \"Manager\"",
+    "JS Name": "`Manager`"
+  },
+  {
+    "Excel Description": "Summary tab \"Company\"",
+    "JS Name": "`Company`"
+  },
+  {
+    "Excel Description": "Summary tab \"Category\"",
+    "JS Name": "`Category`"
+  },
+  {
+    "Excel Description": "Summary tab \"Keywords\"",
+    "JS Name": "`Keywords`"
+  },
+  {
+    "Excel Description": "Summary tab \"Comments\"",
+    "JS Name": "`Comments`"
+  },
+  {
+    "Excel Description": "Statistics tab \"Last saved by\"",
+    "JS Name": "`LastAuthor`"
+  },
+  {
+    "Excel Description": "Statistics tab \"Created\"",
+    "JS Name": "`CreatedDate`"
+  }
+]

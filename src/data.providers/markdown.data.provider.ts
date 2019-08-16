@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as path from 'path';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
@@ -65,13 +66,19 @@ export class MarkdownDataProvider implements IDataProvider {
   }
 
   /**
-   * Saves raw Data Provider data.
-   * @param filePath Data file path. 
+   * Saves CSV as markdown table data.
+   * @param filePath Local data file path.
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  public saveData(filePath: string, fileData: any, stringifyFunction: Function): void {
-    // TODO
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
+    // convert CSV text to markdown table
+    fileData = this.csvToMarkdownTable(fileData);
+    if ( fileData.length > 0) {
+      // TODO: change this to async later
+      fs.writeFile(filePath, fileData, (error) => showData(error));
+    }
   }
 
   /**
@@ -204,5 +211,98 @@ export class MarkdownDataProvider implements IDataProvider {
     }
     return csvContent;
   } // end of markdownToCsv()
+
+  /**
+   * Converts CSV to markdown table.
+   * @param {string} csvContent Csv/tsv data content.
+   * @param {string} delimiter Csv/tsv delimiter.
+   * @param {boolean} hasTableHeaderRow Has table header row.
+   * @returns {string} Markdown table content.
+   */
+  private csvToMarkdownTable(csvContent: string, delimiter: string = ',', hasTableHeaderRow: boolean = true) : string {
+    if (delimiter !== '\t') {
+      // replace all tabs with spaces
+      csvContent = csvContent.replace(/\t/g, '    ');
+    }
+
+    // extract table rows and data from csv content
+    const csvRows: Array<string> = csvContent.split('\n');
+    const tableData: string[][] = [];
+    const maxColumnLength: number[] = []; // for pretty markdown table cell spacing
+    const cellRegExp: RegExp = new RegExp(delimiter + '(?![^"]*"\\B)');
+    const doubleQuotes: RegExp = new RegExp(/("")/g);
+    this.logger.debug('csvToMarkdownTable(): csv rows:', csvRows);
+    csvRows.forEach((row, rowIndex) => {
+      if (typeof tableData[rowIndex] === 'undefined') {
+        // create new table row cells data array
+        tableData[rowIndex] = [];
+      }
+      // extract row cells data from csv text line
+      const cells: Array<string> = row.replace('\r', '').split(cellRegExp);
+      cells.forEach((cell, columnIndex) => {
+        if (typeof maxColumnLength[columnIndex] === 'undefined') {
+          // set initial column size to 0
+          maxColumnLength[columnIndex] = 0;
+        }
+
+        // strip out leading and trailing quotes
+        if (cell.startsWith('"')) {
+          cell = cell.substring(1);
+        }
+        if (cell.endsWith('"')) {
+          cell = cell.substring(0, cell.length - 1);
+        }
+
+        // replace escaped double quotes that come from csv text data format
+        cell = cell.replace(doubleQuotes, '"');
+
+        // update max column length for pretty markdwon table cells spacing
+        maxColumnLength[columnIndex] = Math.max(maxColumnLength[columnIndex], cell.length);
+
+        // save extracted cell data for table rows output
+        tableData[rowIndex][columnIndex] = cell;
+      });
+    });
+
+    // create markdown table header and separator text lines
+    let tableHeader: string = '';
+    let tableHeaderSeparator: string = '';
+    maxColumnLength.forEach((columnLength) => {
+      const columnHeader = Array(columnLength + 1 + 2);
+      tableHeader += '|' + columnHeader.join(' ');
+      tableHeaderSeparator += '|' + columnHeader.join('-');
+    });
+    // end table header and separator text lines
+    tableHeader += '| \n';
+    tableHeaderSeparator += '| \n';
+    if (hasTableHeaderRow) {
+      // reset: use table data instead
+      tableHeader = '';
+    }
+
+    // create markdown table data text lines
+    let tableRows = '';
+    tableData.forEach((row, rowIndex) => {
+      maxColumnLength.forEach((columnLength, columnIndex) => {
+        const cellData: string = typeof row[columnIndex] === 'undefined' ? '' : row[columnIndex];
+        const cellSpacing: string = Array((columnLength - cellData.length) + 1).join(' ');
+        const cellString: string = `| ${cellData}${cellSpacing} `;
+        if (hasTableHeaderRow && rowIndex === 0) {
+          tableHeader += cellString;
+        } else {
+          tableRows += cellString;
+        }
+      });
+    
+  // end table header or data row text line
+      if (hasTableHeaderRow && rowIndex === 0) {
+        tableHeader += '| \n';
+      } else {
+        tableRows += '| \n';
+      }
+    });
+
+    return `${tableHeader}${tableHeaderSeparator}${tableRows}`;
+  } // end of csvToMarkdownTable()
 
 }

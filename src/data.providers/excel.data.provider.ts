@@ -1,3 +1,4 @@
+import {window} from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as xlsx from 'xlsx';
@@ -98,12 +99,65 @@ export class ExcelDataProvider implements IDataProvider {
   }
 
   /**
-   * Saves raw Data Provider data.
-   * @param filePath Data file path. 
+   * Saves JSON data in Excel format for html, ods, xml, xlsb and xlsx file types.
+   * @param filePath Local data file path.
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  public saveData(filePath: string, fileData: any, stringifyFunction: Function): void {
-    // TODO
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
+    const fileType: string = filePath.substr(filePath.lastIndexOf('.') + 1);
+    fileData = this.jsonToExcelData(fileData, fileType, tableName);
+    if ( fileData.length > 0) {
+      // TODO: change this to async later
+      fs.writeFile(filePath, fileData, (error) => showData(error));
+    }
   }
+
+  /**
+   * Converts JSON data to Excel data formats.
+   * @param jsonData Json data to convert.
+   * @param bookType Excel data file/book type.
+   */
+  private jsonToExcelData(jsonData: any, fileType: string, tableName: string): any {
+    this.logger.debug('jsonToExcelData(): creating excel data:', fileType);
+    const workbook: xlsx.WorkBook = xlsx.utils.book_new();
+    const worksheet: xlsx.WorkSheet  = xlsx.utils.json_to_sheet(jsonData, {
+      //header: JSON.parse(this._viewConfig.columns)
+    });
+    xlsx.utils.book_append_sheet(workbook, worksheet, tableName);
+    return xlsx.write(workbook, {
+      type: 'buffer',
+      compression: true, // use zip compression for zip-based formats
+      bookType: this.getBookType(fileType)
+    });
+  }
+
+  /**
+   * Converts file type to Excel book type.
+   * @param fileType File type: html, ods, xml, xlsb, xlsx, etc.
+   */
+  private getBookType(fileType: string): xlsx.BookType {
+    let bookType: xlsx.BookType = 'xlsb'; // default
+    // TODO: must be a better way to do this string to type conversion :)
+    switch (fileType) {
+      case '.html':
+        bookType = 'html';
+        break;  
+      case '.ods':
+        bookType = 'ods';
+        break;
+      case '.xml':
+        bookType = 'xlml';
+        break;    
+      case '.xlsb':
+        bookType = 'xlsb';
+        break;
+      case '.xlsx':
+        bookType = 'xlsx';
+        break;    
+    }
+    return bookType;
+  }
+
 }

@@ -73,12 +73,14 @@ export class AvroDataProvider implements IDataProvider {
   }
 
   /**
-   * Saves raw Data Provider data.
-   * @param filePath Data file path. 
+   * Saves Avro data.
+   * @param filePath Local data file path.
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  public saveData(filePath: string, fileData: any, stringifyFunction: Function): void {
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
     // TODO
   }
+
 }

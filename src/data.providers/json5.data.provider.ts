@@ -1,4 +1,5 @@
 import {window} from 'vscode';
+import * as fs from 'fs';
 import * as json5 from 'json5';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
@@ -60,12 +61,18 @@ export class Json5DataProvider implements IDataProvider {
   }
 
   /**
-   * Saves raw Data Provider data.
-   * @param filePath Data file path. 
+   * Saves JSON5 data.
+   * @param filePath Local data file path.
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  public saveData(filePath: string, fileData: any, stringifyFunction: Function): void {
-    // TODO
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
+    fileData = json5.stringify(fileData, null, 2);
+    if ( fileData.length > 0) {
+      // TODO: change this to async later
+      fs.writeFile(filePath, fileData, (error) => showData(error));
+    }
   }
+
 }

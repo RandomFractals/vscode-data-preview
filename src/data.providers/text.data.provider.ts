@@ -1,4 +1,5 @@
 import {window} from 'vscode';
+import * as fs from 'fs';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
 import {Logger, LogLevel} from '../logger';
@@ -59,12 +60,17 @@ export class TextDataProvider implements IDataProvider {
   }
 
   /**
-   * Saves raw Data Provider data.
-   * @param filePath Data file path. 
+   * Saves CSV data.
+   * @param filePath Local data file path.
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  public saveData(filePath: string, fileData: any, stringifyFunction: Function): void {
-    // TODO
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
+    // save CSV data string
+    if ( fileData.length > 0) {
+      // TODO: change this to async later
+      fs.writeFile(filePath, fileData, (error) => showData(error));
+    }
   }
 }

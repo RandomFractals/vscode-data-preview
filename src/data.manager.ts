@@ -45,6 +45,15 @@ export interface IDataManager {
    */
   getDataSchema(dataUrl: string): any;
 
+  /**
+   * Saves raw data provider data.
+   * @param filePath Local data file path. 
+   * @param fileData Raw data to save.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
+   */
+  saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void;
+
 }
 
 /**
@@ -81,9 +90,10 @@ export interface IDataProvider {
    * Saves raw data provider data.
    * @param filePath Local data file path. 
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringify function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  saveData(filePath: string, fileData: any, stringifyFunction?: Function): void;
+  saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void;
 }
 
 /**
@@ -192,6 +202,19 @@ export class DataManager implements IDataManager {
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
     const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
     return dataProvider.getDataSchema(dataUrl);
+  }
+
+  /**
+   * Saves raw data provider data.
+   * @param filePath Local data file path.
+   * @param fileData Raw data to save.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
+   */
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
+    const dataFileType: string = filePath.substr(filePath.lastIndexOf('.')); // file extension
+    const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
+    dataProvider.saveData(filePath, fileData, tableName, showData);
   }
 
 }

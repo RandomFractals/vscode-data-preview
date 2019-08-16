@@ -1,3 +1,4 @@
+import {window} from 'vscode';
 import * as fs from 'fs';
 import {Table} from 'apache-arrow';
 import * as config from '../config';
@@ -101,12 +102,19 @@ export class ArrowDataProvider implements IDataProvider {
   }
 
   /**
-   * Saves raw Data Provider data.
-   * @param filePath Data file path. 
+   * Saves Arrow data.
+   * @param filePath Local data file path.
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  public saveData(filePath: string, fileData: any, stringifyFunction: Function): void {
-    // TODO
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
+    fileData = Buffer.from(fileData);
+    this.logger.debug('saveData(): arrow data size in bytes:', fileData.byteLength.toLocaleString());
+    if ( fileData.length > 0) {
+      // TODO: change this to async later
+      fs.writeFile(filePath, fileData, (error) => showData(error));
+    }
   }
+
 }

@@ -1,4 +1,5 @@
 import {window} from 'vscode';
+import * as fs from 'fs';
 import * as yaml from 'js-yaml';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
@@ -58,12 +59,19 @@ export class YamlDataProvider implements IDataProvider {
   }
 
   /**
-   * Saves raw Data Provider data.
+   * Saves YAML data.
    * @param filePath Data file path. 
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  public saveData(filePath: string, fileData: any, stringifyFunction: Function): void {
-    // TODO
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
+    // convert to yaml. see: https://github.com/nodeca/js-yaml#safedump-object---options-
+    fileData = yaml.dump(fileData, {skipInvalid: true});
+    if ( fileData.length > 0) {
+      // TODO: change this to async later
+      fs.writeFile(filePath, fileData, (error) => showData(error));
+    }
   }
+
 }

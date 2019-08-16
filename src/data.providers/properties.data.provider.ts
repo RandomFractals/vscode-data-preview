@@ -1,4 +1,5 @@
 import {window} from 'vscode';
+import * as fs from 'fs';
 import * as props from 'properties';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
@@ -84,12 +85,37 @@ export class PropertiesDataProvider implements IDataProvider {
   }
 
   /**
-   * Saves raw Data Provider data.
-   * @param filePath Data file path. 
+   * Saves .properties data.
+   * @param filePath Local data file path.
    * @param fileData Raw data to save.
-   * @param stringifyFunction Optional stringiy function override.
+   * @param tableName Table name for data files with multiple tables support.
+   * @param showData Show saved data callback.
    */
-  public saveData(filePath: string, fileData: any, stringifyFunction: Function): void {
-    // TODO
-  }
+  public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
+    // check if data is from Properties Grid Data View
+    if (fileData.length > 0 && fileData[0].hasOwnProperty('key') && fileData[0].hasOwnProperty('value')) {
+      let propertiesString: string = '';
+      const newLineRegExp: RegExp = new RegExp('\n', 'g');
+      fileData = fileData.forEach(property => {
+        // convert it to properties string
+        let propertyLine:string =`${property['key']}=${property['value']}`;
+        if (propertyLine.indexOf(`\n`) > 0) {
+          // replace all new lines for multi-line property values with \ next line marker and \n
+          propertyLine = propertyLine.replace(newLineRegExp, '\\\n');
+        }
+        propertiesString += `${propertyLine}\n`;
+      });
+      fileData = propertiesString;
+    } else {
+      // display not a properties collection warning
+      fileData = '';
+      window.showWarningMessage(`Data loaded in Preview is not a Properties collection. Use other data formats to Save this data.`);
+    }
+
+    if ( fileData.length > 0) {
+      // TODO: change this to async later
+      fs.writeFile(filePath, fileData, (error) => showData(error));
+    }
+  } // end of saveData()
+
 }
