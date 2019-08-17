@@ -368,7 +368,7 @@
     "@finos/perspective-viewer-highcharts": "^0.3.1",
     "@finos/perspective-viewer-hypergrid": "^0.3.1",
     "apache-arrow": "^0.4.1",
-    "avsc": "^5.4.12",
+    "avsc": "^5.4.13",
     "hjson": "^3.1.2",
     "js-yaml": "^3.13.1",
     "json5": "^2.1.0",
