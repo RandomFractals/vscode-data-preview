@@ -19,20 +19,11 @@ import {
 // fs data parsing imports
 import * as fs from 'fs';
 import * as path from 'path';
-import {Table} from 'apache-arrow';
-import * as avro from 'avsc';
-import * as hjson from 'hjson';
-import * as json5 from 'json5';
-import * as xlsx from 'xlsx';
-import * as yaml from 'js-yaml';
-import * as snappy from 'snappy';
-import * as props from 'properties';
 //import * as parquet from 'parquetjs';
 
-// local ext. imports
+// data preview imports
 import * as config from './config';
 import * as fileUtils from './utils/file.utils';
-import * as jsonUtils from './utils/json.utils';
 import {Logger, LogLevel} from './logger';
 import {dataManager} from './data.manager';
 import {previewManager} from './preview.manager';
