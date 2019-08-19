@@ -379,7 +379,8 @@ export class DataPreview {
   private loadView(viewName: string, url: string): void {
     const fileUri: Uri = Uri.parse(url);
     try {
-      this._logger.debug(`loadView(): loading view... \n ${viewName}`, fileUri.toString(true)); // skip encoding
+      this._logger.debug(`loadView(): loading view... \n ${viewName}`, url); 
+        //fileUri.toString(true)); // skip encoding
       if (url.startsWith('http://') || url.startsWith('https://')) {
         // launch requested remote data view command
         this._logger.debug(`loadView():executeCommand: \n ${viewName}`, url);
