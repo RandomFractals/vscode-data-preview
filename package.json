@@ -344,7 +344,7 @@
     }
   },
   "engines": {
-    "vscode": "^1.35.0",
+    "vscode": "^1.36.0",
     "node": ">=10.2.0"
   },
   "scripts": {
@@ -356,10 +356,10 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.0.8",
-    "tslint": "^5.17.0",
-    "typescript": "^3.5.2",
-    "vscode": "^1.1.34"
+    "@types/node": "^12.7.2",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3",
+    "vscode": "^1.1.36"
   },
   "dependencies": {
     "@finos/perspective": "^0.3.1",
