@@ -156,13 +156,17 @@ export class DataPreview {
 
     // patch view config
     if (viewConfig && viewConfig.hasOwnProperty('view')) {
+      // set new view config plugin attribute
       viewConfig['plugin'] = viewConfig['view'];
       // initilize charts plugin
       this._charts = this.charts;
-      if (viewConfig.view !== 'hypergrid' && !viewConfig.view.startsWith('d3')) {
+      if (viewConfig.view !== 'grid' && viewConfig.view !== 'hypergrid' &&
+          !viewConfig.view.startsWith('d3')) {
         // reset it to highcharts for older ext v.s configs
         this._charts = 'highcharts';
       }
+      // delete deprecated view config property
+      delete viewConfig['view'];
     }
 
     // initialize data preview logger
