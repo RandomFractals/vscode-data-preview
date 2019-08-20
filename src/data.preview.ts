@@ -154,11 +154,15 @@ export class DataPreview {
     this._previewUri = this._uri.with({scheme: 'data'});
     this._title = `${this._fileName}`;
 
-    // initilize charts plugin
-    this._charts = this.charts;
-    if (viewConfig && viewConfig.hasOwnProperty('view') && viewConfig.view.startsWith('d3')) {
-      // reset it to highcharts for older ext v.s configs
-      this._charts = 'highcharts';
+    // patch view config
+    if (viewConfig && viewConfig.hasOwnProperty('view')) {
+      viewConfig['plugin'] = viewConfig['view'];
+      // initilize charts plugin
+      this._charts = this.charts;
+      if (viewConfig.view !== 'hypergrid' && !viewConfig.view.startsWith('d3')) {
+        // reset it to highcharts for older ext v.s configs
+        this._charts = 'highcharts';
+      }
     }
 
     // initialize data preview logger

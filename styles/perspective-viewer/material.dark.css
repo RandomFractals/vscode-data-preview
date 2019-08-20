@@ -70,6 +70,7 @@ perspective-viewer {
   --active-column-selector--height: 45px;
   --column_selector--width: 31px;
   --column_selector--font-size: 16px;
+  --hypergrid--color: #666;
   --hypergrid--padding: 24px;
   --side_panel--padding: 24px 24px 24px 17px;
   --button--padding: 24px 17px 0px 17px;
@@ -98,15 +99,15 @@ perspective-viewer {
   --column_type-string--color: #ff8888;
   --psp-text-field--border-color: #22a0ce;
   --button-hover--color: #22a0ce;
+  --hypergrid--color: #eee;
   --hypergrid-tree-header--background: #2f3136;
+  --hypergrid--background: #2f3136;
   --hypergrid-tree-header--color: #eee;
   --hypergrid-header--background: #2f3136;
   --hypergrid-separator--color: #eee;
   --hypergrid-header--color: #eee;
   --hypergrid-positive--color: #22a0ce;
   --hypergrid-negative--color: #ff8888;
-  --hypergrid-positive--background: #2f3136;
-  --hypergrid-negative--background: #2f3136;
   --hypergrid--font-size: 12px;
   --hypergrid-header--font-size: 12px;
   --hypergrid--font-family: "Open Sans";
@@ -137,12 +138,14 @@ perspective-viewer {
   --d3fc-series-8: #7f7f7f;
   --d3fc-series-9: #bcbd22;
   --d3fc-series-10: #17becf;
-  --d3fc-gradient-full: linear-gradient(#feeb65 0%, #e4521b 22.5%, #4d342f 42.5%, #222222 50%, #1a237e 57.5%, #42b3d5 67.5%, #dcedc8 100%);
-  --d3fc-gradient-positive: linear-gradient(#222222 0%, #1a237e 35%, #42b3d5 70%, #dcedc8 100%);
-  --d3fc-gradient-negative: linear-gradient(#feeb65 0%, #e4521b 35%, #4d342f 70%, #222222 100%);
-  --highcharts-heatmap-gradient-full: linear-gradient(#feeb65 0%, #e4521b 22.5%, #4d342f 42.5%, #222222 50%, #1a237e 57.5%, #42b3d5 67.5%, #dcedc8 100%);
-  --highcharts-heatmap-gradient-positive: linear-gradient(#222222 0%, #1a237e 35%, #42b3d5 70%, #dcedc8 100%);
-  --highcharts-heatmap-gradient-negative: linear-gradient(#feeb65 0%, #e4521b 35%, #4d342f 70%, #222222 100%);
+  --d3fc-full--gradient: linear-gradient(#feeb65 0%, #e4521b 22.5%, #4d342f 42.5%, #222222 50%, #1a237e 57.5%, #42b3d5 67.5%, #dcedc8 100%);
+  --d3fc-positive--gradient: linear-gradient(#222222 0%, #1a237e 35%, #42b3d5 70%, #dcedc8 100%);
+  --d3fc-negative--gradient: linear-gradient(#feeb65 0%, #e4521b 35%, #4d342f 70%, #222222 100%);
+  --highcharts-full--gradient: linear-gradient(#feeb65 0%, #e4521b 22.5%, #4d342f 42.5%, #222222 50%, #1a237e 57.5%, #42b3d5 67.5%, #dcedc8 100%);
+  --highcharts-positive--gradient: linear-gradient(#222222 0%, #1a237e 35%, #42b3d5 70%, #dcedc8 100%);
+  --highcharts-negative--gradient: linear-gradient(#feeb65 0%, #e4521b 35%, #4d342f 70%, #222222 100%);
   --warning--color: #333;
 }
 
+
+/*# sourceMappingURL=material.dark.css.map*/

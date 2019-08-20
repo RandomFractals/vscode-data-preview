@@ -62,6 +62,7 @@ perspective-viewer {
   --active-column-selector--height: 45px;
   --column_selector--width: 31px;
   --column_selector--font-size: 16px;
+  --hypergrid--color: #666;
   --hypergrid--padding: 24px;
   --side_panel--padding: 24px 24px 24px 17px;
   --button--padding: 24px 17px 0px 17px;
@@ -79,3 +80,5 @@ perspective-viewer {
   --d3fc-treedata-axis--lines: none;
 }
 
+
+/*# sourceMappingURL=material.css.map*/
