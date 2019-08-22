@@ -146,13 +146,12 @@ for more info.
 | `.csv` `.tsv` `.txt` `.tab` | text | [perspective](https://github.com/finos/perspective/)/[`perspectiveViewer.load(text)`](https://github.com/finos/perspective/tree/master/packages/perspective-viewer#module_perspective-viewer..PerspectiveViewer+load) | https://en.wikipedia.org/wiki/Comma-separated_values https://en.wikipedia.org/wiki/Tab-separated_values |
 | `.dif` `.ods` `.xls` `.xlsb` `.xlsx` `.xlsm` `.xml` `.html` | binary/text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read()`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on `Excel` file formats |
 
-![Data Preview Data](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-data.png?raw=true 
-"Data Preview Data")
+**See** [Data Manager API](https://github.com/RandomFractals/vscode-data-preview/blob/master/src/data.manager.ts) & [src/data.providers](https://github.com/RandomFractals/vscode-data-preview/tree/master/src/data.providers) folder for data loading and saving imlementation details.
 
 ## Provided Chart 📊 Types
 
 - Area Chart
-- Bar 
+- Bar Chart
 - Candlesick Chart (`d3fc` only))
 - Heatmap
 - Line Chart
