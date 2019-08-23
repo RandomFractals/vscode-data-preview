@@ -29,9 +29,6 @@
 - Save & Load Data View `.config` options
 - Dark & Light Data Preview 🈸 Panel Themes
 
-![Perspective Viewer](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/perspective-viewer.gif?raw=true 
-"Perspective Viewer")
-
 # Next V.
 
 - Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming
