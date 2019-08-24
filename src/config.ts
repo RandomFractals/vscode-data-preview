@@ -15,7 +15,7 @@ export const supportedFilesFilters: any = {
   'Avro': ['avro'],
   'Config': ['config'],
   'Markdown': ['md'],
-  'Properties': ['env', 'properties', 'ini'],
+  'Properties': ['env', 'ini', 'properties'],
   'YAML': ['yml']
 };
 

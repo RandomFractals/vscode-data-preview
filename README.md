@@ -71,11 +71,15 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 
 1. Run `View -> Command Palette...>Data: Preview Data 🈸` command or `Ctrl+Shift+D` in an open 
 `.json` `.config` `.env` `.properties` `.ini` `.yml` or `.csv/.tsv` text  data file document to launch Data Preview panel.
-2. `File -> Save` (`Ctrl+S`) your text data file for immediate updates in an open Data Preview panel.
+2. `File -> Save` (`Ctrl+S`) your text data file for immediate updates in an open Data Preview 🈸 panel.
 3. Right-click on a Binary `.xlsx/.xlsb`, `.arrow` or `.avro` data file in VSCode File Explorer to launch Data Preview panel.
 4. Use exposed `explorer/context`, `editor/title` or `editor/title/context` Preview Data 🈸 or Preview Data on Side context menu options to preview your data files.
 5. Click on the Data View Filename toolbar link to Load saved Data View Grid || Chart 📊 `.config`.
 6. Click on the Data View 🈸 icon to Launch new Data Preview Panel for new view config changes.
+7. Use Open Data File 📤 option from Data View toolbar to launch new Data Preview 🈸.
+
+![Data Preview Open Data File](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-open-file.png?raw=true 
+"Data Preview Open Data File")
 
 ## Data Grid/Filter/Columns UX Tips
 
@@ -144,6 +148,7 @@ for more info.
 | `.dif` `.ods` `.xls` `.xlsb` `.xlsx` `.xlsm` `.xml` `.html` | binary/text | [js-xlsx](https://github.com/SheetJS/js-xlsx)/[`XLSX.read()`](https://github.com/SheetJS/js-xlsx#parsing-functions) | See https://github.com/SheetJS/js-xlsx#file-formats for more info on `Excel` file formats |
 
 **See** [Data Manager API](https://github.com/RandomFractals/vscode-data-preview/blob/master/src/data.manager.ts) & [src/data.providers](https://github.com/RandomFractals/vscode-data-preview/tree/master/src/data.providers) folder for data loading and saving imlementation details.
+
 
 ## Provided Chart 📊 Types
 

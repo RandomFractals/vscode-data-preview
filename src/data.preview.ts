@@ -374,7 +374,7 @@ export class DataPreview {
     });
     if (selectedFiles && selectedFiles.length >= 1) {
       // launch new data preview for the selected data file
-      this.loadView('data.preview', selectedFiles[0].fsPath);
+      this.loadView('data.preview', selectedFiles[0].toString(true)); // skip encoding
     }
   }
 
