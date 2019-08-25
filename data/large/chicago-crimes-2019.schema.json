@@ -1,0 +1,188 @@
+{
+  "fields": [
+    {
+      "name": "ID",
+      "type": {
+        "precision": 2
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Case Number",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 0
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Date",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 1
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Block",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 2
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "IUCR",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 3
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Primary Type",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 4
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Description",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 5
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Location Description",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 6
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Arrest",
+      "type": {},
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Domestic",
+      "type": {},
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Beat",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 32
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "District",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 32
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Ward",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 32
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Community Area",
+      "type": {
+        "isSigned": true,
+        "bitWidth": 32
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "FBI Code",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 7
+      },
+      "nullable": false,
+      "metadata": {}
+    },
+    {
+      "name": "Updated On",
+      "type": {
+        "indices": {
+          "isSigned": false,
+          "bitWidth": 32
+        },
+        "dictionary": {},
+        "isOrdered": false,
+        "id": 8
+      },
+      "nullable": false,
+      "metadata": {}
+    }
+  ],
+  "metadata": {},
+  "dictionaries": {}
+}
