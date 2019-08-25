@@ -323,7 +323,7 @@
         },
         "data.preview.create.json.schema": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Create '.schema.json' file for Arrow & Avro metadata binary data formats"
         },
         "data.preview.openSavedFileEditor": {
