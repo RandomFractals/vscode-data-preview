@@ -162,6 +162,9 @@ for more info.
 - Sunburst
 - Tree Map
 
+![Data Preview Chart Types](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-chart-types.png?raw=true 
+"Data Preview Chart Types")
+
 ## Supported Filter Functions
 
 - `<, <=, ==, !=, >, >=` for dates and number columns/fields
