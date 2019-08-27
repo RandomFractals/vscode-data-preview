@@ -357,16 +357,16 @@
   "devDependencies": {
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
-    "tslint": "^5.18.0",
+    "tslint": "^5.19.0",
     "typescript": "^3.5.3",
     "vscode": "^1.1.36"
   },
   "dependencies": {
-    "@finos/perspective": "^0.3.7",
-    "@finos/perspective-viewer": "^0.3.7",
-    "@finos/perspective-viewer-d3fc": "^0.3.7",
-    "@finos/perspective-viewer-highcharts": "^0.3.7",
-    "@finos/perspective-viewer-hypergrid": "^0.3.7",
+    "@finos/perspective": "^0.3.8",
+    "@finos/perspective-viewer": "^0.3.8",
+    "@finos/perspective-viewer-d3fc": "^0.3.8",
+    "@finos/perspective-viewer-highcharts": "^0.3.8",
+    "@finos/perspective-viewer-hypergrid": "^0.3.8",
     "apache-arrow": "^0.14.1",
     "avsc": "^5.4.13",
     "hjson": "^3.1.2",
