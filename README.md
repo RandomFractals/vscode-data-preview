@@ -241,4 +241,13 @@ to generate `VSIX` Data Preview extension package from our latest for local dev 
 
 Any and all test, code or feedback contributions are welcome. 
 
-Open an issue or create a pull request to make this Data Preview 🈸 extension work better for all. 
+Open an [issue](https://github.com/RandomFractals/vscode-data-preview/issues) or create a pull request to make this Data Preview 🈸 extension work better for all.
+
+# Backers
+
+| [<img src="https://sheetjs.com/sketch128.png" width="80">](https://sheetjs.com/) | [<img src="https://avatars2.githubusercontent.com/u/10234615?s=400&v=4" width="80">](https://amanhimself.dev/) |
+|:-:|:-:|
+| [SheetJS](https://sheetjs.com/) | [Aman Mittal](https://amanhimself.dev/) |
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F812DLR)
+
