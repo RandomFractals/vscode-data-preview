@@ -154,10 +154,9 @@ export class DataPreview {
     this._previewUri = this._uri.with({scheme: 'data'});
     this._title = `${this._fileName}`;
 
-    // patch view config
+    // parse view config
+    viewConfig = this.parseConfig(viewConfig);
     if (viewConfig && viewConfig.hasOwnProperty('view')) {
-      // set new view config plugin attribute
-      viewConfig['plugin'] = viewConfig['view'];
       // initilize charts plugin
       this._charts = this.charts;
       if (viewConfig.view !== 'grid' && viewConfig.view !== 'hypergrid' &&
@@ -165,8 +164,6 @@ export class DataPreview {
         // reset it to highcharts for older ext v.s configs
         this._charts = 'highcharts';
       }
-      // delete deprecated view config property
-      delete viewConfig['view'];
     }
 
     // initialize data preview logger
@@ -480,7 +477,7 @@ export class DataPreview {
     else if (viewConfig.hasOwnProperty('view') && // not a blank view config
       JSON.stringify(this._viewConfig) !== JSON.stringify(viewConfig)) {
       // update view config for the loaded data table
-      this._viewConfig = viewConfig;
+      this._viewConfig = this.parseConfig(viewConfig);
       // this._logger.debug(`updateConfig(${this._dataTable}): config:`, this._viewConfig);
       if (this._dataTable.length > 0) {
         // save updated config in data views for reload
@@ -598,7 +595,7 @@ export class DataPreview {
     this._logger.debug('loadConfigFromFile(): loading view config:', configFilePath);
     if (this._uri.fsPath.indexOf(viewConfig.dataFileName) >=0) {
       // save loaded view config, and data table reference if present
-      this._viewConfig = viewConfig.config;
+      this._viewConfig = this.parseConfig(viewConfig.config);
       this._dataTable = (viewConfig.dataTable === undefined) ? '': viewConfig.dataTable;
       this._logger.debug('loadConfigFromFile(): loaded view config:', this._viewConfig);
       if (refreshData) {
@@ -609,6 +606,34 @@ export class DataPreview {
     else if (showErrors) {
       window.showErrorMessage(`Config data file '${viewConfig.dataFileName}' doesn't match '${this._fileName}'!`);
     }
+  }
+
+  /**
+   * Parses data view config by converting config string properties 
+   * to arrays and objects for the data viewer web component attributes.
+   * @param viewConfig View config object to parse.
+   */
+  private parseConfig(viewConfig: any): any {
+    // patch view config
+    if (viewConfig.hasOwnProperty('view')) {
+      // set new view config plugin attribute
+      viewConfig['plugin'] = viewConfig['view'];
+      // delete deprecated view config property
+      // delete viewConfig['view'];
+    }
+    // create clean view config instance
+    const config: any = {};
+    Object.keys(viewConfig).forEach(key => {
+      config[key] = viewConfig[key];
+      if (typeof viewConfig[key] === 'string') {
+        const attribute: string = String(viewConfig[key]);
+        if (attribute.startsWith('{') || attribute.startsWith('[')) {
+          // parse config object or array
+          config[key] = JSON.parse(attribute);
+        }
+      }
+    });
+    return config;
   }
 
   /*------------------------------ Get/Save Data Methods ---------------------------------------*/
