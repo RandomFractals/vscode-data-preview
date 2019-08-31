@@ -565,7 +565,7 @@
             const data = {
               dataFileName: dataFileName,
               dataTable: dataTable,
-              config: viewConfig
+              config: parseConfig(viewConfig)
             };
             if (dataUrl.startsWith('http')) {
               // append remote data url
@@ -596,6 +596,29 @@
             break;
         }
       } // end of saveData()
+
+      /**
+       * Parses data view config by converting config string properties 
+       * to arrays and objects for the data viewer web component attributes.
+       * @param viewConfig View config object to parse.
+       */
+      function parseConfig(viewConfig) {
+        // set new view config plugin attribute
+        viewConfig['plugin'] = viewConfig['view'];
+        // create clean view config instance
+        const config = {};
+        Object.keys(viewConfig).forEach(key => {
+          config[key] = viewConfig[key];
+          if (typeof viewConfig[key] === 'string') {
+            const attribute = String(viewConfig[key]);
+            if (attribute.startsWith('{') || attribute.startsWith('[')) {
+              // parse config object or array
+              config[key] = JSON.parse(attribute);
+            }
+          }
+        });
+        return config;
+      }
 
       /**
        * Posts binary Arrow data for saving.
