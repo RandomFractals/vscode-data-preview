@@ -249,5 +249,8 @@ Open an [issue](https://github.com/RandomFractals/vscode-data-preview/issues) or
 |:-:|:-:|
 | [SheetJS](https://sheetjs.com/) | [Aman Mittal](https://amanhimself.dev/) |
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F812DLR)
-
+<a href='https://ko-fi.com/F1F812DLR' target='_blank'>
+  <img height='36' style='border:0px;height:36px;' border='0'
+    src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' 
+    alt='support me on ko-fi.com' />
+</a>
