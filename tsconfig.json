@@ -24,7 +24,6 @@
   "exclude": [
     "node_modules", 
     ".vscode-test",
-    "templates",
-    "src/test/examples",
+    "templates"
   ]
 }
