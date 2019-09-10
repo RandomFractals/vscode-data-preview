@@ -104,7 +104,7 @@ export class DataManager implements IDataManager {
   
   // singleton instance
   private static _instance: DataManager;
-  private _dataProviders: {}; // loaded data providers map
+  private _dataProviders: Map<string, IDataProvider>;
   private _logger: Logger = new Logger('data.manager:', config.logLevel);
 
   /**
@@ -132,7 +132,7 @@ export class DataManager implements IDataManager {
   private loadDataProviders(): any {
     this._logger.debug('loadDataProviders(): loading data providers...');
     // create data provider instances for the supported data formats
-    const dataProviders: any = {};
+    const dataProviders: Map<string, IDataProvider> = new Map<string, IDataProvider>();
     this.addDataProvider(dataProviders, new AvroDataProvider());
     this.addDataProvider(dataProviders, new ArrowDataProvider());
     this.addDataProvider(dataProviders, new ExcelDataProvider());
@@ -152,9 +152,10 @@ export class DataManager implements IDataManager {
    * @param dataProviderMap Data provider map to update.
    * @param dataProvider Data provider to add.
    */
-  private addDataProvider(dataProviderMap: any, dataProvider: IDataProvider): void {
+  private addDataProvider(dataProviderMap: Map<string, IDataProvider>, 
+    dataProvider: IDataProvider): void {
     dataProvider.supportedDataFileTypes.forEach(fileType => {
-      dataProviderMap[fileType] = dataProvider;
+      dataProviderMap.set(fileType, dataProvider);
     });
   }
 
@@ -163,8 +164,8 @@ export class DataManager implements IDataManager {
    * @param fileType The data file mime type or extension to get data provider instance for.
    */
   public getDataProvider(fileType: string): IDataProvider {
-    if (this._dataProviders.hasOwnProperty(fileType)) {
-      return this._dataProviders[fileType];
+    if (this._dataProviders.has(fileType)) {
+      return this._dataProviders.get(fileType);
     }
     const errorMessage: string = `No matching Data Provider found for the File Type: '${fileType}'`;
     window.showErrorMessage(errorMessage);
