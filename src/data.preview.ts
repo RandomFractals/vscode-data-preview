@@ -681,7 +681,7 @@ export class DataPreview {
    */
   private logDataStats(dataRows: Array<any>, dataSchema: any = null): void {
     // get data file size in bytes
-    this._fileSize = fileUtils.getFileSize(this._dataUrl);
+    this._fileSize = fileUtils.getFileSize(this._uri.fsPath); //this._dataUrl);
     this._rowCount = dataRows.length;
     this.updateStats(this._columns, this._rowCount);
     if (this.logLevel === 'debug') {

@@ -16,7 +16,7 @@ const logger: Logger = new Logger(`file.utils:`, config.logLevel);
 export function readDataFile(dataFilePath: string, encoding:string = null) {
   let data: any = '';
   const fileName: string = path.basename(dataFilePath);
-  const fileUri: Uri = Uri.parse(dataFilePath);
+  const fileUri: Uri = Uri.file(dataFilePath); // .parse(dataFilePath);
   logger.debug('readDataFile():', dataFilePath);
   if (!config.supportedDataFiles.test(fileName)) {
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
@@ -36,7 +36,7 @@ export function readDataFile(dataFilePath: string, encoding:string = null) {
     workspace.findFiles(`**/${dataFilePath}`).then(files => {
       if (files.length > 0 && fs.existsSync(files[0].fsPath)) {
         // read workspace file data
-        data = readLocalData(dataFilePath, encoding);
+        data = readLocalData(files[0].fsPath, encoding);
       } else {
         window.showErrorMessage(`${dataFilePath} file doesn't exist!`);
       }
@@ -51,7 +51,7 @@ export function readDataFile(dataFilePath: string, encoding:string = null) {
  */
 export function getFileSize(dataFilePath: string): number {
   let fileSize: number = -1;
-  const fileUri: Uri = Uri.parse(dataFilePath);
+  const fileUri: Uri = Uri.file(dataFilePath); //.parse(dataFilePath);
   if (fs.existsSync(fileUri.fsPath)) {
     const stats: fs.Stats = fs.statSync(fileUri.fsPath);
     fileSize = stats.size;
