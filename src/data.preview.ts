@@ -98,7 +98,6 @@ export class DataPreview {
   private _fileName: string;
   private _fileExtension: string;
   private _fileSize: number;
-  private _title: string;
   private _html: string;
   private _panel: WebviewPanel;
   private _status: StatusBarItem;
@@ -152,7 +151,6 @@ export class DataPreview {
     this._fileName = path.basename(uri.fsPath);    
     this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
     this._previewUri = this._uri.with({scheme: 'data'});
-    this._title = `${this._fileName}`;
 
     // parse view config
     viewConfig = this.parseConfig(viewConfig);
@@ -222,7 +220,7 @@ export class DataPreview {
   private initWebview(viewType: string, viewColumn: ViewColumn): void {    
     if (!this._panel) {
       // create new webview panel
-      this._panel = window.createWebviewPanel(viewType, this._title, viewColumn, this.getWebviewOptions());
+      this._panel = window.createWebviewPanel(viewType, this._fileName, viewColumn, this.getWebviewOptions());
       this._panel.iconPath = Uri.file(path.join(this._extensionPath, './images/data-preview.svg'));
     }
     this._logger.debug('initWebview(): data.view created!');
