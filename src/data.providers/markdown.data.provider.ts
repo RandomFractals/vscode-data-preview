@@ -32,11 +32,11 @@ export class MarkdownDataProvider implements IDataProvider {
    * @param parseOptions Data parse options.
    * @param loadData Load data callback.
    */
-  public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
+  public async getData(dataUrl: string, parseOptions: any, loadData: Function): Promise<void> {
     let content: string = '';
     try {
       // read markdown file content
-      content = fileUtils.readDataFile(dataUrl, 'utf8');
+      content = String(await fileUtils.readDataFile(dataUrl, 'utf8'));
       
       // convert it to to CSV for loading into data view
       content = this.markdownToCsv(dataUrl, content, parseOptions.dataTable);

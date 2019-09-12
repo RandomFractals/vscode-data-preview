@@ -30,10 +30,10 @@ export class HjsonDataProvider implements IDataProvider {
    * @param parseOptions Data parse options.
    * @param loadData Load data callback.
    */
-  public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
+  public async getData(dataUrl: string, parseOptions: any, loadData: Function): Promise<void> {
     let data: any = [];
     try {
-      let content: string = fileUtils.readDataFile(dataUrl, 'utf8');
+      let content: string = String(await fileUtils.readDataFile(dataUrl, 'utf8'));
       data = hjson.parse(content);
     }
     catch (error) {

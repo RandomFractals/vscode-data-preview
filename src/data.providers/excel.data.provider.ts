@@ -34,51 +34,53 @@ export class ExcelDataProvider implements IDataProvider {
    * @param parseOptions Data parse options.
    * @param loadData Load data callback.
    */
-  public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
-    // load Excel workbook
+  public async getData(dataUrl: string, parseOptions: any, loadData: Function): Promise<void> {
     const dataFileName: string = path.basename(dataUrl);
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
-    const dataBuffer: Buffer = fileUtils.readDataFile(dataUrl);
-    const workbook: xlsx.WorkBook = xlsx.read(dataBuffer, {
-      cellDates: true,
+    // read Excel file data
+    await fileUtils.readDataFile(dataUrl, null).then((dataBuffer: Buffer) => {
+      // create Excel 'workbook'
+      const workbook: xlsx.WorkBook = xlsx.read(dataBuffer, {
+        cellDates: true,
+      });
+
+      // load data sheets
+      let dataRows: Array<any> = [];
+      this.dataTableNamesMap[dataUrl] = [];
+      if (workbook.SheetNames.length > 0) {
+        if (workbook.SheetNames.length > 1) {
+          // cache sheet names
+          this.dataTableNamesMap[dataUrl] = workbook.SheetNames;
+          this.logger.debug(`getData(): file: ${dataFileName} sheetNames:`, workbook.SheetNames);
+        }
+
+        // determine spreadsheet to load
+        let sheetName:string = workbook.SheetNames[0];
+        if (parseOptions.dataTable.length > 0 && 
+            workbook.SheetNames.indexOf(parseOptions.dataTable) >= 0) {
+          // reset to requested table name
+          sheetName = parseOptions.dataTable;
+        }
+        
+        // get worksheet data row objects array
+        const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
+        dataRows = xlsx.utils.sheet_to_json(worksheet);
+
+        // create json data file for binary Excel file text data preview
+        if (parseOptions.createJsonFiles && config.supportedBinaryDataFiles.test(dataFileName)) {
+          // create json data file path
+          let jsonFilePath: string = dataUrl.replace(dataFileType, '.json');
+          if (parseOptions.dataTable.length > 0 && workbook.SheetNames.length > 1) {          
+            // append table name to the generated json data file name
+            jsonFilePath = jsonFilePath.replace('.json', `-${parseOptions.dataTable}.json`);
+          }
+          if (!fs.existsSync(jsonFilePath)) {
+            fileUtils.createJsonFile(jsonFilePath, dataRows);
+          }
+        }
+      }    
+      loadData(dataRows);
     });
-
-    // load data sheets
-    let dataRows: Array<any> = [];
-    this.dataTableNamesMap[dataUrl] = [];
-    if (workbook.SheetNames.length > 0) {
-      if (workbook.SheetNames.length > 1) {
-        // cache sheet names
-        this.dataTableNamesMap[dataUrl] = workbook.SheetNames;
-        this.logger.debug(`getData(): file: ${dataFileName} sheetNames:`, workbook.SheetNames);
-      }
-
-      // determine spreadsheet to load
-      let sheetName:string = workbook.SheetNames[0];
-      if (parseOptions.dataTable.length > 0 && 
-          workbook.SheetNames.indexOf(parseOptions.dataTable) >= 0) {
-        // reset to requested table name
-        sheetName = parseOptions.dataTable;
-      }
-      
-      // get worksheet data row objects array
-      const worksheet: xlsx.Sheet = workbook.Sheets[sheetName];
-      dataRows = xlsx.utils.sheet_to_json(worksheet);
-
-      // create json data file for binary Excel file text data preview
-      if (parseOptions.createJsonFiles && config.supportedBinaryDataFiles.test(dataFileName)) {
-        // create json data file path
-        let jsonFilePath: string = dataUrl.replace(dataFileType, '.json');
-        if (parseOptions.dataTable.length > 0 && workbook.SheetNames.length > 1) {          
-          // append table name to the generated json data file name
-          jsonFilePath = jsonFilePath.replace('.json', `-${parseOptions.dataTable}.json`);
-        }
-        if (!fs.existsSync(jsonFilePath)) {
-          fileUtils.createJsonFile(jsonFilePath, dataRows);
-        }
-      }
-    }    
-    loadData(dataRows);
   } // end of getData()
 
   /**

@@ -32,57 +32,57 @@ export class ArrowDataProvider implements IDataProvider {
    * @param parseOptions Data parse options.
    * @param loadData Load data callback.
    */
-  public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
+  public async getData(dataUrl: string, parseOptions: any, loadData: Function): Promise<void> {
     const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
 
-    // get binary arrow data
-    const dataBuffer: Buffer = fileUtils.readDataFile(dataUrl);
+    // read binary Arrow data
+    await fileUtils.readDataFile(dataUrl, null).then((dataBuffer: Buffer) => {
+      // create typed data array
+      const dataArray: Uint8Array = new Uint8Array(dataBuffer);
+      this.logger.debug('getData(): data size in bytes:', dataArray.byteLength.toLocaleString());
 
-    // create typed data array
-    const dataArray: Uint8Array = new Uint8Array(dataBuffer);
-    this.logger.debug('getData(): data size in bytes:', dataArray.byteLength.toLocaleString());
+      // create arrow table
+      const dataTable: Table = Table.from(dataArray);
 
-    // create arrow table
-    const dataTable: Table = Table.from(dataArray);
+      // remap arrow data schema to columns for data viewer
+      const dataSchema = {};
+      dataTable.schema.fields.map(field => {
+        let fieldType: string = field.type.toString();
+        const typesIndex: number = fieldType.indexOf('<');
+        if (typesIndex > 0) {
+          fieldType = fieldType.substring(0, typesIndex);
+        }
+        dataSchema[field.name] = config.dataTypes[fieldType];
+      });
+      // cache arrow data view schema
+      this.dataSchemaMap[dataUrl] = dataSchema;
 
-    // remap arrow data schema to columns for data viewer
-    const dataSchema = {};
-    dataTable.schema.fields.map(field => {
-      let fieldType: string = field.type.toString();
-      const typesIndex: number = fieldType.indexOf('<');
-      if (typesIndex > 0) {
-        fieldType = fieldType.substring(0, typesIndex);
+      // create Arrow schema.json file for data schema text data preview
+      const dataSchemaFilePath: string = dataUrl.replace(dataFileType, '.schema.json');
+      if (parseOptions.createJsonSchema && !fs.existsSync(dataSchemaFilePath)) {
+        fileUtils.createJsonFile(dataSchemaFilePath, dataTable.schema);
       }
-      dataSchema[field.name] = config.dataTypes[fieldType];
+
+      // create arrow data.json for text arrow data preview
+      let dataRows: Array<any> = [];
+      const jsonFilePath: string = dataUrl.replace(dataFileType, '.json');
+      if (parseOptions.createJsonFiles && !fs.existsSync(jsonFilePath)) {
+        // convert arrow table data to array of objects (happens only on the 1st run :)
+        dataRows = Array(dataTable.length);
+        const fields = dataTable.schema.fields.map(field => field.name);
+        for (let i=0, n=dataRows.length; i<n; ++i) {
+          const proto = {};
+          fields.forEach((fieldName, index) => {
+            const column = dataTable.getColumnAt(index);
+            proto[fieldName] = column.get(i);
+          });
+          dataRows[i] = proto;
+        }
+        fileUtils.createJsonFile(jsonFilePath, dataRows);
+      }
+
+      loadData(dataArray);
     });
-    // cache arrow data view schema
-    this.dataSchemaMap[dataUrl] = dataSchema;
-
-    // create Arrow schema.json file for data schema text data preview
-    const dataSchemaFilePath: string = dataUrl.replace(dataFileType, '.schema.json');
-    if (parseOptions.createJsonSchema && !fs.existsSync(dataSchemaFilePath)) {
-      fileUtils.createJsonFile(dataSchemaFilePath, dataTable.schema);
-    }
-
-    // create arrow data.json for text arrow data preview
-    let dataRows: Array<any> = [];
-    const jsonFilePath: string = dataUrl.replace(dataFileType, '.json');
-    if (parseOptions.createJsonFiles && !fs.existsSync(jsonFilePath)) {
-      // convert arrow table data to array of objects (happens only on the 1st run :)
-      dataRows = Array(dataTable.length);
-      const fields = dataTable.schema.fields.map(field => field.name);
-      for (let i=0, n=dataRows.length; i<n; ++i) {
-        const proto = {};
-        fields.forEach((fieldName, index) => {
-          const column = dataTable.getColumnAt(index);
-          proto[fieldName] = column.get(i);
-        });
-        dataRows[i] = proto;
-      }
-      fileUtils.createJsonFile(jsonFilePath, dataRows);
-    }
-
-    loadData(dataArray);
   } // end of getData()
 
   /**

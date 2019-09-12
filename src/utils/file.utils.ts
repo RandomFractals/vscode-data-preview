@@ -1,10 +1,12 @@
 import * as fs from 'fs';
+import * as util from 'util';
 import * as request from 'superagent';
 import * as path from 'path';
 import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
 import {window, workspace, Uri} from 'vscode';
 
+const readFileAsync = util.promisify(fs.readFile);
 const fileSizeLabels: string[] = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 const logger: Logger = new Logger(`file.utils:`, config.logLevel);
 
@@ -13,7 +15,7 @@ const logger: Logger = new Logger(`file.utils:`, config.logLevel);
  * @param dataFilePath Data file path or public data source url.
  * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
  */
-export function readDataFile(dataFilePath: string, encoding:string = null) {
+export async function readDataFile(dataFilePath: string, encoding:string = null): Promise<string | Buffer> {
   let data: any = '';
   const fileName: string = path.basename(dataFilePath);
   const fileUri: Uri = Uri.file(dataFilePath); // .parse(dataFilePath);
@@ -29,7 +31,7 @@ export function readDataFile(dataFilePath: string, encoding:string = null) {
   } 
   else if (fs.existsSync(fileUri.fsPath)) {
     // read local data file via fs.readFile() api
-    data = readLocalData(fileUri.fsPath, encoding);
+    data = await readLocalData(fileUri.fsPath, encoding);
   } 
   else {
     // try to find requested data file(s) in open workspace
@@ -102,12 +104,10 @@ export function createJsonFile(jsonFilePath: string, jsonData: any): void {
  * TODO: change this to read data async later
  * TODO: rework this to using fs.ReadStream for large data files support later
  */
-function readLocalData(dataFilePath: string, encoding: string = null): any {
-  let data: any = '';
+async function readLocalData(dataFilePath: string, encoding: string = null): Promise<string | Buffer> {
   logger.debug('readLocalData():', dataFilePath);
   // read local data file via fs read file api
-  data = fs.readFileSync(dataFilePath, encoding);
-  return data;
+  return await readFileAsync(dataFilePath, encoding);
 }
 
 /**
