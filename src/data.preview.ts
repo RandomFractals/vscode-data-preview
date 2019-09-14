@@ -345,9 +345,11 @@ export class DataPreview {
     const dataLoadTime: number = Math.round(
       (this._dataLoadEndTime.getTime() - this._dataLoadStartTime.getTime()) / 1000 // msecs
     );
-    const fileSizeString: string = fileUtils.formatBytes(this._fileSize, 2); // decimals
-    this.updateStatus(
-      `${dataStats}\tFileSize: ${fileSizeString}\tLoadTime: ${dataLoadTime.toLocaleString()} sec`);
+    let fileSizeString: string = '';
+    if (!this._isRemoteData) {
+      fileSizeString = `\tFileSize: ${fileUtils.formatBytes(this._fileSize, 2)}`; // decimals
+    }
+    this.updateStatus(`${dataStats}${fileSizeString}\tLoadTime: ${dataLoadTime.toLocaleString()} sec`);
   }
 
   /**
