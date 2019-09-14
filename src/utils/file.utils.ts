@@ -98,8 +98,6 @@ export function createJsonFile(jsonFilePath: string, jsonData: any): void {
  * Reads local file data.
  * @param dataFilePath Data file path.
  * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
- * TODO: change this to read data async later
- * TODO: rework this to using fs.ReadStream for large data files support later
  */
 async function readLocalData(dataFilePath: string, encoding: string = null): Promise<string | Buffer> {
   logger.debug('readLocalData():', dataFilePath);
@@ -111,8 +109,6 @@ async function readLocalData(dataFilePath: string, encoding: string = null): Pro
  * Reads remote file data.
  * @param dataUrl Data file url.
  * @param encoding Data file encoding: 'utf8' for text data files, null for binary data reads.
- * TODO: change this to read data async later
- * TODO: rework this to using streaming api for large data files support later
  */
 async function readRemoteData(dataUrl: string, encoding: string = null): Promise<string | Buffer> {
   logger.debug('readRemoteData(): url:', dataUrl);
