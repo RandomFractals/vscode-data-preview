@@ -493,24 +493,19 @@ export class DataPreview {
     this._panel.reveal(this._panel.viewColumn, true); // preserve focus
     this._status.show();
     this.updateStatus('Loading data...');
-
     if (dataTable.length >  0) {
       // save requested data table
       this._dataTable = dataTable;
     }
-
-    // read and send updated data to webview
-    // workspace.openTextDocument(this.uri).then(document => {
-      this._logger.debug(`refresh(): \n dataTable: '${this._dataTable}' \n dataUrl:`, this._dataUrl);
-      //const textData: string = document.getText();
-      try {
-        this.getData(this._uri.fsPath, this._dataTable); //this._dataUrl, this._dataTable);
-      }
-      catch (error) {
-        this._logger.error(`refresh(${this._dataTable}): Error:\n`, error.message);
-        this.webview.postMessage({error: error});
-      }
-    // });
+    const dataUrl: string = (this._isRemoteData) ? this._dataUrl: this._uri.fsPath; // local data file path
+    this._logger.debug(`refresh(): \n dataTable: '${this._dataTable}' \n dataUrl:`, dataUrl);
+    try {
+      this.getData(dataUrl, this._dataTable);
+    }
+    catch (error) {
+      this._logger.error(`refresh(${this._dataTable}): Error:\n`, error.message);
+      this.webview.postMessage({error: error});
+    }
   } // end of refresh()
 
   /**
