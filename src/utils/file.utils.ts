@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as util from 'util';
-import * as request from 'superagent';
+import * as superagent from 'superagent';
 import * as path from 'path';
 import * as config from '../config';
 import {Logger, LogLevel} from '../logger';
@@ -24,10 +24,7 @@ export async function readDataFile(dataFilePath: string, encoding:string = null)
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
   }
   else if (dataFilePath.startsWith('http://') || dataFilePath.startsWith('https://')) {
-    window.showInformationMessage('Remote data loading coming soon!');
-    // TODO: finish this part with remote data read async
-    data = readRemoteData(dataFilePath, encoding);
-    // logger.debug('readDataFile(): data:\n', data);
+    data = await readRemoteData(dataFilePath, encoding);
   } 
   else if (fs.existsSync(fileUri.fsPath)) {
     // read local data file via fs.readFile() api
@@ -117,39 +114,14 @@ async function readLocalData(dataFilePath: string, encoding: string = null): Pro
  * TODO: change this to read data async later
  * TODO: rework this to using streaming api for large data files support later
  */
-function readRemoteData(dataUrl: string, encoding: string = null): any {
-  let data: any = '';
+async function readRemoteData(dataUrl: string, encoding: string = null): Promise<string | Buffer> {
   logger.debug('readRemoteData(): url:', dataUrl);
-  spawn(function *() {
-    try {
-      const response: any = yield Promise.resolve(request.get(dataUrl));
-      data = response.text;
-      // logger.debug('readRemoteData(): data:\n', data);
-    }
-    catch (error) {
-      data = '';
-      console.error(error);
-    }
-  });
-  return data;
-}
-
-function spawn(generatorFunc) {
-  function continuer(verb, arg) {
-    var result;
-    try {
-      result = generator[verb](arg);
-    } catch (err) {
-      return Promise.reject(err);
-    }
-    if (result.done) {
-      return result.value;
-    } else {
-      return Promise.resolve(result.value).then(onFulfilled, onRejected);
-    }
+  if (encoding) { // must be text request
+    return await superagent.get(dataUrl).then(response => response.text);
+  } 
+  else { // binary data request
+    return await superagent.get(dataUrl)
+      .buffer(true).parse(superagent.parse.image)
+      .then(response => response.body);
   }
-  var generator = generatorFunc();
-  var onFulfilled = continuer.bind(continuer, "next");
-  var onRejected = continuer.bind(continuer, "throw");
-  return onFulfilled();
 }
