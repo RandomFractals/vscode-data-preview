@@ -78,7 +78,7 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 4. Use exposed `explorer/context`, `editor/title` or `editor/title/context` Preview Data 🈸 or Preview Data on Side context menu options to preview your data files.
 5. Click on the Data View Filename toolbar link to Load saved Data View Grid || Chart 📊 `.config`.
 6. Click on the Data View 🈸 icon to Launch new Data Preview Panel for new view config changes.
-7. Use Open Data File 📤 option from Data View toolbar to launch new Data Preview 🈸.
+7. Use Open Data File or URL 📤 option from Data View toolbar to launch new Data Preview 🈸.
 
 ![Data Preview Open Data File](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-open-file.png?raw=true 
 "Data Preview Open Data File")
