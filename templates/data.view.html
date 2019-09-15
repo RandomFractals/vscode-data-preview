@@ -567,9 +567,9 @@
               dataTable: dataTable,
               config: parseConfig(viewConfig)
             };
-            if (dataUrl.startsWith('http')) {
-              // append remote data url
-              data['dataUrl'] = dataUrl;
+            if (dataUrl.startsWith('http://') || dataUrl.startsWith('https://')) {
+              // append remote data uri
+              data['dataUri'] = dataUrl;
             }
             postData(data, dataFileType);
             break;
