@@ -720,14 +720,22 @@ export class DataPreview {
    * @param fileType Data file type.
    */
   private async saveData(fileData: any, fileType: string): Promise<void> {
-    let dataFilePath: string = this._uri.fsPath.replace(this._fileExtension, '');
+    let dataFileName: string = this._fileName.replace(this._fileExtension, '');
     if (this._dataTable.length > 0) {
       // append data table name to new config or data export file name
-      dataFilePath += `-${this._dataTable}`;
+      dataFileName += `-${this._dataTable}`;
     }
-
     // add requested data file extension
-    dataFilePath += fileType;
+    dataFileName += fileType;
+
+    // create full data file path for saving data
+    let dataFilePath: string = path.dirname(this._uri.fsPath);
+    const workspaceFolders: Array<WorkspaceFolder> = workspace.workspaceFolders;
+    if (this._isRemoteData && workspaceFolders && workspaceFolders.length > 0) {
+      // use 'rootPath' workspace folder for saving remote data file
+      dataFilePath = workspace.workspaceFolders[0].uri.fsPath;
+    }
+    dataFilePath = path.join(dataFilePath, dataFileName);
     this._logger.debug('saveData(): saving data file:', dataFilePath);
 
     // display save file dialog
