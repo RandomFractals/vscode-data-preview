@@ -55,6 +55,22 @@ export function activate(context: ExtensionContext) {
     createDataPreviewCommand('data.preview.on.side', 'data.preview', extensionPath, dataViewTemplate);
   context.subscriptions.push(dataWebviewOnSide);
 
+  // add Preview Remote data command
+  const dataWebviewRemote: Disposable = commands.registerCommand('data.preview.remote', () => {
+    window.showInputBox({
+      ignoreFocusOut: true,
+      placeHolder: 'https://',
+      prompt: 'Enter remote data url'
+    }).then((dataUrl: string) => {
+      if (dataUrl && dataUrl !== undefined && dataUrl.length > 0) {
+        const dataUri: Uri = Uri.parse(dataUrl);
+        // launch new data preview
+        commands.executeCommand('data.preview', dataUri);
+      }  
+    });
+  });
+  context.subscriptions.push(dataWebviewRemote);
+
   // refresh associated preview on data file save
   workspace.onDidSaveTextDocument((document: TextDocument) => {
     if (isDataFile(document)) {

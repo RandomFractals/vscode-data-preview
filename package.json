@@ -246,6 +246,11 @@
           "light": "./images/data-preview-side.svg",
           "dark": "./images/data-preview-side-dark.svg"
         }
+      },
+      {
+        "command": "data.preview.remote",
+        "title": "Preview Remote Data",
+        "category": "Data"
       }
     ],
     "keybindings": [
@@ -256,6 +261,10 @@
       {
         "command": "data.preview.on.side",
         "key": "ctrl+alt+s d"
+      },
+      {
+        "command": "data.preview.remote",
+        "key": "ctrl+shift+r"
       }
     ],
     "menus": {

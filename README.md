@@ -71,7 +71,7 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 
 ## Data Preview 🈸 Launch Tips
 
-1. Run `View -> Command Palette...>Data: Preview Data 🈸` command or `Ctrl+Shift+D` in an open 
+1. Run `View -> Command Palette...>Data: Preview Data` command or `Ctrl+Shift+D` in an open 
 `.json` `.config` `.env` `.properties` `.ini` `.yml` or `.csv/.tsv` text  data file document to launch Data Preview panel.
 2. `File -> Save` (`Ctrl+S`) your text data file for immediate updates in an open Data Preview 🈸 panel.
 3. Right-click on a Binary `.xlsx/.xlsb`, `.arrow` or `.avro` data file in VSCode File Explorer to launch Data Preview panel.
@@ -79,6 +79,8 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 5. Click on the Data View Filename toolbar link to Load saved Data View Grid || Chart 📊 `.config`.
 6. Click on the Data View 🈸 icon to Launch new Data Preview Panel for new view config changes.
 7. Use Open Data File or URL 📤 option from Data View toolbar to launch new Data Preview 🈸.
+8. Run `View -> Command Palette...>Data: Preview Remote Data` command or `Ctrl+Shift+R`
+to launch Data Preview for remote `http(s)` data files.
 
 ![Data Preview Open Data File](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview-open-file.png?raw=true 
 "Data Preview Open Data File")
