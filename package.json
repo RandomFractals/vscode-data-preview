@@ -375,11 +375,11 @@
     "vscode": "^1.1.36"
   },
   "dependencies": {
-    "@finos/perspective": "^0.3.8",
-    "@finos/perspective-viewer": "^0.3.8",
-    "@finos/perspective-viewer-d3fc": "^0.3.8",
-    "@finos/perspective-viewer-highcharts": "^0.3.8",
-    "@finos/perspective-viewer-hypergrid": "^0.3.8",
+    "@finos/perspective": "^0.3.9",
+    "@finos/perspective-viewer": "^0.3.9",
+    "@finos/perspective-viewer-d3fc": "^0.3.9",
+    "@finos/perspective-viewer-highcharts": "^0.3.9",
+    "@finos/perspective-viewer-hypergrid": "^0.3.9",
     "apache-arrow": "^0.14.1",
     "avsc": "^5.4.13",
     "hjson": "^3.1.2",
