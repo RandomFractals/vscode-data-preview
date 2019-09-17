@@ -23,7 +23,7 @@ export async function readDataFile(dataFilePath: string, encoding:string = null)
   if (!config.supportedDataFiles.test(fileName)) {
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
   }
-  else if (dataFilePath.startsWith('http://') || dataFilePath.startsWith('https://')) {
+  else if (isRemoteDataUrl(dataFilePath)) {
     data = await readRemoteData(dataFilePath, encoding);
   } 
   else if (fs.existsSync(fileUri.fsPath)) {
@@ -42,6 +42,15 @@ export async function readDataFile(dataFilePath: string, encoding:string = null)
     });
   }
   return data;
+}
+
+/**
+ * Checks if the requested data url is a remote data source; http(s) only for now.
+ * @param dataUrl The data url to check.
+ * @returns True if the specified data url is a remote data source. false otherwise.
+ */
+export function isRemoteDataUrl(dataUrl: string): boolean {
+  return dataUrl.startsWith('http://') || dataUrl.startsWith('https://');
 }
 
 /**

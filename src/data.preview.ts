@@ -144,7 +144,7 @@ export class DataPreview {
     this._extensionPath = extensionPath;
     this._uri = uri;
     this._dataUrl = uri.toString(true); // skip uri encoding
-    this._isRemoteData = (this._dataUrl.startsWith('http://') || this._dataUrl.startsWith('https://'));
+    this._isRemoteData = fileUtils.isRemoteDataUrl(this._dataUrl);
     this._dataTable = (table !== undefined) ? table: '';
     this._dataViews = (views !== undefined) ? views: {};
     this._viewConfig = viewConfig;
