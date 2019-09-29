@@ -534,7 +534,6 @@
           case '.ini':
           case '.yaml':
           case '.yml':
-          case '.json':
           case '.json5':
           case '.hjson':
             // pass through loaded data json
@@ -549,6 +548,11 @@
           case '.parquet':
             // TODO: add parquet data read
             console.info('data.preview:\n\n Parquet data format support coming soon!');
+            break;
+          default: // json
+            // pass through loaded data json
+            tableData = data;
+            logMessage(`getData()\n\n records count: ${tableData.length.toLocaleString()}`);
             break;
         }
         return tableData;
