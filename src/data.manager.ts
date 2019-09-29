@@ -1,4 +1,5 @@
 import {window} from 'vscode';
+import * as path from 'path';
 import * as config from './config';
 import {Logger, LogLevel} from './logger';
 
@@ -20,10 +21,10 @@ import {YamlDataProvider} from './data.providers/yaml.data.provider';
 export interface IDataManager {
 
   /**
-   * Gets IDataProvider instance for the specified data file mime type or extension.
-   * @param fileType Data file mime type or extension to get IDataProvider instance for.
+   * Gets IDataProvider instance for the specified data url.
+   * @param dataUrl Local data file path or remote data url.
    */
-  getDataProvider(fileType: string): IDataProvider;
+  getDataProvider(dataUrl: string): IDataProvider;
 
   /**
    * Gets local or remote data.
@@ -160,16 +161,19 @@ export class DataManager implements IDataManager {
   }
 
   /**
-   * Gets IDataProvider instance for the specified file mime type or extension.
-   * @param fileType The data file mime type or extension to get data provider instance for.
+   * Gets IDataProvider instance for the specified data url.
+   * @param dataUrl Local data file path or remote data url.
    */
-  public getDataProvider(fileType: string): IDataProvider {
-    if (this._dataProviders.has(fileType)) {
+  public getDataProvider(dataUrl: string): IDataProvider {
+    const fileName: string = path.basename(dataUrl);
+    const fileType: string = path.extname(fileName); // file extension
+    if (fileType.length > 0 && this._dataProviders.has(fileType)) {
       return this._dataProviders.get(fileType);
+    } else if (this._dataProviders.has(fileName)) { // no file extension
+      // for dockerfile, etc.
+      return this._dataProviders.get(fileName);
     }
-    const errorMessage: string = `No matching Data Provider found for the File Type: '${fileType}'`;
-    window.showErrorMessage(errorMessage);
-    throw new Error(errorMessage);
+    return this._dataProviders.get('.json'); // default to json.data.provider for now
   }
 
   /**
@@ -179,9 +183,7 @@ export class DataManager implements IDataManager {
    * @param loadData Load data callback.
    */
   public getData(dataUrl: string, parseOptions: any, loadData: Function): void {
-    // TODO: add mime types later for remote http data loading
-    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
-    const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
+    const dataProvider: IDataProvider = this.getDataProvider(dataUrl);
     dataProvider.getData(dataUrl, parseOptions, loadData);
   }
 
@@ -190,8 +192,7 @@ export class DataManager implements IDataManager {
    * @param dataUrl Local data file path or remote data url.
    */
   public getDataTableNames(dataUrl: string): Array<string> {
-    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
-    const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
+    const dataProvider: IDataProvider = this.getDataProvider(dataUrl);
     return dataProvider.getDataTableNames(dataUrl);
   }
 
@@ -200,8 +201,7 @@ export class DataManager implements IDataManager {
    * @param dataUrl Local data file path or remote data url.
    */
   public getDataSchema(dataUrl: string): any {
-    const dataFileType: string = dataUrl.substr(dataUrl.lastIndexOf('.')); // file extension
-    const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
+    const dataProvider: IDataProvider = this.getDataProvider(dataUrl);
     return dataProvider.getDataSchema(dataUrl);
   }
 
@@ -213,8 +213,7 @@ export class DataManager implements IDataManager {
    * @param showData Show saved data callback.
    */
   public saveData(filePath: string, fileData: any, tableName: string, showData?: Function): void {
-    const dataFileType: string = filePath.substr(filePath.lastIndexOf('.')); // file extension
-    const dataProvider: IDataProvider = this.getDataProvider(dataFileType);
+    const dataProvider: IDataProvider = this.getDataProvider(filePath);
     dataProvider.saveData(filePath, fileData, tableName, showData);
   }
 

@@ -148,7 +148,7 @@ export class DataPreview {
     this._dataTable = (table !== undefined) ? table: '';
     this._dataViews = (views !== undefined) ? views: {};
     this._viewConfig = viewConfig;
-    this._fileName = path.basename(uri.fsPath);    
+    this._fileName = path.basename(uri.fsPath);
     this._fileExtension = this._fileName.substr(this._fileName.lastIndexOf('.'));
     this._previewUri = this._uri.with({scheme: 'data'});
 
