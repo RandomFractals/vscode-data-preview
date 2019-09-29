@@ -19,11 +19,12 @@ export async function readDataFile(dataFilePath: string, encoding:string = null)
   let data: any = '';
   const fileName: string = path.basename(dataFilePath);
   const fileUri: Uri = Uri.file(dataFilePath); // .parse(dataFilePath);
+  const isRemoteData: boolean = isRemoteDataUrl(dataFilePath);
   logger.debug('readDataFile():', dataFilePath);
-  if (!config.supportedDataFiles.test(fileName)) {
+  if (!isRemoteData && !config.supportedDataFiles.test(fileName)) {
     window.showErrorMessage(`${dataFilePath} is not a supported data file for Data Preview!`);
   }
-  else if (isRemoteDataUrl(dataFilePath)) {
+  else if (isRemoteData) {
     data = await readRemoteData(dataFilePath, encoding);
   } 
   else if (fs.existsSync(fileUri.fsPath)) {
