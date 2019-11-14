@@ -371,9 +371,9 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.7.5",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.3",
+    "@types/node": "^12.12.7",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2",
     "vscode": "^1.1.36"
   },
   "dependencies": {
@@ -382,11 +382,11 @@
     "@finos/perspective-viewer-d3fc": "^0.3.9",
     "@finos/perspective-viewer-highcharts": "^0.3.9",
     "@finos/perspective-viewer-hypergrid": "^0.3.9",
-    "apache-arrow": "^0.14.1",
-    "avsc": "^5.4.13",
-    "hjson": "^3.1.2",
+    "apache-arrow": "^0.15.1",
+    "avsc": "^5.4.16",
+    "hjson": "^3.2.1",
     "js-yaml": "^3.13.1",
-    "json5": "^2.1.0",
+    "json5": "^2.1.1",
     "properties": "^1.2.1",
     "snappy": "^6.2.3",
     "superagent": "^5.1.0",
