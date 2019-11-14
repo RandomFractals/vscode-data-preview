@@ -124,7 +124,7 @@ Use Data Preview 🈸 to:
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/",
+  "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
@@ -139,7 +139,7 @@ for more info.
 
 | Data File Extension(s) | File Type | Data Parsing Library/Method Used | Data Format Specification |
 | --- | --- | --- | --- |
-| `.json` `.config` | text | [`JSON.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) | https://json.org/ |
+| `.json` `.config` `.jsonl` `.ndjson` | text | [`JSON.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) | https://json.org/ |
 | `.json5` | text | [json5](https://github.com/json5/json5)/[`JSON5.parse()`](https://github.com/json5/json5#json5parse) | https://json5.org/ |
 | `.hjson` | text | [hjson-js](https://github.com/hjson/hjson-js)/[`Hjson.parse()`](https://github.com/hjson/hjson-js#hjsonparsetext-options) | https://hjson.org/ |
 | `.arrow` `.arr` | binary | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/ |
@@ -210,6 +210,7 @@ Other extensions Data Preview 🈸 replaces, enhances or supplements for working
 | [Ini for VSCode](https://marketplace.visualstudio.com/items?itemName=DavidWang.ini-for-vscode) | Provides outline view and section folding for INI files |
 | [Hjson](https://marketplace.visualstudio.com/items?itemName=laktak.hjson) | Hjson language syntax support |
 | [JSON5 syntax](https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-json5) | Adds syntax highlighting of JSON5 files |
+| [NDJSON Colorizer](https://marketplace.visualstudio.com/items?itemName=buster.ndjson-colorizer) | Colorizes NDJSON (Newline Delimited JSON) files |
 | [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) | YAML Language Support by Red Hat, with built-in Kubernetes and Kedge syntax support |
 | [docs-yaml](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-yaml) | YAML schema validation and auto-completion for docs.microsoft.com authoring |
 | [YAML to JSON](https://marketplace.visualstudio.com/items?itemName=ahebrank.yaml2json) | Convert YAML from clipboard or current document/selection to JSON and vice versa |

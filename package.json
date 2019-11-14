@@ -38,8 +38,11 @@
     "data import",
     "markdown table",
     "json array",
+    "json line",
+    "jsonl",
     "json5",
     "hjson",
+    "ndjson",
     "arrow",
     "avro",
     "parquet",
@@ -79,6 +82,7 @@
     "onWebviewPanel:data.preview",
     "onLanguage:json",
     "onLanguage:json5",
+    "onLanguage:jsonl",
     "onLanguage:hjson",
     "onLanguage:arrow",
     "onLanguage:avro",
@@ -112,6 +116,16 @@
         ],
         "aliases": [
           "JSON5"
+        ]
+      },
+      {
+        "id": "jsonl",
+        "extensions": [
+          ".jsonl",
+          ".ndjson"
+        ],
+        "aliases": [
+          "JSON Line"
         ]
       },
       {
@@ -275,36 +289,36 @@
       "explorer/context": [
         {
           "command": "data.preview",
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         },
         {
           "command": "data.preview.on.side",
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
           "command": "data.preview",
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         },
         {
           "command": "data.preview.on.side",
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
           "command": "data.preview",
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         },
         {
           "command": "data.preview.on.side",
-          "when": "resourceFilename =~ /.*\\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         }
       ]

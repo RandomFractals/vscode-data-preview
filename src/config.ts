@@ -3,12 +3,12 @@ import { LogLevel } from "./logger";
 // log level setting for prod. vs. dev run of this ext.
 export const logLevel: LogLevel = LogLevel.Info; // change to .Debug for ext. dev debug
 
-export const supportedDataFiles: RegExp = /.*\.(json|json5|hjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/;
+export const supportedDataFiles: RegExp = /.*\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/;
 
 export const supportedBinaryDataFiles: RegExp = /.*\.(arrow|arr|avro|parquet|parq|dif|ods|xls|xlsb|xlsx|xlsm)/;
 
 export const supportedFilesFilters: any = {
-  'JSON': ['json', 'json5', 'hjson'],
+  'JSON': ['json', 'jsonl', 'json5', 'hjson', 'ndjson'],
   'CSV/TSV': ['csv', 'tsv', 'tab', 'txt'],
   'Excel': ['dif', 'ods', 'xls', 'xlsb', 'xlsx', 'xlsm', 'xml', 'html'],
   'Arrow': ['arrow'],

@@ -536,6 +536,8 @@
           case '.yml':
           case '.json5':
           case '.hjson':
+          case '.jsonl':
+          case '.ndjson':
             // pass through loaded data json
             tableData = data;
             logMessage(`getData()\n\n records count: ${tableData.length.toLocaleString()}`);
@@ -587,8 +589,10 @@
             viewer.view.to_csv().then(csv => postData(csv, dataFileType));
             break;
           case '.json':
+          case '.jsonl':
           case '.json5':
           case '.hjson':
+          case '.ndjson':
           case '.html':
           case '.ods':
           case '.xml':
