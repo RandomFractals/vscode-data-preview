@@ -179,7 +179,7 @@ export class DataPreview {
       scripts: scriptsPath,
       styles: stylesPath,
       theme: this.theme,
-      themeColor: (this.theme === 'material') ? '#eee' : '#2f3136', // light/dark themes viewer background color
+      themeColor: this.themeColor,
       charts: this._charts
     });
 
@@ -827,6 +827,20 @@ export class DataPreview {
       dataViewTheme = uiTheme; // custom data view theme
     }
     return dataViewTheme;
+  }
+
+  /** 
+   * Gets UI theme color for the Data View dropdowns background color override.
+   */
+  get themeColor(): string {
+    let themeColor: string = '#eee'; // default light theme color
+    if (this.theme.endsWith('.dark')) {
+      themeColor = '#2f3136';
+    }
+    else {
+      themeColor = 'none'; // for the custom themes
+    }
+    return themeColor;
   }
 
   /**
