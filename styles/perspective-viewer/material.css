@@ -18,20 +18,20 @@
  *
  */
 perspective-viewer {
-  --interface--font-family: "Open Sans";
+  font-family: "Open Sans";
   --interface-monospace--font-family: "Roboto Mono";
   --inactive-column-selector--content: "\E835";
   --active-column-selector--content: "\E834";
-  --active-column-selector--color: #1a7da1;
-  --active-column--background: none;
+  --active--color: #1a7da1;
+  --column--background: none;
   --column--height: 21px;
   --active-column--height: 51px;
   --inactive-column--height: 24px;
   --active-columns--justify-content: space-evenly;
   --inactive-column--opacity: 0.3;
-  --column_type-float--color: #1a7da1;
-  --column_type-string--color: #ff8888;
-  --config_button--before: "more_vert";
+  --float--column-type--color: #1a7da1;
+  --string--column-type--color: #ff8888;
+  --settings-button--content: "more_vert";
   --button--font-family: "Material Icons";
   --overflow_hint--before: "error_outline";
   --overflow_hint--font-family: "Material Icons";
@@ -67,15 +67,16 @@ perspective-viewer {
   --active-column-selector--height: 45px;
   --column_selector--width: 31px;
   --column_selector--font-size: 16px;
+  --hypergrid-gridline--color: #AAA;
   --hypergrid--color: #666;
   --hypergrid--padding: 24px;
   --side_panel--padding: 24px 24px 24px 17px;
   --button--padding: 24px 17px 0px 17px;
   --button--font-size: 16px;
-  --button-hover--color: #1a7da1;
   --top_panel--padding: 0px 0px 24px 0px;
   --hypergrid-scrollbar--width: 8px;
   --hypergrid-scrollbar--border-radius: 5px;
+  --hypergrid--background: #fff;
   --hypergrid-positive--color: #1078d1;
   --hypergrid-negative--color: #de3838;
   --hypergrid--font-size: 12px;
