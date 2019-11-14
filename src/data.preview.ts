@@ -179,7 +179,7 @@ export class DataPreview {
       scripts: scriptsPath,
       styles: stylesPath,
       theme: this.theme,
-      themeColor: (this.theme === '.dark') ? '#2f3136': '#eee', // for viewer dropdowns background
+      themeColor: (this.theme === 'material') ? '#eee' : '#2f3136', // light/dark themes viewer background color
       charts: this._charts
     });
 
@@ -820,7 +820,13 @@ export class DataPreview {
    */
   get theme(): string {
     const uiTheme: string = <string>workspace.getConfiguration('data.preview').get('theme');
-    return (uiTheme === 'dark' || uiTheme === '.dark') ? '.dark': ''; // blank for light theme css loading
+    let dataViewTheme: string = 'material'; // default light theme
+    if (uiTheme === 'dark' || uiTheme === '.dark') {
+      dataViewTheme += '.dark'; // material dark theme
+    } else {
+      dataViewTheme = uiTheme; // custom data view theme
+    }
+    return dataViewTheme;
   }
 
   /**

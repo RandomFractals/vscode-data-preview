@@ -317,10 +317,11 @@
           "type": "string",
           "enum": [
             "light",
-            "dark"
+            "dark",
+            "vaporwave"
           ],
           "default": "dark",
-          "description": "Data Preview UI Theme: light || dark"
+          "description": "Data Preview UI Theme: light, dark || vaporwave (hight constrast blue theme)"
         },
         "data.preview.charts.plugin": {
           "type": "string",
