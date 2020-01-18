@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Material+Icons);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
 @import url(https://fonts.googleapis.com/css?family=Orbitron);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
@@ -19,20 +18,15 @@
  * the Apache License 2.0.  The full license can be found in the LICENSE file.
  *
  */
-/******************************************************************************
- *
- * Copyright (c) 2017, the Perspective Authors.
- *
- * This file is part of the Perspective library, distributed under the terms of
- * the Apache License 2.0.  The full license can be found in the LICENSE file.
- *
- */
-perspective-viewer {
+perspective-viewer[settings] {
+  --settings-button--content: "check_box_outline_blank";
+}
+perspective-viewer,
+.perspective-viewer-vaporwave {
   font-family: "Open Sans";
   --interface-monospace--font-family: "Roboto Mono";
   --inactive-column-selector--content: "\E835";
   --active-column-selector--content: "\E834";
-  --active--color: #1a7da1;
   --column--background: none;
   --column--height: 21px;
   --active-column--height: 51px;
@@ -77,28 +71,15 @@ perspective-viewer {
   --active-column-selector--height: 45px;
   --column_selector--width: 31px;
   --column_selector--font-size: 16px;
-  --hypergrid-gridline--color: #AAA;
-  --hypergrid--color: #666;
-  --hypergrid--padding: 24px;
+  --hypergrid-gridline--color: #ddd;
   --side_panel--padding: 24px 24px 24px 17px;
   --button--padding: 24px 17px 0px 17px;
   --button--font-size: 16px;
   --top_panel--padding: 0px 0px 24px 0px;
   --hypergrid-scrollbar--width: 8px;
   --hypergrid-scrollbar--border-radius: 5px;
-  --hypergrid--background: #fff;
-  --hypergrid-positive--color: #1078d1;
-  --hypergrid-negative--color: #de3838;
-  --hypergrid--font-size: 12px;
-  --hypergrid-header--font-size: 12px;
-  --hypergrid--font-family: "Open Sans";
-  --hypergrid-header--font-family: "Open Sans";
+  --hypergrid-selection--background: rgba(0, 0, 0, 0.1);
   --d3fc-treedata-axis--lines: none;
-}
-perspective-viewer[settings] {
-  --settings-button--content: "check_box_outline_blank";
-}
-perspective-viewer {
   padding: 24px;
   background-color: #150442;
   color: #cfd8dc;

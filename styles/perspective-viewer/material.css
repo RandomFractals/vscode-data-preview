@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Material+Icons);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
 /******************************************************************************
  *
@@ -17,12 +17,12 @@
  * the Apache License 2.0.  The full license can be found in the LICENSE file.
  *
  */
-perspective-viewer {
+perspective-viewer,
+.perspective-viewer-material {
   font-family: "Open Sans";
   --interface-monospace--font-family: "Roboto Mono";
   --inactive-column-selector--content: "\E835";
   --active-column-selector--content: "\E834";
-  --active--color: #1a7da1;
   --column--background: none;
   --column--height: 21px;
   --active-column--height: 51px;
@@ -67,8 +67,7 @@ perspective-viewer {
   --active-column-selector--height: 45px;
   --column_selector--width: 31px;
   --column_selector--font-size: 16px;
-  --hypergrid-gridline--color: #AAA;
-  --hypergrid--color: #666;
+  --hypergrid-gridline--color: #ddd;
   --hypergrid--padding: 24px;
   --side_panel--padding: 24px 24px 24px 17px;
   --button--padding: 24px 17px 0px 17px;
@@ -76,14 +75,17 @@ perspective-viewer {
   --top_panel--padding: 0px 0px 24px 0px;
   --hypergrid-scrollbar--width: 8px;
   --hypergrid-scrollbar--border-radius: 5px;
-  --hypergrid--background: #fff;
-  --hypergrid-positive--color: #1078d1;
-  --hypergrid-negative--color: #de3838;
   --hypergrid--font-size: 12px;
   --hypergrid-header--font-size: 12px;
   --hypergrid--font-family: "Open Sans";
   --hypergrid-header--font-family: "Open Sans";
+  --hypergrid-selection--background: rgba(0, 0, 0, 0.1);
   --d3fc-treedata-axis--lines: none;
+  --active--color: #1a7da1;
+  --hypergrid--color: #666;
+  --hypergrid--background: #fff;
+  --hypergrid-positive--color: #1078d1;
+  --hypergrid-negative--color: #de3838;
 }
 
 

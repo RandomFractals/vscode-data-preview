@@ -9,16 +9,8 @@
  * the Apache License 2.0.  The full license can be found in the LICENSE file.
  *
  */
-/******************************************************************************
- *
- * Copyright (c) 2017, the Perspective Authors.
- *
- * This file is part of the Perspective library, distributed under the terms of
- * the Apache License 2.0.  The full license can be found in the LICENSE file.
- *
- */
 perspective-viewer,
-.perspective-viewer-material-dark {
+.perspective-viewer-material-dense-dark {
   font-family: "Open Sans";
   --interface-monospace--font-family: "Roboto Mono";
   --inactive-column-selector--content: "\E835";
@@ -132,7 +124,16 @@ perspective-viewer,
   --highcharts-positive--gradient: linear-gradient(#222222 0%, #1a237e 35%, #42b3d5 70%, #dcedc8 100%);
   --highcharts-negative--gradient: linear-gradient(#feeb65 0%, #e4521b 35%, #4d342f 70%, #222222 100%);
   --warning--color: #333;
+  --hypergrid--padding: 12px 12px 12px 12px;
+  --hypergrid-row--height: 20px;
+  --side_panel--padding: 12px 12px 12px 10px;
+  --top_panel--padding: 0px 0px 12px 0px;
+  --column-drop-label--margin: -10px 0px 0px 0px;
+  --column-drop-container--margin: 12px 12px 0px 0px;
+  --column-container--margin: 12px 0px 0px 0px;
+  --row_draggable--animation: none;
+  --button--padding: 1px 9px;
 }
 
 
-/*# sourceMappingURL=material.dark.css.map*/
+/*# sourceMappingURL=material-dense.dark.css.map*/
