@@ -398,13 +398,13 @@
     "@finos/perspective-viewer-highcharts": "^0.4.0-rc.4",
     "@finos/perspective-viewer-hypergrid": "^0.4.0-rc.4",
     "apache-arrow": "^0.15.1",
-    "avsc": "^5.4.16",
+    "avsc": "^5.4.18",
     "hjson": "^3.2.1",
     "js-yaml": "^3.13.1",
     "json5": "^2.1.1",
     "properties": "^1.2.1",
     "snappy": "^6.2.3",
-    "superagent": "^5.1.0",
-    "xlsx": "^0.15.1"
+    "superagent": "^5.2.1",
+    "xlsx": "^0.15.4"
   }
 }
