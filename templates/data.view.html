@@ -41,13 +41,13 @@
         white-space: nowrap;
       }
       #toolbar-left {
-        width: calc(100% - 120);
+        width: calc(100% - 140);
       }
       #toolbar-right {
         position: absolute;
         top: 7px;
         right: 0px;
-        width: 130px;
+        width: 150px;
         height: 32px;
         padding-left: 5px;
         background-color: var(--vscode-editor-background);
@@ -132,6 +132,9 @@
         <a id="help-button" title="Data Preview Help" href="#"
           style="color: orange;"
           onClick="loadHelp()">?</a>
+        <a id="buy-coffee-button" title="Buy Coffee" href="#"
+          style="color: orangered; font-weight: bold" 
+          onclick="buyCoffee()">&nbsp;☕️&nbsp;</a>
       </div>
       <div id="toolbar-left">
         <a id="data-preview-button" title="Launch new Data Preview" href="#" 
@@ -754,6 +757,17 @@
             viewName: 'vscode.open',
             uri: 'https://github.com/RandomFractals/vscode-data-preview#usage-tips'
           });
+      }
+
+      /**
+       * Loads ko-fi sponsor button page in a browser window.
+       */
+      function buyCoffee() {
+        vscode.postMessage({
+          command: 'buyCoffee',
+          viewName: 'vscode.open',
+          uri: 'https://ko-fi.com/datapixy'
+        });
       }
 
       /**

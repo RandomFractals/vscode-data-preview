@@ -294,7 +294,11 @@ export class DataPreview {
           break;
         case 'redoConfig':
           // TODO: implement view config redo
-          break;    
+          break;
+        case 'buyCoffee':
+          // for the ko-fi sponsor button
+          this.loadView(message.viewName, message.uri);
+          break;
       }
     }, null, this._disposables);
   } // end of initWebview()
