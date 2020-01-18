@@ -332,10 +332,12 @@
           "enum": [
             "light",
             "dark",
+            "dense.light",
+            "dense.dark",
             "vaporwave"
           ],
           "default": "dark",
-          "description": "Data Preview UI Theme: light, dark || vaporwave (hight constrast blue theme)"
+          "description": "Data Preview UI Theme: light, dark, dense.light, dense.dark || vaporwave (hight constrast blue theme)"
         },
         "data.preview.charts.plugin": {
           "type": "string",

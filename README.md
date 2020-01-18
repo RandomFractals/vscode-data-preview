@@ -54,7 +54,7 @@ List of Data Preview 🈸 extension config Settings, `data.preview` command(s), 
 
 | Setting | Type | Default Value | Description |
 | ------- | ---- | ------------- | ----------- |
-| data.preview.theme | string | dark | Data Preview UI Theme: `dark`, `light`, or `vaporwave` (hight contrast blue theme) |
+| data.preview.theme | string | dark | Data Preview UI Theme: `dark`, `light`, `dense.light`, `dense.dark`, or `vaporwave` (hight contrast blue theme) |
 | data.preview.charts.plugin | string | d3fc | Data Preview Charts 📊 library to use for built-in charts: [d3fc](https://d3fc.io/) or [highcharts](https://www.highcharts.com/demo) |
 | data.preview.create.json.files | boolean | false | Creates `.json` data files for Arrow, Avro & Excel binary data formats |
 | data.preview.create.json.schema | boolean | true | Creates `.schema.json` files for Arrow & Avro metadata binary data formats |

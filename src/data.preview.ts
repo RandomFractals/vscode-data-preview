@@ -821,7 +821,11 @@ export class DataPreview {
   get theme(): string {
     const uiTheme: string = <string>workspace.getConfiguration('data.preview').get('theme');
     let dataViewTheme: string = 'material'; // default light theme
-    if (uiTheme === 'dark' || uiTheme === '.dark') {
+    if (uiTheme.startsWith('dense')) {
+      // append dense UI theme name
+      dataViewTheme += '-dense';
+    }
+    if (uiTheme.endsWith('dark') || uiTheme.endsWith('.dark')) {
       dataViewTheme += '.dark'; // material dark theme
     } else {
       dataViewTheme = uiTheme; // custom data view theme
