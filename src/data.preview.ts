@@ -386,7 +386,7 @@ export class DataPreview {
    * @param columns Displayed columns array.
    * @param rowCount Loaded data rows count.
    */
-  private updateStats(columns, rowCount) {
+  private updateStats(columns: Array<string>, rowCount: number) {
     // update columns and rows state vars
     this._columns = columns;
     this._rowCount = rowCount;
@@ -638,6 +638,8 @@ export class DataPreview {
         }
       }
     });
+    // update columns info
+    this._columns = config['columns'];
     return config;
   }
 
