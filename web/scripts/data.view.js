@@ -143,8 +143,9 @@ function initializeDataView() {
  * Updates data stats on view config changes or data load/update.
  */
 function updateStats() {
+	const numberOfRows = viewer.view ? viewer.view.num_rows() : viewer.table.size();
 	// get rows count and displayed columns info
-	viewer.view.num_rows().then(rowCount => {
+	numberOfRows.then(rowCount => {
 		let columns = viewer['columns'];
 		/*if (viewConfig.hasOwnProperty('columns')) {
 			// use view config columns property instead
