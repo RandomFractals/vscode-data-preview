@@ -33,7 +33,7 @@ export function activate(context: ExtensionContext) {
   logger.debug('activate(): activating from extPath:', context.extensionPath);
 
   // initialize data preview webview panel html template
-  const templateManager: ITemplateManager = new TemplateManager(context.asAbsolutePath('templates'));
+  const templateManager: ITemplateManager = new TemplateManager(context.asAbsolutePath('web'));
   const dataViewTemplate: Template = templateManager.getTemplate('data.view.html');
   
   // create extension status bar items

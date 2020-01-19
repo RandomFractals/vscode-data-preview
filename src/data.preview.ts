@@ -175,9 +175,9 @@ export class DataPreview {
       \n dataUrl:`, this._dataUrl);
 
     // create html template for data preview with local scripts, styles and theme params replaced
-    const scriptsPath: string = Uri.file(path.join(this._extensionPath, 'scripts'))
+    const scriptsPath: string = Uri.file(path.join(this._extensionPath, 'web/scripts'))
       .with({scheme: 'vscode-resource'}).toString(true);
-    const stylesPath: string = Uri.file(path.join(this._extensionPath, 'styles'))
+    const stylesPath: string = Uri.file(path.join(this._extensionPath, 'web/styles'))
       .with({scheme: 'vscode-resource'}).toString(true);
     this._html = htmlTemplate.replace({
       title: this._fileName,
@@ -193,6 +193,16 @@ export class DataPreview {
     this.initWebview(viewType, viewColumn);
     this.configure();
   } // end of constructor()
+
+  /**
+   * Configures webview html for preview.
+   */
+  public configure(): void {
+    this.webview.html = this.html;
+    // NOTE: let webview fire refresh message
+    // when data view DOM content is initialized
+    // see: data.view.html/refresh();
+  }
 
   /**
    * Updates data preview status bar item text.
@@ -307,6 +317,43 @@ export class DataPreview {
       }
     }, null, this._disposables);
   } // end of initWebview()
+
+  /**
+   * Creates webview options with local resource roots, etc
+   * for data preview webview display.
+   */
+  private getWebviewOptions(): any {
+    return {
+      enableScripts: true,
+      enableCommandUris: true,
+      retainContextWhenHidden: true,
+      localResourceRoots: this.getLocalResourceRoots()
+    };
+  }
+
+  /**
+   * Creates local resource roots for loading assets in data preview webview.
+   */
+  private getLocalResourceRoots(): Uri[] {
+    const localResourceRoots: Uri[] = [];
+    const workspaceFolder: WorkspaceFolder = workspace.getWorkspaceFolder(this.uri);
+    if (workspaceFolder && workspaceFolder !== undefined) {
+      localResourceRoots.push(Uri.file(workspaceFolder.uri.fsPath));
+    }
+    else if (!this.uri.scheme || this.uri.scheme === 'file') {
+      localResourceRoots.push(Uri.file(path.dirname(this.uri.fsPath)));
+    }
+    
+    // add web view styles and scripts folders
+    localResourceRoots.push(Uri.file(path.join(this._extensionPath, './web/styles')));
+    localResourceRoots.push(Uri.file(path.join(this._extensionPath, './web/scripts')));
+
+    if (config.logLevel === LogLevel.Debug) {
+      this._logger.debug('getLocalResourceRoots():', 
+        localResourceRoots.map(uri => uri.path));
+    }
+    return localResourceRoots;
+  }
 
   /**
    * Sends initial data info to data view.
@@ -426,54 +473,6 @@ export class DataPreview {
       window.showErrorMessage(`Failed to load '${viewName}' for document: '${url}'! Error:\n${error.message}`);
     }
   } // end of loadView()
-
-  /**
-   * Creates webview options with local resource roots, etc
-   * for data preview webview display.
-   */
-  private getWebviewOptions(): any {
-    return {
-      enableScripts: true,
-      enableCommandUris: true,
-      retainContextWhenHidden: true,
-      localResourceRoots: this.getLocalResourceRoots()
-    };
-  }
-
-  /**
-   * Creates local resource roots for loading assets in data preview webview.
-   */
-  private getLocalResourceRoots(): Uri[] {
-    const localResourceRoots: Uri[] = [];
-    const workspaceFolder: WorkspaceFolder = workspace.getWorkspaceFolder(this.uri);
-    if (workspaceFolder && workspaceFolder !== undefined) {
-      localResourceRoots.push(Uri.file(workspaceFolder.uri.fsPath));
-    }
-    else if (!this.uri.scheme || this.uri.scheme === 'file') {
-      localResourceRoots.push(Uri.file(path.dirname(this.uri.fsPath)));
-    }
-    
-    // add data preview js scripts
-    localResourceRoots.push(Uri.file(path.join(this._extensionPath, 'scripts')));
-
-    // add data preview styles
-    localResourceRoots.push(Uri.file(path.join(this._extensionPath, 'styles')));
-    if (config.logLevel === LogLevel.Debug) {
-      this._logger.debug('getLocalResourceRoots():', 
-        localResourceRoots.map(uri => uri.path));
-    }
-    return localResourceRoots;
-  }
-
-  /**
-   * Configures webview html for preview.
-   */
-  public configure(): void {
-    this.webview.html = this.html;
-    // NOTE: let webview fire refresh message
-    // when data view DOM content is initialized
-    // see: data.view.html/refresh();
-  }
 
   /**
    * Saves updated data viewer config for restore on vscode reload.
