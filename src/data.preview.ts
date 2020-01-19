@@ -215,7 +215,11 @@ export class DataPreview {
    * Disposes this data preview resources.
    */
   public dispose() {
+    // clear status bar
+    this._status.text = '';
+    // remove this instance from tracked open data views
     previewManager.remove(this);
+    // dispose related resources
     this._panel.dispose();
     while (this._disposables.length) {
       const item = this._disposables.pop();
