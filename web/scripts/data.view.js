@@ -171,8 +171,9 @@ function restoreConfig(viewConfig) {
 
 	// restore view config
 	logMessage(`restoreConfig(\n${JSON.stringify(viewConfig, null, 2)})`);
-	viewer.restore(viewConfig);        
-
+	viewer.restore(viewConfig);
+	updateStats();
+	
 	// clear updating view config flag
 	restoringConfig = false;
 }
@@ -275,8 +276,8 @@ function refresh(data) {
 			logMessage(`refresh('${dataTable}')\n\n updating view data: ${data.fileName} ...`);
 			viewer.clear();
 			viewer.update(tableData);
-			updateStats();
 		}
+		updateStats();
 		// save loaded view data for future data update checks
 		viewData = tableData;
 	} catch (error) {
