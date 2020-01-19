@@ -74,6 +74,7 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
       state.views, // other data views for data files with multiple data sets
       webviewPanel.viewColumn, 
       this.htmlTemplate,
+      state.theme,
       webviewPanel
     );
 
@@ -114,6 +115,7 @@ export class DataPreview {
   private _rowCount: number = 0;
   private _columns: string[] = [];
   private _charts: string = 'd3fc';
+  private _theme: string = 'material.dark'; // default UI theme
   private _dataLoadStartTime: Date = new Date();
   private _dataLoadEndTime: Date = new Date(this._dataLoadStartTime.getTime());
 
@@ -127,6 +129,7 @@ export class DataPreview {
    * @param views Other data table views.
    * @param viewColumn vscode IDE view column to display data preview in.
    * @param htmlTemplate Webview html template reference.
+   * @param theme Webview UI theme.
    * @param panel Optional webview panel reference for restore on vscode IDE reload.
    */
   constructor(
@@ -137,7 +140,8 @@ export class DataPreview {
     viewConfig: any,
     views: any,
     viewColumn: ViewColumn, 
-    htmlTemplate: Template, 
+    htmlTemplate: Template,
+    theme: string = null,
     panel?: WebviewPanel) {
     
     // save ext path, document uri, view config, preview uri, title, etc.
@@ -151,6 +155,7 @@ export class DataPreview {
     this._fileName = path.basename(uri.fsPath);
     this._fileExtension = path.extname(this._fileName); // file extension
     this._previewUri = this._uri.with({scheme: 'data'});
+    this._theme = theme ? theme : this.theme;
 
     // parse view config
     viewConfig = this.parseConfig(viewConfig);
@@ -178,7 +183,7 @@ export class DataPreview {
       title: this._fileName,
       scripts: scriptsPath,
       styles: stylesPath,
-      theme: this.theme,
+      theme: this._theme,
       themeColor: this.themeColor,
       charts: this._charts
     });
@@ -314,6 +319,7 @@ export class DataPreview {
         command: 'dataInfo',
         fileName: this._fileName,
         uri: this._dataUrl,
+        theme: this._theme,
         config: this.config,
         schema: this.schema,
         tableNames: this._tableNames,
@@ -536,6 +542,7 @@ export class DataPreview {
           command: 'refresh',
           fileName: this._fileName,
           uri: this._dataUrl,
+          theme: this._theme,
           config: this.config,
           schema: this.schema,
           tableNames: this._tableNames,
@@ -842,7 +849,7 @@ export class DataPreview {
    */
   get themeColor(): string {
     let themeColor: string = '#eee'; // default light theme color
-    if (this.theme.endsWith('.dark')) {
+    if (this._theme.endsWith('.dark')) {
       themeColor = '#2f3136';
     }
     else {

@@ -29,7 +29,7 @@
 - Quick Launch new Data Preview input box for data files in open workspace
 - Save Filtered Data Grid || Chart 📊 Data in `.arrow` `.csv` `.json(s)` `.yml` & `.properties` formats
 - Save & Load Data View `.config` options
-- Dark, Light & High Contrast Blue Data Preview 🈸 Panel Themes
+- Dark, Light, Dense & High Contrast Blue Data Preview 🈸 Panel UI Themes
 
 # Next V.
 

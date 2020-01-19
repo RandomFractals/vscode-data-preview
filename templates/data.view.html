@@ -177,7 +177,8 @@
         saveFileTypeSelector,
         dataViewConsoleText, dataUrlInput,
         dataUrl, dataFileName,
-        viewer, toggleConfig = true, restoringConfig = true,
+        viewer, theme,
+        toggleConfig = true, restoringConfig = true,
         dataTable = '', dataViews = {}, tableNames = [], 
         viewConfig = {}, viewData = [], logLevel = 'info';
 
@@ -261,6 +262,7 @@
         dataTable = data.table;
         dataViews = data.views;
         viewConfig = data.config;
+        theme = data.theme;
         logLevel = data.logLevel;
         logMessage(`loadDataInfo()\n\n data url: ${dataUrl}\n data table: ${dataTable}`);
 
@@ -379,6 +381,7 @@
             uri: dataUrl,
             table: dataTable, 
             config: viewConfig,
+            theme: theme,
             views: dataViews
           });
           // notify data preview
@@ -411,6 +414,7 @@
           dataFileName = data.fileName;
           dataTable = data.table;
           dataViews = data.views;
+          theme = data.theme;
           logLevel = data.logLevel;
           title.innerText = data.fileName;
 
@@ -494,6 +498,7 @@
             uri: dataUrl,
             table: dataTable,
             config: viewConfig,
+            theme: theme,
             views: dataViews
           });
         }
