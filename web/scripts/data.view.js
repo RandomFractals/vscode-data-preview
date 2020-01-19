@@ -29,6 +29,7 @@ window.addEventListener('message', event => {
 			logMessage(`data size in bytes: ${viewData.byteLength.toLocaleString()}`);
 			// update data viewer
 			viewer.load(viewData.buffer);
+			updateStats();
 			if (toggleConfig) {
 				// show viewer toggles on the 1st run
 				viewer.toggleConfig();
@@ -65,36 +66,6 @@ window.addEventListener('WebComponentsReady', event => {
 
 // initialize data view on content loaded
 document.addEventListener('DOMContentLoaded', event => initializeDataView());
-
-/**
- * Loads raw data source content on view data source button click.
- */
-function viewDataSource() {
-	vscode.postMessage({
-		command: 'loadView',
-		viewName: 'vscode.open',
-		uri: `${dataUrl}`
-	});
-}
-
-/**
- * Loads initial data view info.
- * @param data Data info with data url, views, etc.
- */
-function loadDataInfo(data) {
-	// initialize data view vars
-	dataUrl = data.uri;
-	dataFileName = data.fileName;
-	dataTable = data.table;
-	dataViews = data.views;
-	viewConfig = data.config;
-	theme = data.theme;
-	logLevel = data.logLevel;
-	logMessage(`loadDataInfo()\n\n data url: ${dataUrl}\n data table: ${dataTable}`);
-
-	// update view config
-	restoreConfig(viewConfig);
-}
 
 /**
  * Initializes data view UI elements,
@@ -160,6 +131,26 @@ function updateStats() {
 		logMessage(`updateStats()\n\n columns: ${columns}\n rows: ${rowCount.toLocaleString()}`);
 	});
 } // end of updateStats()
+
+/**
+ * Loads initial data view info.
+ * @param data Data info with data url, views, etc.
+ */
+function loadDataInfo(data) {
+	// initialize data view vars
+	dataUrl = data.uri;
+	dataFileName = data.fileName;
+	dataTable = data.table;
+	dataViews = data.views;
+	viewConfig = data.config;
+	theme = data.theme;
+	logLevel = data.logLevel;
+
+	logMessage(`loadDataInfo()\n\n data url: ${dataUrl}\n data table: ${dataTable}`);
+
+	// update view config
+	restoreConfig(viewConfig);
+}
 
 /**
  * Restores data view config on new data view load or new view config load.
@@ -396,6 +387,20 @@ function getData(fileName, data, schema = {}) {
 	}
 	return tableData;
 } // end of getData()
+
+
+/*--------------------- Data View toolbar action handlers ----------------------*/
+
+/**
+ * Loads raw data source content on view data source button click.
+ */
+function viewDataSource() {
+	vscode.postMessage({
+		command: 'loadView',
+		viewName: 'vscode.open',
+		uri: `${dataUrl}`
+	});
+}
 
 /**
  * Saves data view config, and filtered json or csv data.
