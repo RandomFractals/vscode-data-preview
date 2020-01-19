@@ -1,0 +1,85 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+#data-preview-icon {
+  color: orange;
+  font-weight: bold;
+  font-size: 11pt;
+}
+#toolbar {
+  margin: 0px;
+  margin-top: 5px;
+  padding: 0px;
+  padding-left: 7px;
+  font-size: 10pt;
+  font-weight: normal;
+  display: inline-block;
+  white-space: nowrap;
+}
+#toolbar-left {
+  width: calc(100% - 140);
+}
+#toolbar-right {
+  position: absolute;
+  top: 7px;
+  right: 0px;
+  width: 150px;
+  height: 32px;
+  padding-left: 5px;
+  background-color: var(--vscode-editor-background);
+}
+#toolbar a {
+  color: dodgerblue;
+  text-decoration: none;
+  padding: 2px 5px 2px 5px;
+}
+#title {
+  margin: 0px;
+  padding: 0px;
+}
+#data-url-input {
+  width: 200px;
+  color: var(--vscode-editor-foreground);
+  background-color: var(--vscode-editor-background);
+  border: 1px solid #999;
+}
+#data-viewer {
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#data-view-console-text {
+  color: var(--vscode-editor-foreground);
+  background-color: var(--vscode-editor-background);
+  width: 100%;
+  height: calc(100% - 32px);
+  position: absolute;
+  top: 32px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  z-index: 100;
+}
+.hidden {
+  display: none;
+}
+.label {
+  color: var(--vscode-editor-foreground);
+}
+select {
+  color: var(--vscode-editor-foreground);
+  background-color: var(--vscode-editor-background);
+}
+perspective-viewer {
+  /* --select--color: var(--vscode-editor-foreground); */
+  /* --select--background-color: var(--vscode-editor-background); */
+  --select--padding: 0px 5px 0px 5px;
+  --hypergrid--padding: 2px;
+  --hypergrid-scrollbar--width: 18px;
+  --hypergrid-scrollbar--border-radius: 0px;
+}
