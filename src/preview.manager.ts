@@ -39,11 +39,12 @@ export class PreviewManager {
   }
 
   /**
-   * Returns matching preview for the specified uri.
-   * @param uri preview uri.
+   * Returns matching preview for the specified data uri.
+   * @param dataUri Data Uri to find for open data previews.
    */
-  public find(uri: Uri): DataPreview {        
-    return this._previews.find(p => p.previewUri.toString() === uri.toString());
+  public find(dataUri: Uri): Array<DataPreview> {
+    const dataUrl: string = dataUri.toString(true); // skip uri encoding
+    return this._previews.filter(p => p.dataUrl === dataUrl);
   }
 
   /**

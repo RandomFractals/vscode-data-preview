@@ -796,6 +796,13 @@ export class DataPreview {
   }
 
   /**
+   * Gets the source data url for this preview.
+   */
+  get dataUrl(): string {
+    return this._dataUrl;
+  }
+
+  /**
    * Gets the preview uri to load on data preview command triggers or vscode IDE reload. 
    */
   get previewUri(): Uri {

@@ -74,22 +74,20 @@ export function activate(context: ExtensionContext) {
   // refresh associated preview on data file save
   workspace.onDidSaveTextDocument((document: TextDocument) => {
     if (isDataFile(document)) {
-      const uri: Uri = document.uri.with({scheme: 'data'});
-      const preview: DataPreview = previewManager.find(uri);
-      if (preview) {
-        preview.refresh();
-      }
+      const dataUri: Uri = document.uri; // .with({scheme: 'data'});
+      const previews: Array<DataPreview> = previewManager.find(dataUri);
+      previews.forEach(preview => preview.refresh());
     }
   });
 
   // reset associated preview on data file change
   workspace.onDidChangeTextDocument((changeEvent: TextDocumentChangeEvent) => {
     if (isDataFile(changeEvent.document)) {
-      const uri: Uri = changeEvent.document.uri.with({scheme: 'data'});
-      const preview: DataPreview = previewManager.find(uri);
-      if (preview && changeEvent.contentChanges.length > 0) {
+      const dataUri: Uri = changeEvent.document.uri; //.with({scheme: 'data'});
+      const previews: Array<DataPreview> = previewManager.find(dataUri);
+      if (previews && changeEvent.contentChanges.length > 0) {
         // TODO: add refresh interval before enabling this
-        // preview.refresh();
+        // previews.forEach(preview => preview.refresh());
       }
     }
   });
