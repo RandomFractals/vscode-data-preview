@@ -124,8 +124,8 @@ function initializeDataView() {
 		viewer.addEventListener('perspective-config-update', event => {
 			if (!restoringConfig) {
 				updateConfig();
+				updateStats();
       }
-      updateStats();
 		});
 
 		// add viewer click handler for cross-filtering
@@ -173,7 +173,7 @@ function restoreConfig(viewConfig) {
 	logMessage(`restoreConfig(\n${JSON.stringify(viewConfig, null, 2)})`);
 	viewer.restore(viewConfig);
 	updateStats();
-	
+
 	// clear updating view config flag
 	restoringConfig = false;
 }
