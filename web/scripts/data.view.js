@@ -442,7 +442,7 @@ function saveData() {
 		case '.xlsx':
 		case '.yml':
 		case '.properties':
-			viewer.view.to_json().then(json => postData(json, dataFileType));
+			viewer.view.to_json({date_format: 'en-US'}).then(json => postData(json, dataFileType));
 			break;
 	}
 } // end of saveData()
