@@ -5,7 +5,7 @@ for the prior versions information, and all the notable changes to this [Data Pr
 
 ## v2.0.0 (2020-01-20)
 
-- [#156](https://github.com/RandomFractals/vscode-data-preview/issues/172)
+- [#156](https://github.com/RandomFractals/vscode-data-preview/issues/156)
 User-friendly dates save in en-US date format for now, instead of milliseconds since epoch
 - [#172](https://github.com/RandomFractals/vscode-data-preview/issues/172)
 Refresh all open data views on related data source file content change and save
