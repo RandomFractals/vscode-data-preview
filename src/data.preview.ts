@@ -2,17 +2,17 @@
 
 // vscode imports
 import {
-  commands, 
+  commands,
   window,
-  workspace, 
+  workspace,
   Disposable,
-  StatusBarItem, 
-  Uri, 
-  ViewColumn, 
-  WorkspaceFolder, 
+  StatusBarItem,
+  Uri,
+  ViewColumn,
+  WorkspaceFolder,
   Webview,
-  WebviewPanel, 
-  WebviewPanelOnDidChangeViewStateEvent, 
+  WebviewPanel,
+  WebviewPanelOnDidChangeViewStateEvent,
   WebviewPanelSerializer
 } from 'vscode';
 
@@ -35,7 +35,7 @@ import {Template} from './template.manager';
 export class DataPreviewSerializer implements WebviewPanelSerializer {
 
   private _logger: Logger;
-  
+
   /**
    * Creates new webview serializer.
    * @param viewType Web view type.
@@ -43,11 +43,11 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
    * @param htmlTemplate Webview preview html template.
    * @param status Status bar item for data loading updates.
    */
-  constructor(private viewType: string, private extensionPath: string, 
-    private htmlTemplate: Template, 
+  constructor(private viewType: string, private extensionPath: string,
+    private htmlTemplate: Template,
     private status: StatusBarItem) {
     const logLevel: string = <string>workspace.getConfiguration('data.preview').get('log.level');
-    this._logger = new Logger(`${this.viewType}.serializer:`, 
+    this._logger = new Logger(`${this.viewType}.serializer:`,
       (logLevel === 'info') ? LogLevel.Info: LogLevel.Debug);
   }
 
@@ -59,7 +59,7 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
   async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
     const dataTable: string = state.table;
     this.status.text = '🈸 Restoring data preview...';
-    this._logger.debug(`deserializeWeviewPanel(): \n data table: '${dataTable}' \n data url:`, 
+    this._logger.debug(`deserializeWeviewPanel(): \n data table: '${dataTable}' \n data url:`,
       state.uri.toString());
     this._logger.debug(`deserializeWeviewPanel(): config:`, state.config);
     this._logger.debug(`deserializeWeviewPanel(): views:`, state.views);
@@ -67,12 +67,12 @@ export class DataPreviewSerializer implements WebviewPanelSerializer {
     // create new data preview
     const dataPreview: DataPreview = new DataPreview(
       this.viewType,
-      this.extensionPath, 
+      this.extensionPath,
       Uri.parse(state.uri),
       dataTable,
       state.config, // data view config
       state.views, // other data views for data files with multiple data sets
-      webviewPanel.viewColumn, 
+      webviewPanel.viewColumn,
       this.htmlTemplate,
       state.theme,
       webviewPanel
@@ -134,16 +134,16 @@ export class DataPreview {
    */
   constructor(
     viewType: string,
-    extensionPath: string, 
+    extensionPath: string,
     uri: Uri,
     table: string,
     viewConfig: any,
     views: any,
-    viewColumn: ViewColumn, 
+    viewColumn: ViewColumn,
     htmlTemplate: Template,
     theme: string = null,
     panel?: WebviewPanel) {
-    
+
     // save ext path, document uri, view config, preview uri, title, etc.
     this._extensionPath = extensionPath;
     this._uri = uri;
@@ -236,7 +236,7 @@ export class DataPreview {
    * @param viewType Preview webview type, i.e. data.preview.
    * @param viewColumn vscode IDE view column to display preview in.
    */
-  private initWebview(viewType: string, viewColumn: ViewColumn): void {    
+  private initWebview(viewType: string, viewColumn: ViewColumn): void {
     if (!this._panel) {
       // create new webview panel
       this._panel = window.createWebviewPanel(viewType, this._fileName, viewColumn, this.getWebviewOptions());
@@ -347,13 +347,13 @@ export class DataPreview {
     else if (!this.uri.scheme || this.uri.scheme === 'file') {
       localResourceRoots.push(Uri.file(path.dirname(this.uri.fsPath)));
     }
-    
+
     // add web view styles and scripts folders
     localResourceRoots.push(Uri.file(path.join(this._extensionPath, './web/styles')));
     localResourceRoots.push(Uri.file(path.join(this._extensionPath, './web/scripts')));
 
     if (config.logLevel === LogLevel.Debug) {
-      this._logger.debug('getLocalResourceRoots():', 
+      this._logger.debug('getLocalResourceRoots():',
         localResourceRoots.map(uri => uri.path));
     }
     return localResourceRoots;
@@ -427,7 +427,7 @@ export class DataPreview {
     const selectedFiles: Array<Uri> = await window.showOpenDialog({
       defaultUri: openFolderUri,
       canSelectMany: false,
-      canSelectFolders: false, 
+      canSelectFolders: false,
       filters: config.supportedFilesFilters
     });
     if (selectedFiles && selectedFiles.length >= 1) {
@@ -445,7 +445,7 @@ export class DataPreview {
   private loadView(viewName: string, url: string): void {
     const fileUri: Uri = Uri.parse(url);
     try {
-      this._logger.debug(`loadView(): loading view... \n ${viewName}`, url); 
+      this._logger.debug(`loadView(): loading view... \n ${viewName}`, url);
         //fileUri.toString(true)); // skip encoding
       if (url.startsWith('http://') || url.startsWith('https://')) {
         // launch requested remote data view command
@@ -456,7 +456,7 @@ export class DataPreview {
         // launch requested local data view command
         this._logger.debug(`loadView():executeCommand: \n ${viewName}`, fileUri.fsPath);
         commands.executeCommand(viewName, fileUri);
-      } 
+      }
       else {
         // try to find requested data file(s) in open workspace
         workspace.findFiles(`**/${url}`).then(files => {
@@ -593,8 +593,8 @@ export class DataPreview {
    * @param refreshData Refreshes data on new view config load.
    * @param showErrors Shows errors messages if data view config doesn't match data preview data file.
    */
-  private loadConfigFromFile(configFilePath: string, 
-    refreshData: boolean = true, 
+  private loadConfigFromFile(configFilePath: string,
+    refreshData: boolean = true,
     showErrors: boolean = true): void {
     // load view config
     const configString: string = fs.readFileSync(configFilePath, 'utf8'); // file encoding to read data as string
@@ -618,7 +618,7 @@ export class DataPreview {
   }
 
   /**
-   * Parses data view config by converting config string properties 
+   * Parses data view config by converting config string properties
    * to arrays and objects for the data viewer web component attributes.
    * @param viewConfig View config object to parse.
    */
@@ -659,7 +659,7 @@ export class DataPreview {
     let data: any = [];
     if (this._fileExtension === '.parquet') {
       // TODO: sort out node-gyp lzo lib loading for parquet data files parse
-      window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
+      window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');
       // data = this.getParquetData(dataFilePath);
     }
     else { // get data, table names, and data schema via data.manager api
@@ -678,14 +678,14 @@ export class DataPreview {
         }
         else {
           this.logDataStats(data, this._dataSchema);
-        }    
+        }
       });
     }
     return data;
   } // end of getData()
 
   /**
-   * Logs data stats and optional data schema or metadata for debug 
+   * Logs data stats and optional data schema or metadata for debug
    * and updates data preview status bar item.
    * @param dataRows Data rows array.
    * @param dataSchema Optional data schema or metadata for debug logging.
@@ -723,7 +723,7 @@ export class DataPreview {
       dataRows.push(record);
     }
     await parquetReader.close();
-    dataRows = dataRows.map(rowObject => this.flattenObject(rowObject));    
+    dataRows = dataRows.map(rowObject => this.flattenObject(rowObject));
     this.logDataStats(dataRows, dataSchema);
     // update web view
     this.loadData(dataRows);
@@ -787,7 +787,7 @@ export class DataPreview {
   get webview(): Webview {
     return this._panel.webview;
   }
-    
+
   /**
    * Gets the source data doc uri for this preview.
    */
@@ -803,12 +803,12 @@ export class DataPreview {
   }
 
   /**
-   * Gets the preview uri to load on data preview command triggers or vscode IDE reload. 
+   * Gets the preview uri to load on data preview command triggers or vscode IDE reload.
    */
   get previewUri(): Uri {
     return this._previewUri;
   }
-  
+
   /**
    * Gets the html content to load for this preview.
    */
@@ -848,6 +848,10 @@ export class DataPreview {
       // append dense UI theme name
       dataViewTheme += '-dense';
     }
+    if (uiTheme.includes('monospace')) {
+      // append monospace UI theme name
+      dataViewTheme += '.monospace';
+    }
     if (uiTheme.endsWith('dark') || uiTheme.endsWith('.dark')) {
       dataViewTheme += '.dark'; // material dark theme
     } else {
@@ -856,7 +860,7 @@ export class DataPreview {
     return dataViewTheme;
   }
 
-  /** 
+  /**
    * Gets UI theme color for the Data View dropdowns background color override.
    */
   get themeColor(): string {

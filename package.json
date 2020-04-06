@@ -334,10 +334,14 @@
             "dark",
             "dense.light",
             "dense.dark",
+            "monospace.light",
+            "monospace.dark",
+            "dense.monospace.light",
+            "dense.monospace.dark",
             "vaporwave"
           ],
           "default": "dark",
-          "description": "Data Preview UI Theme: light, dark, dense.light, dense.dark || vaporwave (hight constrast blue theme)"
+          "description": "Data Preview UI Theme: light, dark, dense.light, dense.dark, monospace.light, monospace.dark, dense.monospace.light. dense.monospace.dark || vaporwave (hight constrast blue theme)"
         },
         "data.preview.charts.plugin": {
           "type": "string",
