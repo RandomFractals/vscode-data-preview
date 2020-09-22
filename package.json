@@ -69,7 +69,10 @@
     "html"
   ],
   "categories": [
-    "Programming Languages"
+    "Data Science",
+    "Formatters",
+    "Programming Languages",
+    "Visualization"
   ],
   "galleryBanner": {
     "color": "#333",
