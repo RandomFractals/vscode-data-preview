@@ -376,22 +376,29 @@
     }
   },
   "engines": {
-    "vscode": "^1.36.0",
+    "vscode": "^1.49.0",
     "node": ">=10.2.0"
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc --skipLibCheck -p ./",
+    "lint": "eslint src --ext ts",
     "watch": "tsc -watch --skipLibCheck -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^13.1.8",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.5",
-    "vscode": "^1.1.36"
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^14.11.2",
+    "@types/vscode": "^1.49.0",
+    "eslint": "^7.9.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "typescript": "^4.0.3",
+    "glob": "^7.1.6",
+    "mocha": "^8.1.3",
+    "vscode-test": "^1.4.0"
   },
   "dependencies": {
     "@finos/perspective": "^0.4.0",
