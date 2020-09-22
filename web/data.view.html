@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Security-Policy" 
-      content="default-src * vscode-resource: https: 'unsafe-inline' 'unsafe-eval';
-        script-src vscode-resource: blob: data: https: 'unsafe-inline' 'unsafe-eval';
-        style-src vscode-resource: https: 'unsafe-inline';
-        img-src vscode-resource: data: https:;
-        connect-src vscode-resource: blob: data: https: http:;">
+      content="default-src * {cspSource} https: 'unsafe-inline' 'unsafe-eval';
+        script-src {cspSource} blob: data: https: 'unsafe-inline' 'unsafe-eval';
+        style-src {cspSource} https: 'unsafe-inline';
+        img-src {cspSource} data: https:;
+        connect-src {cspSource} blob: data: https: http:;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Data Preview">
     <base href="https://github.com/RandomFractals/vscode-data-preview" target="_blank" />

@@ -174,23 +174,8 @@ export class DataPreview {
     this._logger.debug(`(): creating data.preview... \n theme: '${this.theme}' \n charts: '${this._charts}' \
       \n dataUrl:`, this._dataUrl);
 
-    // create html template for data preview with local scripts, styles and theme params replaced
-    const scriptsPath: string = Uri.file(path.join(this._extensionPath, 'web/scripts'))
-      .with({scheme: 'vscode-resource'}).toString(true);
-    const stylesPath: string = Uri.file(path.join(this._extensionPath, 'web/styles'))
-      .with({scheme: 'vscode-resource'}).toString(true);
-    this._html = htmlTemplate.replace({
-      title: this._fileName,
-      scripts: scriptsPath,
-      styles: stylesPath,
-      theme: this._theme,
-      themeColor: this.themeColor,
-      charts: this._charts
-    });
-
     // initialize webview panel
-    this._panel = panel;
-    this.initWebview(viewType, viewColumn);
+    this._panel = this.initWebview(viewType, viewColumn, panel, htmlTemplate);
     this.configure();
   } // end of constructor()
 
@@ -235,22 +220,44 @@ export class DataPreview {
    * Initializes data preview webview panel.
    * @param viewType Preview webview type, i.e. data.preview.
    * @param viewColumn vscode IDE view column to display preview in.
+   * @param viewPanel Optional web view panel to initialize.
+   * @param template Webview html template.
    */
-  private initWebview(viewType: string, viewColumn: ViewColumn): void {    
-    if (!this._panel) {
+  private initWebview(viewType: string,
+    viewColumn: ViewColumn,
+    viewPanel: WebviewPanel | undefined,
+    template: Template
+    ): WebviewPanel {
+
+    if (!viewPanel) {
       // create new webview panel
-      this._panel = window.createWebviewPanel(viewType, this._fileName, viewColumn, this.getWebviewOptions());
-      this._panel.iconPath = Uri.file(path.join(this._extensionPath, './images/data-preview.svg'));
+      viewPanel = window.createWebviewPanel(viewType, this._fileName, viewColumn, this.getWebviewOptions());
+      viewPanel.iconPath = Uri.file(path.join(this._extensionPath, './images/data-preview.svg'));
     }
+
+    // create html template for data preview with local scripts, styles and theme params replaced
+    const scriptsPath: string = viewPanel.webview.asWebviewUri(
+      Uri.file(path.join(this._extensionPath, 'web/scripts'))).toString(true);
+    const stylesPath: string = viewPanel.webview.asWebviewUri(
+      Uri.file(path.join(this._extensionPath, 'web/styles'))).toString(true);
+    this._html = template?.replace({
+      cspSource: viewPanel.webview.cspSource,
+      title: this._fileName,
+      scripts: scriptsPath,
+      styles: stylesPath,
+      theme: this._theme,
+      themeColor: this.themeColor,
+      charts: this._charts
+    });
     this._logger.debug('initWebview(): data.view created!');
 
     // dispose preview panel handler
-    this._panel.onDidDispose(() => {
+    viewPanel.onDidDispose(() => {
       this.dispose();
     }, null, this._disposables);
 
     // handle view state changes
-    this._panel.onDidChangeViewState(
+    viewPanel.onDidChangeViewState(
       (viewStateEvent: WebviewPanelOnDidChangeViewStateEvent) => {
       let active = viewStateEvent.webviewPanel.visible;
       if (!active) {
@@ -267,13 +274,14 @@ export class DataPreview {
 
     // load matching view config, if available
     const viewConfigFilePath:string = this._dataUrl.replace(this._fileExtension, '.config');
-    if (!this._isRemoteData && !this._viewConfig.hasOwnProperty('view') && // is a blank view config
-      fs.existsSync(viewConfigFilePath)) {
+    if (!this._isRemoteData && 
+        !this._viewConfig.hasOwnProperty('view') && // is a blank view config
+        fs.existsSync(viewConfigFilePath)) {
       this.loadConfigFromFile(viewConfigFilePath, false, false); // don't refresh data, don't show errors
     }
 
     // process web view messages
-    this.webview.onDidReceiveMessage(message => {
+    viewPanel.webview.onDidReceiveMessage(message => {
       switch (message.command) {
         case 'getDataInfo':
           // post initial data view info
@@ -320,6 +328,8 @@ export class DataPreview {
           break;
       }
     }, null, this._disposables);
+
+    return viewPanel;
   } // end of initWebview()
 
   /**
@@ -342,7 +352,7 @@ export class DataPreview {
     const localResourceRoots: Uri[] = [];
     const workspaceFolder: WorkspaceFolder = workspace.getWorkspaceFolder(this.uri);
     if (workspaceFolder && workspaceFolder !== undefined) {
-      localResourceRoots.push(Uri.file(workspaceFolder.uri.fsPath));
+      localResourceRoots.push(workspaceFolder.uri);
     }
     else if (!this.uri.scheme || this.uri.scheme === 'file') {
       localResourceRoots.push(Uri.file(path.dirname(this.uri.fsPath)));
@@ -419,10 +429,9 @@ export class DataPreview {
   private async openFile() {
     // display open file dialog
     let openFolderUri: Uri = Uri.parse(this._dataUrl).with({scheme: 'file'});
-    const workspaceFolders: Array<WorkspaceFolder> = workspace.workspaceFolders;
-    if (workspaceFolders && workspaceFolders.length >= 1) {
+    if (workspace.workspaceFolders && workspace.workspaceFolders.length >= 1) {
       // change open file folder uri to the 1st workspace folder, usuallay workspace root
-      openFolderUri = workspaceFolders[0].uri;
+      openFolderUri = workspace.workspaceFolders[0].uri;
     }
     const selectedFiles: Array<Uri> = await window.showOpenDialog({
       defaultUri: openFolderUri,
@@ -746,8 +755,7 @@ export class DataPreview {
 
     // create full data file path for saving data
     let dataFilePath: string = path.dirname(this._uri.fsPath);
-    const workspaceFolders: Array<WorkspaceFolder> = workspace.workspaceFolders;
-    if (this._isRemoteData && workspaceFolders && workspaceFolders.length > 0) {
+    if (this._isRemoteData && workspace.workspaceFolders && workspace.workspaceFolders.length > 0) {
       // use 'rootPath' workspace folder for saving remote data file
       dataFilePath = workspace.workspaceFolders[0].uri.fsPath;
     }
