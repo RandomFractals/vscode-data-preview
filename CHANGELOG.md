@@ -3,6 +3,19 @@
 See [releases](https://github.com/RandomFractals/vscode-data-preview/releases)
 for the prior versions information, and all the notable changes to this [Data Preview 🈸](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) extension with new feature details and screen pics.
 
+## v2.1.0 (2020-09-22)
+
+- [#185](https://github.com/RandomFractals/vscode-data-preview/issues/185)
+Hide status bar item after launch
+- [#203](https://github.com/RandomFractals/vscode-data-preview/issues/203)
+Adopt VS Code's 'asWebviewUri' API
+- [#223](https://github.com/RandomFractals/vscode-data-preview/issues/223)
+Add Data Science and Visualization categories to this extension manifest
+- [#224](https://github.com/RandomFractals/vscode-data-preview/issues/224)
+Update minimum required vscode version and dependencies to v1.49.0
+- [#225](https://github.com/RandomFractals/vscode-data-preview/issues/225)
+Upade libraries for avro, hjson, yaml, json5, and excel data files loading
+
 ## v2.0.0 (2020-01-20)
 
 - [#156](https://github.com/RandomFractals/vscode-data-preview/issues/156)
