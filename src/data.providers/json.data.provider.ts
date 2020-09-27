@@ -1,5 +1,9 @@
 import {window} from 'vscode';
 import * as fs from 'fs';
+import {
+  parse as jsoncParse,
+  ParseError
+} from 'jsonc-parser';
 import * as config from '../config';
 import * as fileUtils from '../utils/file.utils';
 import * as jsonUtils from '../utils/json.utils';
@@ -33,12 +37,8 @@ export class JsonDataProvider implements IDataProvider {
     let data: any = [];
     try {
       let content: string = String(await fileUtils.readDataFile(dataUrl, 'utf8'));
-      if (dataUrl.endsWith('.json')) {
-        // strip out comments from vscode settings .json :)
-        const comments: RegExp = new RegExp(/\/\*[\s\S]*?\*\/|\/\/.*/g);
-        content = content.replace(comments, '');
-      }
-      data = JSON.parse(content);
+      let parseErrors: ParseError[] = []; 
+      data = jsoncParse(content, parseErrors, {disallowComments: true}); //JSON.parse(content);
     }
     catch (error) {
       this.logger.logMessage(LogLevel.Error, `getData(): Error parsing '${dataUrl}' \n\t Error:`, error.message);
