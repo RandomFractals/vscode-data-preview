@@ -1,0 +1,6 @@
+// this is not a valid json file
+// used for testing .json data preview and errors display
+{
+  "test": "invalid"
+  "showErrors": true
+}
