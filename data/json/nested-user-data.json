@@ -1,0 +1,34 @@
+[
+  {
+    "user_id" : 1,
+    "email": "1@domain.com",
+    "hobbies": [
+      {
+        "type": "sport",
+        "name": "soccer",
+        "dates": [
+          "May 3rd",
+          "May 4th",
+          "May 5th"
+        ]
+      },
+      {
+        "type": "sport",
+        "name": "basketball",
+        "dates": [
+          "June 3rd",
+          "July 4th"
+        ]
+      }
+    ]
+  },
+  {
+    "user_id" : 2,
+    "email": "2@domain.com"
+  },
+  {
+    "user_id" : 3,
+    "email": "3@domain.com",
+    "hobbies": []
+  }
+]
