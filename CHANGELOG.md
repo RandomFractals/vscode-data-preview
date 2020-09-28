@@ -3,6 +3,13 @@
 See [releases](https://github.com/RandomFractals/vscode-data-preview/releases)
 for the prior versions information, and all the notable changes to this [Data Preview 🈸](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) extension with new feature details and screen pics.
 
+## v2.2.0 (2020-09-27)
+
+- [#168](https://github.com/RandomFractals/vscode-data-preview/issues/168)
+Flatten nested object properties for json array data preview display
+- [#222](https://github.com/RandomFractals/vscode-data-preview/issues/222)
+Use jsonc-parser for json data loading
+
 ## v2.1.0 (2020-09-22)
 
 - [#185](https://github.com/RandomFractals/vscode-data-preview/issues/185)
