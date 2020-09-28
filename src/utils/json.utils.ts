@@ -1,3 +1,4 @@
+import * as jsonSpread from 'json-spread';
 import * as config from '../config';
 import {Logger} from '../logger';
 
@@ -12,6 +13,10 @@ export function convertJsonData(data: any): any {
     // convert it to flat object properties array
     data = this.objectToPropertyArray(
       this.flattenObject(data, true)); // preserve parent path
+  }
+  else {
+    // flatten json data array
+    data = jsonSpread(data);
   }
   return data;
 }
