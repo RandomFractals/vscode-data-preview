@@ -2,6 +2,7 @@ import {window} from 'vscode';
 import * as fs from 'fs';
 import {
   parse as jsoncParse,
+  printParseErrorCode,
   ParseError
 } from 'jsonc-parser';
 import * as config from '../config';
@@ -38,7 +39,19 @@ export class JsonDataProvider implements IDataProvider {
     try {
       let content: string = String(await fileUtils.readDataFile(dataUrl, 'utf8'));
       let parseErrors: ParseError[] = []; 
-      data = jsoncParse(content, parseErrors, {disallowComments: true}); //JSON.parse(content);
+      data = jsoncParse(content, parseErrors, {
+        disallowComments: false,
+        allowTrailingComma: true
+      }); //JSON.parse(content);
+      if (parseErrors && parseErrors.length > 0) {
+        // log and display json parse errors
+        let jsonErrors: string = '';
+        for (const error of parseErrors) {
+          jsonErrors += `${printParseErrorCode(error.error)} at ${error.offset} of ${error.length} length \n`;
+        }
+        this.logger.logMessage(LogLevel.Error, `getData(): Error parsing '${dataUrl}' \n\t Error:`, jsonErrors);
+        window.showErrorMessage(`Invalid json data file: '${dataUrl}'. \n\t Error(s): \n ${jsonErrors}`);
+      }
     }
     catch (error) {
       this.logger.logMessage(LogLevel.Error, `getData(): Error parsing '${dataUrl}' \n\t Error:`, error.message);
