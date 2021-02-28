@@ -366,6 +366,7 @@ function getData(fileName, data, schema = {}) {
 		case '.hjson':
 		case '.jsonl':
 		case '.ndjson':
+		case '.parquet':
 			// pass through loaded data json
 			tableData = data;
 			logMessage(`getData()\n\n records count: ${tableData.length.toLocaleString()}`);
@@ -374,10 +375,6 @@ function getData(fileName, data, schema = {}) {
 			// return empty data array since binary data is loaded elsewhere
 			tableData = [];
 			logMessage(`getData()\n\n schema: ${JSON.stringify(schema, null, 2)}`);
-			break;
-		case '.parquet':
-			// TODO: add parquet data read
-			console.info('data.preview:\n\n Parquet data format support coming soon!');
 			break;
 		default: // json
 			// pass through loaded data json

@@ -19,7 +19,6 @@ import {
 // fs data parsing imports
 import * as fs from 'fs';
 import * as path from 'path';
-//import * as parquet from 'parquetjs';
 
 // data preview imports
 import * as config from './config';
@@ -404,7 +403,7 @@ export class DataPreview {
     // update columns and rows state vars
     this._columns = columns;
     this._rowCount = rowCount;
-    let dataStats: string = `Rows: ${rowCount.toLocaleString()}\tColumns: ${columns.length.toLocaleString()}`;
+    let dataStats: string = `Rows: ${rowCount.toLocaleString()}\tColumns: ${columns?.length.toLocaleString()}`;
     if (this._tableNames.length > 0) {
       // add tables count to data preview data stats status display
       dataStats = `Tables: ${this._tableNames.length.toLocaleString()}\t${dataStats}`;
@@ -666,30 +665,23 @@ export class DataPreview {
    */
   private getData(dataUrl: string, dataTable: string = ''): any {
     let data: any = [];
-    if (this._fileExtension === '.parquet') {
-      // TODO: sort out node-gyp lzo lib loading for parquet data files parse
-      window.showInformationMessage('Parquet Data Preview 🈸 coming soon!');        
-      // data = this.getParquetData(dataFilePath);
-    }
-    else { // get data, table names, and data schema via data.manager api
-      dataManager.getData(dataUrl, {
-          dataTable: dataTable,
-          createJsonFiles: this.createJsonFiles,
-          createJsonSchema: this.createJsonSchema
-        }, (data: any) => {
-        this._tableNames = dataManager.getDataTableNames(dataUrl);
-        this._dataSchema = dataManager.getDataSchema(dataUrl);
-        this.loadData(data);
-        // log data stats
-        if (typeof data === 'string') {
-          const dataLines: Array<string> = data.split('\n');
-          this.logDataStats(dataLines);
-        }
-        else {
-          this.logDataStats(data, this._dataSchema);
-        }    
-      });
-    }
+    dataManager.getData(dataUrl, {
+        dataTable: dataTable,
+        createJsonFiles: this.createJsonFiles,
+        createJsonSchema: this.createJsonSchema
+      }, (data: any) => {
+      this._tableNames = dataManager.getDataTableNames(dataUrl);
+      this._dataSchema = dataManager.getDataSchema(dataUrl);
+      this.loadData(data);
+      // log data stats
+      if (typeof data === 'string') {
+        const dataLines: Array<string> = data.split('\n');
+        this.logDataStats(dataLines);
+      }
+      else {
+        this.logDataStats(data, this._dataSchema);
+      }    
+    });
     return data;
   } // end of getData()
 
@@ -716,29 +708,7 @@ export class DataPreview {
     }
   }
 
-  /**
-   * Gets binary Parquet file data.
-   * @param dataFilePath Parquet data file path.
-   * @returns Array of row objects.
-   */ /*
-  private async getParquetData(dataFilePath: string) {
-    let dataSchema: any = {};
-    let dataRows: Array<any> = [];
-    const parquetReader = await parquet.ParquetReader.openFile(dataFilePath);
-    const cursor = parquetReader.getCursor();
-    // read all records
-    let record = null;
-    while (record = await cursor.next()) {
-      dataRows.push(record);
-    }
-    await parquetReader.close();
-    dataRows = dataRows.map(rowObject => this.flattenObject(rowObject));    
-    this.logDataStats(dataRows, dataSchema);
-    // update web view
-    this.loadData(dataRows);
-    return dataRows;
-  } */
-
+  
   /**
    * Saves posted data from data view.
    * @param fileData File data to save.

@@ -12,8 +12,9 @@ import {JsonDataProvider} from './data.providers/json.data.provider';
 import {Json5DataProvider} from './data.providers/json5.data.provider';
 import {JsonLineDataProvider} from './data.providers/json.line.data.provider';
 import {MarkdownDataProvider} from './data.providers/markdown.data.provider';
-import {TextDataProvider} from './data.providers/text.data.provider';
+import {ParquetDataProvider} from './data.providers/parquet.data.provider';
 import {PropertiesDataProvider} from './data.providers/properties.data.provider';
+import {TextDataProvider} from './data.providers/text.data.provider';
 import {YamlDataProvider} from './data.providers/yaml.data.provider';
 
 /**
@@ -143,8 +144,9 @@ export class DataManager implements IDataManager {
     this.addDataProvider(dataProviders, new Json5DataProvider());
     this.addDataProvider(dataProviders, new JsonLineDataProvider());
     this.addDataProvider(dataProviders, new MarkdownDataProvider());
-    this.addDataProvider(dataProviders, new TextDataProvider());
     this.addDataProvider(dataProviders, new PropertiesDataProvider());
+    this.addDataProvider(dataProviders, new ParquetDataProvider());
+    this.addDataProvider(dataProviders, new TextDataProvider());
     this.addDataProvider(dataProviders, new YamlDataProvider());
     this._logger.debug('loadDataProviders(): loaded data providers:', Object.keys(dataProviders));
     return dataProviders;
