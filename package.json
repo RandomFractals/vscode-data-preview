@@ -354,7 +354,7 @@
         "data.preview.create.json.files": {
           "type": "boolean",
           "default": false,
-          "description": "Create '.json' data files for Arrow, Avro & Excel binary data formats"
+          "description": "Create '.json' data files for Arrow, Avro, Parquet & Excel binary data formats"
         },
         "data.preview.create.json.schema": {
           "type": "boolean",
