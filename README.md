@@ -146,7 +146,7 @@ for more info.
 | `.json5` | text | [json5](https://github.com/json5/json5)/[`JSON5.parse()`](https://github.com/json5/json5#json5parse) | https://json5.org/ |
 | `.hjson` | text | [hjson-js](https://github.com/hjson/hjson-js)/[`Hjson.parse()`](https://github.com/hjson/hjson-js#hjsonparsetext-options) | https://hjson.org/ |
 | `.arrow` `.arr` | binary | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/ |
-| `.parquet` | binary | [parquets](https://github.com/kbajalc/parquets)/[`parquets/ParquetReader.openFile()`](https://github.com/kbajalc/parquets#usage-reading-files) | https://parquet.apache.org/documentation/latest/ |
+| `.parquet` | binary | [parquets](https://github.com/kbajalc/parquets)/[`ParquetReader.openFile()`](https://github.com/kbajalc/parquets#usage-reading-files) | https://parquet.apache.org/documentation/latest |
 | `.properties` `.env` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#parse) | https://en.wikipedia.org/wiki/.properties |
 | `.ini` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file |
 | `.md` | text | [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)/[`markdownToCsv()`](https://github.com/RandomFractals/vscode-data-preview/blob/f7d8db4062914822c3e74cfd6259a90cdc051b82/src/data.preview.ts#L1035)| https://en.wikipedia.org/wiki/Markdown | 

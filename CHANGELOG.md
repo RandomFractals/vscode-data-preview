@@ -3,6 +3,11 @@
 See [releases](https://github.com/RandomFractals/vscode-data-preview/releases)
 for the prior versions information, and all the notable changes to this [Data Preview 🈸](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) extension with new feature details and screen pics.
 
+## v2.3.0 (2021-02-28)
+
+- [#13](https://github.com/RandomFractals/vscode-data-preview/issues/13)
+Add .parquet files data preview
+
 ## v2.2.0 (2020-09-27)
 
 - [#168](https://github.com/RandomFractals/vscode-data-preview/issues/168)
