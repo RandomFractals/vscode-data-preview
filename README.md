@@ -10,14 +10,14 @@
 
 [![Trending-Weekly](https://vsmarketplacebadge.apphb.com/trending-weekly/RandomFractalsInc.vscode-data-preview.svg?logo=tinder&logoColor=white&label=trending%20weekly)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) [![Trending-Monthly](https://vsmarketplacebadge.apphb.com/trending-monthly/RandomFractalsInc.vscode-data-preview.svg?logo=tinder&logoColor=white&label=monthly)](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview)
 
-[Data Preview 🈸](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** `.json` array `.arrow` `.avro` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsb` Excel files and `.md` markdown tables with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
+[Data Preview 🈸](https://marketplace.visualstudio.com/items?itemName=RandomFractalsInc.vscode-data-preview) extension for importing 📤 viewing 🔎 slicing 🔪 dicing 🎲  charting 📊 & exporting 📥 **large** `.json` array `.arrow` `.avro` `.parquet` data files, `.config` `.env` `.properties` `.ini` `.yml` configurations files, `.csv/.tsv` & `.xlsx/.xlsb` Excel files and `.md` markdown tables with [Perspective](https://perspective.finos.org/) - streaming data analytics WebAssembly library.
 
 ![Data Preview](https://github.com/RandomFractals/vscode-data-preview/blob/master/images/vscode-data-preview.png?raw=true 
 "Data Preview")
 
 # 🈸 Features
 
-- Preview `.json` `.arrow` `.avro` `.yml` `.csv/.tsv` & `.xlsx/.xlsb` data files in a Data Grid w/Sorting & Filtering
+- Preview `.json` `.arrow` `.avro` `.parquet` `.yml` `.csv/.tsv` & `.xlsx/.xlsb` data files in a Data Grid w/Sorting & Filtering
 - Grid Data Summary display w/Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts 📊 creation w/Aggregate Functions, Row & Column Pivots
 - Pluggable Charting 📊 libraries for bult-in Charts: [d3fc](https://d3fc.io/) || [highcharts](https://www.highcharts.com/demo)
@@ -35,7 +35,7 @@
 
 # Next V.
 
-- Will include `.parquet` data format support, large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming
+- Will include large text & binary data files loading & [Apache Arrow](https://observablehq.com/@randomfractals/apache-arrow) data streaming.
 
 **Note:** Data Preview 🈸 is already capable of loading a few 10+MB's large data files with 100+K records & extensive list of [supported Data Formats](https://github.com/RandomFractals/vscode-data-preview#supported-json-config-binary--excel-data-file-formats) you'll be hard pressed to find on 
 [VSCode marketplace](https://marketplace.visualstudio.com/search?term=data&target=VSCode&category=All%20categories&sortBy=Relevance) in one extension. 
@@ -114,6 +114,7 @@ Use Data Preview 🈸 to:
 **Tip**: try sample data and Data View `.config` files from this repository [data/...](https://github.com/RandomFractals/vscode-data-preview/tree/master/data) folders: 
 [`data/arrow`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/arrow) 
 [`data/avro`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/avro)
+[`data/parquet`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/parquet)
 [`data/config`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/config)
 [`data/excel`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/excel)
 [`data/json`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/json)
@@ -126,7 +127,7 @@ Use Data Preview 🈸 to:
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/",
+  "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
@@ -145,7 +146,7 @@ for more info.
 | `.json5` | text | [json5](https://github.com/json5/json5)/[`JSON5.parse()`](https://github.com/json5/json5#json5parse) | https://json5.org/ |
 | `.hjson` | text | [hjson-js](https://github.com/hjson/hjson-js)/[`Hjson.parse()`](https://github.com/hjson/hjson-js#hjsonparsetext-options) | https://hjson.org/ |
 | `.arrow` `.arr` | binary | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/ |
-| `.avro` | binary | [avsc](https://github.com/mtth/avsc)/[`avro.createFileDecoder()`](https://github.com/mtth/avsc/wiki/API#createfiledecoderpath-opts) | https://avro.apache.org/docs/current/ |
+| `.parquet` | binary | [parquets](https://github.com/kbajalc/parquets)/[`parquets/ParquetReader.openFile()`](https://github.com/kbajalc/parquets#usage-reading-files) | https://parquet.apache.org/documentation/latest/ |
 | `.properties` `.env` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#parse) | https://en.wikipedia.org/wiki/.properties |
 | `.ini` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file |
 | `.md` | text | [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)/[`markdownToCsv()`](https://github.com/RandomFractals/vscode-data-preview/blob/f7d8db4062914822c3e74cfd6259a90cdc051b82/src/data.preview.ts#L1035)| https://en.wikipedia.org/wiki/Markdown | 
