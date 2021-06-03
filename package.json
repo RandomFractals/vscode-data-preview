@@ -44,6 +44,7 @@
     "hjson",
     "ndjson",
     "arrow",
+    "feather",
     "avro",
     "parquet",
     "config",
