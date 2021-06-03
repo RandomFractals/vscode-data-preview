@@ -144,7 +144,8 @@
         "id": "arrow",
         "extensions": [
           ".arrow",
-          ".arr"
+          ".arr",
+          ".feather"
         ],
         "aliases": [
           "Arrow"
