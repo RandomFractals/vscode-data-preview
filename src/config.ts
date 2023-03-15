@@ -11,6 +11,7 @@ export const supportedFilesFilters: any = {
   'JSON': ['json', 'jsonl', 'json5', 'hjson', 'ndjson'],
   'CSV/TSV': ['csv', 'tsv', 'tab', 'txt'],
   'Excel': ['dif', 'ods', 'xls', 'xlsb', 'xlsx', 'xlsm', 'xml', 'html'],
+  'Parquet': ['parquet'],
   'Arrow': ['arrow'],
   'Avro': ['avro'],
   'Config': ['config'],
