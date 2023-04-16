@@ -1,5 +1,5 @@
 # vscode-data-preview
-[![Build Status](https://travis-ci.org/HoangNguyen17193/vscode-simple-rest-client.svg?branch=master)](https://travis-ci.com/RandomFractals/vscode-data-preview)
+[![Build Status](https://api.travis-ci.com/RandomFractals/vscode-data-preview.svg?branch=master)](https://github.com/RandomFractals/vscode-data-preview)
 [![Apache-2.0 License](https://img.shields.io/badge/license-Apache2-orange.svg?color=green)](http://opensource.org/licenses/Apache-2.0)
 <a href='https://ko-fi.com/F1F812DLR' target='_blank' title='support: https://ko-fi.com/dataPixy'>
   <img height='24' style='border:0px;height:20px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' alt='https://ko-fi.com/dataPixy' /></a>
