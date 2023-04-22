@@ -404,11 +404,11 @@
     "vscode-test": "^1.4.0"
   },
   "dependencies": {
-    "@finos/perspective": "^0.4.0",
-    "@finos/perspective-viewer": "^0.4.0",
-    "@finos/perspective-viewer-d3fc": "^0.4.0",
-    "@finos/perspective-viewer-highcharts": "^0.4.0",
-    "@finos/perspective-viewer-hypergrid": "^0.4.0",
+    "@finos/perspective": "^1.9.1",
+    "@finos/perspective-viewer": "^1.9.1",
+    "@finos/perspective-viewer-d3fc": "^1.9.1",
+    "@finos/perspective-viewer-highcharts": "^0.5.2",
+    "@finos/perspective-viewer-hypergrid": "^0.5.2",
     "apache-arrow": "^0.15.1",
     "avsc": "^5.4.22",
     "hjson": "^3.2.1",
