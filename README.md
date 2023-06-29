@@ -15,7 +15,7 @@
 
 # 🈸 Features
 
-- Preview `.json` `.arrow` `.avro` `.parquet` `.yml` `.csv/.tsv` & `.xlsx/.xlsb` data files in a Data Grid w/Sorting & Filtering
+- Preview `.json` `.arrow` `.avro` `.parquet` `.yml` `.csv/.tsv` `.xlsx/.xlsb` & `.edn` data files in a Data Grid w/Sorting & Filtering
 - Grid Data Summary display w/Aggregate Functions, Row & Column Pivots (a.k.a. `Group By` & `Split By`)
 - Basic Charts 📊 creation w/Aggregate Functions, Row & Column Pivots
 - Pluggable Charting 📊 libraries for bult-in Charts: [d3fc](https://d3fc.io/) || [highcharts](https://www.highcharts.com/demo)
@@ -27,7 +27,7 @@
 - Property Grid display for `.json` `.config` `.env` `.properties` `.ini` & `.yml` configuration files
 - Open Data Preview on Side option for slim data || config files
 - Quick Launch new Data Preview input box for data files in open workspace
-- Save Filtered Data Grid || Chart 📊 Data in `.arrow` `.csv` `.json(s)` `.yml` & `.properties` formats
+- Save Filtered Data Grid || Chart 📊 Data in `.arrow` `.csv` `.json(s)` `.yml` `.edn` & `.properties` formats
 - Save & Load Data View `.config` options
 - Dark, Light, Dense & High Contrast Blue Data Preview 🈸 Panel UI Themes
 
@@ -72,7 +72,7 @@ Data Preview 🈸 example using `dark` UI theme with `d3fc` Charts 📊 Data Vie
 ## Data Preview 🈸 Launch Tips
 
 1. Run `View -> Command Palette...>Data: Preview Data` command or `Ctrl+Shift+D` in an open
-`.json` `.config` `.env` `.properties` `.ini` `.yml` or `.csv/.tsv` text  data file document to launch Data Preview panel.
+`.json` `.config` `.env` `.properties` `.ini` `.yml` `.edn` or `.csv/.tsv` text  data file document to launch Data Preview panel.
 2. `File -> Save` (`Ctrl+S`) your text data file for immediate updates in an open Data Preview 🈸 panel.
 3. Right-click on a Binary `.xlsx/.xlsb`, `.arrow` or `.avro` data file in VSCode File Explorer to launch Data Preview panel.
 4. Use exposed `explorer/context`, `editor/title` or `editor/title/context` Preview Data 🈸 or Preview Data on Side context menu options to preview your data files.
@@ -98,7 +98,7 @@ to launch Data Preview for remote `http(s)` data files.
 Use Data Preview 🈸 to:
 
 - Load large data files for sorting, filtering & charting 📊
-- Export displayed data in a compact binary `.arrow` data format, `.ods` `.xlsb` || `.xlsx` spreadsheet format, or `.csv` `.json` `.yml` `.md` or `.properties` text formats
+- Export displayed data in a compact binary `.arrow` data format, `.ods` `.xlsb` || `.xlsx` spreadsheet format, or `.csv` `.json` `.yml` `.md` `.edn` or `.properties` text formats
 - Preview `.properites` and other key-value pairs configuration files to reformat them or find set config option values
 - Generate Arrow & Avro `.shema.json` for metadata text preview of those binary data files
 - Generate `.json` files for text data preview of binary Excel files
@@ -114,6 +114,7 @@ Use Data Preview 🈸 to:
 [`data/avro`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/avro)
 [`data/parquet`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/parquet)
 [`data/config`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/config)
+[`data/edn`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/edn)
 [`data/excel`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/excel)
 [`data/json`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/json)
 [`data/yaml`](https://github.com/RandomFractals/vscode-data-preview/tree/master/data/yaml)
@@ -125,7 +126,7 @@ Use Data Preview 🈸 to:
 
 ```js
 {
-  "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/",
+  "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|edn|env|config|properties|ini|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsx|xlsm|xml|html)/",
   "command": "data.preview",
   "group": "navigation"
 }
@@ -146,6 +147,7 @@ for more info.
 | `.arrow` `.arr` | binary | [apache-arrow](https://github.com/apache/arrow/tree/master/js)/[`Table.from()`](https://github.com/apache/arrow/tree/master/js#get-a-table-from-an-arrow-file-on-disk-in-ipc-format) | https://arrow.apache.org/ |
 | `.parquet` | binary | [parquets](https://github.com/kbajalc/parquets)/[`ParquetReader.openFile()`](https://github.com/kbajalc/parquets#usage-reading-files) | https://parquet.apache.org/documentation/latest |
 | `.properties` `.env` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#parse) | https://en.wikipedia.org/wiki/.properties |
+| `.edn` | text | [edn-data](https://github.com/jorinvo/edn-data)/[`parseEDNString()`](https://github.com/jorinvo/edn-data#parsing-edn) | https://github.com/edn-format/edn |
 | `.ini` | text | [node-properties](https://github.com/gagle/node-properties)/[`properties.parse()`](https://github.com/gagle/node-properties#ini) | https://en.wikipedia.org/wiki/INI_file |
 | `.md` | text | [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)/[`markdownToCsv()`](https://github.com/RandomFractals/vscode-data-preview/blob/f7d8db4062914822c3e74cfd6259a90cdc051b82/src/data.preview.ts#L1035)| https://en.wikipedia.org/wiki/Markdown |
 | `.yml` `.yaml` | text | [js-yaml](https://github.com/nodeca/js-yaml)/[`yaml.load()`](https://github.com/nodeca/js-yaml#load-string---options-) | https://yaml.org/ |

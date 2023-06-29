@@ -47,6 +47,7 @@
     "avro",
     "parquet",
     "config",
+    "edn",
     "env",
     "properties",
     "ini",
@@ -91,6 +92,7 @@
     "onLanguage:avro",
     "onLanguage:parquet",
     "onLanguage:config",
+    "onLanguage:clojure",
     "onLanguage:env",
     "onLanguage:properties",
     "onLanguage:ini",
@@ -292,36 +294,36 @@
       "explorer/context": [
         {
           "command": "data.preview",
-          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|edn|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         },
         {
           "command": "data.preview.on.side",
-          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|edn|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
           "command": "data.preview",
-          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|edn|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         },
         {
           "command": "data.preview.on.side",
-          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|edn|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
           "command": "data.preview",
-          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|edn|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         },
         {
           "command": "data.preview.on.side",
-          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
+          "when": "resourceFilename =~ /.*\\.(json|jsonl|json5|hjson|ndjson|arrow|arr|avro|parquet|parq|config|edn|env|properties|ini|yaml|yml|md|csv|tsv|txt|tab|dif|ods|xls|xlsb|xlsm|xlsx|xml|html)/",
           "group": "navigation"
         }
       ]
@@ -395,12 +397,12 @@
     "@types/mocha": "^8.0.3",
     "@types/node": "^14.11.2",
     "@types/vscode": "^1.49.0",
-    "eslint": "^7.10.0",
-    "@typescript-eslint/parser": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
-    "typescript": "^4.0.3",
+    "@typescript-eslint/parser": "^4.2.0",
+    "eslint": "^7.10.0",
     "glob": "^7.1.6",
     "mocha": "^8.1.3",
+    "typescript": "^4.0.3",
     "vscode-test": "^1.4.0"
   },
   "dependencies": {
@@ -411,11 +413,12 @@
     "@finos/perspective-viewer-hypergrid": "^0.4.0",
     "apache-arrow": "^0.15.1",
     "avsc": "^5.4.22",
+    "edn-data": "^1.0.0",
     "hjson": "^3.2.1",
     "js-yaml": "^3.14.0",
+    "json-spread": "0.3.2",
     "json5": "^2.1.3",
     "jsonc-parser": "2.3.1",
-    "json-spread": "0.3.2",
     "parquets": "^0.10.10",
     "properties": "^1.2.1",
     "snappy": "^6.3.5",

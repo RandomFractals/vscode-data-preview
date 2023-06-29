@@ -6,6 +6,7 @@ import {Logger, LogLevel} from './logger';
 // data provider imports
 import {AvroDataProvider} from './data.providers/avro.data.provider';
 import {ArrowDataProvider} from './data.providers/arrow.data.provider';
+import {EDNDataProvider} from './data.providers/edn.data.provider';
 import {ExcelDataProvider} from './data.providers/excel.data.provider';
 import {HjsonDataProvider} from './data.providers/hjson.data.provider';
 import {JsonDataProvider} from './data.providers/json.data.provider';
@@ -138,6 +139,7 @@ export class DataManager implements IDataManager {
     const dataProviders: Map<string, IDataProvider> = new Map<string, IDataProvider>();
     this.addDataProvider(dataProviders, new AvroDataProvider());
     this.addDataProvider(dataProviders, new ArrowDataProvider());
+    this.addDataProvider(dataProviders, new EDNDataProvider());
     this.addDataProvider(dataProviders, new ExcelDataProvider());
     this.addDataProvider(dataProviders, new HjsonDataProvider());
     this.addDataProvider(dataProviders, new JsonDataProvider());

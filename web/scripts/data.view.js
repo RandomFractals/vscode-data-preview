@@ -356,6 +356,7 @@ function getData(fileName, data, schema = {}) {
 		case '.xml':
 		case '.html':
 		case '.avro':
+		case '.edn':
 		case '.env':
 		case '.properties':
 		case '.config':
@@ -427,6 +428,7 @@ function saveData() {
 		case '.md':
 			viewer.view.to_csv().then(csv => postData(csv, dataFileType));
 			break;
+		case '.edn':
 		case '.json':
 		case '.jsonl':
 		case '.json5':
