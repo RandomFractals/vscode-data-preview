@@ -47,6 +47,7 @@
     "avro",
     "parquet",
     "config",
+    "edn",
     "env",
     "properties",
     "ini",
